@@ -4,14 +4,17 @@
 % http://minds.jacobs-university.de/mantas
 
 % load the data
-trainLen = 2000;
-testLen = 2000;
+%trainLen = 2000;
+%testLen = 2000;
+trainLen = 4000;
+testLen = 4000;
 initLen = 100;
 
-data = load('MackeyGlass_t17.txt');
-t = 0:pi/13:(10000-1)*pi/13;
-data = sin(.13.*t)'+0.2.*sin(0.45.*t)';
-
+%data = load('MackeyGlass_t17.txt');
+%t = 0:pi/13:(10000-1)*pi/13;
+%data = sin(.13.*t)'+0.2.*sin(0.45.*t)';
+data = mso(1,10000,5)';
+data = data./max(abs(data));
 
 % plot some of it
 figure(10);
@@ -21,9 +24,10 @@ title('A sample of data');
 % generate the ESN reservoir
 inSize = 1; outSize = 1;
 resSize = 1000;
-a = 0.3; % leaking rate
+%a = 0.3; % leaking rate
+a = 0.35; % leaking rate
 
-rand( 'seed', 42 );
+%rand( 'seed', 42 );
 Win = (rand(resSize,1+inSize)-0.5) .* 1;
 W = rand(resSize,resSize)-0.5;
 %W = normrnd(0,1,resSize,resSize);
@@ -94,4 +98,16 @@ title('Some reservoir activations x(n)');
 figure(3);
 bar( Wout' )
 title('Output weights W^{out}');
+
+figure(4)
+pdata = data(trainLen+2:trainLen+testLen+1); 
+win = hamming(length(pdata));
+plot( 20*log10(abs(fft(win.*pdata))), 'color', [0,0.75,0] );
+hold on;
+plot( 20*log10(abs(fft(win.*Y'))), 'b' );
+hold off;
+axis tight;
+title('Spectrum of target and generated signals y(n) starting at n=0');
+legend('Target signal', 'Free-running predicted signal');
+
 

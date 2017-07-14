@@ -65,6 +65,13 @@ Train the readout to recognize cyclostationary signals using a biologically plau
 \section{Preliminary results}
 
 \section{Work plan}
+The approach to the problem includes milestones at every quarter and several decision points.
+The first phase (two quarters) is an application of current echo state networks and liquid state machines to signals of interest to identify their strengths and weaknesses and understand the problem space.
+The chosen approach is then developed in the second phase (two quarters) through basic simulation.
+One quarter is reserved to refine the work into a paper for publication.
+The next stage may be an experimental study of nonlinear photonic delay systems OR a high-fidelity simulation using a tool such as NEURON.
+One quarter is reserved to refine the experiment or high-fidelity simulation for publication.
+The last two quarters are reserved for writing the thesis.
 \begin{figure}
  \caption{Schedule}
  \centering
