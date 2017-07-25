@@ -1,5 +1,4 @@
-function s = mso( fs, nsamples, order )
-%Produces multiple superimposed oscillator test data
+function s = mso_single( fs, nsamples, order )
 nsamples = nsamples*fs;
 t = 0:nsamples-1;
 t = t./fs;
@@ -13,12 +12,7 @@ if order > length(f)
     order = length(f);
 end
 
-s = zeros(1, nsamples);
-for jj=1:order
-   s = s+dynRange(jj).*sin(f(jj).*t); 
-end
-
-%figure; plot(abs(xcorr(s)))
+s = dynRange(order).*sin(f(order).*t); 
 
 end
 
