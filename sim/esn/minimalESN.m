@@ -13,7 +13,7 @@ initLen = 100;
 %data = load('MackeyGlass_t17.txt');
 %t = 0:pi/13:(10000-1)*pi/13;
 %data = sin(.13.*t)'+0.2.*sin(0.45.*t)';
-data = mso(1,10000,5)';
+data = mso(1,10000,2)';
 data = data./max(abs(data));
 
 % plot some of it
