@@ -1,9 +1,10 @@
 %DDN test
 clear all; close all;
-N = 500;
-maxDelay = 7;
+N = 10;
+maxDelay = 17;
 
 delays = randi(maxDelay, N); 
+%delays = ones(N);
 
 for kk=1:N
    colInd = 1:N;
@@ -20,8 +21,14 @@ win = 0.1.*(rand(N,1)-0.5);
 w = 0.1.*(rand(N,N)-0.5);
 %u = sin(1.1.*(1:(initLen+trainLen+testLen)));
 u = mso(1,initLen+trainLen+testLen,8);
-
-[Wout, x, Yt] = trainDDN( u, initLen, trainLen, win, w, N, maxDelay, delays  );
+u = u./max(abs(u));
+[Wout, x, x8] = trainDDN( u, initLen, trainLen, win, w, N, maxDelay, delays  );
+u = mso(1,initLen+trainLen+testLen,2);
+u = u./max(abs(u));
+[Wout, x, x2] = trainDDN( u, initLen, trainLen, win, w, N, maxDelay, delays  );
+u = rand(1,initLen+trainLen+testLen)-0.5;
+u = u./max(abs(u));
+[Wout, x, xr] = trainDDN( u, initLen, trainLen, win, w, N, maxDelay, delays  );
 
 ut = mso(1,testLen,8);
 Xout = evalDDN( ut, maxDelay, delays, N, w, win, Wout );

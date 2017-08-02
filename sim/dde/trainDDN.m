@@ -1,4 +1,4 @@
-function [Wout, x, Yt ] = trainDDN( data, initLen, trainLen, Win, W, N, maxDelay, delays)
+function [Wout, x, out ] = trainDDN( data, initLen, trainLen, Win, W, N, maxDelay, delays)
 
 x = zeros(maxDelay, N); %Node activations, first column is input history
 u = data;
@@ -33,6 +33,6 @@ X_T = out';
 Wout = Yt*X_T * inv(X*X_T + reg*eye(1+N));
 
 %Wout = Yt*pinv(X);
-
+out = out(2:end,:);
 end
 
