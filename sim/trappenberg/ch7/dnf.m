@@ -1,7 +1,7 @@
 %% Dynamic Neural Field Model (1D) 
  clear; clf; hold on;
- nn = 100; dx=2*pi/nn; sig = 2*pi/8.7; C=0.5; 
-
+ %nn = 100; dx=2*pi/nn; sig = 2*pi/10; C=0.5; %Original parameters
+ nn = 100; dx=2*pi/nn; sig = 2*pi/10; C=0.5; 
 %% Training weight matrix
  for loc=1:nn;  
      i=(1:nn)'; dis=min(abs(i-loc),nn-abs(i-loc)); 
@@ -10,7 +10,8 @@
  w=pat*pat'; w=w/w(1,1); w=4*(w-C);
 %% Update with localised input 
  tall = []; rall = [];
- I_ext=zeros(nn,1); I_ext((nn/2-2):(nn/2+2))=1;
+% I_ext=zeros(nn,1); I_ext(nn/2-floor(nn/10):nn/2+floor(nn/10))=1;
+ I_ext=zeros(nn,1); I_ext(end/2) = 1;
  [t,u]=ode45('rnn_ode',[0 10],zeros(1,nn),[],nn,dx,w,I_ext);
  r=1./(1+exp(-u)); tall=[tall;t]; rall=[rall;r];
 %% Update without input 
