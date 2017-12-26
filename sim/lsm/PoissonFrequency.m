@@ -6,7 +6,7 @@ duration = 100;
 
 st = poissonSpikeTrain(duration, frf , dt);
 
-gs = exp(-(-5:5).^2/4)
+gs = exp(-(-5:5).^2/4);
 stg = conv(st,gs);
 stg = stg-mean(stg);
 

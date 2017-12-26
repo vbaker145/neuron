@@ -24,3 +24,5 @@ for t=1:1000            % simulation of 1000 ms
   u=u+a.*(b.*v-u);                 % stability
 end
 plot(firings(:,1),firings(:,2),'.');
+xlabel('Time (ms)','FontSize', 12); ylabel('Neruon #', 'FontSize',12);
+
