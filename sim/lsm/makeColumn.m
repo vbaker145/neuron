@@ -13,7 +13,7 @@ d=[8-6*re.^2;           2*ones(ni,1)];
 S=[0.5*rand(ne+ni,ne),  -rand(ne+ni,ni)];
 
 
-Dmax = 4;
+Dmax = 8;
 delays=floor( rand(ne+ni)*Dmax ); %Synaptic delays
 
 end

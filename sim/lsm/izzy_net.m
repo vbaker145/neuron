@@ -4,10 +4,11 @@ function [v, u, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S, delays, sti
 n = size(S,1);
 Dmax = max(max(delays));
 PSP = zeros(n, Dmax);
+background_current = 0;
 firings=[];             % spike timings
 
 for t=1:nsteps          % simulation of 1000 ms
-  I = stim(:,t);
+  I = stim(:,t)+background_current;
   
   fired=find(v>=30);    % indices of spikes
   firings=[firings; t+0*fired,fired];
