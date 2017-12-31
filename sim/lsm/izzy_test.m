@@ -1,4 +1,4 @@
-clear; clc
+clear; clc; close all;
 
 %Ne=800;                 Ni=200;
 %re=rand(Ne,1);          ri=rand(Ni,1);
@@ -17,22 +17,27 @@ clear; clc
 v=-65*ones(10*10*10,1);    % Initial values of v
 u=b.*v;                 % Initial values of u
 
-nsteps = 1000;
+dt = 0.1;
+
+nsteps = 10000;
 nstim = floor(.30*1000);
+firingRate = 20;
 %stim1 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
-st1 = 30*poissonSpikeTrain( 1, 20, .001);
+st1 = 30*poissonSpikeTrain( 1, firingRate, dt*1e-3);
 sf = randi(1000,1,nstim);
 stim1 = zeros(1000,1);
 stim1(sf) = 1;
 stim1 = stim1*st1;
 
 [v1, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
-figure(10); subplot(2,1,1); plot(firings(:,1),firings(:,2),'.');
+figure(10); plot(firings(:,1),firings(:,2),'.');
 xlabel('Time (ms)','FontSize', 12); ylabel('Neruon #', 'FontSize',12);
-figure(10); subplot(2,1,2); imagesc(stim1);
+tsp = find(st1>0);
+xv = [tsp; tsp]; yv = [zeros(1,length(tsp)); 1000*ones(1,length(tsp))];
+hold on; line(xv, yv, 'Color', 'r');
 
 %stim2 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
-st2 = 20*poissonSpikeTrain( 1, 20, .001);
+st2 = 20*poissonSpikeTrain( 1, firingRate, dt*1e-3);
 stim2 = zeros(1000,1);
 stim2(sf) = 1;
 stim2 = stim2*st2;

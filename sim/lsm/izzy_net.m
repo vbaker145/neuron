@@ -4,7 +4,7 @@ function [v, u, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S, delays, sti
 n = size(S,1);
 Dmax = max(max(delays));
 PSP = zeros(n, Dmax);
-background_current = 0;
+background_current = 1;
 firings=[];             % spike timings
 
 for t=1:nsteps          % simulation of 1000 ms
@@ -27,9 +27,9 @@ for t=1:nsteps          % simulation of 1000 ms
   I=I+PSP(:,mod(t-1,Dmax)+1);
   PSP(:,mod(t-1,Dmax)+1) = 0;
   
-  v=v+0.5*(0.04*v.^2+5*v+140-u+I); % step 0.5 ms
-  v=v+0.5*(0.04*v.^2+5*v+140-u+I); % for numerical
-  u=u+a.*(b.*v-u);                 % stability
+  v=v+0.5*dt*(0.04*v.^2+5*v+140-u+I); % step 0.5 ms
+  v=v+0.5*dt*(0.04*v.^2+5*v+140-u+I); % for numerical
+  u=u+dt*a.*(b.*v-u);                 % stability
 end
 
 
