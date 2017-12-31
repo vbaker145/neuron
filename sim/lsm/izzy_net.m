@@ -1,11 +1,12 @@
-function [v, u, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S, delays, stim)
+function [v, vall, u, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S, delays, stim)
 %Izhikevich model
 
 n = size(S,1);
 Dmax = max(max(delays));
 PSP = zeros(n, Dmax);
-background_current = 1;
+background_current = 1.25;
 firings=[];             % spike timings
+vall = [];
 
 for t=1:nsteps          % simulation of 1000 ms
   I = stim(:,t)+background_current;
@@ -30,6 +31,8 @@ for t=1:nsteps          % simulation of 1000 ms
   v=v+0.5*dt*(0.04*v.^2+5*v+140-u+I); % step 0.5 ms
   v=v+0.5*dt*(0.04*v.^2+5*v+140-u+I); % for numerical
   u=u+dt*a.*(b.*v-u);                 % stability
+  
+  vall =[vall v];
 end
 
 

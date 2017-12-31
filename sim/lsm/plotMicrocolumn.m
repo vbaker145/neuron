@@ -8,8 +8,6 @@ zv = 1:15;
 
 x = x(:); y = y(:); z = z(:);
 
-
-
 figure; subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
 hold on;
 
