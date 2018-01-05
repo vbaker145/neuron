@@ -24,7 +24,7 @@ dt = 1.0;
 
 nsteps = 500;
 nstim = floor(.30*N);
-firingRate = 20;
+firingRate = 30;
 %stim1 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
 st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
 
@@ -48,6 +48,38 @@ hold on; line(xv, yv, 'Color', 'r');
 figure(11); imagesc(vall); colorbar; caxis([-100 30])
 hold on; line(xv, yv, 'Color', 'r');
 
+stims = []; response = [];
+
+ntests = 10;
+for jj=1:ntests
+    st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
+
+    %Gaussian spikes
+    gs = exp(-(-5:5).^2/4); 
+    st1g = conv(st1,gs);
+
+    sf = randi(N,1,nstim);
+    stim1 = zeros(N,1);
+    stim1(sf) = 1;
+    stim1 = stim1*st1g;
+    
+    v=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
+    u=b.*v;                 % Initial values of u
+    
+    [v1, vall, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
+    
+    stims = [stims; st1g];
+    response = [response vall(:,1)];
+    
+end
+
+sdis = zeros(ntests, ntests);
+rdis = zeros(ntests, ntests);
+for jj=1:ntests
+    for kk=1:ntests
+        [sdis(jj,kk) rdis(jj,kk)] = lsmDistance(stims(jj,:), response(:,jj), stims(kk,:), response(:,kk));
+    end
+end
 %stim2 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
 % st2 = 20*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
 % stim2 = zeros(1000,1);
