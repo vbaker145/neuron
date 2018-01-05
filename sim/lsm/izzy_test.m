@@ -11,30 +11,41 @@ clear; clc; close all;
 
 %Dmax = 4;
 %delays=floor( rand(Ne+Ni)*Dmax ); %Synaptic delays
+width = 3;
+height = 3;
+layers = 10;
+[a,b,c,d, S, delays] = makeColumn(width, height, layers, 0.8);
 
-[a,b,c,d, S, delays] = makeColumn(5, 5, 40, 0.8);
-
-v=-65*ones(10*10*10,1);    % Initial values of v
+N = width*height*layers;
+v=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
 u=b.*v;                 % Initial values of u
 
 dt = 1.0;
 
 nsteps = 500;
-nstim = floor(.30*1000);
+nstim = floor(.30*N);
 firingRate = 20;
 %stim1 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
 st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
-sf = randi(1000,1,nstim);
-stim1 = zeros(1000,1);
+
+%Gaussian spikes
+gs = exp(-(-5:5).^2/4); 
+st1g = conv(st1,gs);
+
+sf = randi(N,1,nstim);
+stim1 = zeros(N,1);
 stim1(sf) = 1;
-stim1 = stim1*st1;
+stim1 = stim1*st1g;
 
 [v1, vall, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
 firings(:,1) = firings(:,1)*dt;
 figure(10); plot(firings(:,1),firings(:,2),'.');
 xlabel('Time (ms)','FontSize', 12); ylabel('Neruon #', 'FontSize',12);
 tsp = find(st1>0)*dt;
-xv = [tsp; tsp]; yv = [zeros(1,length(tsp)); 1000*ones(1,length(tsp))];
+xv = [tsp; tsp]; yv = [zeros(1,length(tsp)); N*ones(1,length(tsp))];
+hold on; line(xv, yv, 'Color', 'r');
+
+figure(11); imagesc(vall); colorbar; caxis([-100 30])
 hold on; line(xv, yv, 'Color', 'r');
 
 %stim2 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
