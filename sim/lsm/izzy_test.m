@@ -1,4 +1,4 @@
-clear; clc; close all;
+clear; clc; %close all;
 
 %Ne=800;                 Ni=200;
 %re=rand(Ne,1);          ri=rand(Ni,1);
@@ -13,14 +13,14 @@ clear; clc; close all;
 %delays=floor( rand(Ne+Ni)*Dmax ); %Synaptic delays
 width = 3;
 height = 3;
-layers = 10;
+layers = 20;
 [a,b,c,d, S, delays] = makeColumn(width, height, layers, 0.8);
 
 N = width*height*layers;
 v=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
 u=b.*v;                 % Initial values of u
 
-dt = 1.0;
+dt = 0.5;
 
 nsteps = 500;
 nstim = floor(.30*N);
@@ -39,47 +39,62 @@ stim1 = stim1*st1g;
 
 [v1, vall, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
 firings(:,1) = firings(:,1)*dt;
-figure(10); plot(firings(:,1),firings(:,2),'.');
+figure(10); clf; plot(firings(:,1),firings(:,2),'.');
 xlabel('Time (ms)','FontSize', 12); ylabel('Neruon #', 'FontSize',12);
 tsp = find(st1>0)*dt;
 xv = [tsp; tsp]; yv = [zeros(1,length(tsp)); N*ones(1,length(tsp))];
 hold on; line(xv, yv, 'Color', 'r');
 
-figure(11); imagesc(vall); colorbar; caxis([-100 30])
-hold on; line(xv, yv, 'Color', 'r');
+figure(11); clf; imagesc(vall); colorbar; caxis([-100 30])
+hold on; line(xv, yv, 'Color', 'r'); set(gca, 'YDir', 'Normal');
 
 stims = []; response = [];
 
-ntests = 10;
+ntests = 100;
 for jj=1:ntests
     st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
+    st2 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
 
     %Gaussian spikes
     gs = exp(-(-5:5).^2/4); 
     st1g = conv(st1,gs);
+    st2g = conv(st2,gs);
 
     sf = randi(N,1,nstim);
     stim1 = zeros(N,1);
     stim1(sf) = 1;
     stim1 = stim1*st1g;
     
+    sf = randi(N,1,nstim);
+    stim2 = zeros(N,1);
+    stim2(sf) = 1;
+    stim2 = stim2*st2g;
+    
     v=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
     u=b.*v;                 % Initial values of u
+    [v1, vall1, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
     
-    [v1, vall, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
+    v=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
+    u=b.*v;                 % Initial values of u
+    [v2, vall2, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim2);
     
-    stims = [stims; st1g];
-    response = [response vall(:,1)];
+    [sd rd] = lsmDistance(st1g, vall1, st2g, vall2);
+    stims = [stims sd];
+    response = [response rd'];
+    %stims = [stims; st1g]; 
+    %response = [response vall(:,1)];
     
 end
 
-sdis = zeros(ntests, ntests);
-rdis = zeros(ntests, ntests);
-for jj=1:ntests
-    for kk=1:ntests
-        [sdis(jj,kk) rdis(jj,kk)] = lsmDistance(stims(jj,:), response(:,jj), stims(kk,:), response(:,kk));
-    end
-end
+figure; plot(stims, mean(response),'o');
+xlabel('Stimulus distance', 'FontSize', 12); ylabel('Response distance', 'FontSize', 12);
+% sdis = zeros(ntests, ntests);
+% rdis = zeros(ntests, ntests);
+% for jj=1:ntests
+%     for kk=1:ntests
+%         [sdis(jj,kk) rdis(jj,kk)] = lsmDistance(stims(jj,:), response(:,jj), stims(kk,:), response(:,kk));
+%     end
+% end
 %stim2 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
 % st2 = 20*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
 % stim2 = zeros(1000,1);

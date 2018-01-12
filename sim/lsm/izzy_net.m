@@ -4,7 +4,7 @@ function [v, vall, u, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S, delay
 n = size(S,1);
 Dmax = max(max(delays));
 PSP = zeros(n, Dmax);
-background_current = 1.25;
+background_current = 0;
 firings=[];             % spike timings
 vall = [];
 
