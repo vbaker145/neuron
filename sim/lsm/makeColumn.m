@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays] = makeColumn(width, height, layers, percentExc)
+function [a,b,c,d, S, delays, excNeurons] = makeColumn(width, height, layers, percentExc)
 
 
 
@@ -27,7 +27,7 @@ x = x(:); y = y(:); z = z(:);
 figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
 hold on;
 
-lambda = 4;
+lambda = 2.5;
 dmax = 5;
 map = colormap('jet');
 connections = zeros(length(x), length(x));
@@ -39,7 +39,7 @@ inNeurons = rtype >= percentExc; nIn = sum(inNeurons);
 a = zeros(n,1); b = zeros(n,1); c = zeros(n,1); d = zeros(n,1);
 a(excNeurons) = 0.02; a(inNeurons) = 0.02 + 0.08*rand(nIn,1);
 b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*rand(nIn,1);
-c(excNeurons) = -20+3*rand(nExc,1).^2; c(inNeurons) = -20;
+c(excNeurons) = -65+2*rand(nExc,1).^2; c(inNeurons) = -65;
 d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
@@ -54,8 +54,8 @@ for jj=1:length(x)
         if dis > 0
             if rand() < exp(-(dis/lambda)^2)
                 %Connect neuron
-                connections(jj,kk) = 1.0-2.0*inNeurons(jj);
-                delays(jj,kk) = floor(dis);
+                connections(jj,kk) = excNeurons(jj)*4+inNeurons(jj)*(-2);
+                delays(jj,kk) = floor(dis*5);
                 didx = dis/dmax;
                 didx = min(didx,1);
                 cm = map(floor(didx*size(map,1)),:);  
