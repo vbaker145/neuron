@@ -13,7 +13,7 @@ clear; clc; %close all;
 %delays=floor( rand(Ne+Ni)*Dmax ); %Synaptic delays
 width = 3;
 height = 3;
-layers = 20;
+layers = 15;
 [a,b,c,d, S, delays] = makeColumn(width, height, layers, 0.8);
 
 N = width*height*layers;
@@ -22,7 +22,7 @@ u=b.*v;                 % Initial values of u
 
 dt = 0.5;
 
-nsteps = 500;
+nsteps = 1000;
 nstim = floor(.30*N);
 firingRate = 30;
 %stim1 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input

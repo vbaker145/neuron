@@ -40,17 +40,19 @@ a = zeros(n,1); b = zeros(n,1); c = zeros(n,1); d = zeros(n,1);
 a(excNeurons) = 0.02; a(inNeurons) = 0.02 + 0.08*rand(nIn,1);
 b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*rand(nIn,1);
 c(excNeurons) = -65+2*rand(nExc,1).^2; c(inNeurons) = -65;
-d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
+d(excNeurons) = 10-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
-Dmax = 20;
-%delays=floor( rand(n)*(Dmax-5) ); %Synaptic delays
-delays = 2*ones(n);
+Dmax = 15;
+delays=floor( rand(n)*(Dmax-5) ); %Synaptic delayss
 
 %Synaptic weights
 for jj=1:length(x)
      for kk=1:length(x)
-        dis = sqrt((x(jj)-x(kk)).^2+(y(jj)-y(kk))^2+(z(jj)-z(kk))^2);
+        zmin = min(z(jj), z(kk)); zmax = max(z(jj),z(kk)); 
+        dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers)));
+        dz = z(jj)-z(kk);
+        dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
             if rand() < exp(-(dis/lambda)^2)
                 %Connect neuron

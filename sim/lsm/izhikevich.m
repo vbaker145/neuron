@@ -5,7 +5,7 @@ re=rand(Ne,1);          ri=rand(Ni,1);
 a=[0.02*ones(Ne,1);     0.02+0.08*ri];
 b=[0.2*ones(Ne,1);      0.25-0.05*ri];
 %c=[-65+15*re.^2;        -65*ones(Ni,1)];
-c=[-55+15*re.^2;        -55*ones(Ni,1)];
+c=[-65+15*re.^2;        -65*ones(Ni,1)];
 d=[8-6*re.^2;           2*ones(Ni,1)];
 S=[0.5*rand(Ne+Ni,Ne),  -rand(Ne+Ni,Ni)];
 

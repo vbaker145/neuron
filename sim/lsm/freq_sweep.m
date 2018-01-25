@@ -1,14 +1,14 @@
 %Frequency sweep
 clear; close all;
 
-width = 4;
-height = 4;
-layers = 20;
+width = 3;
+height = 3;
+layers = 12;
 N = width*height*layers;
 [a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8);
 
 dt = 0.25;
-t = 0:dt:500;
+t = 0:dt:200;
 
 vall = [];
 fires = [];
@@ -19,9 +19,9 @@ nstim = floor(.30*N);
 sf = 1:16;
 jj = 1;
 rate = zeros(3,5);
-f = [50 100 150];
-for jj=1:3
-    for kk=1:5
+f = [20 100 150];
+for jj=1:1
+    for kk=1:1
         v=-20*ones(N,1)+5*rand(N,1);    % Initial values of v
         u=b.*v;                 % Initial values of u
 
