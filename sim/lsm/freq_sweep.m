@@ -1,14 +1,14 @@
 %Frequency sweep
 clear; close all;
 
-width = 3;
-height = 3;
+width = 4;
+height = 4;
 layers = 12;
 N = width*height*layers;
 [a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8);
 
 dt = 0.25;
-t = 0:dt:200;
+t = 0:dt:500;
 
 vall = [];
 fires = [];
@@ -32,7 +32,7 @@ for jj=1:1
         stim1(sf) = normrnd(1, 1, [1 length(sf)]);
         stim1 = stim1*st1; 
 
-        [v1, vall, u, uall, firings] = izzy_net(v,u,1.0, length(t), a, b, c, d, S, delays, stim1);
+        [v1, vall, u, uall, firings] = izzy_net(v,u, dt, length(t), a, b, c, d, S, delays, stim1);
         fires{5*(jj-1)+kk} = firings;
         rate(jj,kk) = sum(firings(:,2)>(N-width*height));
     end
