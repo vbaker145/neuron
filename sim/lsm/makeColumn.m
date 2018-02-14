@@ -40,13 +40,14 @@ inNeurons = rtype >= percentExc; nIn = sum(inNeurons);
 a = zeros(n,1); b = zeros(n,1); c = zeros(n,1); d = zeros(n,1);
 a(excNeurons) = 0.02; a(inNeurons) = 0.02 + 0.08*rand(nIn,1);
 b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*rand(nIn,1);
-c(excNeurons) = -65+2*rand(nExc,1).^2; c(inNeurons) = -65;
+c(excNeurons) = -65+10*rand(nExc,1).^2; c(inNeurons) = -65;
 d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-delayMult = 4;
+delayMult = 2;
 dmax = layers;
+connStrength = 4;
 
 %Synaptic weights
 for jj=1:length(x)
@@ -63,11 +64,12 @@ for jj=1:length(x)
             end
             if cp
                 %Connect neuron
-                connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
+                connections(jj,kk) = connStrength*(0.75*excNeurons(jj)-inNeurons(jj));
+                %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
                 if connType == 1
                     delays(jj,kk) = floor(dis*delayMult);
                 else
-                    delays(jj,kk) = floor(5*rand())+1;
+                    delays(jj,kk) = floor(delayMult*rand())+1;
                 end
                 didx = dis/dmax;
                 didx = min(didx,1);
