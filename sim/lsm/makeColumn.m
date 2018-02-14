@@ -45,7 +45,7 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-delayMult = floor(10/dt);
+delayMult = 4;
 dmax = layers;
 
 %Synaptic weights
@@ -53,7 +53,7 @@ for jj=1:length(x)
      for kk=1:length(x)
         zmin = min(z(jj), z(kk)); zmax = max(z(jj),z(kk)); 
         dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers)));
-        %dz = z(jj)-z(kk);
+        dz = z(jj)-z(kk);
         dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
             if connType == 1
