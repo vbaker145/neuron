@@ -1,9 +1,10 @@
-%Frequency sweep
-clear; close all;
+function pt = ImpulseResponse(csec)
 
-width = 3;
-height = 3;
-layers = 12;
+%Frequency sweep
+
+width = csec;
+height = csec;
+layers = 20;
 N = width*height*layers;
 
 dt = 1;
@@ -38,3 +39,15 @@ vall = []; uall = [];
 uinit=b.*vinit;                 % Initial values of u
 [v1, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st1);
 figure(20); imagesc(vall); caxis([-80 50]); colorbar
+
+%st1(sidx:sidx+width*height,50:53)= 30;
+%
+%[v1, vall, u, uall, firings] = izzy_net(v,u,1.0, length(t), a, b, c, d, S, delays, st1);
+
+%out = vall(end-width*height:end,:);
+%midx = find(mean(out)>30);
+%midx = midx(1);
+%pt = midx-50
+
+end
+
