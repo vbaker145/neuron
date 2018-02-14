@@ -17,12 +17,13 @@ for t=1:nsteps          % simulation of 1000 ms
   v(fired)=c(fired);
   u(fired)=u(fired)+d(fired);
   
-  synResp = exp(-(0:4).^2./4);
+  synRespLambda = floor(4/dt);
+  synResp = exp(-(0:synRespLambda).^2./synRespLambda);
   %PSP(:,mod(D(fired,:)+t, Dmax)) = 1;
   for ii=1:length(fired)
      pst = delays(:,fired(ii)); 
      for jj=1:n
-        idx = mod((t:t+4)-1+pst(jj),Dmax)+1;
+        idx = mod((t:t+synRespLambda)-1+pst(jj),Dmax)+1;
         PSP(jj, idx) = PSP(jj,idx)+S(jj,fired(ii))*synResp;
         %idx = mod(t-1+pst(jj),Dmax)+1;
         %PSP(jj, idx) = PSP(jj,idx)+S(jj,fired(ii));

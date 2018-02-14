@@ -1,6 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons] = makeColumn(width, height, layers, percentExc)
-
-
+function [a,b,c,d, S, delays, excNeurons] = makeColumn(width, height, layers, percentExc, connType, dt)
 
 % ne = floor(n*percentExc);
 % ni = n-ne;
@@ -14,6 +12,10 @@ function [a,b,c,d, S, delays, excNeurons] = makeColumn(width, height, layers, pe
 % 
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
+
+if nargin < 5
+    connType = 0;
+end
 
 n = width*height*layers;
 
@@ -43,8 +45,8 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-delayMult = 3;
-dmax = delayMult*layers;
+delayMult = floor(10/dt);
+dmax = layers;
 
 %Synaptic weights
 for jj=1:length(x)
@@ -54,10 +56,19 @@ for jj=1:length(x)
         %dz = z(jj)-z(kk);
         dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
-            if rand() < exp(-(dis/lambda)^2)
+            if connType == 1
+                cp = rand() < exp(-(dis/lambda)^2);
+            else
+                cp = rand() < 0.2;
+            end
+            if cp
                 %Connect neuron
                 connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
-                delays(jj,kk) = floor(dis*delayMult);
+                if connType == 1
+                    delays(jj,kk) = floor(dis*delayMult);
+                else
+                    delays(jj,kk) = floor(5*rand())+1;
+                end
                 didx = dis/dmax;
                 didx = min(didx,1);
                 cm = map(floor(didx*size(map,1)),:);  
