@@ -19,8 +19,8 @@ end
 
 n = width*height*layers;
 
-xv = 0:width-1;
-yv = 0:width-1;
+xv = 0:width-1; 
+yv = 0:height-1;
 zv = 0:layers-1;
 [x,y,z] = meshgrid(xv,yv,zv);
 
