@@ -26,11 +26,11 @@ zv = 0:layers-1;
 
 x = x(:); y = y(:); z = z(:);
 
-figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
-hold on;
+%figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
+%hold on;
 
 lambda = 2.5;
-map = colormap('jet');
+%map = colormap('jet');
 connections = zeros(length(x), length(x));
 rtype = rand(n,1);
 excNeurons = rtype < percentExc; nExc = sum(excNeurons);
@@ -60,8 +60,9 @@ for jj=1:length(x)
             if connType == 1
                 cp = rand() < exp(-(dis/lambda)^2);
             else
-                cp = rand() < 0.2;
+                cp = rand() < (1-percentExc);
             end
+            cp = rand() < exp(-(dis/lambda)^2);
             if cp
                 %Connect neuron
                 connections(jj,kk) = connStrength*(0.75*excNeurons(jj)-inNeurons(jj));
@@ -71,18 +72,18 @@ for jj=1:length(x)
                 else
                     delays(jj,kk) = floor(delayMult*rand())+1;
                 end
-                didx = dis/dmax;
-                didx = min(didx,1);
-                cm = map(floor(didx*size(map,1)),:);  
-                line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
+                %didx = dis/dmax;
+                %didx = min(didx,1);
+                %cm = map(floor(didx*size(map,1)),:);  
+                %line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
             end
         end
     end
 end
-title(['Connections, lambda=' num2str(lambda)]);
-axis equal;
-set(gcf, 'pos', [0 0 600 800]);
-subplot(1,2,2); hold on; imagesc(connections);
+%title(['Connections, lambda=' num2str(lambda)]);
+%axis equal;
+%set(gcf, 'pos', [0 0 600 800]);
+%subplot(1,2,2); hold on; imagesc(connections);
 S = connections;
 
 end
