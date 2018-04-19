@@ -17,20 +17,31 @@ if nargin < 5
     connType = 0;
 end
 
+doplot = 1;
+
 n = width*height*layers;
 
-xv = 0:width-1; 
-yv = 0:height-1;
-zv = 0:layers-1;
+displacement = 0.25;
+xv = (0:width-1); 
+yv = (0:height-1);
+zv = (0:layers-1);
 [x,y,z] = meshgrid(xv,yv,zv);
 
 x = x(:); y = y(:); z = z(:);
+x = x+displacement*(rand(size(x))-0.5);
+y = y+displacement*(rand(size(y))-0.5);
+z = z+displacement*(rand(size(z))-0.5);
 
-%figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
-%hold on;
+if doplot == 1
+    figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
+    hold on;
+end
+
+if doplot == 1
+    map = colormap('jet');
+end
 
 lambda = 2.5;
-%map = colormap('jet');
 connections = zeros(length(x), length(x));
 rtype = rand(n,1);
 excNeurons = rtype < percentExc; nExc = sum(excNeurons);
@@ -72,18 +83,24 @@ for jj=1:length(x)
                 else
                     delays(jj,kk) = floor(delayMult*rand())+1;
                 end
-                %didx = dis/dmax;
-                %didx = min(didx,1);
-                %cm = map(floor(didx*size(map,1)),:);  
-                %line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
+                if doplot == 1
+                    didx = dis/dmax;
+                    didx = min(didx,1);
+                    cm = map(floor(didx*size(map,1)),:);  
+                    line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
+                end
             end
         end
     end
 end
-%title(['Connections, lambda=' num2str(lambda)]);
-%axis equal;
-%set(gcf, 'pos', [0 0 600 800]);
-%subplot(1,2,2); hold on; imagesc(connections);
+
+if doplot == 1
+    title(['Connections, lambda=' num2str(lambda)]);
+    axis equal;
+    set(gcf, 'pos', [0 0 600 800]);
+    subplot(1,2,2); hold on; imagesc(connections);
+end
+
 S = connections;
 
 end

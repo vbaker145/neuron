@@ -39,8 +39,9 @@ st1(inn,:) = 2*rand(sum(inn), size(t,2)); %Inhibitory neurons
 st1(N/4:end,:) = 0;
 
 uinit=b.*vinit;                 % Initial values of u
-[v1, vall, u, uall, firingsRand] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, Sdis, delaysRand, st1);
 [v1, vall, u, uall, firingsDis] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, Sdis, delaysDis, st1);
+[v1, vall, u, uall, firingsRand] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, Sdis, delaysRand, st1);
+
 
 figure(5); plot(firingsRand(:,1),firingsRand(:,2),'.');
 ax = axis; ax(4) = N; axis(ax)
