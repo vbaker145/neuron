@@ -17,11 +17,11 @@ if nargin < 5
     connType = 0;
 end
 
-doplot = 1;
+doplot = 0;
 
 n = width*height*layers;
 
-displacement = 0.25;
+displacement = 0.1;
 xv = (0:width-1); 
 yv = (0:height-1);
 zv = (0:layers-1);
@@ -56,7 +56,7 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-delayMult = 2;
+delayMult = 1;
 dmax = layers;
 connStrength = 4;
 
