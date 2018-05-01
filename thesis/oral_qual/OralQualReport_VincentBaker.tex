@@ -4,12 +4,11 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage[backend=biber]{biblatex}
 
+\addbibresource{nn.bib}
 \numberwithin{equation}{section}
 \renewcommand\thesubsection{\alph{subsection}}
-\newcommand{\bvp}[1]{\mathbf{#1}'}
-\newcommand{\bv}[1]{\mathbf{#1}}
-\newcommand{\pp}[1]{#1'}
 
 
 %opening
@@ -27,17 +26,28 @@ Computational neuroscience seeks to understand brain functions through modeling 
 Computational biophysics provides insight into the lowest levels of neural functions while nonlinear dynamics provides tools for understanding some aspects of cognition.
 This research will explore the computational properties of neural networks through a novel combination of biophysics, nonlinear dynamics and machine learning.
 \\ \\
-\section{Review of neural network dynamics}
+\section{Review of neural network dynamics and cortical organization}
 First part: review of basic neural dynamics.
-Discuss Hodgkins-Huxley experiment, differential equations leading to dynamic behavior.
-Include graphic showing various neural models, highlight Izhikevich (MATLAB) and HH (NEURON) models for this work.\\
-Second part discusses cortex organization into columns and microcolumns.
-Includes previous results from the group on structure and synchronization.
-Introduce SPIKE metric for synchronization.\\
+Discuss Hodgkins-Huxley experiment, differential equations leading to dynamic behavior.z
+Include graphic showing various neural models, highlight Izhikevich \cite{izhikevich2003} (MATLAB) and HH (NEURON) models for this work.
+\begin{figure}
+ \caption{Neural models}
+ \centering
+   \includegraphics[width=\textwidth]{fig/neural_models}
+\end{figure}\\
+The cortex is organized into laminar layers and exhibits columnar structures that span multiple layers. \\ \\
+The cortex also exhibits a very small-scale columnar structure as reported in \cite{cruz2000}\cite{cruz2009}. \\ \\
 \\ \\
 \section{Review of neural column computational properties in a liquid state machine}
 This section reviews the liquid state machine architecture.
 Focus on fading memory concept and the separation and approximation properties.\\
+Liquid state machines defined in \cite{maas2002}.
+Biologically plausible, demonstrated world-class speech recognition \cite{zhang2015}.
+\begin{figure}
+ \caption{Column structure}
+ \centering
+   \includegraphics[width=\textwidth]{fig/maas_memory}
+\end{figure}\\
 \\ \\
 \section{Initial results: Temporal dynamics in a small neural column}
 Introduce simple column structure.
@@ -70,7 +80,7 @@ Might be an important feature of microcolumn structure, to be explored in thesis
  \centering
    \includegraphics[width=\textwidth]{fig/propagation_time}
 \end{figure}
-Neural dynamics near a bifurcation can result in a delayed firing (Izhikevich).
+Neural dynamics near a bifurcation can result in a delayed firing \cite{izhikevich}.
 Could be another mechanism for slower effective velocity.
 \\ \\
 Introduce SPIKE metric and input/output distances-fading memory with association.
@@ -78,6 +88,8 @@ Compare to Maas Liquid State Machine measures of similarity.
 \\
 \section{Suggestions for further research}
 Further investigation into mechanisms for lower effective velocity: spatial organization, neuron dynamics.\\
+Create 
 
+\printbibliography
 
 \end{document}
