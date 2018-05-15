@@ -56,7 +56,7 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-delayMult = 1;
+delayMult = 3;
 dmax = layers;
 connStrength = 4;
 
