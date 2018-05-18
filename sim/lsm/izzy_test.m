@@ -14,46 +14,47 @@ clear; clc; close all;
 width = 3;
 height = 3;
 layers = 15;
+stimLayers = 15;
 [a,b,c,d, S, delays] = makeColumn(width, height, layers, 0.8,1,1);
 
 N = width*height*layers;
-v=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
-u=b.*v;                 % Initial values of u
-
 dt = 1;
-
 nsteps = 1000;
-nstim = floor(.30*N);
+nstim = floor(.30*(stimLayers*width*height));
 stimSyn = randn(nstim,1)+1;
 firingRate = 40;
-%stim1 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
-st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
 
-%Gaussian spikes
-gs = exp(-(-5:5).^2/4); 
-st1g = conv(st1,gs);
 
-sf = randi(2,N, length(st1g));
-sf = sf-1;
-%stim1 = zeros(N,1);
-%stim1(sf) = 1;
-%stim1 = stim1*st1g;
-stim1 = sf;
-
-[v1, vall, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
-firings(:,1) = firings(:,1)*dt;
-figure(10); clf; plot(firings(:,1),firings(:,2),'.');
-xlabel('Time (ms)','FontSize', 12); ylabel('Neruon #', 'FontSize',12);
-tsp = find(st1>0)*dt;
-xv = [tsp; tsp]; yv = [zeros(1,length(tsp)); N*ones(1,length(tsp))];
-hold on; line(xv, yv, 'Color', 'r');
-
-figure(11); clf; imagesc(vall); colorbar; caxis([-100 30])
-hold on; line(xv, yv, 'Color', 'r'); set(gca, 'YDir', 'Normal');
+% v=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
+% u=b.*v;                 % Initial values of u
+% stim1 = [5*randn(800,nsteps);2*randn(200,nsteps)]; % thalamic input
+% st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
+% 
+% %Gaussian spikes
+% gs = exp(-(-5:5).^2/4); 
+% st1g = conv(st1,gs);
+% 
+% sf = randi(2,N, length(st1g));
+% sf = sf-1;
+% %stim1 = zeros(N,1);
+% %stim1(sf) = 1;
+% %stim1 = stim1*st1g;
+% stim1 = sf;
+% 
+% [v1, vall, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
+% firings(:,1) = firings(:,1)*dt;
+% figure(10); clf; plot(firings(:,1),firings(:,2),'.');
+% xlabel('Time (ms)','FontSize', 12); ylabel('Neruon #', 'FontSize',12);
+% tsp = find(st1>0)*dt;
+% xv = [tsp; tsp]; yv = [zeros(1,length(tsp)); N*ones(1,length(tsp))];
+% hold on; line(xv, yv, 'Color', 'r');
+% 
+% figure(11); clf; imagesc(vall); colorbar; caxis([-100 30])
+% hold on; line(xv, yv, 'Color', 'r'); set(gca, 'YDir', 'Normal');
 
 stims = []; response = []; eds = [];
 
-ntests = 100;
+ntests = 30;
 st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
 st2 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
 
@@ -62,18 +63,27 @@ gs = exp(-(-5:5).^2/4);
 st1g = conv(st1,gs);
 st2g = conv(st2,gs);
 
-sf = randi(N,1,nstim);
+sf = randi(stimLayers*width*height,1,nstim); %Inject onto random neurons in column
 
-stim1 = zeros(N,1);
-stim1(sf) = stimSyn;
-stim1 = stim1*st1g;
+stim1inject = zeros(N,1);
+stim1inject(sf) = stimSyn;
 
-stim2 = zeros(N,1);
-stim2(sf) = stimSyn;
-stim2 = stim2*st2g;
+stim2inject = zeros(N,1);
+stim2inject(sf) = stimSyn;
     
 for jj=1:ntests
     disp(jj)
+    
+    %Make random stimulus spiuke trains
+    st1 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
+    st2 = 30*poissonSpikeTrain( nsteps*dt*1e-3, firingRate, dt*1e-3);
+    %Gaussian spikes
+    st1g = conv(st1,gs);
+    st2g = conv(st2,gs);
+    %Inject onto random neurons with Gaussian-distributed weightss
+    stim1 = stim1inject*st1g;
+    stim2 = stim2inject*st2g;
+    
     v=-65*ones(N,1)+20*rand(N,1);    % Initial values of v
     u=b.*v;                 % Initial values of u
     [v1, vall1, u, firings] = izzy_net(v,u,1.0, nsteps, a, b, c, d, S, delays, stim1);
