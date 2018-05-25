@@ -18,26 +18,15 @@
 
 \maketitle
 
-\section{Introduction} 
-The human brain hosts advanced cognitive processes that remain only partially understood.
+\begin{abstract}
+ The human brain hosts advanced cognitive processes that remain only partially understood.
 Computational neuroscience seeks to understand brain functions through modeling at several levels of physical fidelity.
 ``Biologically inspired'' computation models are used in machine learning to solve a variety of problems that are intractable with conventional approaches.
 Computational biophysics provides insight into the lowest levels of neural functions while nonlinear dynamics provides tools for understanding some aspects of cognition.
 This research will explore the computational properties of neural networks through a novel combination of biophysics, nonlinear dynamics and machine learning.
-\\ \\
-\section{Review of neural network dynamics and cortical organization}
-First part: review of basic neural dynamics.
-Discuss Hodgkins-Huxley experiment, differential equations leading to dynamic behavior.z
-Include graphic showing various neural models, highlight Izhikevich \cite{izhikevich2003} (MATLAB) and HH (NEURON) models for this work.
-\begin{figure}[ht]
- \caption{Neural models}
- \centering
-   \includegraphics[width=\textwidth]{fig/neural_models}
-\end{figure}\\
-The cortex is organized into laminar layers and exhibits columnar structures that span multiple layers. \\ \\
-The cortex also exhibits a very small-scale columnar structure as reported in \cite{cruz2000}\cite{cruz2009}. \\ \\
-\\ \\
-\section{Review of neural column computational properties in a liquid state machine}
+\end{abstract}
+
+\section{Introduction} 
 There is no universal method to quantify the processing capability of a neural network.
 In the machine learning community network models are developed and trained to solve specific problems, with the trained networks then graded against data sets representing those specific problems.
 These computational network models include multi-layer perceptrons [ref], feed-forward "convolutional" networks [ref], and recurrent networks with memory [ref].
@@ -76,7 +65,15 @@ Figure from \cite{kreuz2012} demonstrates the time-resolved SPIKE metric (green)
 	\centering
 	\includegraphics[width=\textwidth]{fig/SPIKE}
 \end{figure}\\
-\section{Initial results: Temporal dynamics in a small neural column}
+
+\section{Methods}
+Include graphic showing various neural models, highlight Izhikevich \cite{izhikevich2003} (MATLAB) and HH (NEURON) models for this work.
+\begin{figure}[ht]
+ \caption{Neural models}
+ \centering
+   \includegraphics[width=\textwidth]{fig/neural_models}
+\end{figure}\\
+\\ \\
 Our initial research re-examines the neural column circuit used as an LSM liquid network in \cite{maas2002}.
 In their original work Maas and Markram used a simple integrate-and-fire neuron model combined with a sophisticted synapse model first presented in \cite{markram1998}.
 The neural column was composed of 135 neurons on a unit column, 3x3 neurons wide and 9 neurons high.
@@ -95,6 +92,11 @@ Instead of I+F neurons we have chosen the Izhikevich model \cite{izhikevich2003}
 \\
 We enhanced the available MATLAB code for the Izhikevich model to incorporate propagation time between the neurons through the use of a delay buffer.
 This allowed us to study the temporal effects of action potential propagation.
+\\ \\
+Introduce SPIKE metric and input/output distances-fading memory with association.
+Compare to Maas Liquid State Machine measures of similarity.
+\\ \\
+\section{Results}
 To test the effect of the distance-dependent propagation times we created two columns, 3x3x40,  with identical neurons and identical connectivity.
 The first column has random propagation times, the second column has distance-dependent propagation times.
 The bottom 10 layers were stimulated with random input as in \cite{izhikevich2003}.
@@ -122,14 +124,12 @@ This indicates a possible function of neural microcolumns, about 1 neuron wide, 
  \centering
    \includegraphics[width=\textwidth]{fig/propagation_time}
 \end{figure}
+\\ \\
+
+\section{Future work}
+Further investigation into mechanisms for lower effective velocity: spatial organization, neuron dynamics.\\
 Neural dynamics near a bifurcation can result in a delayed firing \cite{izhikevich}.
 Could be another mechanism for slower effective velocity.
-\\ \\
-Introduce SPIKE metric and input/output distances-fading memory with association.
-Compare to Maas Liquid State Machine measures of similarity.
-\\
-\section{Suggestions for further research}
-Further investigation into mechanisms for lower effective velocity: spatial organization, neuron dynamics.\\
 
 \printbibliography
 
