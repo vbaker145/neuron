@@ -22,7 +22,7 @@
 We investigate the computational properties of a neural column structure using the Liquid State Machine (LSM) paradigm.
 We enhance the neural model used in the original LSM work to incorporate more realistic neuron dynamics and action potential propagation delay.
 The enhanced model shows synchronous wave propagation behavior with propagation speed that depends on the column width. 
-The column ecnodes information about the input spike trains in its dynamic state as required for LSM processing.
+The column encodes information about the input spike trains in its dynamic state as required for LSM processing.
 
 \end{abstract}
 
@@ -55,21 +55,9 @@ Liquid state machines have also proven an effective computational model, acheivi
 \\ \\
 Discussion of approximation property, separation property, and fading memory.
 \\
-\begin{figure}
- \caption{Dynamic synapse models allow the LSM to recognize past inputs using the present state of the liquid \cite{maas2002}}
- \label{fig:lsm_memory}
- \centering
-   \includegraphics[width=\textwidth]{fig/maas_memory}
-\end{figure}\\
-\\ \\
+
 Multiple independent readout maps can be trained to extract information from the same liquid.
 This allows for new classifiers to be trained without disturbing previous learning.
-\begin{figure}
-	\centering
-	\includegraphics{fig/MultipleReadouts}
-	\caption{Multiple readouts from a single reservoir \cite{maas2002}}
-	\label{fig:lsm_multiple_readouts}
-\end{figure}\\
 \\ \\
 To characterize the separation property of their liquid network Maas and Markram injected various spike trains and observed the resulting liquid states.
 They defined the distance between two spike trains by correlating the spike trains against each other.
@@ -77,33 +65,25 @@ This definition is valid for closely related spike trains that may only differ b
 Improved distance metrics have been developed that are timescale-independent and time-resolved including inter-spike interval (ISI) and SPIKE \cite{kreuz2012}.
 The SPIKE metric in particular provides an improved time-resolved distance metric across time scales and time shifts.
 Figure from \cite{kreuz2012} demonstrates the time-resolved SPIKE metric (green) tracking three EEG signals that become synchronized over time.
-\begin{figure}
-	\caption{SPIKE metric applied to EEG data from \cite{kreuz2012}}
-	\centering
-	\includegraphics[width=\textwidth]{fig/SPIKE}
-\end{figure}\\
+
 
 \section{Methods}
-Include graphic showing various neural models, highlight Izhikevich \cite{izhikevich2003} (MATLAB) and HH (NEURON) models for this work.
-\begin{figure}
- \caption{Neural models}
- \centering
-   \includegraphics[width=\textwidth]{fig/neural_models}
-\end{figure}\\
-\\ \\
 We re-examine the neural column circuit used as an LSM liquid network in \cite{maas2002}.
 In their original work Maas and Markram used a simple integrate-and-fire neuron model combined with a sophisticted synapse model first presented in \cite{markram1998}.
 The neural column was composed of 135 neurons on a unit column, 3x3 neurons wide and 9 neurons high.
-The neurons were connected according to a distance-based rule $C \times e^{-(D(a,b)/\lambda)^2} $.
+The neurons were connected according to a distance-based rule:
+\begin{align}\label{eq:connectivity}
+ P_{a,b} &= C \times e^{-(D(a,b)/\lambda)^2}
+\end{align}
 80\% of the neurons were excitatory, 20\% of the neurons were inhibitory. 
 The transmission delays between neurons were fixed to 1.5 ms for excitatory-excitatory connections and 0.8 ms for all other connections.
-\begin{figure}
- \caption{Column structure used in this research, $\lambda=2$,$C=1$,}
- \centering
-   \includegraphics[width=200px]{fig/lambda2}
-\end{figure}
-\\
-In this work we have used a similar column structure and connectivity rule. 
+The synaptic responses were modeled using the dynamic model in \cite{markram1998}. \\
+This model, although highly simplified, incorporates many biophysical parameters.
+The recurrent connections, general structure, connectivity and synaptic dynamics are all higher fidelity than a typical computational model.
+The authors were able to directly measure the effects of certain parameters using a variety of computational tasks including spiking rate estimation, pattern recognition, spike coincidence and spatial distribution. 
+For example, the best performance on a spike pattern classification task was acheived with $\lambda=2$ in equation (\ref{eq:connectivity}) (figure \ref{fig:lambda_performance}).
+\\ \\
+In this work we have used a similar column structure and connectivity rule.
 Instead of integrate-and-fire neurons we have chosen the Izhikevich model \cite{izhikevich2003} to allow us to explore the neural dynamics.
 The Izhikevich model uses two coupled differential equations with two variables and four parameters:
 \begin{align}
@@ -112,39 +92,15 @@ The Izhikevich model uses two coupled differential equations with two variables 
  \text{if } &v>30: v\Leftarrow c, u\leftarrow u+d
 \end{align}
 This is a simplified model of a two-dimensional dynamical system.
-This model has been used to reproduce common neural firing patterns (figure \ref{fig:izzy_model}).
-\begin{figure}
- \caption{The Izhikevich model reproduces common neural firing patterns \cite{izhikevich2003}}
- \label{fig:izzy_model}
- \centering
-   \includegraphics[width=\textwidth]{fig/izzy_model}
-\end{figure}
-\\ 
+This model has been used to reproduce common neural firing patterns (figure \ref{fig:izzy_model}). \\
 We enhanced the available MATLAB code for the Izhikevich model to incorporate propagation time between the neurons through the use of a delay buffer.
 This allowed us to study the temporal effects of action potential propagation time.
-We first verified that our enhanced model reproduced the qualitative behavior of the original model for the same parameter settings (figure \ref{fig:izzy_enhanced}).
-\begin{figure}
- \caption{The original Izhikevich model (left) and our enhanced model (right) with identical parameters with randomized stimulus.}
- \label{fig:izzy_enhanced}
- \centering
-   \includegraphics[width=\textwidth]{fig/izzy_enhanced}
-\end{figure}
-\\
-Introduce SPIKE metric and input/output distances-fading memory with association.
-Compare to Maas Liquid State Machine measures of similarity.
-
+We first verified that our enhanced model reproduced the qualitative behavior of the original model for the same parameter settings (figure \ref{fig:izzy_enhanced}).\\
 \section{Results}
 To test the effect of the distance-dependent propagation times we created two columns, 3x3x40,  with identical neurons and identical connectivity.
 The first column has random propagation times, the second column has distance-dependent propagation times.
 The bottom 10 layers were stimulated with random input as in \cite{izhikevich2003}.
 The resulting firing patterns are shown in figure \ref{fig:delaycompare}.
-\begin{figure}
- \caption{Two identical neural columns, 3x3x40, with randomized propagation delays (top) and distance-dependent propagation delays (bottom) were stimulated with random input in the first 10 layers,
- The column with distance-dependent propagation delays shows synchronized firing that induce traveling wave packets through the column.}
- \label{fig:delaycompare}
- \centering
-   \includegraphics[width=\textwidth]{fig/DelayCompare_RandInput}
-\end{figure}
 \\
 The column with random delay shows random firing activity in the stimulated region, but no propagation through the column.
 The column with distance-dependent propagation shows correlated firings with a clear propagation down the column.
@@ -157,18 +113,80 @@ There are several possible mechanisms through which slower effective propagation
 Below we show that the spike propagation time is slower for narrower columns. 
 This indicates a possible function of neural microcolumns, about 1 neuron wide, as slow-propagation channels in larger neural columns.
 \\
-\begin{figure}
- \caption{Effective propagation velocity}
- \centering
-   \includegraphics[width=\textwidth]{fig/propagation_time}
-\end{figure}
-\\ \\
-
 \section{Future work}
 Further investigation into mechanisms for lower effective velocity: spatial organization, neuron dynamics.\\
 Neural dynamics near a bifurcation can result in a delayed firing \cite{izhikevich}.
 Could be another mechanism for slower effective velocity.
 
+\section{Figures}
+\begin{figure}[p]
+ \caption{Dynamic synapse models allow the LSM to recognize past inputs using the present state of the liquid \cite{maas2002}}
+ \label{fig:lsm_memory}
+ \centering
+   \includegraphics[width=\textwidth]{fig/maas_memory}
+\end{figure}
+
+\begin{figure}[p]
+ \caption{Column structure used in this research, $\lambda=2$,$C=1$,}
+ \centering
+   \includegraphics[width=0.48\textwidth]{fig/lambda2}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics{fig/MultipleReadouts}
+	\caption{Multiple readouts from a single reservoir \cite{maas2002}}
+	\label{fig:lsm_multiple_readouts}
+\end{figure}
+
+\begin{figure}[p]
+	\caption{SPIKE metric applied to EEG data from \cite{kreuz2012}}
+	\centering
+	\includegraphics[width=\textwidth]{fig/SPIKE}
+\end{figure}
+
+\begin{figure}[p]
+ \caption{Neural models}
+ \centering
+   \includegraphics[width=\textwidth]{fig/neural_models}
+\end{figure}
+
+\begin{figure}[p]
+  \caption{Classification performance from \cite{maas2002}}
+  \label{fig:lambda_performance}
+  \centering
+    \includegraphics[width=0.48\textwidth]{fig/lambda_performance}
+\end{figure}
+
+\begin{figure}[p]
+ \caption{The Izhikevich model reproduces common neural firing patterns \cite{izhikevich2003}}
+ \label{fig:izzy_model}
+ \centering
+   \includegraphics[width=\textwidth]{fig/izzy_model}
+\end{figure}
+
+\begin{figure}[p]
+ \caption{The original Izhikevich model (left) and our enhanced model (right) with identical parameters with randomized stimulus.}
+ \label{fig:izzy_enhanced}
+ \centering
+   \includegraphics[width=\textwidth]{fig/izzy_enhanced}
+\end{figure}
+
+\begin{figure}[p]
+ \caption{Two identical neural columns, 3x3x40, with randomized propagation delays (top) and distance-dependent propagation delays (bottom) were stimulated with random input in the first 10 layers,
+ The column with distance-dependent propagation delays shows synchronized firing that induce traveling wave packets through the column.}
+ \label{fig:delaycompare}
+ \centering
+   \includegraphics[width=\textwidth]{fig/DelayCompare_RandInput}
+\end{figure}
+
+\begin{figure}[p]
+ \caption{Effective propagation velocity}
+ \centering
+   \includegraphics[width=\textwidth]{fig/propagation_time}
+\end{figure}
+
+\clearpage
 \printbibliography
 
 \end{document}

@@ -1,5 +1,5 @@
 %Single Izhikevich neuron
-clear;
+clear; 
 
 dt = 0.1;
 t = 0;
@@ -11,12 +11,13 @@ d = 6;
 v = -65;
 u = b*v;
 
-stim = zeros(1,1000);
+nsteps = 2000;
+stim = zeros(1,nsteps);
 stimDur = floor(10/dt);
-stim(100:(100+stimDur)) = 10;
+stim(100:end) = 4;
 vall = [];
 uall = [];
-for step=1:1000            % simulation of 1000 ms
+for step=1:nsteps            % simulation of 1000 ms
   fired=find(v>=30);    % indices of spikes
   if v>30
     v = c;
