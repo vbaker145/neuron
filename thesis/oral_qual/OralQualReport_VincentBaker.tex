@@ -11,7 +11,7 @@
 
 
 %opening
-\title{Computational properties of neural microcolumns arising from temporal dynamics}
+\title{Computational properties of neural columns arising from temporal dynamics}
 \author{Vince Baker, advisor: Dr. Luis Cruz Cruz\\ Drexel University Department of Physics}
 
 \begin{document}
@@ -39,25 +39,27 @@ These models have been effectively applied to solve diverse problems including i
 The common computational models may be considered biologically-inspired, but none of them are biologically plausible.
 All of these approaches greatly simplify the network and synapse dynamics.
 Multi-layer perceptrons and feed-forward networks do not include recurrent connections, and are trained through biologically unrealistic methods involving back-propagation of error terms.
-Recurrent network models such as long short-term memory (LSTM)  incorporate feedback with a basic concept of memory, but the dynamics and training mechanisms are still not biologically plausible. \\
-\\
+Recurrent network models such as long short-term memory (LSTM)  incorporate feedback with a basic concept of memory, but the dynamics and training mechanisms are still not biologically plausible.
+\\ \\
 In this work we adapt the more biologically plausible Liquid State Machine (LSM) model first developed in \cite{maas2002} and shown in figure \ref{fig:lsm_structure}.
-In the LSM model an untrained recurrent network, called the liquid or the reservoir, is excited with a time-varying input.
+In the LSM model a recurrently connected network, called the liquid or the reservoir, is excited with a time-varying input.
 The stimulus perturbs the liquid and creates a complex state progression like pebbles dropped into a pond.
 The time history of the input is encoded into the liquid state through the recurrent connections.
 A trained readout network then decodes the desired information from the liquid state. 
+The recurrent connections in the liquid create a fading memory property so that the time history of the input becomes encoded in the liquid state.
+Figure \ref{fig:lsm_memory} from \cite{maas2002} shows that a liquid state machine can recognize segments of a spike train that occurred up to 750 milliseconds in the past using only the current state of a liquid network.
 \\
 The LSM model has unique features that make it biologically plausible. 
 The large liquid network can be randomly connected and does not need to be trained.
 The readout network can be trained with biologically plausible Hebbian learning and does not require error backpropagation \cite{auer2002}.
 Multiple independent readout networks can be trained to simultaneously extract different information from the same liquid network (figure \ref{fig:lsm_multiple_readouts}).
-Liquid state machines have also proven an effective computational model, acheiving world-class results in speech recognition \cite{zhang2015}.
+Liquid state machines have also proven an effective computational model, achieving world-class results in speech recognition \cite{zhang2015}.
 \\ \\
 Two important properties of the liquid state machine are the separation property and the approximation property.
 The separation property reflects the distance between liquid network trajectories (time-evolved states) induced by different inputs.
 The separation property is mostly a function of the liquid itself.
-The approximation property addresses the ability of the LSM to decode the desired information from the traejctory of the liquid.
-The approximiation property depends mostly on the particular structure and adaptation mechanism of the readout layer.
+The approximation property addresses the ability of the LSM to decode the desired information from the trajectory of the liquid.
+The approximation property depends mostly on the particular structure and adaptation mechanism of the readout layer.
 \\ 
 To characterize the separation property of their liquid network Maas and Markram injected various spike trains and observed the resulting liquid states.
 They defined the distance between two spike trains by correlating the spike trains against each other.
@@ -70,11 +72,11 @@ We re-examine the neural column circuit used as an LSM liquid network in \cite{m
 In this work we explore the additional temporal dynamics found in realistic neural structures.
 We adopt a more realistic model for neuron dynamics that allows us to explore the rich variety of behaviors found in biological neurons.
 We also incorporate action-potential propagation times that are proportional to the physical distance between neurons.
-The dynamics of a small neural column are then simulated under various conditions to explore neuron synchronization, effective propagation velocity and the tranformation properties of the column.
+The dynamics of a small neural column are then simulated under various conditions to explore neuron synchronization, effective propagation velocity and the transformation properties of the column.
 Our model provides simulation of important physical parameters and constructs while still remaining computationally tractable for machine learning tasks such as pattern recognition on large data sets.
 \\
-In their original work Maas and Markram used a simple integrate-and-fire neuron model combined with a sophisticted synapse model first presented in \cite{markram1998}.
-Their neural column was composed of 135 neurons on a unit column, 3x3 neurons wide and 9 neurons high.
+In their original work Maas and Markram used a simple integrate-and-fire neuron model combined with a sophisticated synapse model first presented in \cite{markram1998}.
+Their neural column was composed of 135 neurons on a unit column, 3x3 neurons wide and 9 neurons high as shown in figure \ref{fig:column_structure}.
 The neurons were connected according to a distance-based rule:
 \begin{align}\label{eq:connectivity}
  P_{a,b} &= C \times e^{-(D(a,b)/\lambda)^2}
@@ -85,9 +87,11 @@ The synaptic responses were modeled using the dynamic model in \cite{markram1998
 This model, although highly simplified, incorporates many biophysical parameters.
 The recurrent connections, general structure, connectivity and synaptic dynamics are all higher fidelity than a typical computational model.
 The authors were able to directly measure the effects of certain parameters using a variety of computational tasks including spiking rate estimation, pattern recognition, spike coincidence and spatial distribution. 
-For example, the best performance on a spike pattern classification task was acheived with $\lambda=2$ in equation (\ref{eq:connectivity}) (figure \ref{fig:lambda_performance}).
+For example, the best performance on a spike pattern classification task was achieved with $\lambda=2$ in equation (\ref{eq:connectivity}) (figure \ref{fig:lambda_performance}).
 \\
-Instead of integrate-and-fire neurons we have chosen the Izhikevich model \cite{izhikevich2003} to allow us to explore the neural dynamics.
+Computational neuroscientists, biophysicists and machine learning researchers use various models to simulate neural networks (figure \ref{fig:neural_models}).
+Most liquid state machine implementations have used simple integrate-and-fire neurons due to their low computational complexity.
+We have chosen the Izhikevich model \cite{izhikevich2003} to allow us to explore the neural dynamics.
 The Izhikevich model uses two coupled differential equations with two variables and four parameters:
 \begin{align}
  v^\prime &= 0.04v^2+5v+140-u+I\\
@@ -180,7 +184,7 @@ We will focus on how the liquid state machine performance depends upon temporal 
 \end{figure}
 
 \begin{figure}[p]
- \caption{Dynamic synapse models allow the LSM to recognize past inputs using the present state of the liquid \cite{maas2002}}
+ \caption{A liquid network was stimulated with four sequential 250-millisecond sequences. The readout map was able to identify the first three segments from the liquid state at t=1000 milliseconds if the network included dynamic synapses. \cite{maas2002}}
  \label{fig:lsm_memory}
  \centering
    \includegraphics[width=\textwidth]{fig/maas_memory}
@@ -188,6 +192,7 @@ We will focus on how the liquid state machine performance depends upon temporal 
 
 \begin{figure}[p]
  \caption{Column structure used in this research, $\lambda=2$,$C=1$,}
+ \label{fig:column_structure}
  \centering
    \includegraphics[width=0.48\textwidth]{fig/lambda2}
 \end{figure}
@@ -199,9 +204,9 @@ We will focus on how the liquid state machine performance depends upon temporal 
 	\label{fig:lsm_multiple_readouts}
 \end{figure}
 
-
 \begin{figure}[p]
  \caption{Neural models}
+ \label{fig:neural_models}
  \centering
    \includegraphics[width=\textwidth]{fig/neural_models}
 \end{figure}
