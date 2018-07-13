@@ -1,24 +1,24 @@
 %Single Izhikevich neuron
-clear; 
+clear; close all;
 
-dt = 0.1;
+dt = .1;
 t = 0;
 a = 0.02;
+%b = 0.2;
 b = 0.2;
 c = -65;
 d = 6;
 
 v = -65;
-u = b*v;
+u = 0.2*v;
 
-nsteps = 2000;
+nsteps = 4000;
 stim = zeros(1,nsteps);
 stimDur = floor(10/dt);
-stim(100:end) = 4;
+stim(100:end) = 20;
 vall = [];
 uall = [];
 for step=1:nsteps            % simulation of 1000 ms
-  fired=find(v>=30);    % indices of spikes
   if v>30
     v = c;
     u =u+d;
@@ -28,11 +28,14 @@ for step=1:nsteps            % simulation of 1000 ms
   v=v+dt*0.5*(0.04*v.^2+5*v+140-u+I); % for numerical
   u=u+dt*a.*(b.*v-u);                 % stability
   
-  vall = [vall v];
+  vall = [vall min(v,30)];
   uall = [uall u];
 end
 
 figure(10); plot(vall);
+hold on; plot(stim,'r')
+
+figure(11); plot(vall, uall,'x-')
 
 vval = -80:0;
 uval = b.*vval;

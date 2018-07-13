@@ -1,6 +1,6 @@
 clear; close all
-width = 3;
-height = 3;
+width = 4;
+height = 4;
 layers = 40;
 N = width*height*layers;
 
@@ -24,12 +24,12 @@ st1(sidx:sidx+width*height,100:(100+stimDuration))= 5;
 st1 = 2*abs(rand(N, size(t,2)));
 
 %Column with random connections
-[a,b,c,d, Srand, delaysRand, ecn] = makeColumn(width, height, layers, 0.8, 0, dt);
-
+%[a,b,c,d, Srand, delaysRand, ecn] = makeColumn(width, height, layers, 0.8, 0, dt);
+[a,b,c,d, Srand, delaysRand, ecn] = makeColumnEnsemble(2,2, 2,2, layers, 0.8, 0, dt);
 
 %Column with distance-based connections
 vall = []; uall = [];
-[a,b,c,d, Sdis, delaysDis, ecn] = makeColumn(width, height, layers, 0.8, 1, dt);
+[a,b,c,d, Sdis, delaysDis, ecn] = makeColumnEnsemble(2,2, 2,2, layers, 0.8, 1, dt);
 
 %Thalamic input, per Izhekevich
 st1 = zeros(N, size(t,2));

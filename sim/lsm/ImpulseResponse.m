@@ -36,7 +36,8 @@ st1(sidx:stimDepth*(sidx+width*height),100:(100+stimDuration))= 30;
 
 %Column with distance-based connections
 vall = []; uall = [];
-[a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8, 1, dt);
+%[a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8, 1, dt);
+[a,b,c,d, S, delays, ecn] = makeColumnEnsemble(2, 2, 2, 2, layers, 0.8, 1, dt);
 uinit=b.*vinit;                 % Initial values of u
 [v1, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st1);
 %figure(20); imagesc(vall); caxis([-80 50]); colorbar
