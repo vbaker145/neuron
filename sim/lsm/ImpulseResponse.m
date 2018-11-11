@@ -1,10 +1,10 @@
-function pt = ImpulseResponse(csec)
+function [pt vall] = ImpulseResponse(csec)
 
 %Frequency sweep
 
 width = csec;
 height = csec;
-layers = 15;
+layers = 45;
 N = width*height*layers;
 
 dt = 1;
@@ -26,7 +26,7 @@ stimDepth = 1;
 st1(sidx:stimDepth*(sidx+width*height),100:(100+stimDuration))= 30;
 
 %background current, subthreshold
-%st1(1:width*height, :) = 3*rand(width*height, size(t,2));
+st1(1:width*height, :) = 3*rand(width*height, size(t,2));
 
 %Column with random connections
 % [a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8, 0);
@@ -36,10 +36,10 @@ st1(sidx:stimDepth*(sidx+width*height),100:(100+stimDuration))= 30;
 
 %Column with distance-based connections
 vall = []; uall = [];
-%[a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8, 1, dt);
-[a,b,c,d, S, delays, ecn] = makeColumnEnsemble(2, 2, 2, 2, layers, 0.8, 1, dt);
+[a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8, 1, dt);
+%[a,b,c,d, S, delays, ecn] = makeColumnEnsemble(2, 2, 2, 2, layers, 0.8, 1, dt);
 uinit=b.*vinit;                 % Initial values of u
-[v1, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st1);
+[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st1);
 %figure(20); imagesc(vall); caxis([-80 50]); colorbar
 
 %st1(sidx:sidx+width*height,50:53)= 30;

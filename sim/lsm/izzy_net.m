@@ -9,6 +9,9 @@ firings=[];             % spike timings
 vall = [];
 uall = [];
 
+synRespLambda = floor(4/dt);
+synResp = exp(-(0:synRespLambda).^2./synRespLambda);
+  
 for t=1:nsteps          % simulation of 1000 ms
   I = stim(:,t)+background_current;
   
@@ -16,9 +19,7 @@ for t=1:nsteps          % simulation of 1000 ms
   firings=[firings; t+0*fired,fired];
   v(fired)=c(fired);
   u(fired)=u(fired)+d(fired);
-  
-  synRespLambda = floor(4/dt);
-  synResp = exp(-(0:synRespLambda).^2./synRespLambda);
+   
   %PSP(:,mod(D(fired,:)+t, Dmax)) = 1;
   for ii=1:length(fired)
      pst = delays(:,fired(ii)); 
@@ -36,6 +37,8 @@ for t=1:nsteps          % simulation of 1000 ms
   v=v+0.5*dt*(0.04*v.^2+5*v+140-u+I); % step 0.5 ms
   v=v+0.5*dt*(0.04*v.^2+5*v+140-u+I); % for numerical
   u=u+dt*a.*(b.*v-u);                 % stability
+  
+  v(v>30) = 30;
   
   vall =[vall v];
   uall = [uall u];

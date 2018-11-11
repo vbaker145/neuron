@@ -56,16 +56,16 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-delayMult = 10;
+delayMult = 2;
 dmax = layers;
-connStrength = 4;
+connStrength = 5;
 
 %Synaptic weights
 for jj=1:length(x)
      for kk=1:length(x)
         zmin = min(z(jj), z(kk)); zmax = max(z(jj),z(kk)); 
-        dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers)));
-        dz = z(jj)-z(kk);
+        dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers))); %PBC
+        %dz = z(jj)-z(kk); 
         dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
             if connType == 1
@@ -82,6 +82,7 @@ for jj=1:length(x)
                     delays(jj,kk) = floor(dis*delayMult);
                 else
                     delays(jj,kk) = floor(delayMult*rand())+1;
+                    %delays(jj,kk) = 1;
                 end
                 if doplot == 1
                     didx = dis/dmax;
