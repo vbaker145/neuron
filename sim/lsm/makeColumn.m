@@ -21,7 +21,7 @@ doplot = 0;
 
 n = width*height*layers;
 
-displacement = 0.1;
+displacement = 0.8;
 xv = (0:width-1); 
 yv = (0:height-1);
 zv = (0:layers-1);

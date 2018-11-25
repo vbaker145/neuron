@@ -1,11 +1,11 @@
 clear; close all;
 width = 2;
 height = 2;
-layers = 45;
+layers = 200;
 N = width*height*layers;
 
-tmax = 500;
-dt = 1;
+tmax = 2000;
+dt = 1.0;
 t = 0:dt:tmax;
 
 %background current, subthreshold
@@ -13,7 +13,7 @@ t = 0:dt:tmax;
 
 %Background, corrected for dt
 st = zeros(N, size(t,2));
-st(:,1:1/dt:end) = 5*rand(N,tmax+1);
+st(:,1:1/dt:end) = 3*rand(N,tmax+1);
 sti = interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax);
 
 %Column with distance-based connections
