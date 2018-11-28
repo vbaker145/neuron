@@ -6,7 +6,7 @@ waveTimes = [];
 wavePositions = [];
 
 winSz = .010;
-winStep = .010;
+winStep = .005;
 bridge = 5;
 minClusPts = 3;
 
@@ -29,6 +29,7 @@ while jj < max(f(:,1))
         if length(clusPts) > minClusPts
            waveTimes(idx) = jj;
            wavePositions(idx) = mean(clusPts);
+           numFirings(idx) = length(clusPts);
            idx = idx+1;
            kk = kk+length(clusPts);
         else
@@ -60,11 +61,17 @@ maxidx = sortrows(tabulate(idx),2);
 maxidx = maxidx(find(maxidx(:,2)>5));
 
 figure(10); hold on;
+waveLabels = {};
 for jj=1:length(maxidx)
     cidx = find(idx==maxidx(jj));
     scatter(pts(cidx,1), pts(cidx,2), 50, idx(cidx),'filled'); colorbar;
+    waveLabels{jj} = cidx;
 end
 
-waveLabels = idx;
+nWavePts = sum(cellfun(@length,waveLabels));
+frac = nWavePts/length(wavePositions)
+
+medWaveSize = median(cellfun(@length,waveLabels))
+
 end
 

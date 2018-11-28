@@ -4,7 +4,7 @@ height = 2;
 layers = 200;
 N = width*height*layers;
 
-tmax = 2000;
+tmax = 1000;
 dt = 1.0;
 t = 0:dt:tmax;
 
@@ -25,3 +25,6 @@ uinit=b.*vinit;                 % Initial values of u
 
 [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
 figure; imagesc(vall); colorbar
+
+%Analyze results
+[t wp wl] = findWaves(firings, .001, width*height);
