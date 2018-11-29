@@ -15,7 +15,7 @@ minClusPts = 3;
 f = firings;
 f(:,1) = f(:,1) * dt;
 f(:,2) = floor( f(:,2) / crossSection );
-%figure(10); plot(f(:,1), f(:,2), 'x');
+figure(10); plot(f(:,1), f(:,2), 'x');
 
 %Windowed clustering, remove background firing
 steps = floor((max(f(:,1))-winSz)/winStep);
@@ -64,11 +64,11 @@ end
 maxidx = sortrows(tabulate(idx),2);
 maxidx = maxidx(find(maxidx(:,2)>5));
 
-%figure(10); hold on;
+figure(10); hold on;
 
 for jj=1:length(maxidx)
     cidx = find(idx==maxidx(jj));
-    %scatter(pts(cidx,1), pts(cidx,2), 50, idx(cidx),'filled'); colorbar;
+    scatter(pts(cidx,1), pts(cidx,2), 50, idx(cidx),'filled'); colorbar;
     waveLabels{jj} = cidx;
 end
 
