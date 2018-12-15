@@ -17,7 +17,7 @@ st(:,1:1/dt:end) = 3*rand(N,tmax+1);
 sti = interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax);
 
 vall = []; uall = [];
-[a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.5, 1, dt);
+[a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8, 1, dt);
 
 vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
 uinit=b.*vinit;                 % Initial values of u
@@ -40,12 +40,12 @@ end
         
 
 pidx=1;
-for percExc = 0.1:0.1:0.9
-    midx=1;
-    frac=[];
-    medWaveSize=[];
-    for jj=1:3
+pexc = 0.5:0.1:0.9;
+for percExc = 0.5:0.1:0.9
+    waveSizes = []; waveFractions =[]; waveSlopes = [];
+    for jj=1:10
         vall = []; uall = [];
+        
         [a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, percExc, 1, dt);
 
         vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
@@ -65,16 +65,28 @@ for percExc = 0.1:0.1:0.9
         wl={};
         if ~isempty(firings)
             [wt wp wl] = findWaves(firings, .001, width*height);
+            if ~isempty(wl)
+                [sizes waveFrac slopes] = analyzeWaves(wt, wp, wl);
+                waveSizes = [waveSizes sizes];
+                waveFractions = [waveFractions waveFrac];
+                waveSlopes = [waveSlopes slopes];
+            end
         end
 
-        if ~isempty(wl)
-            nWavePts = sum(cellfun(@length,wl));
-            frac(midx) = nWavePts/length(wp);
-            medWaveSize(midx) = median(cellfun(@length,wl));
-            midx=midx+1;
-        end
+        %if ~isempty(wl)
+        %    nWavePts = sum(cellfun(@length,wl));
+        %    frac(midx) = nWavePts/length(wp);
+        %    medWaveSize(midx) = median(cellfun(@length,wl));
+        %    midx=midx+1;
+        %end
     end
-    waveSize(pidx,:) = [mean(medWaveSize) std(medWaveSize)];
-    waveFraction(pidx,:) = [mean(frac) std(frac)];
+    waveSize(pidx,:) = [mean(waveSizes) std(waveSizes)];
+    waveFraction(pidx,:) = [mean(waveFractions) std(waveFractions)];
+    waveSlope(pidx,:) = [mean(waveSlopes) std(waveSlopes)];
     pidx = pidx+1;
 end
+
+figure;
+subplot(3,1,1); errorbar(pexc, waveSize(:,1), waveSize(:,2),'k'); set(gca,'XTick',[])
+subplot(3,1,2); errorbar(pexc, waveFraction(:,1), waveFraction(:,2),'k'); set(gca,'XTick',[])
+subplot(3,1,3); errorbar(pexc, waveSlope(:,1), waveSlope(:,2),'k'); 

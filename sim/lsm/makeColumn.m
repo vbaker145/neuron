@@ -68,11 +68,12 @@ for jj=1:length(x)
         %dz = z(jj)-z(kk); 
         dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
-            if connType == 1
-                cp = rand() < exp(-(dis/lambda)^2);
-            else
-                cp = rand() < (1-percentExc);
-            end
+            cp = rand() < exp(-(dis/lambda)^2);
+%             if connType == 1
+%                 cp = rand() < exp(-(dis/lambda)^2);
+%             else
+%                 cp = rand() < (1-percentExc);
+%             end
             cp = rand() < exp(-(dis/lambda)^2);
             if cp
                 %Connect neuron
@@ -81,8 +82,8 @@ for jj=1:length(x)
                 if connType == 1
                     delays(jj,kk) = floor(dis*delayMult);
                 else
-                    delays(jj,kk) = floor(delayMult*rand())+1;
-                    %delays(jj,kk) = 1;
+                    %delays(jj,kk) = floor(delayMult*rand())+1;
+                    delays(jj,kk) = 2;
                 end
                 if doplot == 1
                     didx = dis/dmax;

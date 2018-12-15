@@ -8,7 +8,7 @@ waveLabels = {};
 
 winSz = .010;
 winStep = .005;
-bridge = 5;
+bridge = 3;
 minClusPts = 3;
 
 %Get firing matrix in terms of time and layer #
@@ -52,7 +52,7 @@ for jj = 1:length(waveTimes)
       waveIdx = waveIdx + 1;
    end
    pdiff = pts(jj+1:end,:)-testPt;
-   cidx = find(pdiff(:,1)<4*winSz & abs(pdiff(:,2)) < 4*bridge);
+   cidx = find(pdiff(:,1)<2*winSz & abs(pdiff(:,2)) < 2*bridge);
    idx(jj+cidx) = idx(jj);
 end
 
