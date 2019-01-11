@@ -2,14 +2,15 @@ function [v, vall, u, uall, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S,
 %Izhikevich model
 
 n = size(S,1);
-Dmax = max(max(delays));
+ExpSize = 4;
+Dmax = max(max(delays))+ExpSize;
 PSP = zeros(n, Dmax);
 background_current = 0;
 firings=[];             % spike timings
 vall = [];
 uall = [];
 
-synRespLambda = floor(4/dt);
+synRespLambda = floor(ExpSize/dt);
 synResp = exp(-(0:synRespLambda).^2./synRespLambda);
   
 for t=1:nsteps          % simulation of 1000 ms
@@ -23,9 +24,11 @@ for t=1:nsteps          % simulation of 1000 ms
   %PSP(:,mod(D(fired,:)+t, Dmax)) = 1;
   for ii=1:length(fired)
      pst = delays(:,fired(ii)); 
-     for jj=1:n
-        idx = mod((t:t+synRespLambda)-1+pst(jj),Dmax)+1;
-        PSP(jj, idx) = PSP(jj,idx)+S(jj,fired(ii))*synResp;
+     ConIdx = find(abs(S(:,fired(ii)))>0);
+     for jj=1:length(ConIdx)
+        jIdx = ConIdx(jj);
+        idx = mod((t:t+synRespLambda)-1+pst(jIdx),Dmax)+1;
+        PSP(jIdx, idx) = PSP(jIdx,idx)+S(jIdx,fired(ii))*synResp;
         %idx = mod(t-1+pst(jj),Dmax)+1;
         %PSP(jj, idx) = PSP(jj,idx)+S(jj,fired(ii));
      end

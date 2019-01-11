@@ -8,45 +8,58 @@ tmax = 1000;
 dt = 1.0;
 t = 0:dt:tmax;
 
-%background current, subthreshold
-%st = 3*rand(N, size(t,2));
+%Column parameters
+structure.width = width;
+structure.height = height;
+structure.layers = layers;
+structure.displacement = 0.3;
 
-%Background, corrected for dt
-st = zeros(N, size(t,2));
-st(:,1:1/dt:end) = 3*rand(N,tmax+1);
-sti = interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax);
+connectivity.percentExc = 0.8;
+connectivity.connType = 1;
+connectivity.lambda = 2.5;
+connectivity.connStrength = 5;
 
-vall = []; uall = [];
-[a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, 0.8, 1, dt);
+delay.delayType = 1;
+delay.delayMult = 2;
+delay.delayFrac = 1.0;
+delay.dt = dt;
 
-vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
-uinit=b.*vinit;                 % Initial values of u
+% vall = []; uall = [];
+% delay.delayType = 1; %Distance-dependent delay
+% [a,b,c,d, S, delaysDis, ecn] = makeColumnParameters(structure, connectivity, delay);
+% delay.delayType = 2; %Fixed delay
+% [a,b,c,d, S, delaysFixed, ecn] = makeColumnParameters(structure, connectivity, delay);
+% 
+% vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
+% uinit=b.*vinit;                 % Initial values of u
+% 
+% %Background, corrected for dt
+% st = zeros(N, size(t,2));
+% st(:,1:1/dt:end) = 3*rand(N,tmax+1);
+% sti = interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax);
+% 
+% [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDis, st);
+% firingsDis = firings;
+% figure; subplot(1,2,1); plot(firings(:,1)*.001,firings(:,2)/4,'k.');
+% xlim([-0.1 1.1]);
+% xlabel('Time (seconds)'); ylabel('Z position')
+% [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysFixed, st);
+% firingsFixed = firings;
+% subplot(1,2,2); plot(firings(:,1)*.001,firings(:,2)/4,'k.');
+% set(gca, 'YTick',[]); xlim([-0.1 1.1]);
+% xlabel('Time (seconds)')
 
-%Background, corrected for dt
-st = zeros(N, size(t,2));
-st(:,1:1/dt:end) = 3*rand(N,tmax+1);
-sti = interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax);
-
-[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
-size(firings)
-
-%figure; imagesc(vall); colorbar
-
-%Analyze results
-wl={};
-if ~isempty(firings)
-    [wt wp wl] = findWaves(firings, .001, width*height);
-end
         
-
 pidx=1;
-pexc = 0.5:0.1:0.9;
-for percExc = 0.5:0.1:0.9
+delayMult = 1:4;
+delay.delayFrac = 1;
+for kk = 1:length(delayMult)
+    delay.delayMult = delayMult(kk);
     waveSizes = []; waveFractions =[]; waveSlopes = [];
     for jj=1:10
         vall = []; uall = [];
         
-        [a,b,c,d, S, delays, ecn] = makeColumn(width, height, layers, percExc, 1, dt);
+        [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
 
         vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
         uinit=b.*vinit;                 % Initial values of u
@@ -59,7 +72,7 @@ for percExc = 0.5:0.1:0.9
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
         size(firings)
         
-        %figure; imagesc(vall); colorbar
+        figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
 
         %Analyze results
         wl={};
@@ -86,7 +99,26 @@ for percExc = 0.5:0.1:0.9
     pidx = pidx+1;
 end
 
+% figure;
+% subplot(3,1,1); errorbar(pexc, waveSize(:,1), waveSize(:,2),'k'); set(gca,'XTick',[])
+% subplot(3,1,2); errorbar(pexc, waveFraction(:,1), waveFraction(:,2),'k'); set(gca,'XTick',[])
+% subplot(3,1,3); errorbar(pexc, waveSlope(:,1), waveSlope(:,2),'k'); 
+
+
+% figure;
+% subplot(3,1,1); errorbar(lambda, waveSize(:,1), waveSize(:,2),'k'); set(gca,'XTick',[])
+% subplot(3,1,2); errorbar(lambda, waveFraction(:,1), waveFraction(:,2),'k'); set(gca,'XTick',[])
+% subplot(3,1,3); errorbar(lambda, waveSlope(:,1), waveSlope(:,2),'k'); 
+
+% 
 figure;
-subplot(3,1,1); errorbar(pexc, waveSize(:,1), waveSize(:,2),'k'); set(gca,'XTick',[])
-subplot(3,1,2); errorbar(pexc, waveFraction(:,1), waveFraction(:,2),'k'); set(gca,'XTick',[])
-subplot(3,1,3); errorbar(pexc, waveSlope(:,1), waveSlope(:,2),'k'); 
+subplot(3,1,1); errorbar(delayMult, waveSize(:,1), waveSize(:,2),'k'); 
+set(gca,'XTick',[]); xlim([delayMult(1)-0.2 delayMult(end)+0.2]);
+ylabel('# firings/wave');
+subplot(3,1,2); errorbar(delayMult, waveFraction(:,1), waveFraction(:,2),'k'); 
+set(gca,'XTick',[]); xlim([delayMult(1)-0.2 delayMult(end)+0.2]);
+ylabel('Wave firing fraction')
+subplot(3,1,3); errorbar(delayMult, waveSlope(:,1), waveSlope(:,2),'k'); 
+xlim([delayMult(1)-0.2 delayMult(end)+0.2]);
+xlabel('Delay constant');
+ylabel('Velocity (mm/s)');

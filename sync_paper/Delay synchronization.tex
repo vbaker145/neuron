@@ -23,8 +23,8 @@ Cortical traveling waves have been observed in vivo and in simulations of recurr
 These traveling waves explain various features of cortical dynamics including spike timing variability and correlated fluctuations in membrane potential.
 In this work we examine the firing dynamics of neural column structures similar to those found in the cortex.
 We find that traveling waves are evoked by random background stimulus in networks with distance-dependent connectivity.
-We also demonstrate that the propagation velocity of the action potentials effects wave formation.
-In particular, networks with propagation time porportional to inter-neuron distance exhibit traveling waves while otherwise identical networks with constant or random propagation time do not show synchronization.
+We determine that the propagation velocity of the waves is determined by both the action potential propagation time and the topology of the column.
+This topological dependence of wave propagation may indicate a functional role of the cortex organization into columns and microcolumns.
 
 \end{abstract}
 
@@ -42,7 +42,7 @@ We study the emergence of traveling waves in columnar structures with biological
 \section{Methods}
 We simulated the dynamics of a small neural column to explore neuron synchronization.
 Our network geometry is based on the model presented in \cite{markram1998}.
-The neural column is composed of 135 neurons on a unit column, 3x3 neurons wide and 9 neurons high as shown in figure \ref{fig:column_structure}.
+An example neural column composed of 135 neurons on a unit grid spacing, 3x3 neurons wide and 9 neurons high as shown in figure \ref{fig:column_structure}.
 \begin{figure}[ht]
  \caption{Column structure used in this research, $\lambda=2$,$C=1$,}
  \label{fig:column_structure}
@@ -81,7 +81,14 @@ We then identify and label the traveling wave structures that evolve over time.
 
 
 \section{Results}
+We first establish the existence of traveling waves in our column.
+We simulate a column with a 2x2 cross section that is 200 neurons high.
+We randomly perturbed the neuron positions by 30\% from a perfect unit grid.
+The neurons connectivity was determiend by inter-neuron distance as described in Methods, with $\lambda$ of 2.5.
+\\
 Traveling wave behavior emerges when the excitatory neuron fraction is between 50\% and 98\%.
+When 40\% or fewer of the neurons were excitatory we did not observe traveling wave structure in the neuron firings.
+With almost no inhibition (>97\% excitatory neurons) we observed minimal firing activity.
 \begin{figure}[ht]
  \caption{Traveling wave statistics for columns with differing excitatory/inhibitory balance. 
 	  For columns with <50\% excitatory neurons no waves are observed. 
@@ -92,9 +99,46 @@ Traveling wave behavior emerges when the excitatory neuron fraction is between 5
  \centering
    \includegraphics[width=\textwidth]{fig/ExcitatoryWaves}
 \end{figure}
+
+In \ref{fig:excitatory_effect} we observe that more of the firing events are contained in traveling wave structures as the excitatory percentage increases.
+The average traveling wave group velocity does not seem to depend on the excitatory balance in the network, but the velocity measurements become more consistent in more excitatory networks.
+This may be a function of lower measurement variance since the traveling waves in more excitatory networks contain more firing events.
 \\
-We simulated various networks with random delays, fixed delays and distance-dependent delays.
-We found that only distance-dependent delay networks produced traveling waves.
+We measure the impact of action potential propagation delay on the wave propagation velocity.
+We simulate the a 2x2 column and a 3x3 column with action potential delays porportional to the inter-neuron distance.
+The porportionality constant is varied from 1 to 4. 
+We observe that the 3x3 column has substantially higher propagation velocity than the 2x2 column.
+For both topologies the proagation velocity depends weakly on the action potential propagation delay.
+
+\begin{figure}
+  \centering
+  \begin{minipage}{0.45\textwidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{fig/2x2_delay1}
+      \caption{2x2 column with porportionality constant 1}
+  \end{minipage}\hfill
+  \begin{minipage}{0.45\textwidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{fig/3x3_delay1}
+      \caption{3x3 column with porportionality constant 1}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[ht]
+ \caption{The propagation velocity decreases with longer delays.}
+ \label{fig:delay_compare}
+ \centering
+   \includegraphics[width=\textwidth]{fig/DelayMult_2x2}
+\end{figure}
+A 3x3 column shows the same dependence on action potential propagation, but the wave velocity is higher.
+\begin{figure}[ht]
+ \caption{The propagation velocity decreases with longer delays.}
+ \label{fig:delay_compare}
+ \centering
+   \includegraphics[width=\textwidth]{fig/DelayMult_3x3}
+\end{figure}
+
+
 
 
 \section{Future work}

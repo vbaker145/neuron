@@ -6,8 +6,8 @@ waveTimes = [];
 wavePositions = [];
 waveLabels = {};
 
-winSz = .010;
-winStep = .005;
+winSz = .020;
+winStep = .010;
 bridge = 3;
 minClusPts = 3;
 
@@ -15,7 +15,7 @@ minClusPts = 3;
 f = firings;
 f(:,1) = f(:,1) * dt;
 f(:,2) = floor( f(:,2) / crossSection );
-figure(10); plot(f(:,1), f(:,2), 'x');
+figure(10); clf; plot(f(:,1), f(:,2), 'x');
 
 %Windowed clustering, remove background firing
 steps = floor((max(f(:,1))-winSz)/winStep);
