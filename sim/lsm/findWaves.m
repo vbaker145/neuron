@@ -1,6 +1,9 @@
-function [waveTimes wavePositions waveLabels] = findWaves(firings, dt, crossSection)
+function [waveTimes wavePositions waveLabels, figNum] = findWaves(firings, dt, crossSection)
 %Find propagating waves in a column
 % firings - firings times by time step/neuron index
+if nargin<4
+   figNum = 1; 
+end
 
 waveTimes = [];
 wavePositions = [];
@@ -15,7 +18,7 @@ minClusPts = 3;
 f = firings;
 f(:,1) = f(:,1) * dt;
 f(:,2) = floor( f(:,2) / crossSection );
-figure(10); clf; plot(f(:,1), f(:,2), 'x');
+figure(figNum); clf; plot(f(:,1), f(:,2), 'k.');
 
 %Windowed clustering, remove background firing
 steps = floor((max(f(:,1))-winSz)/winStep);
@@ -64,7 +67,7 @@ end
 maxidx = sortrows(tabulate(idx),2);
 maxidx = maxidx(find(maxidx(:,2)>5));
 
-figure(10); hold on;
+figure(figNum); hold on;
 
 for jj=1:length(maxidx)
     cidx = find(idx==maxidx(jj));

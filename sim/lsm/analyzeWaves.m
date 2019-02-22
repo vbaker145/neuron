@@ -15,7 +15,11 @@ for jj=1:length(labels)
     wl = labels{jj};
     wpAbs = abs(wp(wl)-wp(wl(1)));
     wtRef = wt(wl)-wt(wl(1));
-    slopes(jj) = wtRef'\wpAbs';     
+    slopes(jj) = wtRef'\wpAbs';  
+    
+    wtj = wt(wl); wpj = wp(wl);
+    
+    pidx = [min(wp(wi)), max(wp(wi))]
 end
 
 
