@@ -72,11 +72,11 @@ dmax = layers;
 for jj=1:length(x)
      for kk=1:length(x)
         zmin = min(z(jj), z(kk)); zmax = max(z(jj),z(kk)); 
-        dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers))); %PBC
-        %dz = z(jj)-z(kk); 
+        %dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers))); %PBC
+        dz = z(jj)-z(kk); %Regular boundary conditions
         dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
-            cp = rand() < exp(-(dis/lambda)^2);
+            %cp = rand() < exp(-(dis/lambda)^2);
             if connType == 1
                 cp = rand() < exp(-(dis/lambda)^2);
             else

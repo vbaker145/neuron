@@ -19,7 +19,7 @@ for jj=1:length(labels)
     
     wtj = wt(wl); wpj = wp(wl);
     
-    pidx = [min(wp(wi)), max(wp(wi))]
+    pidx = [min(wp(wl)), max(wp(wl))];
 end
 
 
