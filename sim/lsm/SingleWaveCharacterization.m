@@ -2,7 +2,7 @@ clear all; close all;
 
 width = 2;
 height = 2;
-layers = 100;
+layers = 150;
 N = width*height*layers;
 
 %Column parameters
@@ -40,24 +40,27 @@ stBackground = st;
 
 waveSizes = []; waveFractions = []; waveSlopes = [];
 
-figure(20); subplot(3,3,1);
+%figure(20); subplot(3,3,1);
 vall = []; uall = [];
-for jj=1:1
+for jj=1:10
     %[pt, v, firings, hb] = ImpulseResponse(2, 1);
     %Make column
     [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
        
     %Simulate column
-    hbins = zeros(1,20);
+    nbins = 20;
+    hbins = zeros(1,nbins);
     startTimes = []; startPos = [];
     for kk=1:100
+        kk
         vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
         uinit=b.*vinit;                 % Initial values of u
 
         %Column impulse response
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
         fscale = firings(:,2)/(width*height);
-        hbins = hbins + histcounts(fscale, 0:5:100 );
+        [bins, edges] = histcounts(fscale, 0:layers/nbins:layers );
+        hbins = hbins + bins;
         
         %Column background response
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stBackground);
@@ -69,8 +72,13 @@ for jj=1:1
             startPos = [startPos, wp(idx)];
         end  
     end
-    figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
-    subplot(1,2,2); barh(2.5:5:97.5, hbins./sum(hbins),'k')
+    %figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
+    fbins = histcounts(startPos, 0:layers/nbins:layers);
+    figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
+    subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
+    ccf = corrcoef(fbins(2:end), hbins(2:end));
+    ccf_all(jj) = ccf(1,2);
+    title(['Correlation coefficient ', num2str(ccf(1,2))]);
     %figure(20); subplot(3,3,jj); barh(2.5:5:97.5, hbins./sum(hbins),'k')
     
     %Analyze waves
