@@ -8,6 +8,7 @@ displacement = structure.displacement;
 percentExc = connectivity.percentExc;
 connType = connectivity.connType;
 lambda = connectivity.lambda;
+maxLength = connectivity.maxLength;
 connStrength = connectivity.connStrength;
 
 delayType = delay.delayType;
@@ -78,11 +79,16 @@ for jj=1:length(x)
         if dis > 0
             %cp = rand() < exp(-(dis/lambda)^2);
             if connType == 1
-                cp = rand() < exp(-(dis/lambda)^2);
+                %cp = rand() < exp(-(dis/lambda)^2);
+                cp = rand() < exp(-(dis/lambda));
+            elseif connType == 2
+                cp = dis<maxLength;
             else
                 cp = rand() < (1-percentExc);
             end
-
+            %if dis>maxLength
+            %    cp = 0;
+            %end
             if cp
                 %Connect neuron
                 connections(jj,kk) = connStrength*(0.75*excNeurons(jj)-inNeurons(jj));
