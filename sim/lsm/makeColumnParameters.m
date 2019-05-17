@@ -8,6 +8,7 @@ displacement = structure.displacement;
 percentExc = connectivity.percentExc;
 connType = connectivity.connType;
 lambda = connectivity.lambda;
+norm2 = sqrt(1/lambda^2)/sqrt(pi); %PDF normalization constant
 maxLength = connectivity.maxLength;
 connStrength = connectivity.connStrength;
 
@@ -71,6 +72,9 @@ dmax = layers;
 
 %Synaptic weights
 for jj=1:length(x)
+    if connType == 4
+       rowConnect = rand()<0.5; 
+    end
      for kk=1:length(x)
         zmin = min(z(jj), z(kk)); zmax = max(z(jj),z(kk)); 
         %dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers))); %PBC
@@ -78,17 +82,27 @@ for jj=1:length(x)
         dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
             %cp = rand() < exp(-(dis/lambda)^2);
-            if connType == 1
-                %cp = rand() < exp(-(dis/lambda)^2);
-                cp = rand() < exp(-(dis/lambda));
+            if connType == 1 
+                cp = rand() < exp(-(dis/lambda)^2);
+                if dis>maxLength
+                   cp = 0; 
+                end
+                %cp = rand() < exp(-(dis/lambda));
             elseif connType == 2
                 cp = dis<maxLength;
+            elseif connType == 3
+                cp = rand() < funkyPDF(maxLength, 0.5, lambda, dis);
+            elseif connType == 4
+                cp = 0;
+                if rowConnect
+                    cp = dis<maxLength;
+                end
             else
-                cp = rand() < (1-percentExc);
+                cp = rand() < 0.5;
             end
-            %if dis>maxLength
-            %    cp = 0;
-            %end
+%             if dis>maxLength
+%                 cp = 0;
+%             end
             if cp
                 %Connect neuron
                 connections(jj,kk) = connStrength*(0.75*excNeurons(jj)-inNeurons(jj));

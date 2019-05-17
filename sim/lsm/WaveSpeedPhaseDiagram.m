@@ -12,7 +12,7 @@ structure.layers = layers;
 structure.displacement = 0.0;
 
 connectivity.percentExc = 0.8;
-connectivity.connType = 1;
+connectivity.connType = 3;
 connectivity.lambda = 2.5;
 connectivity.maxLength = 10;
 connectivity.connStrength = 8;
@@ -37,11 +37,11 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
-delayMults = (2:4);
-lambdas = (1.5:.5:4.5);
-maxLengths = (20);
+delayMults = (1.5);
+lambdas = ([4.5]);
+maxLengths = (2:8);
 slopesMean = zeros(length(delayMults), length(lambdas));
-slopesStd = zeros(length(delayMults), length(lambdas));
+slopesStd = zeros(length(delayMults), length(lambdas), length(maxLengths));
 for jj=1:length(delayMults)
     jj
     delay.delayMult = delayMults(jj);
@@ -63,10 +63,10 @@ for jj=1:length(delayMults)
                 [wt wp wl] = findWaves(firings, .001, 2*2);
                 [sizes waveFrac slope] = analyzeWaves(wt, wp, wl);
                 slopes(testIdx) = mean(slope);
-                %figure; plot(wt, wp, 'k.'); title(num2str(lambdas(kk)));
+                figure; plot(wt, wp, 'k.'); title(num2str(maxLengths(ll)));
             end
+            slopesMean(jj,kk,ll) = mean(slopes);
         end
-        slopesMean(jj,kk) = mean(slopes);
         %slopesStd(jj,kk) = std(slopes);
     end
     
