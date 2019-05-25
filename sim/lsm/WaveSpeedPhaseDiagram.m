@@ -12,7 +12,7 @@ structure.layers = layers;
 structure.displacement = 0.0;
 
 connectivity.percentExc = 0.8;
-connectivity.connType = 3;
+connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.maxLength = 10;
 connectivity.connStrength = 8;
@@ -37,9 +37,9 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
-delayMults = (1.5);
-lambdas = ([4.5]);
-maxLengths = (2:8);
+delayMults = (2);
+lambdas = ([2.5]);
+maxLengths = (100);
 slopesMean = zeros(length(delayMults), length(lambdas));
 slopesStd = zeros(length(delayMults), length(lambdas), length(maxLengths));
 for jj=1:length(delayMults)
