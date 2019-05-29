@@ -15,14 +15,14 @@ connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.maxLength = 10;
-connectivity.connStrength = 8;
+connectivity.connStrength = 5;
 
 dt = 1.0;
 tmax = 700;
 t = 0:dt:tmax;
 
 delay.delayType = 1;
-delay.delayMult = 2;
+delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
@@ -60,7 +60,7 @@ for jj=1:length(delayMults)
 
                 %Column impulse response
                 [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
-                [wt wp wl] = findWaves(firings, .001, 2*2);
+                [wt wp wl] = findWaves(firings, dt/1000, width*height);
                 [sizes waveFrac slope] = analyzeWaves(wt, wp, wl);
                 slopes(testIdx) = mean(slope);
                 figure; plot(wt, wp, 'k.'); title(num2str(maxLengths(ll)));

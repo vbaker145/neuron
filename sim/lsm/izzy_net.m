@@ -2,7 +2,7 @@ function [v, vall, u, uall, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S,
 %Izhikevich model
 
 n = size(S,1);
-ExpSize = 4;
+ExpSize = 4;  %Length of synaptic response in milliseconds
 Dmax = max(max(delays))+ExpSize;
 PSP = zeros(n, Dmax);
 background_current = 0;
@@ -11,7 +11,7 @@ vall = [];
 uall = [];
 
 synRespLambda = floor(ExpSize/dt);
-synResp = exp(-(0:synRespLambda).^2./synRespLambda);
+synResp = exp(-((0:synRespLambda)./synRespLambda).^2);
   
 for t=1:nsteps          % simulation of 1000 ms
   I = stim(:,t)+background_current;
