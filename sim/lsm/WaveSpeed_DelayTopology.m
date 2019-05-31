@@ -36,7 +36,7 @@ widthHeights = [2,2; 2,3; 3,3 ];
 slopesMean = zeros(length(delayMults), size(widthHeights,1));
 slopesStd = zeros(length(delayMults), size(widthHeights,1));
 
-Ntrials = 50;
+Ntrials = 100;
 slopes = zeros(length(delayMults), size(widthHeights,1), Ntrials);
 for jj=1:length(delayMults)
     delay_t = delay;
