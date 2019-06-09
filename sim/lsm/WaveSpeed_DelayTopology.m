@@ -21,7 +21,7 @@ dt = 1.0;
 tmax = 1200;
 t = 0:dt:tmax;
 
-delay.delayType = 1;
+delay.delayType = 2;
 delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
@@ -31,12 +31,12 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
 delayMults = (1:4);
-widthHeights = [2,2; 2,3; 3,3 ];
+widthHeights = [2,2];
 
 slopesMean = zeros(length(delayMults), size(widthHeights,1));
 slopesStd = zeros(length(delayMults), size(widthHeights,1));
 
-Ntrials = 100;
+Ntrials = 4;
 slopes = zeros(length(delayMults), size(widthHeights,1), Ntrials);
 for jj=1:length(delayMults)
     delay_t = delay;

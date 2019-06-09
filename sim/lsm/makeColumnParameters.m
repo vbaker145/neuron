@@ -105,7 +105,7 @@ for jj=1:length(x)
 %             end
             if cp
                 %Connect neuron
-                connections(jj,kk) = connStrength*(0.75*excNeurons(jj)-inNeurons(jj));
+                connections(jj,kk) = connStrength*rand()*(0.5*excNeurons(jj)-inNeurons(jj));
                 %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
                 
                 if doplot == 1
@@ -118,14 +118,14 @@ for jj=1:length(x)
             
             if delayType == 1
                 if rand() < delayFrac
-                    delays(jj,kk) = floor(dis*delayMult);
+                    delays(jj,kk) = floor(dis*delayMult/dt);
                 else
-                    delays(jj,kk) = 2;
+                    delays(jj,kk) = floor(2/dt);
                 end
             elseif delayType == 2
-                delays(jj,kk) = 2;
+                delays(jj,kk) = floor(delayMult/dt);
             else
-                delays(jj,kk) = floor(delayMult*rand())+1;
+                delays(jj,kk) = floor(delayMult*rand()/dt)+1;
             end
             
         end

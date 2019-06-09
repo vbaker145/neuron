@@ -11,7 +11,7 @@ vall = [];
 uall = [];
 
 synRespLambda = floor(ExpSize/dt);
-synResp = exp(-((0:synRespLambda)./synRespLambda).^2);
+synResp = exp(-((0:synRespLambda-1)./synRespLambda).^2);
   
 for t=1:nsteps          % simulation of 1000 ms
   I = stim(:,t)+background_current;
@@ -27,7 +27,7 @@ for t=1:nsteps          % simulation of 1000 ms
      ConIdx = find(abs(S(:,fired(ii)))>0);
      for jj=1:length(ConIdx)
         jIdx = ConIdx(jj);
-        idx = mod((t:t+synRespLambda)-1+pst(jIdx),Dmax)+1;
+        idx = mod((t:t+synRespLambda-1)-1+pst(jIdx),Dmax)+1;
         PSP(jIdx, idx) = PSP(jIdx,idx)+S(jIdx,fired(ii))*synResp;
         %idx = mod(t-1+pst(jj),Dmax)+1;
         %PSP(jj, idx) = PSP(jj,idx)+S(jj,fired(ii));
