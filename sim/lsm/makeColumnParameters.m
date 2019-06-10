@@ -106,6 +106,7 @@ for jj=1:length(x)
             if cp
                 %Connect neuron
                 connections(jj,kk) = connStrength*rand()*(0.5*excNeurons(jj)-inNeurons(jj));
+                %connections(jj,kk) = connStrength*(0.5*excNeurons(jj)-inNeurons(jj));
                 %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
                 
                 if doplot == 1

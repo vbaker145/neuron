@@ -81,9 +81,12 @@ for kk = 1:length(connStrength)
         %figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
         figure(20); subplot(length(connStrength),1,kk)
         plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
-        axis([0 1 0 100] ); set(gca, 'XTickLabel',[]);
-        text(0.9,80,['K=' num2str(kk)],'BackgroundColor', 'White')
-        if kk=length(connStrength)
+        axis([0 1 0 100] ); set(gca, 'XTickLabel',[]); set(gca, 'YTickLabel',[]);
+        text(0.8,80,['K=' num2str(connStrength(kk))],'BackgroundColor', 'White', 'FontSize', 12, 'Color', 'Red')
+        if kk == length(connStrength)
+            set(gca, 'XTickMode', 'auto', 'XTickLabelMode', 'auto');
+            xlabel('Time (seconds)');
+        end
         
         %xlabel('Time (seconds)'); ylabel('Neuron Z position');
         

@@ -2,7 +2,7 @@ clear all; close all;
 
 width = 2;
 height = 2;
-layers = 150;
+layers = 100;
 N = width*height*layers;
 
 %Column parameters
@@ -15,13 +15,13 @@ connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.maxLength = 100;
-connectivity.connStrength = 5;
+connectivity.connStrength = 16;
 
 dt = 1.0;
 tmax = 1200;
 t = 0:dt:tmax;
 
-delay.delayType = 2;
+delay.delayType = 1;
 delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
@@ -31,12 +31,12 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
 delayMults = (1:4);
-widthHeights = [2,2];
+widthHeights = [2,2; 2,3; 3,3];
 
 slopesMean = zeros(length(delayMults), size(widthHeights,1));
 slopesStd = zeros(length(delayMults), size(widthHeights,1));
 
-Ntrials = 4;
+Ntrials = 2;
 slopes = zeros(length(delayMults), size(widthHeights,1), Ntrials);
 for jj=1:length(delayMults)
     delay_t = delay;
@@ -52,7 +52,8 @@ for jj=1:length(delayMults)
             sidx = 1;
             stimDuration = floor(20/dt);
             stimDepth = 5;
-            stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 5;
+            stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 10;
+            stImpulse = (interp1(0:tmax, stImpulse(:,1:1/dt:end)', 0:dt:tmax))';
 
             tslope = NaN(1, Ntrials);
             for testIdx = 1:Ntrials
@@ -65,6 +66,7 @@ for jj=1:length(delayMults)
 
                 %Column impulse response
                 [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
+                %figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
                 [wt wp wl] = findWaves(firings, dt/1000, structure_t.width*structure_t.height);
                 
                 
