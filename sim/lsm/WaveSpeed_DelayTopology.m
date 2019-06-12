@@ -36,7 +36,7 @@ widthHeights = [2,2; 2,3; 3,3];
 slopesMean = zeros(length(delayMults), size(widthHeights,1));
 slopesStd = zeros(length(delayMults), size(widthHeights,1));
 
-Ntrials = 2;
+Ntrials = 50;
 slopes = zeros(length(delayMults), size(widthHeights,1), Ntrials);
 for jj=1:length(delayMults)
     delay_t = delay;
@@ -66,7 +66,10 @@ for jj=1:length(delayMults)
 
                 %Column impulse response
                 [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
-                %figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+%                 figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+%                 xlabel('Time (seconds)','FontSize',12)
+%                 ylabel('Z position', 'FontSize', 12)
+%                 set(gca, 'FontSize',12)
                 [wt wp wl] = findWaves(firings, dt/1000, structure_t.width*structure_t.height);
                 
                 

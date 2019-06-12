@@ -120,7 +120,7 @@ The lower overall connectivity in the network requires an increase in the averag
 In Figure \ref{fig:strength_effect} we show typical traveling waves for different levels of connection strength relative to the baseline.
 We see that traveling waves emerge when the connection strength is increased to roughly 4x the original strength.
 \begin{figure}[!htb]
- \caption{Effect of connection strength on traveling wave formation.}
+ \caption{Effect of connection strength on traveling wave formation. $K$ is the connection strength enhancement relative to the baseline.}
  \centering
    \includegraphics[width=0.3\textwidth]{fig/ConnectionStrengthWaves}  
  \label{fig:strength_effect}
@@ -129,8 +129,8 @@ We see that traveling waves emerge when the connection strength is increased to 
 The excitatory/inhibitory balance is known to have a significant impact on neural network dynamics \cite{keane2015}. 
 In our microcolumn model we do not observe traveling waves if less than $40\%$ of the neurons are excitatory.
 As the fraction of excitatory neurons increase we observe traveling wave patterns emerge from the background firing events.
-As the fraction increases more of the firing events occur within waves structures.
-When all neurons are excitatory the traveling waves are the dominat mode of firing, with substantially all of the firing events contained within traveling waves.
+As the excitatory fraction increases more of the firing events occur within waves structures.
+When all neurons are excitatory the traveling waves are the dominat mode of firing, with substantially all of the firing events contained within traveling waves. \\
 \begin{figure}[!htb]
  \caption{Excitatory/inhibitory balance effect on traveling waves.. 
 	  For columns with $<40\%$ excitatory neurons no waves are observed.
@@ -141,12 +141,31 @@ When all neurons are excitatory the traveling waves are the dominat mode of firi
    \includegraphics[width=0.5\textwidth]{fig/ExcitatoryWaves}
 \end{figure}
 To examine the speed of the traveling waves we stimulated the lowest 5 layers of neurons in the column with a step stimulus lasting 20 ms starting at $t=20~ms$..
-This generates a single traveling wave with a well-defined start time, simplifying the propagation velocity measurement.
+This generates a single traveling wave with a determined start time, simplifying the propagation velocity measurement.
+A typical stimulated wave is shown in Figure \ref{fig:wave_example}.
 \begin{figure}[!htb]
- \caption{Wave speed is inversely porportional to K as expected. Wave speed also increases with the column cross-section.}
+ \caption{Single traveling wave resulting from a step stimulus at the bottom of the column.}
+ \label{fig:wave_example}
+ \centering
+   \includegraphics[width=0.5\textwidth]{fig/TypicalWave}
+\end{figure}
+In \cite{muller2018} the authors noted that mesoscopic traveling waves typically have propagation speeds from 0.1 to 0.8 meters per second, consistent with axonal conduction speed of unmyelinated fibers.
+Our linear model of synpatic conduction delay is linear with inter-neuron distance, with a porportionality constant $\kappa$.
+We expected longer synaptic conduction delays to result in slower wave propagation.
+The column topology can also influence the propagation speed.
+Columns with a larger cross-section have a larger number of neurons and synapses for a given length, providing more pathways for the traveling wave to propagate. \\
+Simulations show that the synaptic propagation delay parameter $\kappa$ does effect the wave propagation as expected, but the effect is not linear (Figure \ref{fig:delay_topology}).
+If the traveling wave velocity was determined by the acton potential propagation speed we would expect to see wave velocity of 1000 units/second with $\kappa=1$.
+Instead the wave velocity is less than half the simple prediction.
+A four-fold increase in $\kappa$ does not reduce the traveling wave propagation speed by a factor of 4. \\
+The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
+Real microcolumns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
+
+\begin{figure}[!htb]
+ \caption{Wave speed is inversely porportional to $\kappa$ as expected. Wave speed also increases with the column cross-section.Mean values with $1\sigma$ errorbars, 50 trials.}
  \label{fig:delay_topology}
  \centering
-   \includegraphics[width=0.5\textwidth]{fig/WaveSpeed_DelayTopology}
+   \includegraphics[width=0.6\textwidth]{fig/WaveSpeed_DelayTopology}
 \end{figure}
 
 
