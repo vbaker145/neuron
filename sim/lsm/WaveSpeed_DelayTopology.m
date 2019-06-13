@@ -30,13 +30,13 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
-delayMults = (1:4);
+delayMults = (0.1:0.1:0.5);
 widthHeights = [2,2; 2,3; 3,3];
 
 slopesMean = zeros(length(delayMults), size(widthHeights,1));
 slopesStd = zeros(length(delayMults), size(widthHeights,1));
 
-Ntrials = 50;
+Ntrials = 3;
 slopes = zeros(length(delayMults), size(widthHeights,1), Ntrials);
 for jj=1:length(delayMults)
     delay_t = delay;

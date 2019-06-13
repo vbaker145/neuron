@@ -2055,12 +2055,16 @@
     <bcf:citekey order="4">cruz2005</bcf:citekey>
     <bcf:citekey order="5">horton2005</bcf:citekey>
     <bcf:citekey order="6">muller2018</bcf:citekey>
-    <bcf:citekey order="7">markram1998</bcf:citekey>
-    <bcf:citekey order="8">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="9">izzy_code</bcf:citekey>
-    <bcf:citekey order="10">izzy_code</bcf:citekey>
-    <bcf:citekey order="11">keane2015</bcf:citekey>
-    <bcf:citekey order="12">muller2018</bcf:citekey>
+    <bcf:citekey order="7">muller2018</bcf:citekey>
+    <bcf:citekey order="8">wu2008</bcf:citekey>
+    <bcf:citekey order="9">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="10">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="11">markram1998</bcf:citekey>
+    <bcf:citekey order="12">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="13">izzy_code</bcf:citekey>
+    <bcf:citekey order="14">izzy_code</bcf:citekey>
+    <bcf:citekey order="15">keane2015</bcf:citekey>
+    <bcf:citekey order="16">muller2018</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">
   <bcf:sorting>

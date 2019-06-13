@@ -44,7 +44,14 @@ The layers are connected to each other by microcolumns \cite{cruz2005}, a struct
 The existence of these microcolumns is well established but their function remains unclear \cite{horton2005}. 
 Prevous work on mesoscopic traveling waves in the cortex has largely focused on lateral waves within the layers \cite{muller2018}.
 \\
-TODO: In-depth discussion of previous traveling wave research: 2-D sim, mesoscopic traveling waves, proposed functions.
+Several types of cortical propagating waves have been studied.
+Slow, large-scale wave activity have been observed in sleep and anesthetized states \cite{muller2018}.
+Advances in optical imaging techniques using voltage-sensitive dye provided sufficient spatial resolution to observe local area mesoscopic traveling waves in the awake cortex \cite{wu2008}.
+From a theoretical standpoint neuronal waves have been studied as networks of coupled oscillators \cite{ermentrout2001}. 
+Although the Izhekevich model is capable of producing self-resonant oscillations when tuned appropriately, the model parameters used in this work did not show any evidence of self-oscillation.
+The waves studied in the present work seem to fall instead into the general category of propagating pulses in an excitable network described in \cite{ermentrout2001}. \\
+Stimulus-evoked mesoscopic waves have been observed in the visual and auditory system. 
+
 
 \section{Methods}
 We simulated the dynamics of a small neural column to explore neuron synchronization.
@@ -129,7 +136,7 @@ We see that traveling waves emerge when the connection strength is increased to 
 The excitatory/inhibitory balance is known to have a significant impact on neural network dynamics \cite{keane2015}. 
 In our microcolumn model we do not observe traveling waves if less than $40\%$ of the neurons are excitatory.
 As the fraction of excitatory neurons increase we observe traveling wave patterns emerge from the background firing events.
-As the excitatory fraction increases more of the firing events occur within waves structures.
+As the excitatory fraction increases more of the firing events occur within waves structures (Figure \ref{fig:excitatory_effect}).
 When all neurons are excitatory the traveling waves are the dominat mode of firing, with substantially all of the firing events contained within traveling waves. \\
 \begin{figure}[!htb]
  \caption{Excitatory/inhibitory balance effect on traveling waves.. 
