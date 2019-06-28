@@ -17,23 +17,29 @@ structure.displacement = 0;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
-connectivity.connStrength = 6;
-connectivity.connStrengthRange = 2;
+connectivity.connStrength = 8;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
 delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
+
         
 pidx=1;
+delayMult = 2;
 connStrength = 5;
+delay.delayFrac = 1;
 stimStrength = 5;
-for kk = 1:1
+timeSteps = [0.01, 0.1, 0.5, 1];
+figure(20); subplot(1,3,1); 
+for kk = 1:length(timeSteps)
     %delay.delayMult = delayMult(kk);
-    connectivity.connStrength = connStrength(kk);
     waveSizes = []; waveFractions =[]; waveSlopes = [];
-    for jj=1:10
+    dt = timeSteps(kk);
+    delay.dt = dt;
+    t = 0:dt:tmax;
+    for jj=1:1
         vall = []; uall = [];
         
         [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -42,19 +48,32 @@ for kk = 1:1
         uinit=b.*vinit;                 % Initial values of u
         
         %Background, corrected for dt
-        st = zeros(N, size(t,2));
-        st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
-        st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
-        sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
+%         st = zeros(N, size(t,2));
+%         st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
+%         st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
+%         sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
+        %Impulsive stimulus
+        stImpulse = zeros(N, size(t,2));
+        sidx = 1;
+        stimDuration = floor(20/dt);
+        stimDepth = 5;
+        stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 5;
 
-        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, sti);
+        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
         size(firings)
         
         %figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
-        figure(20); subplot(length(connStrength),1,kk)
+        figure(20); subplot(1,length(timeSteps),kk)
         plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
-        axis([0 1 0 100] ); set(gca, 'XTickLabel',[]);
-        text(0.9,80,['K=' num2str(kk)],'BackgroundColor', 'White')
+        axis([0 0.5 0 100] ); 
+        set(gca, 'XTick', 0:0.1:0.5)
+        %set(gca, 'XTickLabel',[]);
+        %text(0.9,80,['TS=' num2str(timeSteps(kk))],'BackgroundColor', 'White')
+        title(['\delta t=' num2str(timeSteps(kk)) ' ms'])
+        xlabel('Time (s)');
+        if kk==1
+           ylabel('Z position') 
+        end
         
         %xlabel('Time (seconds)'); ylabel('Neuron Z position');
         

@@ -5,7 +5,7 @@ layers = 100;
 N = width*height*layers;
 
 tmax = 1000;
-dt = 1;
+dt = 0.2;
 t = 0:dt:tmax;
 
 %Column parameters
@@ -89,7 +89,7 @@ for kk = 1:length(percentExc)
         
 %         [a,b,c2,d2, S2, delays2, ecn] = makeColumnParameters(structure, connectivity, delay);
 %         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, sti);
-%         figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+        figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
 
         %Analyze results
         wl={};

@@ -11,6 +11,7 @@ lambda = connectivity.lambda;
 norm2 = sqrt(1/lambda^2)/sqrt(pi); %PDF normalization constant
 maxLength = connectivity.maxLength;
 connStrength = connectivity.connStrength;
+connStrengthRange = connectivity.connStrengthRange;
 
 delayType = delay.delayType;
 delayMult = delay.delayMult;
@@ -105,8 +106,9 @@ for jj=1:length(x)
 %             end
             if cp
                 %Connect neuron
-                connections(jj,kk) = connStrength*rand()*(0.5*excNeurons(jj)-inNeurons(jj));
+                %connections(jj,kk) = connStrength*rand()*(0.5*excNeurons(jj)-inNeurons(jj));
                 %connections(jj,kk) = connStrength*(0.5*excNeurons(jj)-inNeurons(jj));
+                connections(jj,kk) = connStrength*(0.5*excNeurons(jj)-inNeurons(jj))+(rand()-0.5)*connStrengthRange;
                 %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
                 
                 if doplot == 1

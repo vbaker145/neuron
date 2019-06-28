@@ -14,10 +14,11 @@ synRespLambda = floor(ExpSize/dt);
 synResp = exp(-((0:synRespLambda-1)./synRespLambda).^2);
   
 for t=1:nsteps          % simulation of 1000 ms
+  sim_t = (t-1)*dt;
   I = stim(:,t)+background_current;
   
   fired=find(v>=30);    % indices of spikes
-  firings=[firings; t+0*fired,fired];
+  firings=[firings; sim_t+0*fired,fired];
   v(fired)=c(fired);
   u(fired)=u(fired)+d(fired);
    

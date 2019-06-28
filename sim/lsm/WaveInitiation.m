@@ -19,7 +19,7 @@ connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.connStrength = 6;
 connectivity.connStrengthRange = 2;
-connectivity.maxLength = 100;
+connectivity.maxLength = 150;
 
 delay.delayType = 1;
 delay.delayMult = 1;
@@ -33,7 +33,7 @@ for kk = 1:1
     %delay.delayMult = delayMult(kk);
     connectivity.connStrength = connStrength(kk);
     waveSizes = []; waveFractions =[]; waveSlopes = [];
-    for jj=1:10
+    for jj=1:1
         vall = []; uall = [];
         
         [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);

@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[font=scriptsize]{caption}
+\usepackage[font=scriptsize]{subcaption}
 \usepackage{wrapfig}
 \usepackage[backend=biber]{biblatex}
 
@@ -13,7 +14,7 @@
 
 
 %opening
-\title{One-dimensional traveling waves in neural minicolumns}
+\title{One-dimensional traveling waves in neural microcolumns}
 \author{Vince Baker, advisor: Dr. Luis Cruz Cruz\\ Drexel University Department of Physics}
 
 \begin{document}
@@ -36,20 +37,19 @@ Proposed functions of these traveling waves include motor coordination, place fi
 Advanced experimental techniques that achieve the required spatial and temporal resolution \cite{shoham1999} to capture the mesoscopic traveling waves have focused on lateral activity near the cortical surface, and simulations of traveling waves in a 2-D sheet of neurons have been performed \cite{keane2015}. 
 In this work we explore the dynamics of traveling waves along the vertical column structures found in the cortex.
 We find that 1-D traveling waves can propagate in simulated neural microcolumn structures with certain properties including distance-dependent connectivity and a mix of excitatory and inhibitory neurons. 
-We observe wave properties including creation from background stimulus, annihilation between waves, and a wave group velocity that is determined by both the neural phase velocity (action potential propagation speed down a synapse) and the column topology. 
-The topological dependence of wave speed is especially interesting as it may contribute to the functional organization of the cortex into minicolumns.
+We observe wave properties including creation from background stimulus, annihilation between waves, and a wave group velocity that is determined by both the neural phase velocity (action potential propagation speed down an axon) and the column topology. 
+The topological dependence of wave speed is especially interesting as it may contribute to the functional organization of the cortex into microcolumns.
 \\
 The cerebral cortex is organized into six layers distinguished by the types of neurons and connections found in each layer.
 The layers are connected to each other by microcolumns \cite{cruz2005}, a structure of about 100 neurons that is a few tens of microns thick and several millimeters long.
 The existence of these microcolumns is well established but their function remains unclear \cite{horton2005}. 
-Prevous work on mesoscopic traveling waves in the cortex has largely focused on lateral waves within the layers \cite{muller2018}.
+Experimental observation of mesoscopic traveling waves in the cortex has largely focused on lateral waves within the layers \cite{muller2018} as vertical penetration is more difficult to image.
 \\
 Several types of cortical propagating waves have been studied.
 Slow, large-scale wave activity have been observed in sleep and anesthetized states \cite{muller2018}.
 Advances in optical imaging techniques using voltage-sensitive dye provided sufficient spatial resolution to observe local area mesoscopic traveling waves in the awake cortex \cite{wu2008}.
 From a theoretical standpoint neuronal waves have been studied as networks of coupled oscillators \cite{ermentrout2001}. 
-Although the Izhekevich model is capable of producing self-resonant oscillations when tuned appropriately, the model parameters used in this work did not show any evidence of self-oscillation.
-The waves studied in the present work seem to fall instead into the general category of propagating pulses in an excitable network described in \cite{ermentrout2001}. \\
+\\
 Stimulus-evoked mesoscopic waves have been observed in the visual and auditory system. 
 
 
@@ -83,16 +83,40 @@ We enhanced the available MATLAB code for the Izhikevich model to incorporate a 
 Our model incorporates a propagation delay $\kappa D(a,b)$ porportional to the inter-neuron distance $D(a,b)$. 
 We also model an exponentially decaying synapse respone with a time constant of $4~ms$.
 \\ \\
+Simulations are run with a $0.5~ms$ time step except where noted.
+The traveling wave behavior looks qualitatively similar at time steps from $1~ms$ down to $10~\mu s$ (Figure \ref{fig:time_step}).
+Some parameters of interest such as propagation speed can depend on the time step.
+Using a common time step and a sufficient number of Monte Carlo trials ensures that the measured relationships are valid, i.e. the dependence of propagation velocity on microcolumn topology.
+We do not attempt to determine the absolute parameter values that would be measured in a specific biological system.
+\begin{figure}[!htb]
+ \centering
+ \includegraphics[width=\textwidth]{fig/TimeStepEffect}
+  \caption{A traveling wave experiment at 4 different time scales. The qualitative behavior is the same, but longer time steps result in slower propagation.}
+ \label{fig:time_step}
+\end{figure}
+\\ \\
 We capture the firing events from all neurons in each simulation.
 We then perform a spatial clustering operation to identify spatiotemporal regions with a high firing density.
 This clustering operation removes random background firing activity.
 We then identify and label the traveling wave structures that evolve over time as shown in Figure \ref{fig:wave_analysis}.
+
+
 \begin{figure}[!htb]
- \caption{A: Neuron firings in a column with 30\% excitatory neurons. B: The resulting cluster points (black) and an example of a labeled wave (red).
-          C: Neuron firings in a column with 80\% excitatory neurons. D: The resulting cluster points (black) and an example wave (red).}
- \label{fig:wave_analysis}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/WaveAnalysisExample}
+ \begin{subfigure}{0.33\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{fig/2x2_firings}
+ \end{subfigure}%
+ \begin{subfigure}{0.33\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{fig/2x2_density_filter}
+ \end{subfigure}%
+ \begin{subfigure}{0.33\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{fig/2x2_wave_IDs}
+ \end{subfigure}%
+ \caption{Wave processing. The raw firing events (left) are filtered in time and position (center) to remove background firing events. The individual waves are then labeled with unique numbers (right, wave numer shown as color scale).}
+ \label{fig:wave_analysis}
 \end{figure}
 To examine the speed of the traveling waves we stimulated the lowest 5 layers of neurons in the column with a step stimulus lasting 20 ms starting at $t=20~ms$..
 This generates a single traveling wave with a determined start time, simplifying the propagation velocity measurement.
@@ -107,10 +131,11 @@ A typical stimulated wave is shown in Figure \ref{fig:wave_example}.
 
 \section{Results}
 The original Izhekevich simulation \cite{izzy_code} demonstrates synchronized firing in a completely connected neural field with random background stimulus.
-We replicated this simulation by setting our column to have complete connectivity corresponing to $\lambda \rightarrow \infty$: all neurons are connected to all other neurons.
+We replicated this simulation by setting our column to have complete connectivity corresponing to $\lambda \rightarrow \infty$: all neurons are connected wiht probability 1 to all other neurons.
 We used a constant delay for every action potential regardless of the inter-neuron distance.
 The result was highly synchronized simultaneous firing among all neurons in the column (Figure \ref{fig:sync_fire}). \\ 
 We then incorporated our distance-dependent action potential propagation. 
+The $\kappa$ parameter was set to 1.
 The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:sync_fire_delay}).
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation time is porportional to the inter-neuron distance.
 \begin{figure}[!htb]
@@ -141,7 +166,10 @@ We see that traveling waves emerge when the connection strength is increased to 
    \includegraphics[width=0.3\textwidth]{fig/ConnectionStrengthWaves}  
  \label{fig:strength_effect}
 \end{figure}
-
+Traveling waves in neurons have previously been analyzed as a set of coupled local oscillators.
+Although the Izhekevich model is capable of producing self-resonant oscillations when tuned appropriately, the model parameters used in this work did not show any evidence of self-oscillation.
+The waves studied in the present work seem to fall instead into the general category of propagating pulses in an excitable network described in \cite{ermentrout2001}. 
+\\
 The excitatory/inhibitory balance is known to have a significant impact on neural network dynamics \cite{keane2015}. 
 In our microcolumn model we do not observe traveling waves if less than $40\%$ of the neurons are excitatory.
 As the fraction of excitatory neurons increase we observe traveling wave patterns emerge from the background firing events.
@@ -151,6 +179,7 @@ When all neurons are excitatory the traveling waves are the dominat mode of firi
  \caption{Excitatory/inhibitory balance effect on traveling waves.. 
 	  For columns with $<40\%$ excitatory neurons no waves are observed.
 	  As the excitatory fraction approaches 1 nearly all firing events are part of traveling waves.
+	  Error bars are 1 $\sigma$, 100 trials per measurement.
 	  }
  \label{fig:excitatory_effect}
  \centering
@@ -164,8 +193,15 @@ The results are shown in Figure \ref{fig:delay_topology}.
  \caption{Wave speed is inversely porportional to $\kappa$ as expected. Wave speed also increases with the column cross-section.Mean values with $1\sigma$ errorbars, 50 trials.}
  \label{fig:delay_topology}
  \centering
-   \includegraphics[width=0.6\textwidth]{fig/WaveSpeed_DelayTopology}
+   \includegraphics[width=0.75\textwidth]{fig/WaveSpeed_DelayTopology}
 \end{figure}
+\\
+We see that both the delay constant and the column topology influence the propagation speed.
+Increasing the inter-neuron actiona potential delay slows the traveling wave propagation.
+Waves travel faster in columns with larger cross-sections. 
+
+
+\section{Discussion}
 In \cite{muller2018} the authors noted that mesoscopic traveling waves typically have propagation speeds from 0.1 to 0.8 meters per second, consistent with axonal conduction speed of unmyelinated fibers.
 Our linear model of synpatic conduction delay is linear with inter-neuron distance, with a porportionality constant $\kappa$.
 We expected longer synaptic conduction delays to result in slower wave propagation.
@@ -177,9 +213,6 @@ Instead the wave velocity is less than half the simple prediction.
 A four-fold increase in $\kappa$ does not reduce the traveling wave propagation speed by a factor of 4. \\
 The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
 Real microcolumns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
-
-
-
 
 \section{Future work}
 
