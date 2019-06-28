@@ -94,6 +94,15 @@ We then identify and label the traveling wave structures that evolve over time a
  \centering
    \includegraphics[width=0.75\textwidth]{fig/WaveAnalysisExample}
 \end{figure}
+To examine the speed of the traveling waves we stimulated the lowest 5 layers of neurons in the column with a step stimulus lasting 20 ms starting at $t=20~ms$..
+This generates a single traveling wave with a determined start time, simplifying the propagation velocity measurement.
+A typical stimulated wave is shown in Figure \ref{fig:wave_example}.
+\begin{figure}[!htb]
+ \caption{Single traveling wave resulting from a step stimulus at the bottom of the column.}
+ \label{fig:wave_example}
+ \centering
+   \includegraphics[width=0.5\textwidth]{fig/TypicalWave}
+\end{figure}
 
 
 \section{Results}
@@ -147,33 +156,29 @@ When all neurons are excitatory the traveling waves are the dominat mode of firi
  \centering
    \includegraphics[width=0.5\textwidth]{fig/ExcitatoryWaves}
 \end{figure}
-To examine the speed of the traveling waves we stimulated the lowest 5 layers of neurons in the column with a step stimulus lasting 20 ms starting at $t=20~ms$..
-This generates a single traveling wave with a determined start time, simplifying the propagation velocity measurement.
-A typical stimulated wave is shown in Figure \ref{fig:wave_example}.
-\begin{figure}[!htb]
- \caption{Single traveling wave resulting from a step stimulus at the bottom of the column.}
- \label{fig:wave_example}
- \centering
-   \includegraphics[width=0.5\textwidth]{fig/TypicalWave}
-\end{figure}
-In \cite{muller2018} the authors noted that mesoscopic traveling waves typically have propagation speeds from 0.1 to 0.8 meters per second, consistent with axonal conduction speed of unmyelinated fibers.
-Our linear model of synpatic conduction delay is linear with inter-neuron distance, with a porportionality constant $\kappa$.
-We expected longer synaptic conduction delays to result in slower wave propagation.
-The column topology can also influence the propagation speed.
-Columns with a larger cross-section have a larger number of neurons and synapses for a given length, providing more pathways for the traveling wave to propagate. \\
-Simulations show that the synaptic propagation delay parameter $\kappa$ does effect the wave propagation as expected, but the effect is not linear (Figure \ref{fig:delay_topology}).
-If the traveling wave velocity was determined by the acton potential propagation speed we would expect to see wave velocity of 1000 units/second with $\kappa=1$.
-Instead the wave velocity is less than half the simple prediction.
-A four-fold increase in $\kappa$ does not reduce the traveling wave propagation speed by a factor of 4. \\
-The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
-Real microcolumns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
 
+To examine the velocity of the traveling waves we performed 50 velocity for measurements for two parameters of interest.
+We varied the propagation delay constant $\kappa$ from (1 to 4) and the cross section of the column (2x2, 2x3, 3x3).
+The results are shown in Figure \ref{fig:delay_topology}.
 \begin{figure}[!htb]
  \caption{Wave speed is inversely porportional to $\kappa$ as expected. Wave speed also increases with the column cross-section.Mean values with $1\sigma$ errorbars, 50 trials.}
  \label{fig:delay_topology}
  \centering
    \includegraphics[width=0.6\textwidth]{fig/WaveSpeed_DelayTopology}
 \end{figure}
+In \cite{muller2018} the authors noted that mesoscopic traveling waves typically have propagation speeds from 0.1 to 0.8 meters per second, consistent with axonal conduction speed of unmyelinated fibers.
+Our linear model of synpatic conduction delay is linear with inter-neuron distance, with a porportionality constant $\kappa$.
+We expected longer synaptic conduction delays to result in slower wave propagation.
+The column topology can also influence the propagation speed.
+Columns with a larger cross-section have a larger number of neurons and synapses for a given length, providing more pathways for the traveling wave to propagate. \\
+Simulations show that the synaptic propagation delay parameter $\kappa$ does effect the wave propagation as expected, but the effect is not linear.
+If the traveling wave velocity was determined by the acton potential propagation speed we would expect to see wave velocity of 1000 units/second with $\kappa=1$.
+Instead the wave velocity is less than half the simple prediction.
+A four-fold increase in $\kappa$ does not reduce the traveling wave propagation speed by a factor of 4. \\
+The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
+Real microcolumns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
+
+
 
 
 \section{Future work}
