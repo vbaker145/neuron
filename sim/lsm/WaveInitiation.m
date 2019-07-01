@@ -18,7 +18,7 @@ connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.connStrength = 6;
-connectivity.connStrengthRange = 2;
+%connectivity.connStrengthRange = 2;
 connectivity.maxLength = 150;
 
 delay.delayType = 1;

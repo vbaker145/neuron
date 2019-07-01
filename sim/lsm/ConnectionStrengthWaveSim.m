@@ -53,10 +53,10 @@ delay.dt = dt;
         
 pidx=1;
 delayMult = 1;
-connStrength = 3:0.5:5;
+connStrength = [2,4,6];
 delay.delayFrac = 1;
 stimStrength = 5;
-figure(20); subplot(length(connStrength),1,1); hold on;
+figure(20); subplot(1, length(connStrength),1); hold on;
 for kk = 1:length(connStrength)
     %delay.delayMult = delayMult(kk);
     connectivity.connStrength = connStrength(kk);
@@ -79,13 +79,15 @@ for kk = 1:length(connStrength)
         size(firings)
         
         %figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
-        figure(20); subplot(length(connStrength),1,kk)
+        figure(20); subplot(1, length(connStrength),kk); 
         plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
         axis([0 1 0 100] ); set(gca, 'XTickLabel',[]); set(gca, 'YTickLabel',[]);
-        text(0.8,80,['K=' num2str(connStrength(kk))],'BackgroundColor', 'White', 'FontSize', 12, 'Color', 'Red')
-        if kk == length(connStrength)
-            set(gca, 'XTickMode', 'auto', 'XTickLabelMode', 'auto');
-            xlabel('Time (seconds)');
+        text(0.6,80,['K=' num2str(connStrength(kk))],'BackgroundColor', 'White', 'FontSize', 12, 'Color', 'Red')
+        set(gca, 'XTickMode', 'auto', 'XTickLabelMode', 'auto');
+        xlabel('Time (seconds)');
+        if kk == 1
+            set(gca, 'YTickMode', 'auto', 'YTickLabelMode', 'auto');
+            ylabel('Z position');
         end
         
         %xlabel('Time (seconds)'); ylabel('Neuron Z position');
@@ -119,26 +121,15 @@ for kk = 1:length(connStrength)
     pidx = pidx+1;
 end
 
-% figure;
-% subplot(3,1,1); errorbar(pexc, waveSize(:,1), waveSize(:,2),'k'); set(gca,'XTick',[])
-% subplot(3,1,2); errorbar(pexc, waveFraction(:,1), waveFraction(:,2),'k'); set(gca,'XTick',[])
-% subplot(3,1,3); errorbar(pexc, waveSlope(:,1), waveSlope(:,2),'k'); 
-
-
-% figure;
-% subplot(3,1,1); errorbar(lambda, waveSize(:,1), waveSize(:,2),'k'); set(gca,'XTick',[])
-% subplot(3,1,2); errorbar(lambda, waveFraction(:,1), waveFraction(:,2),'k'); set(gca,'XTick',[])
-% subplot(3,1,3); errorbar(lambda, waveSlope(:,1), waveSlope(:,2),'k'); 
-
-% 
 figure;
-subplot(3,1,1); errorbar(delayMult, waveSize(:,1), waveSize(:,2),'k'); 
-set(gca,'XTick',[]); xlim([delayMult(1)-0.2 delayMult(end)+0.2]);
+xVals = connStrength;
+subplot(3,1,1); errorbar(xVals, waveSize(:,1), waveSize(:,2),'k'); 
+set(gca,'XTick',[]); xlim([xVals(1)-0.2 xVals(end)+0.2]);
 ylabel('# firings/wave');
-subplot(3,1,2); errorbar(delayMult, waveFraction(:,1), waveFraction(:,2),'k'); 
-set(gca,'XTick',[]); xlim([delayMult(1)-0.2 delayMult(end)+0.2]);
+subplot(3,1,2); errorbar(xVals, waveFraction(:,1), waveFraction(:,2),'k'); 
+set(gca,'XTick',[]); xlim([xVals(1)-0.2 xVals(end)+0.2]);
 ylabel('Wave firing fraction')
-subplot(3,1,3); errorbar(delayMult, waveSlope(:,1), waveSlope(:,2),'k'); 
-xlim([delayMult(1)-0.2 delayMult(end)+0.2]);
+subplot(3,1,3); errorbar(xVals, waveSlope(:,1), waveSlope(:,2),'k'); 
+xlim([xVals(1)-0.2 xVals(end)+0.2]);
 xlabel('Delay constant');
 ylabel('Velocity (mm/s)');
