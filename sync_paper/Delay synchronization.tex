@@ -241,7 +241,28 @@ The results are shown in Figure \ref{fig:delay_topology}.
 \\
 We see that both the delay constant and the column topology influence the propagation speed.
 Increasing the inter-neuron actiona potential delay slows the traveling wave propagation.
-Waves travel faster in columns with larger cross-sections. 
+Waves travel faster in columns with larger cross-sections.  
+
+\subsection{Column ensembles}
+We simulate an ensemble of four microcolumns. 
+The individual microcolumns are 2x2x50, with $80\%$ excitatory neurons, connection strength $K=5$, connection model parameters $\lambda=2.5$ and $C=1$.
+All neurons in all microcolumns were stimulated with a background stimulus, strength $K=5$.
+The spacing between the microcolumns was varied from 2 to 10. 
+At an inter-column spacing of 2 the ensemble is a single column with a 4x4 cross section.
+At an inter-column spacing of 10 there were no connections between the neurons in the columns.
+Ensembles with intermediate inter-column spacings have some degree of connectivity between the microcolumns.
+\begin{figure}[!htb]
+ \caption{Increasing inter-column distance reduces the connectivity between columns (top row). The firing events (bottom row) are color-coded by microcolmn number. }
+ \label{fig:ensemble}
+ \centering
+   \includegraphics[width=\textwidth]{fig/ColumnEnsemble}
+\end{figure}
+\\
+With inter-column spacing of 2 the ensemble fires as a single microcolumn.
+As the spacing increases to 5 the connectivity between microcolumns becomes weaker than the intra-column connectivity.
+There is still correlation between the traveling waves in the four microcolmns.
+As the spacing increases further there is no connectivity between the microcolumns.
+The traveling waves in the microcolumns are now uncorrelated.
 
 \section{Discussion}
 In \cite{muller2018} the authors noted that mesoscopic traveling waves typically have propagation speeds from 0.1 to 0.8 meters per second, consistent with axonal conduction speed of unmyelinated fibers.
