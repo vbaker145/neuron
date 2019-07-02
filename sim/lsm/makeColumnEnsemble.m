@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons, columnLabels] = makeColumnEnsemble(structure, connectivity, delay)
+function [a,b,c,d, S, delays, excNeurons, columnLabels] = makeColumnEnsemble(structure, connectivity, delay, plotAx)
 
 width = structure.width;
 height = structure.height;
@@ -55,6 +55,13 @@ dt = delay.dt;
 
 doplot = 1;
 
+if doplot
+   if nargin < 4
+      figure(101);
+      plotAx = axes;
+   end
+end
+
 n = length(xPts)*length(yPts)*layers;
 
 zv = (0:layers-1);
@@ -66,7 +73,7 @@ y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
 if doplot == 1
-    figure(101); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
+    scatter3(plotAx, x,y,z,10, 'black','filled')
     hold on;
 end
 
@@ -134,7 +141,8 @@ for jj=1:length(x)
                     didx = dis/dmax;
                     didx = min(didx,1);
                     cm = map(floor(didx*size(map,1)),:);  
-                    line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
+                    %line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
+                    line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)] );
                 end
             end
             
@@ -155,10 +163,9 @@ for jj=1:length(x)
 end
 
 if doplot == 1
-    title(['Connections, lambda=' num2str(lambda)]);
+    title(['Spacing=' num2str(columnSpacing)]);
     axis equal;
     set(gcf, 'pos', [0 0 600 800]);
-    subplot(1,2,2); hold on; imagesc(connections);
 end
 
 S = connections;
