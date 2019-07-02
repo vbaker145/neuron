@@ -9,9 +9,10 @@ structure.width = 2;
 structure.height = 2;
 structure.nWide = 2;
 structure.nHigh = 2;
-structure.columnSpacing = 5;
-structure.layers = 8;
+structure.columnSpacing = 3;
+structure.layers = 50;
 structure.displacement = 0;
+nCols = structure.nWide*structure.nHigh;
 
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
@@ -25,7 +26,8 @@ delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
-[a,b,c,d, S, delays, ecn, csec] = makeColumnEnsemble(structure, connectivity, delay);
+Nlayer = structure.width*structure.nWide*structure.height*structure.nHigh;
+N = Nlayer*structure.layers;
         
 pidx=1;
 connStrength = 5;
@@ -34,10 +36,10 @@ for kk = 1:1
     %delay.delayMult = delayMult(kk);
     connectivity.connStrength = connStrength(kk);
     waveSizes = []; waveFractions =[]; waveSlopes = [];
-    for jj=1:10
+    for jj=1:1
         vall = []; uall = [];
         
-        [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+        [a,b,c,d, S, delays, ecn, csec] = makeColumnEnsemble(structure, connectivity, delay);
 
         vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
         uinit=b.*vinit;                 % Initial values of u
@@ -52,10 +54,15 @@ for kk = 1:1
         size(firings)
         
         %figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
-        figure(20); subplot(length(connStrength),1,kk)
-        plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
-        axis([0 1 0 100] ); set(gca, 'XTickLabel',[]);
-        text(0.9,80,['K=' num2str(kk)],'BackgroundColor', 'White')
+        figure(20); 
+        for jj=0:nCols-1
+            subplot(1,nCols,jj+1);
+            idx = csec(firings(:,2))==jj;
+            f = firings(idx,:);
+            plot(f(:,1)./1000, floor(f(:,2)/Nlayer),'k.');
+            axis([0 max(t)/1000 0 structure.layers] ); set(gca, 'XTickLabel',[]);
+            text(0.9,80,['COl #=' num2str(jj)],'BackgroundColor', 'White')
+        end
         
         %xlabel('Time (seconds)'); ylabel('Neuron Z position');
         
@@ -66,7 +73,7 @@ for kk = 1:1
         %Analyze results
         wl={};
         if ~isempty(firings)
-            [wt wp wl] = findWaves(firings, dt*.001, width*height);
+            [wt wp wl] = findWaves(firings, dt*.001, Nlayer);
             if ~isempty(wl)
                 [sizes waveFrac slopes] = analyzeWaves(wt, wp, wl);
                 waveSizes = [waveSizes sizes];

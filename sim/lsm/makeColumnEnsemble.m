@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons, crossSection] = makeColumnEnsemble(structure, connectivity, delay)
+function [a,b,c,d, S, delays, excNeurons, columnLabels] = makeColumnEnsemble(structure, connectivity, delay)
 
 width = structure.width;
 height = structure.height;
@@ -9,8 +9,21 @@ xPts = repmat(0:width-1, nWide,1)' + repmat(0:columnSpacing:columnSpacing*(nWide
 xPts = xPts(:);
 yPts = repmat(0:height-1, nHigh,1)' + repmat(0:columnSpacing:columnSpacing*(nHigh-1),height, 1);
 yPts = yPts(:);
-crossSection.x = xPts; crossSection.y = yPts;
+[xp, yp] = meshgrid(xPts, yPts);
 
+nCols = 0;
+columnLabels = zeros(size(xp));
+for jj=0:nWide-1
+    for kk=0:nHigh-1
+        xt = (columnSpacing*jj<=xp & xp<columnSpacing*(jj+1));
+        yt = (columnSpacing*kk<=yp & yp<columnSpacing*(kk+1));
+        xyt = xt & yt;
+        columnLabels(xyt) = nCols;
+        nCols = nCols + 1;
+    end
+end
+
+columnLabels = repmat(columnLabels(:), structure.layers, 1); 
 
 layers = structure.layers;
 displacement = structure.displacement;
@@ -52,10 +65,8 @@ x = x+displacement*(rand(size(x))-0.5);
 y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
-figure; scatter3(x,y,z); axis equal
-
 if doplot == 1
-    figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
+    figure(101); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
     hold on;
 end
 
