@@ -1,17 +1,16 @@
 clear; close all;
-width = 2;
-height = 2;
-layers = 100;
-N = width*height*layers;
 
 tmax = 1000;
 dt = 1;
 t = 0:dt:tmax;
 
 %Column parameters
-structure.width = width;
-structure.height = height;
-structure.layers = layers;
+structure.width = 2;
+structure.height = 2;
+structure.nWide = 2;
+structure.nHigh = 2;
+structure.columnSpacing = 5;
+structure.layers = 8;
 structure.displacement = 0;
 
 connectivity.percentExc = 0.8;
@@ -25,6 +24,8 @@ delay.delayType = 1;
 delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
+
+[a,b,c,d, S, delays, ecn, csec] = makeColumnEnsemble(structure, connectivity, delay);
         
 pidx=1;
 connStrength = 5;

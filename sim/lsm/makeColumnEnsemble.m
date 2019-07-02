@@ -1,4 +1,31 @@
-function [a,b,c,d, S, delays, excNeurons] = makeColumnEnsemble(width, nwide, height, nhigh, layers, percentExc, connType, dt)
+function [a,b,c,d, S, delays, excNeurons, crossSection] = makeColumnEnsemble(structure, connectivity, delay)
+
+width = structure.width;
+height = structure.height;
+nWide = structure.nWide;
+nHigh = structure.nHigh;
+columnSpacing = structure.columnSpacing;
+xPts = repmat(0:width-1, nWide,1)' + repmat(0:columnSpacing:columnSpacing*(nWide-1),width, 1);
+xPts = xPts(:);
+yPts = repmat(0:height-1, nHigh,1)' + repmat(0:columnSpacing:columnSpacing*(nHigh-1),height, 1);
+yPts = yPts(:);
+crossSection.x = xPts; crossSection.y = yPts;
+
+
+layers = structure.layers;
+displacement = structure.displacement;
+
+percentExc = connectivity.percentExc;
+connType = connectivity.connType;
+lambda = connectivity.lambda;
+maxLength = connectivity.maxLength;
+connStrength = connectivity.connStrength;
+
+delayType = delay.delayType;
+delayMult = delay.delayMult;
+delayFrac = delay.delayFrac;
+dt = delay.dt;
+
 
 % ne = floor(n*percentExc);
 % ni = n-ne;
@@ -13,24 +40,19 @@ function [a,b,c,d, S, delays, excNeurons] = makeColumnEnsemble(width, nwide, hei
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-if nargin < 5
-    connType = 0;
-end
-
 doplot = 1;
 
-n = width*nwide*height*nhigh*layers;
+n = length(xPts)*length(yPts)*layers;
 
-displacement = 0.1;
-xv = [0 1 4 5]; 
-yv = [0 1 4 5];
 zv = (0:layers-1);
-[x,y,z] = meshgrid(xv,yv,zv);
+[x,y,z] = meshgrid(xPts,yPts,zv);
 
 x = x(:); y = y(:); z = z(:);
 x = x+displacement*(rand(size(x))-0.5);
 y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
+
+figure; scatter3(x,y,z); axis equal
 
 if doplot == 1
     figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
@@ -41,7 +63,6 @@ if doplot == 1
     map = colormap('jet');
 end
 
-lambda = 2.5;
 connections = zeros(length(x), length(x));
 rtype = rand(n,1);
 excNeurons = rtype < percentExc; nExc = sum(excNeurons);
@@ -56,33 +77,48 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-delayMult = 10;
 dmax = layers;
-connStrength = 9;
 
 %Synaptic weights
 for jj=1:length(x)
+    if connType == 4
+       rowConnect = rand()<0.5; 
+    end
      for kk=1:length(x)
         zmin = min(z(jj), z(kk)); zmax = max(z(jj),z(kk)); 
-        dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers)));
-        dz = z(jj)-z(kk);
+        %dz = min(abs(zmax-zmin), abs(zmax-(zmin+layers))); %PBC
+        dz = z(jj)-z(kk); %Regular boundary conditions
         dis = sqrt((x(jj)-x(kk))^2+(y(jj)-y(kk))^2+dz^2);
         if dis > 0
-            if connType == 1
+            %cp = rand() < exp(-(dis/lambda)^2);
+            if connType == 1 
                 cp = rand() < exp(-(dis/lambda)^2);
+                if dis>maxLength
+                   cp = 0; 
+                end
+                %cp = rand() < exp(-(dis/lambda));
+            elseif connType == 2
+                cp = dis<maxLength;
+            elseif connType == 3
+                cp = rand() < funkyPDF(maxLength, 0.5, lambda, dis);
+            elseif connType == 4
+                cp = 0;
+                if rowConnect
+                    cp = dis<maxLength;
+                end
             else
-                cp = rand() < (1-percentExc);
+                cp = rand() < 0.5;
             end
-            cp = rand() < exp(-(dis/lambda)^2);
+%             if dis>maxLength
+%                 cp = 0;
+%             end
             if cp
                 %Connect neuron
-                connections(jj,kk) = connStrength*(0.75*excNeurons(jj)-inNeurons(jj));
+                connections(jj,kk) = connStrength*rand()*(0.5*excNeurons(jj)-inNeurons(jj));
+                %connections(jj,kk) = connStrength*(0.5*excNeurons(jj)-inNeurons(jj));
+                %connections(jj,kk) = connStrength*(0.5*excNeurons(jj)-inNeurons(jj))+(rand()-0.5)*connStrengthRange;
                 %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
-                if connType == 1
-                    delays(jj,kk) = floor(dis*delayMult);
-                else
-                    delays(jj,kk) = floor(delayMult*rand())+1;
-                end
+                
                 if doplot == 1
                     didx = dis/dmax;
                     didx = min(didx,1);
@@ -90,6 +126,19 @@ for jj=1:length(x)
                     line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
                 end
             end
+            
+            if delayType == 1
+                if rand() < delayFrac
+                    delays(jj,kk) = floor(dis*delayMult/dt);
+                else
+                    delays(jj,kk) = floor(2/dt);
+                end
+            elseif delayType == 2
+                delays(jj,kk) = floor(delayMult/dt);
+            else
+                delays(jj,kk) = floor(delayMult*rand()/dt)+1;
+            end
+            
         end
     end
 end

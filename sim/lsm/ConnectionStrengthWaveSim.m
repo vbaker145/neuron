@@ -53,7 +53,7 @@ delay.dt = dt;
         
 pidx=1;
 delayMult = 1;
-connStrength = [2,4,6];
+connStrength = [2:0.5:6];
 delay.delayFrac = 1;
 stimStrength = 5;
 figure(20); subplot(1, length(connStrength),1); hold on;
@@ -61,7 +61,7 @@ for kk = 1:length(connStrength)
     %delay.delayMult = delayMult(kk);
     connectivity.connStrength = connStrength(kk);
     waveSizes = []; waveFractions =[]; waveSlopes = [];
-    for jj=1:1
+    for jj=1:50
         vall = []; uall = [];
         
         [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -79,16 +79,16 @@ for kk = 1:length(connStrength)
         size(firings)
         
         %figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
-        figure(20); subplot(1, length(connStrength),kk); 
-        plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
-        axis([0 1 0 100] ); set(gca, 'XTickLabel',[]); set(gca, 'YTickLabel',[]);
-        text(0.6,80,['K=' num2str(connStrength(kk))],'BackgroundColor', 'White', 'FontSize', 12, 'Color', 'Red')
-        set(gca, 'XTickMode', 'auto', 'XTickLabelMode', 'auto');
-        xlabel('Time (seconds)');
-        if kk == 1
-            set(gca, 'YTickMode', 'auto', 'YTickLabelMode', 'auto');
-            ylabel('Z position');
-        end
+%         figure(20); subplot(1, length(connStrength),kk); 
+%         plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+%         axis([0 1 0 100] ); set(gca, 'XTickLabel',[]); set(gca, 'YTickLabel',[]);
+%         text(0.6,80,['K=' num2str(connStrength(kk))],'BackgroundColor', 'White', 'FontSize', 12, 'Color', 'Red')
+%         set(gca, 'XTickMode', 'auto', 'XTickLabelMode', 'auto');
+%         xlabel('Time (seconds)');
+%         if kk == 1
+%             set(gca, 'YTickMode', 'auto', 'YTickLabelMode', 'auto');
+%             ylabel('Z position');
+%         end
         
         %xlabel('Time (seconds)'); ylabel('Neuron Z position');
         
