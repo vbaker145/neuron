@@ -53,9 +53,9 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 0;
+doplot = 1;
 
-if doplot
+if doplot==1
    if nargin < 4
       figure(101);
       plotAx = axes;
