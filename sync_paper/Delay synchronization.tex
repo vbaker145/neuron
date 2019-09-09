@@ -32,17 +32,20 @@ This topological dependence of wave propagation may indicate a functional role o
 \end{abstract}
 
 \section{Introduction} 
-Traveling waves of cortical neuron activation have been observed in vivo, in vitro and in silico. 
-Proposed functions of these traveling waves include motor coordination, place field coordination in the hippocampus, and spatiotemporal processing in the visual cortex \cite{muller2018}. 
-Advanced experimental techniques that achieve the required spatial and temporal resolution \cite{shoham1999} to capture the mesoscopic traveling waves have focused on lateral activity near the cortical surface, and simulations of traveling waves in a 2-D sheet of neurons have been performed \cite{keane2015}. 
-In this work we explore the dynamics of traveling waves along the vertical microcolumn structures found in the cortex.
-We find that 1-D traveling waves can propagate in simulated neural microcolumn structures with certain properties including distance-dependent connectivity and a mix of excitatory and inhibitory neurons. 
-We observe wave properties including creation from background stimulus, annihilation between waves, and a wave velocity that is determined by both the action potential propagation speed and the column topology. 
-The topological dependence of wave speed is especially interesting as it may contribute to the functional organization of the cortex into microcolumns.
+Research into the cognitive functions of mammalian brains is conducted across many academic domains including biophysics, biology, neuroscience, chemistry and others.
+The mammalian brain has also served as a model system for comptuer science and artifical intelligence research.
+Decades of research has established the basic organizational structures of the brain and has enumerated the manifold chemical and electrical processes associated with neurons and their interconnections.
+Recent advances in experimental techniques have enabled neural measurements at higher spatial and temporal resolution.
+From these new measurements we gain a better understanding of neural activity patterns at several different length scales.
+One important experimental observation is the existence of traveling waves of neural activity.
 \\
 The cerebral cortex is organized into six layers distinguished by the types of neurons and connections found in each layer.
 The layers are connected to each other by microcolumns \cite{cruz2005}, a structure of about 100 neurons that is a few tens of microns thick and several millimeters long.
 The existence of these microcolumns is well established but their function remains unclear \cite{horton2005}. 
+\\
+Traveling waves of cortical neuron activation have been observed in vivo, in vitro and in silico. 
+Proposed functions of these traveling waves include motor coordination, place field coordination in the hippocampus, and spatiotemporal processing in the visual cortex \cite{muller2018}. 
+Advanced experimental techniques that achieve the required spatial and temporal resolution \cite{shoham1999} to capture the mesoscopic traveling waves have focused on lateral activity near the cortical surface, and simulations of traveling waves in a 2-D sheet of neurons have been performed \cite{keane2015}. 
 \\
 Several types of cortical propagating waves have been studied.
 Slow, large-scale wave activity have been observed in sleep and anesthetized states \cite{muller2018}.
@@ -50,16 +53,19 @@ Advances in optical imaging techniques using voltage-sensitive dye provided suff
 Stimulus-evoked mesoscopic waves have been observed in the mammalian visual and auditory cortex \cite{reimer2010}\cite{muller2018}.
 Experimental observation of mesoscopic traveling waves in the cortex has largely focused on lateral waves within the layers \cite{muller2018} as vertical penetration is more difficult to image. 
 \\
-
+In this work we explore the dynamics of traveling waves along the vertical microcolumn structures found in the cortex.
+We find that 1-D traveling waves can propagate in simulated neural microcolumn structures with certain properties including distance-dependent connectivity and a mix of excitatory and inhibitory neurons. 
+We observe wave properties including creation from background stimulus, annihilation between waves, and a wave velocity that is determined by both the action potential propagation speed and the column topology. 
+The topological dependence of wave speed is especially interesting as it may contribute to the functional organization of the cortex into microcolumns.
 \section{Methods}
 We simulated the dynamics of a small neural column to explore neuron synchronization.
 Our network geometry is based on the model presented in \cite{markram1998}.
 An example neural column composed of 135 neurons on a unit grid spacing, 3x3 neurons wide and 9 neurons high as shown in figure \ref{fig:column_structure}.
 \begin{figure}[!htb]
- \caption{Column structure used in this research, $\lambda=2$,$C=1$,}
+ \caption{Example column structure used in this research, $\lambda=2.5$,$C=1$. The left image shows the connections between neurons in the column, the color scale indicates connection length. The right image shows inter-neuron connectivity for excitatory connections (white) and inhibitoruy connections (black).}
  \label{fig:column_structure}
  \centering
-   \includegraphics[width=0.48\textwidth]{fig/lambda2}
+   \includegraphics[width=\textwidth]{fig/lambda2}
 \end{figure}
 The neurons are connected with a strong local connectivity according to the distance-based connection probability:
 \begin{align}\label{eq:connectivity}
@@ -77,6 +83,22 @@ The Izhikevich model uses two coupled differential equations with two variables 
 This is a simplified model of a two-dimensional dynamical system.
 This model has been used to reproduce common neural firing patterns.
 There is MATLAB code available \cite{izzy_code} that implements this neural model with fixed, single-time-step action potential propagation.
+The model parameters for excitatory and inhibitory neurons are shown in Table \ref{tab:izzy_params}.
+\begin{table}[!h]
+ \caption{Izhekevich model parameters}
+ \label{tab:izzy_params}
+ \centering
+ \begin{tabular}{l|c|r}
+  \textbf{Parameter} & \textbf{Excitatory} & \textbf{Inhibitory} \\
+  \hline
+  a & 0.02 & 0.02+$\mathcal{U}$(0,0.08) \\
+  b & 0.2 & 0.25-$\mathcal{U}(0,0.05)$\\
+  c & -65+$\mathcal{U}(0,10)^2$ & -65 \\
+  d & 8-$\mathcal{U}(0,6)$& 2 \\
+ \end{tabular}
+
+\end{table}
+
 We enhanced the available MATLAB code for the Izhikevich model to incorporate a more realistic propagation model while still minimizing computational complexity.
 Our model incorporates a propagation delay $\kappa D(a,b)$ porportional to the inter-neuron distance $D(a,b)$. 
 We also model an exponentially decaying synapse respone with a time constant of $4~ms$.
@@ -235,7 +257,50 @@ The results are shown in Figure \ref{fig:delay_topology}.
 \\
 We see that both the delay constant and the column topology influence the propagation speed.
 Increasing the inter-neuron actiona potential delay slows the traveling wave propagation.
-Waves travel faster in columns with larger cross-sections.  
+Waves travel faster in columns with larger cross-sections. 
+
+\subsection{Wave Initiation and Annihilation}
+We observe both initiation and annihilation of traveling waves in our simulations.
+These effects can be clearly seen in Figure \ref{fig:wave_analysis}.
+The annihilation effects can be explained by the refractory period of the neurons.
+Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
+\\
+It appears that columns have preferential wave initiation sites.
+Figure \ref{fig:wave_initiation} shows all the wave initiation sites for 100 simulations of a column.
+It is clear that traveling waves are more likely to begin at certain regions in the column.
+\begin{figure}[!htb]
+ \caption{Wave initiation sites, 100 trials with randomized exciation. Initation events are shown in the left figure. A histogram of initiation positions for all waves is shown on the right.}
+ \label{fig:wave_initiation}
+ \centering
+   \includegraphics[width=0.75\textwidth]{fig/InitiationSites_100sims}
+\end{figure}
+We are currently unable to explain the preferential initiation sites in term of connectivity or excitatory/inhibitory balance. 
+\\
+We also observed that, when generating traveling waves from a step stimulus (Figure \ref{fig:wave_example}) that certain sections of the column showed a higher density of firing activity.
+An example measurement of the firing density is shown in Figure \ref{fig:wave_density}.
+\begin{figure}[!htb]
+ \caption{Density of firing events in a traveling wave initiated from a step stimulus. The traveling wave is shown on the left, a histogram of firing events by position is shown on the right.}
+ \label{fig:wave_density}
+ \centering
+   \includegraphics[width=0.75\textwidth]{fig/ImpulseWaveDensity}
+\end{figure}
+While examining the preferntial wave initiation sites emerging from random stimulus we discovered a correlation to the firing density observed in the same columns under step simulus.
+The wave initiation sites and wave density of the same column are shown in figure \ref{fig:initiation_density}.
+\begin{figure}[!htb]
+ \caption{Wave initiation (left) and wave density (right) for the same column.}
+ \label{fig:initiation_density}
+ \centering
+   \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelationHistogram}
+\end{figure}
+There appears to be an anticorrelation between wave density under a step stimulus and the likelihood of wave initiation under a uniform background stmiulus.
+To test this hypothesis we create 100 columns, applied both background stimulus and step stimulus, and measured the correlation between wave inititation and wave density at the positions of the column (Figure \ref{fig:initiation_density_corr}).
+Although there is substantial variation between columns we measure a consistently negative correlation coefficient (mean -0.13, std 0.21).
+\begin{figure}[!htb]
+ \caption{Correlation between wave initiation and wave density.}
+ \label{fig:initiation_density_corr}
+ \centering
+   \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelation}
+\end{figure}
 
 \subsection{Column ensembles}
 We simulate an ensemble of four microcolumns. 
