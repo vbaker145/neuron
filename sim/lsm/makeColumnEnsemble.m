@@ -53,7 +53,7 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 0;
+doplot = 1;
 
 if doplot
    if nargin < 4

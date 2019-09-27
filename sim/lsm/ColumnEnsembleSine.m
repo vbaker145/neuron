@@ -9,7 +9,7 @@ structure.width = 2;
 structure.height = 2;
 structure.nWide = 2;
 structure.nHigh = 2;
-structure.columnSpacing = 7;
+structure.columnSpacing = 8;
 structure.layers = 50;
 structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
@@ -30,11 +30,9 @@ N = Nlayer*structure.layers;
         
 pidx=1;
 connStrength = 5;
-stimStrength = 5;
-columnSpacing = [2,5,10];
-for kk = 1:1
-    %delay.delayMult = delayMult(kk);
-    %structure.columnSpacing = columnSpacing(kk);
+stimStrength = 3;
+stimFrq = 1:2:7;
+for kk = 1:length(stimFrq)
     waveSizes = []; waveFractions =[]; waveSlopes = [];
     for jj=1:1
         vall = []; uall = [];
@@ -45,7 +43,7 @@ for kk = 1:1
         uinit=b.*vinit;                 % Initial values of u
         
         %Impulse stimulus, column 0
-        st = ensembleStimulus(structure, csec, dt, t, 1, stimStrength);
+        st = ensembleStimulus(structure, csec, dt, t, 2, stimStrength, stimFrq(kk));
 
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
         size(firings)
@@ -62,13 +60,18 @@ for kk = 1:1
             axis([0 max(t)/1000 0 structure.layers] ); set(gca, 'XTickLabel',[]);
             text(0.9,80,['COl #=' num2str(jj)],'BackgroundColor', 'White')
             
-            figure(21); hold on;%subplot(2, length(columnSpacing), kk+length(columnSpacing) ); hold on;
+            figure(21); 
+            subplot(1, length(stimFrq), kk ); hold on;
             scatter(f(:,1)./1000, floor(f(:,2)/Nlayer), 10, jj*ones(1,size(f,1)), 'fo');
             xlabel('Time (seconds)'); 
-            if jj==0
-               ylabel('Z position'); 
+            if jj==0 
+                if kk==1
+                    ylabel('Z position'); 
+                else
+                    set(gca, 'YTickLabel', []);
+                end
             end
-            text(0.25,20,['Spacing=' num2str(columnSpacing(kk))],'BackgroundColor', 'White', 'Color', 'Red')
+            text(0.25,20,['Freq=' num2str(stimFrq(kk))],'BackgroundColor', 'White', 'Color', 'Red')
             
         end
         

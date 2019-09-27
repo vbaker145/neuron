@@ -1,4 +1,4 @@
-function st = ensembleStimulus( structure, colID, dt, t, stimType, stimStrength )
+function st = ensembleStimulus( structure, colID, dt, t, stimType, stimStrength, stimFrq )
 
 % structure: defines structure of microcolumn ensemble
 % layers - number of layers in microcolumn
@@ -27,8 +27,8 @@ elseif stimType == 2
     st = zeros(N, length(t));
     for jj=1:N_cols
         idx = find(colID(1:N_per_layer*4)==(jj-1));
-        phs = (pi/2)*jj;
-        st(idx, :)= repmat(stimStrength*sin(2*pi*33.*(t/1000)+phs),length(idx),1);
+        phs = (pi/2);
+        st(idx, :)= repmat(stimStrength*sin(2*pi*stimFrq.*(t/1000)+phs),length(idx),1);
     end
 end
 
