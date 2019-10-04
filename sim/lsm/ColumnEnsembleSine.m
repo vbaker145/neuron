@@ -31,19 +31,24 @@ N = Nlayer*structure.layers;
 pidx=1;
 connStrength = 5;
 stimStrength = 3;
-stimFrq = 1:2:7;
-for kk = 1:length(stimFrq)
+stimFrq = 4;
+%stimPhs = zeros(1,nCols);
+stimPhs = [[0 0 0 0]; [0 pi/4 pi/2 3*pi/4]; [0 pi/2 pi 3*pi/2] ];
+nFrq = length(stimFrq);
+nPhs = size(stimPhs,1);
+for kk = 1:nFrq
     waveSizes = []; waveFractions =[]; waveSlopes = [];
-    for jj=1:1
+    for phsIdx=1:nPhs
         vall = []; uall = [];
         
         [a,b,c,d, S, delays, ecn, csec] = makeColumnEnsemble(structure, connectivity, delay);
-
+        a(ecn) = 0.02;
+        
         vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
         uinit=b.*vinit;                 % Initial values of u
         
         %Impulse stimulus, column 0
-        st = ensembleStimulus(structure, csec, dt, t, 2, stimStrength, stimFrq(kk));
+        st = ensembleStimulus(structure, csec, dt, t, 2, stimStrength, stimFrq(kk), stimPhs(phsIdx,:));
 
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
         size(firings)
@@ -61,7 +66,8 @@ for kk = 1:length(stimFrq)
             text(0.9,80,['COl #=' num2str(jj)],'BackgroundColor', 'White')
             
             figure(21); 
-            subplot(1, length(stimFrq), kk ); hold on;
+            figIdx = kk+phsIdx-1;
+            subplot(2, nFrq+nPhs, figIdx); hold on;
             scatter(f(:,1)./1000, floor(f(:,2)/Nlayer), 10, jj*ones(1,size(f,1)), 'fo');
             xlabel('Time (seconds)'); 
             if jj==0 
@@ -71,8 +77,12 @@ for kk = 1:length(stimFrq)
                     set(gca, 'YTickLabel', []);
                 end
             end
-            text(0.25,20,['Freq=' num2str(stimFrq(kk))],'BackgroundColor', 'White', 'Color', 'Red')
-            
+            if jj==nCols-1
+                text(0.25,20,['Freq=' num2str(stimFrq(kk))],'BackgroundColor', 'White', 'Color', 'Red')
+                text(0.25,15,['Phases=' num2str(stimPhs(phsIdx,:).*(180/pi))],'BackgroundColor', 'White', 'Color', 'Red')
+            end
+            subplot(2, nFrq+nPhs, nFrq+nPhs+figIdx ); hold on;
+            plot(t./1000, mean(st(find(csec==jj),:)));
         end
         
         %xlabel('Time (seconds)'); ylabel('Neuron Z position');
