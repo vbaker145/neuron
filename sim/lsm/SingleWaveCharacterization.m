@@ -11,12 +11,18 @@ structure.height = height;
 structure.layers = layers;
 structure.displacement = 0.0;
 
-connectivity.percentExc = 1;
+% connectivity.percentExc = 1;
+% connectivity.connType = 1;
+% connectivity.lambda = 2.5;
+% connectivity.connStrength = 6;
+% connectivity.connStrengthRange = 1;
+% connectivity.maxLength = 100;
+
+connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
-connectivity.connStrength = 6;
-connectivity.connStrengthRange = 1;
 connectivity.maxLength = 100;
+connectivity.connStrength = 16;
 
 dt = 0.5;
 tmax = 2000;
@@ -34,13 +40,21 @@ stimDuration = floor(20/dt);
 stimDepth = 5;
 stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 5;
 
+%Impulsive stimulus
+stImpulse = zeros(N, size(t,2))*rand();
+sidx = 1;
+stimDuration = floor(20/dt);
+stimDepth = 5;
+stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 10;
+stImpulse = (interp1(0:tmax, stImpulse(:,1:1/dt:end)', 0:dt:tmax))';
 
 
 waveSizes = []; waveFractions = []; waveSlopes = [];
 
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
-for jj=1:1
+min_ccf = 1;
+for jj=1:50
     %[pt, v, firings, hb] = ImpulseResponse(2, 1);
     %Make column
     [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -56,7 +70,7 @@ for jj=1:1
     nbins = 20;
     hbins = zeros(1,nbins);
     startTimes = []; startPos = [];
-    for kk=1:1
+    for kk=1:3
         kk
         vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
         uinit=b.*vinit;                 % Initial values of u
@@ -77,13 +91,23 @@ for jj=1:1
             startPos = [startPos, wp(idx)];
         end  
     end
-    figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
+    %figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
     fbins = histcounts(startPos, 0:layers/nbins:layers);
-    figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
-    subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
+    %figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
+    %subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
     ccf = corrcoef(fbins(2:end), hbins(2:end));
     ccf_all(jj) = ccf(1,2);
-    title(['Correlation coefficient ', num2str(ccf(1,2))]);
+    %title(['Correlation coefficient ', num2str(ccf(1,2))]);
+    
+    if ccf_all(jj) < min_ccf
+        amin = a;
+        bmin = b;
+        cmin = c;
+        dmin = d;
+        Smin = S;
+        delaysmin = delays;
+        ecnmin = ecn;
+    end
     %figure(20); subplot(3,3,jj); barh(2.5:5:97.5, hbins./sum(hbins),'k')
     
     %Analyze waves
@@ -93,3 +117,41 @@ for jj=1:1
 %     waveFractions = [waveFractions waveFrac];
 %     waveSlopes = [waveSlopes slopes];
 end
+
+%Plot minimum correlation results
+vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
+uinit=b.*vinit;                 % Initial values of u
+
+%Set to mini
+a = amin;
+b = bmin;
+c = cmin;
+d = dmin;
+S = Smin;
+delays = delaysmin;
+ecn = ecnmin;
+        
+%Column impulse response
+[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), amin, b, c, d, S, delays, stImpulse);
+fscale = firings(:,2)/(width*height);
+[bins, edges] = histcounts(fscale, 0:layers/nbins:layers );
+hbins = hbins + bins;
+
+%Column background response
+[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stBackground);
+[wt wp wl] = findWaves(firings, .001, 2*2);
+
+for labels = 1:length(wl)
+    idx = wl{labels}(1);
+    startTimes = [startTimes, wt(idx)];
+    startPos = [startPos, wp(idx)];
+end 
+
+figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
+fbins = histcounts(startPos, 0:layers/nbins:layers);
+subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
+figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
+subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
+ccf = corrcoef(fbins(2:end), hbins(2:end));
+ccf_all(jj) = ccf(1,2);
+title(['Correlation coefficient ', num2str(ccf(1,2))]);
