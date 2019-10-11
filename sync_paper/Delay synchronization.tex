@@ -73,6 +73,7 @@ This is a simplified model of a two-dimensional dynamical system.
 This model has been used to reproduce common neural firing patterns.
 There is MATLAB code available \cite{izzy_code} that implements this neural model with fixed, single-time-step action potential propagation.
 The model parameters for excitatory and inhibitory neurons are shown in Table \ref{tab:izzy_params}.
+We define $\mathcal{U}\{a,b \}$ as a uniform random variable drawn on $[ a,b ] $.
 \begin{table}[!h]
  \caption{Izhekevich model parameters}
  \label{tab:izzy_params}
@@ -98,7 +99,6 @@ The strength for connections from presynaptic excitatory neurons $S_E$ and presy
  S_E &= K \times \mathcal{U}\{0,\frac{1}{2} \} \\
  S_I &= K \times \mathcal{U}\{-1,0 \} 
 \end{align}
-Where $\mathcal{U}\{a,b \}$ is a uniform random variable drawn on $[ a,b ] $.
 The parameter K is used to adjust the overall connection strength: $K=1$ corresponds to the original model in \cite{izzy_code}. 
 \\ \\
 Our model for uniform background stimulus to excitatory neurons $I_E$ and inhibitory neurons $I_I$ is: 
@@ -108,16 +108,14 @@ Our model for uniform background stimulus to excitatory neurons $I_E$ and inhibi
 \end{align}
 The parameter $M$ is used to adjust the overal strength of the stimulus.
 \\ \\
-Simulations are run with a $0.5~ms$ time step except where noted.
-The traveling wave behavior looks qualitatively similar at time steps from $1~ms$ down to $10~\mu s$ (Figure \ref{fig:time_step}).
-Some parameters of interest such as propagation speed can depend on the time step.
-Using a common time step and a sufficient number of Monte Carlo trials ensures that the measured relationships are valid, i.e. the dependence of propagation velocity on column topology.
-We do not attempt to determine the absolute parameter values that would be measured in a specific biological system.
+To examine the speed of the traveling waves we stimulated the lowest 5 layers of neurons in the column with a step stimulus lasting 20 ms starting at $t=20~ms$..
+This generates a single traveling wave with a determined start time, simplifying the propagation velocity measurement.
+A typical stimulated wave is shown in Figure \ref{fig:wave_example}.
 \begin{figure}[!htb]
+ \caption{Single traveling wave resulting from a step stimulus at the bottom of the column.}
+ \label{fig:wave_example}
  \centering
- \includegraphics[width=\textwidth]{fig/TimeStepEffect}
-  \caption{A traveling wave experiment at 4 different time scales. The qualitative behavior is the same, but longer time steps result in slower propagation.}
- \label{fig:time_step}
+   \includegraphics[width=0.5\textwidth]{fig/TypicalWave}
 \end{figure}
 \\ \\
 We capture the firing events from all neurons in each simulation.
@@ -144,15 +142,14 @@ We then identify and label the traveling wave structures that evolve over time a
 \\
 Several useful measurements can be extracted from the labeled wave data, including the wave start positions and wave propagation speed.
 We define the ``wave firing fraction`` as the fraction of the neuron firing events that are associated with the labeled traveling waves.
-\\
-To examine the speed of the traveling waves we stimulated the lowest 5 layers of neurons in the column with a step stimulus lasting 20 ms starting at $t=20~ms$..
-This generates a single traveling wave with a determined start time, simplifying the propagation velocity measurement.
-A typical stimulated wave is shown in Figure \ref{fig:wave_example}.
+\\ \\
+Simulations are run with a $0.5~ms$ time step except where noted.
+The traveling wave behavior looks qualitatively similar at time steps from $1~ms$ down to $10~\mu s$ (Figure \ref{fig:time_step}).
 \begin{figure}[!htb]
- \caption{Single traveling wave resulting from a step stimulus at the bottom of the column.}
- \label{fig:wave_example}
  \centering
-   \includegraphics[width=0.5\textwidth]{fig/TypicalWave}
+ \includegraphics[width=\textwidth]{fig/TimeStepEffect}
+  \caption{A traveling wave experiment at 4 different time scales. The qualitative behavior is the same.}
+ \label{fig:time_step}
 \end{figure}
 
 
@@ -190,6 +187,9 @@ As the connection strength increases nearly all neuron firing events are associa
  \label{fig:conn_fraction}
 \end{figure}
 \\
+We observe that traveling waves annihilate each other when they meet.
+The annihilation effects can be explained by the refractory period of the neurons.
+Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
 
 \subsection{Delay}
 To investigate the impact of delay we simulate a column with complete connectivity corresponing to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
@@ -248,12 +248,7 @@ We see that both the delay constant and the column topology influence the propag
 Increasing the inter-neuron actiona potential delay slows the traveling wave propagation.
 Waves travel faster in columns with larger cross-sections. 
 
-\subsection{Wave Initiation and Annihilation}
-We observe both initiation and annihilation of traveling waves in our simulations.
-These effects can be clearly seen in Figure \ref{fig:wave_analysis}.
-The annihilation effects can be explained by the refractory period of the neurons.
-Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
-\\
+\subsection{Wave Initiation}
 It appears that columns have preferential wave initiation sites.
 Figure \ref{fig:wave_initiation} shows all the wave initiation sites for 100 simulations of a column.
 It is clear that traveling waves are more likely to begin at certain regions in the column.
@@ -283,7 +278,7 @@ The wave initiation sites and wave density of the same column are shown in figur
 \end{figure}
 There appears to be an anticorrelation between wave density under a step stimulus and the likelihood of wave initiation under a uniform background stmiulus.
 To test this hypothesis we create 100 columns, applied both background stimulus and step stimulus, and measured the correlation between wave inititation and wave density at the positions of the column (Figure \ref{fig:initiation_density_corr}).
-Although there is substantial variation between columns we measure a consistently negative correlation coefficient (mean -0.13, std 0.21).
+Although there is substantial variation between columns we measure a consistently negative correlation coefficient (mean -0.18, std 0.20).
 \begin{figure}[!htb]
  \caption{Correlation between wave initiation and wave density.}
  \label{fig:initiation_density_corr}

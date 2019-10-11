@@ -54,7 +54,7 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
 min_ccf = 1;
-for jj=1:50
+for jj=1:100
     %[pt, v, firings, hb] = ImpulseResponse(2, 1);
     %Make column
     [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -107,6 +107,7 @@ for jj=1:50
         Smin = S;
         delaysmin = delays;
         ecnmin = ecn;
+        min_ccf = ccf_all(jj);
     end
     %figure(20); subplot(3,3,jj); barh(2.5:5:97.5, hbins./sum(hbins),'k')
     
@@ -136,6 +137,7 @@ ecn = ecnmin;
 fscale = firings(:,2)/(width*height);
 [bins, edges] = histcounts(fscale, 0:layers/nbins:layers );
 hbins = hbins + bins;
+stepFire = firings;
 
 %Column background response
 [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stBackground);
@@ -147,11 +149,34 @@ for labels = 1:length(wl)
     startPos = [startPos, wp(idx)];
 end 
 
+%Plot wave initiation sites with histogram
 figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
+ylabel('Z position', 'FontSize', 12)
+xlabel('Time (s)', 'FontSize', 12)
+set(gca, 'FontSize',12)
 fbins = histcounts(startPos, 0:layers/nbins:layers);
 subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
-figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
+xlabel('Fraction of initiation events', 'FontSize', 12)
+set(gca, 'FontSize',12)
+
+%plot density histogram
+figure; subplot(1,2,1); plot(stepFire(:,1)./1000, stepFire(:,2)./(width*height), 'k.');
+ylabel('Z position', 'FontSize', 12)
+xlabel('Time (s)', 'FontSize', 12)
+set(gca, 'FontSize',12)
 subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
+xlabel('Fraction of total firing events', 'FontSize', 12)
+set(gca, 'FontSize',12) 
+
+%Plot wave initiation and density histograms together
+figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
+xlabel('Fraction of initiation events', 'FontSize', 12)
+ylabel('Z position', 'FontSize', 12)
+subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
+xlabel('Fraction of total firing events', 'FontSize', 12)
+
 ccf = corrcoef(fbins(2:end), hbins(2:end));
 ccf_all(jj) = ccf(1,2);
-title(['Correlation coefficient ', num2str(ccf(1,2))]);
+
+figure; plot(ccf_all, 'k.');
+
