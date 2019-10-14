@@ -54,7 +54,8 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
 min_ccf = 1;
-for jj=1:100
+n_ccf = 1;
+for jj=1:10
     %[pt, v, firings, hb] = ImpulseResponse(2, 1);
     %Make column
     [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -70,7 +71,7 @@ for jj=1:100
     nbins = 20;
     hbins = zeros(1,nbins);
     startTimes = []; startPos = [];
-    for kk=1:3
+    for kk=1:10
         kk
         vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
         uinit=b.*vinit;                 % Initial values of u
@@ -90,25 +91,24 @@ for jj=1:100
             startTimes = [startTimes, wt(idx)];
             startPos = [startPos, wp(idx)];
         end  
-    end
-    %figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
-    fbins = histcounts(startPos, 0:layers/nbins:layers);
-    %figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
-    %subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
-    ccf = corrcoef(fbins(2:end), hbins(2:end));
-    ccf_all(jj) = ccf(1,2);
-    %title(['Correlation coefficient ', num2str(ccf(1,2))]);
+        
+        fbins = histcounts(startPos, 0:layers/nbins:layers);
+        ccf = corrcoef(fbins(2:end), hbins(2:end));
+        ccf_all(n_ccf) = ccf(1,2);
     
-    if ccf_all(jj) < min_ccf
-        amin = a;
-        bmin = b;
-        cmin = c;
-        dmin = d;
-        Smin = S;
-        delaysmin = delays;
-        ecnmin = ecn;
-        min_ccf = ccf_all(jj);
+        if ccf_all(n_ccf) < min_ccf
+            amin = a;
+            bmin = b;
+            cmin = c;
+            dmin = d;
+            Smin = S;
+            delaysmin = delays;
+            ecnmin = ecn;
+            min_ccf = ccf_all(n_ccf);
+        end
+        n_ccf = n_ccf+1;
     end
+    
     %figure(20); subplot(3,3,jj); barh(2.5:5:97.5, hbins./sum(hbins),'k')
     
     %Analyze waves

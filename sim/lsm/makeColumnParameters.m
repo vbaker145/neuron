@@ -32,7 +32,7 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 1;
+doplot = 0;
 
 n = width*height*layers;
 
