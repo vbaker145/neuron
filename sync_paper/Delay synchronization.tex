@@ -65,7 +65,7 @@ Where $D(a,b)$ is the distance between neuron A and B and $\lambda$ and $C$ are 
 We model the neurons using the Izhikevich model \cite{izhikevich2003} to allow us to explore the neural dynamics.
 The Izhikevich model uses two coupled differential equations with two variables and four parameters:
 \begin{align}
- v^\prime &= 0.04v^2+5v+140-u+I\\
+ v^\prime &= 0.04v^2+5v+140-u+I \label{eq:neuron_v} \\
  u^\prime &= a(bv-u)\\
  \text{if } &v>30: v\leftarrow c, u\leftarrow u+d
 \end{align}
@@ -86,37 +86,43 @@ We define $\mathcal{U}\{a,b \}$ as a uniform random variable drawn on $[ a,b ] $
   c & -65+$\mathcal{U}(0,10)^2$ & -65 \\
   d & 8-$\mathcal{U}(0,6)$& 2 \\
  \end{tabular}
-
 \end{table}
-
+\\
+In the Izhikevich model when a neuron fires the action potential propagates to the target neuron at the next time step.
+The action potential from the firing neuron is added to the target neuron current $I$ (Eq \ref{eq:neuron_v}).
 We enhanced the available MATLAB code for the Izhikevich model to incorporate a more realistic propagation model while still minimizing computational complexity.
-Our model incorporates a propagation delay $\kappa D(a,b)$ porportional to the inter-neuron distance $D(a,b)$. 
-We also model an exponentially decaying synapse respone with a time constant of $4~ms$.
+Our model incorporates a propagation delay $\tau_{ij}=\kappa D(i,j)$ porportional to the inter-neuron distance $D(i,j)$ between neurons $i$ and $j$. 
+The parameter $\kappa$ ranges from 0 (action potentials propagate to the target neuron in the next time step) to 4. 
+We also model an exponentially decaying synapse respone $I(t)=e^{-(\frac{t}{\sigma_s})^2}$ with a time constant of $\sigma_s=4~ms$.
 \\ \\
 The connection strengths between neurons is based on the original Izhikevich work.
-The strength for connections from presynaptic excitatory neurons $S_E$ and presyaptic inhibitory neurons $S_I$ is:
+The strength for connections from presynaptic neuron $i$ to postsynaptic neuron $j$ depends on whether $i$ is inhibitory or excitatory.
 \begin{align}
- S_E &= K \times \mathcal{U}\{0,\frac{1}{2} \} \\
- S_I &= K \times \mathcal{U}\{-1,0 \} 
+ S_{ij}^{excitatory} &= K \times \mathcal{U}\{0,\frac{1}{2} \} \\
+ S_{ij}^{inhibitory} &= K \times \mathcal{U}\{-1,0 \} 
 \end{align}
-The parameter K is used to adjust the overall connection strength: $K=1$ corresponds to the original model in \cite{izzy_code}. 
-\\ \\
-Our model for uniform background stimulus to excitatory neurons $I_E$ and inhibitory neurons $I_I$ is: 
+The parameter K is used to adjust the overall connection strength: $K=1$ corresponds to the original model in \cite{izzy_code}. \\
+The current in Equation \ref{eq:neuron_v} includes all incoming stimulus from other neurons.
+With our models for action potential propagation and synapse response, the total current to neuron $i$ can be written:
 \begin{align}
- I_E &= M \times \mathcal{U}\{0,1 \} \\
- I_I &= \frac{2}{5} M \times \mathcal{U}\{0,1 \}
+ I_i(t) &= \sum_{j\ne i} \sum_{t^\prime_j} S_{ij}  \delta(t-t^\prime_j-\tau_{ij})e^{-(\frac{t-t^\prime_j-\tau_{ij}}{\sigma_s})^2}
 \end{align}
-The parameter $M$ is used to adjust the overal strength of the stimulus.
+Where the $t^\prime_j$ are all firing times of neuron $j$ and $\delta$ is the Kronecker delta.
 \\ \\
-To examine the speed of the traveling waves we stimulated the lowest 5 layers of neurons in the column with a step stimulus lasting 20 ms starting at $t=20~ms$..
+The current in Equation \ref{eq:neuron_v} also includes any stimulus applied as part of the experiment.
+We perform experiments using both a uniform background stimulus and a step stimulus.
+Our model for uniform background stimulus to a neuron $i$ depends on whether $i$ is inhibitory or excitatory, following Izhikevich's original model.
+The uniform background stimulus is:
+\begin{align}
+ I_i^{excitatory} &= M \times \mathcal{U}\{0,1 \} \\
+ I_i^{inhibitory} &= \frac{2}{5} M \times \mathcal{U}\{0,1 \}
+\end{align}
+The parameter $M$ is used to adjust the overal strength of the stimulus, $M=1$ corresponds to the original model in \cite{izzy_code}.
+\\
+A step stimulus is used when measuring the speed of a traveling wave.
+The step stimulus is applied uniformaly to neurons in the lowest 5 layers of the column.
+The stimulus starts at $t=20~ms$ and lasts for $20~ms$ during which the affected neurons receive a constant current input of strength 5.
 This generates a single traveling wave with a determined start time, simplifying the propagation velocity measurement.
-A typical stimulated wave is shown in Figure \ref{fig:wave_example}.
-\begin{figure}[!htb]
- \caption{Single traveling wave resulting from a step stimulus at the bottom of the column.}
- \label{fig:wave_example}
- \centering
-   \includegraphics[width=0.5\textwidth]{fig/TypicalWave}
-\end{figure}
 \\ \\
 We capture the firing events from all neurons in each simulation.
 We then perform a spatial clustering operation to identify spatiotemporal regions with a high firing density.
@@ -141,7 +147,7 @@ We then identify and label the traveling wave structures that evolve over time a
 \end{figure}
 \\
 Several useful measurements can be extracted from the labeled wave data, including the wave start positions and wave propagation speed.
-We define the ``wave firing fraction`` as the fraction of the neuron firing events that are associated with the labeled traveling waves.
+We define the ``wave firing fraction`` as the fraction of the neuron firing events (Figure \ref{fig:wave_analysis}, left) that are associated with the labeled traveling waves.
 \\ \\
 Simulations are run with a $0.5~ms$ time step except where noted.
 The traveling wave behavior looks qualitatively similar at time steps from $1~ms$ down to $10~\mu s$ (Figure \ref{fig:time_step}).
@@ -158,14 +164,15 @@ We determine the conditions for traveling waves to propagate in our simulated ne
 We first examine the connectivity between the neurons and find traveling waves for columns with local connectivity.
 We then examine the impact of actional potential propagation delay, finding that traveling waves are supported in fully-connected columns when the propagation delay is porportional to distance.
 We find that the excitatory/inhibitory balance plays a role in traveling wave propagation and determines the character of column activity.
-Finaly, we show that the traveling wave propagation speed depends on both the action potential propagation speed as well as the column topology.
+Finaly, we show that the traveling wave propagation speed depends on both the action potential propagation speed as well as the column topology. \\
+The baseline model for all experiments are a column of 2x2x100 neurons where $80\%$ of the neurons are excitatory except where noted.
+Connectivity parameters are $\lambda=2.5$ and $C=1$.
+The exponential synapse response time $\sigma_s$ is always $4~ms$.
+The Izhekevich model parameters are as described in Methods, with conenction strenght parameter $K=5$ and stimulus strength parameter $M=5$ except where noted.
+
 \subsection{Connectivity}
-We first investigate a column structure that is 2x2x100 neurons with local connectivity. 
-The neuron connectivity was determined by inter-neuron distance as described in Methods Eq. \ref{eq:connectivity}, with $\lambda=2.5$ and $C=1$.
-This results in $\approx 3.5\%$ of the possible neuron connections realized.  
-The column contains $80\%$ excitatory neurons.
-The stimulus parameter $M=5$.
-We varied the connection strength parameter $K$.
+We first investigate the impact of connectivity on traveling wave formation.
+We varied the connection strength parameter $K$ and observed the conditions under which uniform background stimulus would produce traveling waves.
 In Figure \ref{fig:strength_effect} we show typical traveling waves for three different values of $K$.
 \begin{figure}[!htb]
  \caption{Effect of connection strength on traveling wave formation. $K$ is the connection strength parameter. At $K=2$ the firing events appear random, while at $K=6$ traveling waves are clearly evident.}
@@ -174,12 +181,14 @@ In Figure \ref{fig:strength_effect} we show typical traveling waves for three di
  \label{fig:strength_effect}
 \end{figure}
 \\
-At low connection strength the firing events appear random.
-Traveling waves emerge at higher connection strengths. 
-To identify the transition point we performed 50 simulations for each of several values of $K$.
+At low connection strength $K=2$ the firing events appear random.
+Traveling waves are evident at a higher connection strength of $K=4$.
+We see visually that the traveling wave patterns dominate the firing activity at $K=6$. \\
+We performed 50 simulations values of $K$ from $2$ to $6$ at intervals of $0.5$ and determine the wave firing fraction as decribed in methods (Figure \ref{fig:conn_fraction}).
 Below $K=3.5$ no traveling waves are detected.
-The wave firing fractions (Figure \ref{fig:conn_fraction}) show that traveling waves begin to emerge at $K=3.5$.
-As the connection strength increases nearly all neuron firing events are associated with traveling waves. 
+We observe the transition at $K=3.5$ where traveling waves are observed but most of the firing events are still random.
+From $K=3.5$ to $K=5$ the wave firing fraction is porportional to $K$, indicating that traveling waves become more dominant as the neurons become more strongly connected.
+At $K>5$ more than $90\%$ of the firing events are part of a traveling wave.
 \begin{figure}[!htb]
  \caption{Traveling waves emerge at $K=3.5$. As the connection strength increases the traveling waves dominate all firing events in the column.}
  \centering
@@ -187,17 +196,16 @@ As the connection strength increases nearly all neuron firing events are associa
  \label{fig:conn_fraction}
 \end{figure}
 \\
-We observe that traveling waves annihilate each other when they meet.
+We also observe in Figure \ref{fig:strength_effect} that traveling waves annihilate each other when they meet.
 The annihilation effects can be explained by the refractory period of the neurons.
 Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
 
 \subsection{Delay}
 To investigate the impact of delay we simulate a column with complete connectivity corresponing to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
-The column contains $80\%$ excitatory neurons.
 This is analagous to the original Izhikevich simulation \cite{izzy_code} that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
 We first simulated the column with a fixed action potential propagation delay of $1~ms$ regardless of inter-neuron distance.
 The result was highly synchronized simultaneous firing among all neurons in the column (Figure \ref{fig:sync_fire}). \\ 
-We then incorporated our distance-dependent action potential propagation with the $\kappa$ parameter was set to 1.
+We then incorporated our distance-dependent action potential propagation with the $\kappa$ parameter set to 1.
 The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:sync_fire_delay}).
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation time is porportional to the inter-neuron distance.
 \begin{figure}[!htb]
@@ -215,6 +223,9 @@ This demonstrates that one dimensional traveling waves can emerge from fully-con
       \label{fig:sync_fire_delay}
   \end{minipage}
 \end{figure}
+Previous work (\cite{ermentrout2001}, Figure 1) classifies several architectures for apparent traveling waves in the cortex.
+One architecture, ''Delayed Excitations from a Single Oscillator``, is a periodic source driving a sequence of excitable neurons with increasing time delays, but no connectivity between the neurons.
+
 
 \subsection{Excitatory/Inhibitory Balance}
 The excitatory/inhibitory balance is known to have a significant impact on neural network dynamics \cite{keane2015}. 
@@ -260,7 +271,7 @@ It is clear that traveling waves are more likely to begin at certain regions in 
 \end{figure}
 We are currently unable to explain the preferential initiation sites in term of connectivity or excitatory/inhibitory balance. 
 \\
-We also observed that, when generating traveling waves from a step stimulus (Figure \ref{fig:wave_example}) that certain sections of the column showed a higher density of firing activity.
+We also observed that, when generating traveling waves from a step stimulus that certain sections of the column showed a higher density of firing activity.
 An example measurement of the firing density is shown in Figure \ref{fig:wave_density}.
 \begin{figure}[!htb]
  \caption{Density of firing events in a traveling wave initiated from a step stimulus. The traveling wave is shown on the left, a histogram of firing events by position is shown on the right.}
