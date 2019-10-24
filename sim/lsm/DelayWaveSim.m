@@ -20,15 +20,12 @@ connectivity.lambda = 2.5;
 connectivity.connStrength = 1;
 connectivity.maxLength = 100;
 
-delay.delayType = 2; %Constant delay
+delay.delayType = 1; %Constant delay
 delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
-[a,b,c,d, S, delaysConstant, ecn] = makeColumnParameters(structure, connectivity, delay);
-
-delay.delayType = 1; %Delay porportional to inter-neuron distance
-[a,b,c,d, S, delaysDistance, ecn] = makeColumnParameters(structure, connectivity, delay);
+[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
 
 pidx=1;
 delayMult = 1;
@@ -46,13 +43,14 @@ st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
 sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 
 %No delay
-
+connectivity.connType = 5;
+[a,b,c,d, S, delaysConstant, ecn] = makeColumnParameters(structure, connectivity, delay);
 [v, vall, u, uall, firingsNoDelay] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysConstant, sti);
 
-%with delay
-delay.delayType = 1;
-delay.delayMult = 1;
-[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+%With delay
+delay.delayType = 1; %Delay porportional to inter-neuron distance
+connectivity.connType = 2;
+[a,b,c,d, S, delaysDistance, ecn] = makeColumnParameters(structure, connectivity, delay);
 [v, vall, u, uall, firingsDelay] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
 
 figure; subplot(1,2,1);
