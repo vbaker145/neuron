@@ -55,7 +55,7 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 vall = []; uall = [];
 min_ccf = 1;
 n_ccf = 1;
-for jj=1:10
+for jj=1:100
     %[pt, v, firings, hb] = ImpulseResponse(2, 1);
     %Make column
     [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -71,7 +71,7 @@ for jj=1:10
     nbins = 20;
     hbins = zeros(1,nbins);
     startTimes = []; startPos = [];
-    for kk=1:10
+    for kk=1:1
         kk
         vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
         uinit=b.*vinit;                 % Initial values of u
@@ -95,6 +95,15 @@ for jj=1:10
         fbins = histcounts(startPos, 0:layers/nbins:layers);
         ccf = corrcoef(fbins(2:end), hbins(2:end));
         ccf_all(n_ccf) = ccf(1,2);
+        
+        if ccf_all(n_ccf) < -0.5
+            %Plot wave initiation and density histograms together
+            figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
+            xlabel('Fraction of initiation events', 'FontSize', 12)
+            ylabel('Z position', 'FontSize', 12)
+            subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
+            xlabel('Fraction of total firing events', 'FontSize', 12)
+        end
     
         if ccf_all(n_ccf) < min_ccf
             amin = a;
