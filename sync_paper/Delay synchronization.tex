@@ -14,7 +14,7 @@
 
 
 %opening
-\title{One-dimensional traveling waves in neural columns}
+\title{Thesis Proposal: One-dimensional traveling waves in neural columns}
 \author{Vince Baker, advisor: Dr. Luis Cruz Cruz\\ Drexel University Department of Physics}
 
 \begin{document}
@@ -32,9 +32,9 @@ This topological dependence of wave propagation may indicate a functional role o
 \end{abstract}
 
 \section{Introduction} 
+Neurons in brain firing sequentially can create a traveling wave of neuron activation.
 Traveling waves of cortical neuron activation have been observed in vivo, in vitro and in silico. 
 Proposed functions of these traveling waves include motor coordination, place field coordination in the hippocampus, and spatiotemporal processing in the visual cortex \cite{muller2018}. 
-Advanced experimental techniques that achieve the required spatial and temporal resolution \cite{shoham1999} to capture the mesoscopic traveling waves have focused on lateral activity near the cortical surface, and simulations of traveling waves in a 2-D sheet of neurons have been performed \cite{keane2015}. 
 \\
 Several types of cortical propagating waves have been studied.
 Slow, large-scale wave activity have been observed in sleep and anesthetized states \cite{muller2018}.
@@ -42,9 +42,31 @@ Advances in optical imaging techniques using voltage-sensitive dye provided suff
 Stimulus-evoked mesoscopic waves have been observed in the mammalian visual and auditory cortex \cite{reimer2010}\cite{muller2018}.
 Experimental observation of mesoscopic traveling waves in the cortex has largely focused on lateral waves within the layers \cite{muller2018} as vertical penetration is more difficult to image. 
 \\
-In this work we explore the dynamics of traveling waves along neural structures with one long dimension, similar to column structures that may be found in the cortex.
-We find that these traveling waves in one dimension can propagate in simulated neural column structures with certain properties including distance-dependent connectivity and a mix of excitatory and inhibitory neurons. 
-We observe wave properties including creation from background stimulus, annihilation between waves, and a wave velocity that is determined by both the action potential propagation speed and the column topology. 
+In this work we will explore the dynamics of traveling waves along neural structures with one long dimension, similar to column structures that may be found in the cortex. 
+We will examine wave properties including creation from background stimulus, annihilation between waves, and the wave velocity and shape. 
+We seek to understand how these wave properties are influenced by neural network properties including connectivity, column topology, neuron type and synaptic dynamics.
+Once the traveling wave mechanics in our columns are understood we will use a model from machine learning to understand the possible functional utility of these waves.
+
+\section{Literature review}
+Traveling waves have been extensively observed and recorded in the cortex \cite{sato2012} \cite{wu2008} \cite{muller2018}.
+Advanced experimental techniques that achieve the required spatial and temporal resolution \cite{shoham1999}\cite{wu2008} to capture traveling waves have focused on lateral activity near the cortical surface.
+Simulations of traveling waves in a 2-D sheet of neurons have been performed \cite{keane2015}. 
+\\
+There has been substantial speculation on the functional role of traveling waves in the cortex \cite{muller2018}\cite{sato2012}.
+In \cite{keane2015} the authors propose traveling waves as an explanation for the observed phenomenon of high variability in individual neuron spike timing and highly synchronized synaptic inputs to each neuron.
+In \cite{sato2012} traveling waves are proposed as a mechanism for long-range stimulus interaction and as an element of the nornalization model of neural computation \cite{carandini2012}.
+\\
+The seminal work on Liquid State Machines \cite{maas2002} used a microcolumn of neurons as a processing element for a variety of tasks.
+In \cite{pyle2017} the authors use used the liquid state machine model to demonstrate the functional importance of distance-dependent neural connectivity. 
+Recent work in \cite{basawaraj2019} used a neural network based on the minicolumn structure to improve a model for episodic memory.
+
+\section{Statement of the problem}
+\begin{itemize}
+ \item We will examine the dynamics and functional utility of traveling waves in one-dimensional columns of neurons.
+ \item We will investigate the relevant neural properties including neuron/synapse dynamics, connectivity, column topology and action potential propagation. The goal is to understand how these properties affect the formation and propagation of traveling waves.
+ \item With the neural wave dynamics established we will create an ensemble of neural columns to use as a Liquid State Machine\cite{maas2002}.
+ \item We will use the Liquid State Machine model to investigate how traveling waves in neural columns may function in spatiotemporal processing of stimuli.
+\end{itemize}
 
 \section{Methods}
 We simulated the dynamics of a small neural column to explore neuron synchronization.
@@ -159,7 +181,7 @@ The traveling wave behavior looks qualitatively similar at time steps from $1~ms
 \end{figure}
 
 
-\section{Results}
+\section{Preliminary Results}
 We determine the conditions for traveling waves to propagate in our simulated neural columns.
 We first examine the connectivity between the neurons and find traveling waves for columns with local connectivity.
 We then examine the impact of actional potential propagation delay, finding that traveling waves are supported in fully-connected columns when the propagation delay is porportional to distance.
