@@ -1,0 +1,46 @@
+%Process audio files
+clear all; close all;
+
+addpath('../lsm'); %Neural column code
+data_dir = '../../data/free-spoken-digit-dataset-master/recordings';
+
+fnames = dir(data_dir);
+fnames = fnames(3:end);
+for jj=1:length(fnames)
+    fname = [fnames(jj).folder '/' fnames(jj).name];
+    tok = split(fnames(jj).name, ["_","."]);
+    digit(jj) = str2double(char(tok(1)));
+    spkr{jj} = char(tok(2));
+    trial(jj) = str2double(char(tok(3)));
+    %[d, fs] = audioread(fname);
+end
+
+%Find all examples of digit 0 from Jackson
+idx_jackson_digit0 = find( contains(spkr, "jackson") & digit==0 );
+
+
+digits = [0,5,9];
+
+for jj=1:length(digits)
+   idx = find(digit==digits(jj)); 
+   n_train = floor(length(idx_digit0)/2);
+   n_test = n_train;
+   idxTrain = floor(rand(1,n_train)*length(idx_digit0))+1;
+   idxTest = floor(rand(1,n_train)*length(idx_digit0))+1; 
+end
+
+%Digit 0 training and test samples
+idx_digit0 = find(digit==0);
+n_train = floor(length(idx_digit0)/2);
+n_test = n_train;
+idxTrain = floor(rand(1,n_train)*length(idx_digit0))+1;
+idxTest = floor(rand(1,n_train)*length(idx_digit0))+1;
+
+
+%Find all digit 5
+idx_digit5 = find(digit==5);
+
+idx = idx_digit0(end);
+fname = [fnames(idx).folder '/' fnames(idx).name]
+[d, fs] = audioread(fname);
+sound(d, fs);
