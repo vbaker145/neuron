@@ -1,6 +1,8 @@
 %Process audio files
 clear all; close all;
 
+doplots = 1;
+
 fs = 8e3; %Sample frequency in Hz
 dt = 0.5; %Tiem step in milliseconds
 
@@ -41,13 +43,23 @@ for jj=1:length(digits)
     for kk = 1:length(kidx)
         %Read audio file
         d = audioread( [fnames(kidx(kk)).folder '/' fnames(kidx(kk)).name] );
+        if doplots == 1
+           figure(10); plot((0:length(d)-1)./fs, d);
+           xlabel('Time (s)'); ylabel('Amplitude')
+        end
         
         %Process into 9 frequency regions for stimulus
+        if doplots == 1
+           figure(20); clf;
+           subplot(3,3,1); hold on;
+        end
+        so = [];
         for fidx = 1:9
             fd = filter(chn(:,fidx),1,d);
             fd = filter(lpf,1,abs(fd));
             fd = fd./max(fd);
             so(:,fidx) = fd;
+            subplot(3,3,fidx); plot(fd);
         end
         
         %Stimulate column
