@@ -2,14 +2,14 @@ function colStruct = makeAudioColumnEnsemble()
 %Colum,n ensemble for audio recognition
 
 %Time step for simulation
-dt = 0.5;
+dt = 1e3/8e3;
 
 %Column parameters
 structure.width = 2;
 structure.height = 2;
 structure.nWide = 3;
 structure.nHigh = 3;
-structure.columnSpacing = 8;
+structure.columnSpacing = 20;
 structure.layers = 30;
 structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
@@ -32,7 +32,7 @@ N = Nlayer*structure.layers;
 
 colStruct = struct('structure',structure, 'connectivity', connectivity, ...
     'delay',delay, 'a',a,'b',b,'c',c,'d',d,'S',S, 'delays',delays,...
-    'ecn', ecn, 'csec',csec );
+    'ecn', ecn, 'csec',csec, 'N', N, 'nCols', nCols, 'Nlayer', Nlayer );
 
 
 end
