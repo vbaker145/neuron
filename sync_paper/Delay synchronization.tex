@@ -171,10 +171,7 @@ We first examine the connectivity between the neurons and find traveling waves f
 We then examine the impact of actional potential propagation delay, finding that traveling waves are supported in fully-connected columns when the propagation delay is porportional to distance (\ref{sub:delay}).
 We find that the excitatory/inhibitory balance plays a role in traveling wave propagation and determines the character of column activity (\ref{sub:ei_balance}).
 Wave propagation speed is investigated as a function of the action potential propagation speed and column topology, and we find that wave proapgation speed is porportional to action potential propagation speed and column cross-section (\ref{sub:propagation_speed}).
-We investigate the initiation of traveling waves from a uniform background stimulus (\ref{sub:wave_initiation}).
-Finaly, we show that traveling waves in an ensemble of several columns (\ref{sub:column_ensembles}). 
-
-
+Finally, we investigate the initiation of traveling waves from a uniform background stimulus and determine why a given column has preferential sites for wave initiation (\ref{sub:wave_initiation}).
 
 \begin{table}[!h]
  \caption{Model parameters used in the experiments in each subsection}
@@ -183,14 +180,28 @@ Finaly, we show that traveling waves in an ensemble of several columns (\ref{sub
  \begin{tabularx}{\textwidth}{l | X | c | c | c | c | c | r}
   \textbf{Section} & \textbf{Topology} & \textbf{$\lambda$} & \textbf{E/I} & \textbf{M} & \textbf{K} & \textbf{$\kappa$} \\
   \hline
+  Baseline & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $5$ & $1$ \\ 
   a & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $\textbf{2-6}$ & $1$ \\ 
   b & $2x2x100$ & $\infty$ & $80\%$ & $5$ & $5$ & $\textbf{0,1}$ \\ 
   c & $2x2x100$ & $2.5$ & $\textbf{0-100}\%$ & $5$ & $5$ & $1$ \\ 
   d & $\textbf{(2x2,2x3,3x3)x100}$ & $2.5$ & $80\%$ & $5$ & $5$ & $\textbf{1-5}$ \\ 
   e & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $5$ & $1$ \\ 
-  f & \textbf{Four columns} & $2.5$ & $80\%$ & $5$ & $5$ & $1$ \\ 
  \end{tabularx}
 \end{table}
+
+We first present a baseline experiment with uniform background stimulus to illustrate wave behavior. 
+The firing events in the experiment are plotted in Figure \ref{fig:baseline}.
+We note the visually weel-defined traveling waves in the column, with waves being consistently initiated from approximate column positions 15, 32, 52, 70 and 90.
+The waves proapgate until they interact with another traveling wave or reach the ends of the column.
+We observe that traveling waves annihilate each other when they meet.
+The annihilation effects can be explained by the refractory period of the neurons.
+Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
+\begin{figure}[!htb]
+ \centering
+ \caption{Baseline traveling wave experiment with uniform stimulus.}
+ \includegraphics[width=\textwidth]{fig/baseline}
+ \label{fig:baseline}
+\end{figure}
 
 \subsection{Connectivity} \label{sub:connectivity}
 We first investigate the impact of connectivity on traveling wave formation.
@@ -217,10 +228,13 @@ At $K>5$ more than $90\%$ of the firing events are part of a traveling wave.
    \includegraphics[width=0.5\textwidth]{fig/ConnectionStrengthWaveFraction}  
  \label{fig:conn_fraction}
 \end{figure}
-
-We also observe in Figure \ref{fig:strength_effect} that traveling waves annihilate each other when they meet.
-The annihilation effects can be explained by the refractory period of the neurons.
-Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
+We examine the critical region between $K=3$ and $K=3.5$ and determine that traveling waves emerge at $K=3.15$ (Figure \ref{fig:conn_fraction_critical}).
+\begin{figure}[!htb]
+ \caption{Close-up of the critical region at which traveling waves emerge at $K=3.15$.}
+ \centering
+   \includegraphics[width=0.5\textwidth]{fig/ConnectionStrengthWaveFraction_CriticalRegion}  
+ \label{fig:conn_fraction_critical}
+\end{figure}
 
 \subsection{Delay} \label{sub:delay}
 To investigate the impact of delay we simulate a column with complete connectivity corresponing to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
@@ -270,7 +284,7 @@ To examine the velocity of the traveling waves we performed 50 velocity for meas
 We varied the propagation delay constant $\kappa$ from (1 to 4) and the cross section of the column (2x2, 2x3, 3x3).
 The results are shown in Figure \ref{fig:delay_topology}.
 \begin{figure}[!htb]
- \caption{Wave speed is inversely porportional to $\kappa$ as expected. Wave speed also increases with the column cross-section.Mean values with $1\sigma$ errorbars, 50 trials.}
+ \caption{Wave speed is inversely porportional to $\kappa$ as expected. Wave speed also increases with the column cross-section.Mean values with $1\sigma$ errorbars, 50 trials per measurement.}
  \label{fig:delay_topology}
  \centering
    \includegraphics[width=0.75\textwidth]{fig/WaveSpeed_DelayTopology}
@@ -320,27 +334,6 @@ Although there is substantial variation between columns we measure a consistentl
    \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelation}
 \end{figure}
 
-\subsection{Column ensembles} \label{sub:column_ensembles}
-We simulate an ensemble of four columns. 
-The individual columns are 2x2x50, with $80\%$ excitatory neurons, connection strength $K=5$, connection model parameters $\lambda=2.5$ and $C=1$.
-All neurons in all columns were stimulated with a background stimulus, strength $K=5$.
-The spacing between the columns was varied from 2 to 10. 
-At an inter-column spacing of 2 the ensemble is a single column with a 4x4 cross section.
-At an inter-column spacing of 10 there were no connections between the neurons in the columns.
-Ensembles with intermediate inter-column spacings have some degree of connectivity between the columns.
-\begin{figure}[!htb]
- \caption{Increasing inter-column distance reduces the connectivity between columns (top row). The firing events (bottom row) are color-coded by column number. }
- \label{fig:ensemble}
- \centering
-   \includegraphics[width=\textwidth]{fig/ColumnEnsemble}
-\end{figure}
-
-With inter-column spacing of 2 the ensemble fires as a single column.
-As the spacing increases to 5 the connectivity between columns becomes weaker than the intra-column connectivity.
-There is still correlation between the traveling waves in the four columns.
-As the spacing increases further there is no connectivity between the columns.
-The traveling waves in the columns are now uncorrelated.
-
 \section{Discussion}
 We have demonstrated that representative column structures can support traveling waves.
 Various parameters determine traveling wave formation and propagation including the connectivity, connection strength, excitatory/inhibitory balance and action potential propagation delay.
@@ -364,13 +357,6 @@ A four-fold increase in $\kappa$ does not reduce the traveling wave propagation 
 The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
 Real columns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
 The variations in propagation speed could be an important feature of traveling waves in organizing cortical activity.
-
-Ensembles of coupled columns showed various degrees of correlation in trave wave activity. 
-The inter-column coupling, combined with the distribution of wave parameters among the individual columns, suggest a possible computational role for column organization.
-Columns may carry information between cortical layers in the form of traveling waves. 
-Naturally occuring differences in wave propagation will result in phase differences between waves in different columns.
-Ensembles of columns might perform nonlinear filtering functions through the interaction of the traveling waves within the individual columns.
-
 
 \clearpage
 \printbibliography
