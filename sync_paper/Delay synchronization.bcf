@@ -2066,6 +2066,8 @@
     <bcf:citekey order="15">keane2015</bcf:citekey>
     <bcf:citekey order="16">ermentrout2001</bcf:citekey>
     <bcf:citekey order="17">muller2018</bcf:citekey>
+    <bcf:citekey order="18">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="19">gibson2009</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">
   <bcf:sorting>

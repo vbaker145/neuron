@@ -56,14 +56,22 @@ if doplot == 1
 end
 
 connections = zeros(length(x), length(x));
-rtype = rand(n,1);
-excNeurons = rtype < percentExc; nExc = sum(excNeurons);
-inNeurons = rtype >= percentExc; nIn = sum(inNeurons);
+
+if percentExc <= 1.0
+    rtype = rand(n,1);
+    excNeurons = rtype < percentExc; nExc = sum(excNeurons);
+    inNeurons = rtype >= percentExc; nIn = sum(inNeurons);
+else
+    excNeurons = ones(1,n); excNeurons(percentExc) = 0; nExc = sum(excNeurons);
+    inNeurons = zeros(1,n); inNeurons(percentExc) = 1; nIn = sum(inNeurons); 
+    excNeurons = logical(excNeurons); inNeurons = logical(inNeurons);
+end
 
 %Izhikevich model parameters
 a = zeros(n,1); b = zeros(n,1); c = zeros(n,1); d = zeros(n,1);
 a(excNeurons) = 0.02; a(inNeurons) = 0.02 + 0.08*rand(nIn,1);
 b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*rand(nIn,1);
+%b(excNeurons) = 0.2; b(inNeurons) = 0.25;
 c(excNeurons) = -65+10*rand(nExc,1).^2; c(inNeurons) = -65;
 d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 

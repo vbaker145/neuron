@@ -185,14 +185,14 @@ Finally, we investigate the initiation of traveling waves from a uniform backgro
   b & $2x2x100$ & $\infty$ & $80\%$ & $5$ & $5$ & $\textbf{0,1}$ \\ 
   c & $2x2x100$ & $2.5$ & $\textbf{0-100}\%$ & $5$ & $5$ & $1$ \\ 
   d & $\textbf{(2x2,2x3,3x3)x100}$ & $2.5$ & $80\%$ & $5$ & $5$ & $\textbf{1-5}$ \\ 
-  e & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $5$ & $1$ \\ 
+  e & $2x2x50$ & $2.5$ & $\textbf{80\% , 99+\%}$ & $5$ & $5$ & $1$ \\ 
  \end{tabularx}
 \end{table}
 
 We first present a baseline experiment with uniform background stimulus to illustrate wave behavior. 
 The firing events in the experiment are plotted in Figure \ref{fig:baseline}.
-We note the visually weel-defined traveling waves in the column, with waves being consistently initiated from approximate column positions 15, 32, 52, 70 and 90.
-The waves proapgate until they interact with another traveling wave or reach the ends of the column.
+We note the visually well-defined traveling waves in the column, with waves being consistently initiated from approximate column positions 15, 32, 52, 70 and 90.
+The waves propagate until they interact with another traveling wave or reach the ends of the column.
 We observe that traveling waves annihilate each other when they meet.
 The annihilation effects can be explained by the refractory period of the neurons.
 Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
@@ -295,44 +295,32 @@ Increasing the inter-neuron actiona potential delay slows the traveling wave pro
 Waves travel faster in columns with larger cross-sections. 
 
 \subsection{Wave Initiation} \label{sub:wave_initiation}
-It appears that columns have preferential wave initiation sites.
-Figure \ref{fig:wave_initiation} shows all the wave initiation sites for 100 simulations of a column.
-It is clear that traveling waves are more likely to begin at certain regions in the column.
+We have observed preferential wave initiation sites in our experiments.
+To understand the initiation mechanisms in our column model we first examine connectivity.
+Figure \ref{fig:initiation_baseline} shows the firing of a typical column compared to the same column with all inter-neuron connections removed.
+The unconnected column is stimulated with a different draw of the random background stimulus.
+The unconnected column shows regions with higher firing activity that correspond to initiation sites in the connected column.
+This indicates that the preferential firing sites are likely related to individual neuron dynamics and not inter-neuron connectivity.
 \begin{figure}[!htb]
- \caption{Wave initiation sites, 100 trials with randomized exciation. Initation events are shown in the left figure. A histogram of initiation positions for all waves is shown on the right.}
- \label{fig:wave_initiation}
+ \caption{Left: A typical column experiment showing preferential wave initiation near $Z=8$ and $Z=35$. Center: the same column with all inter-neuron connections removed. Right: Histogram of firing events by Z position in the disconnected column.}
+ \label{fig:initiation_baseline}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/InitiationSites_100sims}
-\end{figure}
-We are currently unable to explain the preferential initiation sites in term of connectivity or excitatory/inhibitory balance. 
-
-We also observed that, when generating traveling waves from a step stimulus that certain sections of the column showed a higher density of firing activity.
-An example measurement of the firing density is shown in Figure \ref{fig:wave_density}.
-\begin{figure}[!htb]
- \caption{Density of firing events in a traveling wave initiated from a step stimulus. The traveling wave is shown on the left, a histogram of firing events by position is shown on the right.}
- \label{fig:wave_density}
- \centering
-   \includegraphics[width=0.75\textwidth]{fig/ImpulseWaveDensity}
+   \includegraphics[width=\textwidth]{fig/InitiationBaseline}
 \end{figure}
 
-While examining the preferntial wave initiation sites emerging from random stimulus we discovered a correlation to the firing density observed in the same columns under step simulus.
-The wave initiation sites and wave density of the same column are shown in figure \ref{fig:initiation_density}.
+The $b$ parameter in the Izhikevich model sets the firing threshold of the individual neurons.
+Per Table \ref{tab:izzy_params} excitatory neurons all have a $b$ parameter of $0.2$, while inhibitory neurons have $b$ parameters in the range $0.2-0.25$.
+Neurons with higher $b$ parameter are easier to excite and therefore more likely to fire.
+To determine whether the preferential firing sites were established by inhibitory neurons with a higher $b$ parameter we simulated a column with only one inhibitory neuron.
+The single inhibitory neuron had the maximum value of $b=0.25$.
+Figure \ref{fig:initiation_pacemaker} demonstrates that the single inhibitory neuron establishes the traveling waves in the column.
 \begin{figure}[!htb]
- \caption{Wave initiation (left) and wave density (right) for the same column.}
- \label{fig:initiation_density}
+ \caption{The single low-threshold inhibitory neuron at $Z=20$ is responsible for generating the traveling waves in this experiment. }
+ \label{fig:initiation_pacemaker}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelationHistogram}
+   \includegraphics[width=\textwidth]{fig/PacemakerNeuron}
 \end{figure}
 
-There appears to be an anticorrelation between wave density under a step stimulus and the likelihood of wave initiation under a uniform background stmiulus.
-To test this hypothesis we create 100 columns, applied both background stimulus and step stimulus, and measured the correlation between wave inititation and wave density at the positions of the column (Figure \ref{fig:initiation_density_corr}).
-Although there is substantial variation between columns we measure a consistently negative correlation coefficient (mean -0.18, std 0.20).
-\begin{figure}[!htb]
- \caption{Correlation between wave initiation and wave density.}
- \label{fig:initiation_density_corr}
- \centering
-   \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelation}
-\end{figure}
 
 \section{Discussion}
 We have demonstrated that representative column structures can support traveling waves.
@@ -357,6 +345,10 @@ A four-fold increase in $\kappa$ does not reduce the traveling wave propagation 
 The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
 Real columns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
 The variations in propagation speed could be an important feature of traveling waves in organizing cortical activity.
+
+Our model shows preferential sites for wave initiation due to the presence of inhibitory neurons with low firing thresholds.
+Low-threshold inhibitory neurons in the Izhikevich model represent the low-threshold spiking inhibitory neurons that are found in the cortex \cite{izhikevich2003}\cite{gibson2009}.
+These low-threshold neurons could act as ''pacemakers'' for traveling waves in the cortex, providing spatial and temporal synchronization.
 
 \clearpage
 \printbibliography
