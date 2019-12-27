@@ -1,10 +1,11 @@
 %Process audio files
 clear all; close all;
 
-doplots = 1;
+doplots = 0;
 
 fs = 8e3; %Sample frequency in Hz
 dt = 1e3/fs; %Time step in milliseconds
+tmax = 1000;
 
 addpath('../lsm'); %Neural column code
 data_dir = '../../data/free-spoken-digit-dataset-master/recordings';
@@ -29,7 +30,8 @@ chn = earModel(fs);
 lpf = ones(1,50)./50;
 
 %Pull training/test data for specified digits
-digits = [0,5,9];
+%digits = [0,5,9];
+digits = 0:9;
 for jj=1:length(digits)
    idx = find(digit==digits(jj)); 
    n_train = floor(length(idx)/2);
@@ -40,8 +42,10 @@ end
 
 %Train the perceptron outputs, linear regression
 for jj=1:length(digits)
-    kidx = idxTrain{jj};
-    for kk = 1:1
+    %kidx = idxTrain{jj};
+    disp(['Digit ' num2str(digits(jj))])
+    kidx = find(digit==digits(jj));
+    for kk = 1:length(kidx)
         %Read audio file
         d = audioread( [fnames(kidx(kk)).folder '/' fnames(kidx(kk)).name] );
         if doplots == 1
@@ -61,7 +65,9 @@ for jj=1:length(digits)
             fd = filter(lpf,1,abs(fd));
             fd = fd./max(fd);
             so(:,fidx) = fd;
-            subplot(3,3,fidx); plot(fd);
+            if doplots == 1
+                subplot(3,3,fidx); plot(fd);
+            end
         end
         
         %Stimulate column
@@ -75,23 +81,34 @@ for jj=1:length(digits)
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), ...
             colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
             colStruct.delays, st);
-        figure; plot(firings(:,1)./1000,firings(:,2),'k.');
+        if doplots == 1
+            figure; plot(firings(:,1)./1000,firings(:,2),'k.');
+        end
+        
         
         for fidx=0:colStruct.nCols-1
-            idx = colStruct.csec(firings(:,2))==fidx;
-            f = firings(idx,:);
-            %fc{jj+1} = f;
-            figure(30+jj); 
-            subplot(1,colStruct.nCols,fidx+1);
-            plot(f(:,1)./1000, floor(f(:,2)/colStruct.Nlayer),'k.');
-            axis([0 max(t)/1000 0 colStruct.structure.layers] ); set(gca, 'XTickLabel',[]);
-            text(0.9,80,['COl #=' num2str(fidx)],'BackgroundColor', 'White')
+            if doplots == 1
+                idx = colStruct.csec(firings(:,2))==fidx;
+                f = firings(idx,:);
+                %fc{jj+1} = f;
+                figure(30+jj); 
+                subplot(1,colStruct.nCols,fidx+1);
+                plot(f(:,1)./1000, floor(f(:,2)/colStruct.Nlayer),'k.');
+                axis([0 max(t)/1000 0 colStruct.structure.layers] ); set(gca, 'XTickLabel',[]);
+                text(0.9,80,['COl #=' num2str(fidx)],'BackgroundColor', 'White')
+            end
         end
         
         %Record average firing rate at end of digit per column
+        [avgFireRates, smoothedFires] = columnFiringRate( colStruct, firings, t, tmax );
+        afr{jj,kk} = avgFireRates;
+        sfr{jj,kk} = smoothedFires;
+        
     end
 end
 %Train perceptron on data
+sf = sfr{1};
+figure; plot(sf(1,:));
 
 %Evaluate the test data
 for jj=1:length(digits)

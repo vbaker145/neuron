@@ -9,8 +9,8 @@ structure.width = 2;
 structure.height = 2;
 structure.nWide = 3;
 structure.nHigh = 3;
-structure.columnSpacing = 20;
-structure.layers = 30;
+structure.columnSpacing = 8;
+structure.layers = 40;
 structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
 
