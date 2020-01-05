@@ -25,20 +25,11 @@ idx_jackson_digit0 = find( contains(spkr, "jackson") & digit==0 );
 
 %Make a column ensemble to process the audio data 
 colStruct = makeAudioColumnEnsemble();
-stimStrength = 6;
+stimStrength = 4;
 chn = earModel(fs);
 lpf = ones(1,50)./50;
 
-%Pull training/test data for specified digits
-%digits = [0,5,9];
 digits = 0:9;
-for jj=1:length(digits)
-   idx = find(digit==digits(jj)); 
-   n_train = floor(length(idx)/2);
-   n_test = n_train;
-   idxTrain{jj} = idx ( floor(rand(1,n_train)*length(idx))+1 );
-   idxTest{jj} = idx( floor(rand(1,n_test)*length(idx))+1 ); 
-end
 
 %Train the perceptron outputs, linear regression
 for jj=1:length(digits)
@@ -81,9 +72,6 @@ for jj=1:length(digits)
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), ...
             colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
             colStruct.delays, st);
-        if doplots == 1
-            figure; plot(firings(:,1)./1000,firings(:,2),'k.');
-        end
         
         
         for fidx=0:colStruct.nCols-1
@@ -91,7 +79,7 @@ for jj=1:length(digits)
                 idx = colStruct.csec(firings(:,2))==fidx;
                 f = firings(idx,:);
                 %fc{jj+1} = f;
-                figure(30+jj); 
+                figure(30); 
                 subplot(1,colStruct.nCols,fidx+1);
                 plot(f(:,1)./1000, floor(f(:,2)/colStruct.Nlayer),'k.');
                 axis([0 max(t)/1000 0 colStruct.structure.layers] ); set(gca, 'XTickLabel',[]);
@@ -100,32 +88,16 @@ for jj=1:length(digits)
         end
         
         %Record average firing rate at end of digit per column
-        [avgFireRates, smoothedFires] = columnFiringRate( colStruct, firings, t, tmax );
+        [avgFireRates, smoothedFires, sout] = columnFiringRate( colStruct, firings, so, t, tmax );
         afr{jj,kk} = avgFireRates;
         sfr{jj,kk} = smoothedFires;
+        audioStim{jj,kk} = sout';
         
     end
 end
+
 %Train perceptron on data
-sf = sfr{1};
-figure; plot(sf(1,:));
-
-%Evaluate the test data
-for jj=1:length(digits)
-    for kk = 1:length(idxTest{jj})
-        %Read audio file
-        
-        %Process into 9 frequency regions for stimulus
-        
-        %Stimulate column
-        
-        %Record average firing rate at end of digit per column
-        
-        %Recognize with perceptron
-    end
-end
-%Evaluate recognition accuracy
-
+[mdl X Y] = trainAudioClassifier(sfr);
 
 % idx_digit0 = idxTrain{1};
 % idx = idx_digit0(end);

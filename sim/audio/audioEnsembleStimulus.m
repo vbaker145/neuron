@@ -17,7 +17,9 @@ st = zeros(N_per_layer, length(t));
 st = zeros(N, length(t));
 for jj=1:N_cols
     idx = find(colID(1:N_per_layer*4)==(jj-1));
-    st(idx, :) = stimStrength.*repmat(stimVals(:,jj)', length(idx),1);
+    sv = bsa(stimVals(:,jj));
+    st(idx, :) = stimStrength.*repmat(sv', length(idx),1);
+    %st(idx, :) = stimStrength.*repmat(stimVals(:,jj)', length(idx),1);
     %st(idx, :)= repmat(stimStrength*sin(2*pi*stimFrq.*(t/1000)+phs),length(idx),1);
 end
 

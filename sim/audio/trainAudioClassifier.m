@@ -1,4 +1,4 @@
-function [mdl X Y] = trainAudioClassifier( sfr )
+function [mdl cm X Y] = trainAudioClassifier( sfr )
 
 sf1 = sfr{1,1};
 [nClass nData] = size(sfr); 
@@ -35,7 +35,13 @@ for jj=1:nClass
     hold on; plot(pv,'ro');
 end
 
-
-
+cm = zeros(nClass, nClass);
+for jj=1:nClass
+   Y_d = Y==jj;
+   
+   for kk=1:nClass
+      pv = predict(mdl{kk}, X); 
+   end
+end
 end
 
