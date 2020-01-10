@@ -9,7 +9,7 @@ structure.width = 2;
 structure.height = 2;
 structure.nWide = 3;
 structure.nHigh = 3;
-structure.columnSpacing = 12;
+structure.columnSpacing = 10;
 structure.layers = 40;
 structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
@@ -31,8 +31,9 @@ N = Nlayer*structure.layers;
 [a,b,c,d, S, delays, ecn, csec] = makeColumnEnsemble(structure, connectivity, delay);
 
 %Modify for audio processing
-a = a+0.01;
-b = b+0.005;
+a = a+rand(size(a))*0.06;
+%b = b+0.005;
+%c = c+10;
 
 colStruct = struct('structure',structure, 'connectivity', connectivity, ...
     'delay',delay, 'a',a,'b',b,'c',c,'d',d,'S',S, 'delays',delays,...

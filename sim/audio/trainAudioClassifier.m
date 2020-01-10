@@ -1,4 +1,4 @@
-function [mdl cm X Y] = trainAudioClassifier( sfr )
+function [mdl X Y md fa] = trainAudioClassifier( sfr )
 
 sf1 = sfr{1,1};
 [nClass nData] = size(sfr); 
@@ -29,19 +29,14 @@ for jj=1:nClass
     
     pv = predict(mdl{jj}, X);
     nClassPts = sum(Y_d);
-    fa = length( find(pv' == 1 & Y_d == 0) )/(length(Y) -nClassPts)
-    md = length( find(pv' == 0 & Y_d == 1) )/nClassPts
-    figure; plot(Y_d,'x'); 
-    hold on; plot(pv,'ro');
+    fa(jj) = length( find(pv' == 1 & Y_d == 0) )/(length(Y) -nClassPts)
+    md(jj) = length( find(pv' == 0 & Y_d == 1) )/nClassPts
+    %figure; plot(Y_d,'x'); 
+    %hold on; plot(pv,'ro');
 end
 
-cm = zeros(nClass, nClass);
-for jj=1:nClass
-   Y_d = Y==jj;
-   
-   for kk=1:nClass
-      pv = predict(mdl{kk}, X); 
-   end
-end
+figure; plot(0:9, 1-md, 'k.-'); hold on; plot(0:9, fa, 'r.-')
+xlabel('Spoken digit'); ylabel('% of all trials');
+legend('Correct classification %', 'False alarm %' );
 end
 

@@ -1,7 +1,7 @@
 %Process audio files
 clear all; close all;
 
-doplots = 0;
+doplots = 1;
 
 fs = 8e3; %Sample frequency in Hz
 dt = 1e3/fs; %Time step in milliseconds
@@ -25,7 +25,7 @@ idx_jackson_digit0 = find( contains(spkr, "jackson") & digit==0 );
 
 %Make a column ensemble to process the audio data 
 colStruct = makeAudioColumnEnsemble();
-stimStrength = 4;
+stimStrength = 3;
 chn = earModel(fs);
 lpf = ones(1,50)./50;
 
@@ -48,16 +48,16 @@ for jj=1:length(digits)
         %Process into 9 frequency regions for stimulus
         if doplots == 1
            figure(20); clf;
-           subplot(3,3,1); hold on;
+           subplot(1,9,1); hold on;
         end
         so = [];
         for fidx = 1:9
             fd = filter(chn(:,fidx),1,d);
             fd = filter(lpf,1,abs(fd));
-            fd = fd./max(fd);
+            %fd = fd./max(fd);
             so(:,fidx) = fd;
             if doplots == 1
-                subplot(3,3,fidx); plot(fd);
+                subplot(1,9,fidx); plot(fd);
             end
         end
         
@@ -92,12 +92,13 @@ for jj=1:length(digits)
         afr{jj,kk} = avgFireRates;
         sfr{jj,kk} = smoothedFires;
         audioStim{jj,kk} = sout';
+        rfs{jj,kk} = firings;
         
     end
 end
 
 %Train perceptron on data
-[mdl X Y] = trainAudioClassifier(sfr);
+[mdl X Y md fa] = trainAudioClassifier(sfr);
 
 % idx_digit0 = idxTrain{1};
 % idx = idx_digit0(end);
