@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons] = makeColumn(structure, connectivity, delay)
+function [a,b,c,d, S, delays, excNeurons, pos] = makeColumn(structure, connectivity, delay)
 
 width = structure.width;
 height = structure.height;
@@ -40,6 +40,9 @@ xv = (0:width-1);
 yv = (0:height-1);
 zv = (0:layers-1);
 [x,y,z] = meshgrid(xv,yv,zv);
+pos.x = x; 
+pos.y = y;
+pos.z = z;
 
 x = x(:); y = y(:); z = z(:);
 x = x+displacement*(rand(size(x))-0.5);
