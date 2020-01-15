@@ -17,12 +17,12 @@ structure.displacement = 0;
 
 connectivity.percentExc = 1.0;
 connectivity.connType = 1;
-connectivity.lambda = 2.5;
-connectivity.connStrength = 8;
+connectivity.lambda = 3.5;
+connectivity.connStrength = 9;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
-delay.delayMult = 2;
+delay.delayMult = 3;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 delay.delayFrac = 1;

@@ -58,7 +58,8 @@ if doplot == 1
     map = colormap('jet');
 end
 
-connections = zeros(length(x), length(x));
+%connections = zeros(length(x), length(x));
+connections = spalloc(length(x), length(x), 1000);
 
 if percentExc <= 1.0
     rtype = rand(n,1);
@@ -81,7 +82,8 @@ c(excNeurons) = -65+10*rand(nExc,1).^2; c(inNeurons) = -65;
 d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
-delays = zeros(n);
+%delays = zeros(n);
+delays = spalloc(n,n,1000);
 dmax = layers;
 
 %Synaptic weights
@@ -130,23 +132,25 @@ for jj=1:length(x)
                     cm = map(floor(didx*size(map,1)),:);  
                     line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
                 end
-            end
-            
-            if delayType == 1
-                if rand() < delayFrac
-                    delays(jj,kk) = floor(dis*delayMult/dt);
+                
+                %Set delay
+                if delayType == 1
+                    if rand() < delayFrac
+                        delays(jj,kk) = floor(dis*delayMult/dt);
+                    else
+                        delays(jj,kk) = floor(2/dt);
+                    end
+                elseif delayType == 2
+                    delays(jj,kk) = floor(delayMult/dt);
                 else
-                    delays(jj,kk) = floor(2/dt);
-                end
-            elseif delayType == 2
-                delays(jj,kk) = floor(delayMult/dt);
-            else
-                delays(jj,kk) = floor(delayMult*rand()/dt)+1;
-            end
-            
-        end
-    end
-end
+                    delays(jj,kk) = floor(delayMult*rand()/dt)+1;
+                end %End set delay
+                
+            end %End if cp is true
+        end %End if dis>0 (not same neuron)
+        
+     end %End for kk
+end %end for jj
 
 if doplot == 1
     title(['Connections, lambda=' num2str(lambda)]);

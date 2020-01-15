@@ -9,7 +9,7 @@ dt = 2; %Milliseconds/tenth second
 hf = figure(10);
 set(hf, 'Position', [50 50 800 800]);
 
-vw = VideoWriter('Waves2D');
+vw = VideoWriter('Waves2D_99Exc');
 open(vw);
 
 for tt=0:dt:tmax
