@@ -2,7 +2,7 @@
 clear; close all;
 width = 2;
 height = 2;
-layers = 40;
+layers = 20;
 N = width*height*layers;
 
 tmax = 2000;
@@ -15,9 +15,9 @@ structure.height = height;
 structure.layers = layers;
 structure.displacement = 0;
 
-connectivity.percentExc = 1.0;
+connectivity.percentExc = 0.8;
 connectivity.connType = 1;
-connectivity.lambda = 3.5;
+connectivity.lambda = 2.5;
 connectivity.connStrength = 9;
 connectivity.maxLength = 100;
 
@@ -27,7 +27,7 @@ delay.delayFrac = 1.0;
 delay.dt = dt;
 delay.delayFrac = 1;
 
-stimStrength = 5;
+stimStrength = 4;
 
 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
 
@@ -35,6 +35,13 @@ stimStrength = 5;
 st = zeros(N, size(t,2));
 st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
 st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
+%Stimulus
+sidx = 1;
+stimStart = floor(1100/dt);
+stimDuration = floor(20/dt);
+stimDepth = 5;
+st(sidx:stimDepth*(sidx+width*height),stimStart:(stimStart+stimDuration))= 5;
+
 sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 
 vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
@@ -55,10 +62,11 @@ connectivity.percentExc = 15*structure.width*structure.height; %Single LTS inhib
 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
 
 %Background, corrected for dt
-st = zeros(N, size(t,2));
-st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
-st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
-sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
+% st = zeros(N, size(t,2));
+% st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
+% st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
+% sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
+% 
 
 vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
 uinit=b.*vinit;                 % Initial values of u

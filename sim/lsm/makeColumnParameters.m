@@ -32,7 +32,7 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 0;
+doplot = 1;
 
 n = width*height*layers;
 
@@ -50,7 +50,7 @@ y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
 if doplot == 1
-    figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
+    figure(100); scatter3(x,y,z,50, 'black','filled')
     hold on;
 end
 
@@ -84,7 +84,9 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 %Synaptic delays
 %delays = zeros(n);
 delays = spalloc(n,n,1000);
-dmax = layers;
+
+%dmax = layers;
+dmax = 2*lambda;
 
 %Synaptic weights
 for jj=1:length(x)
@@ -156,7 +158,6 @@ if doplot == 1
     title(['Connections, lambda=' num2str(lambda)]);
     axis equal;
     set(gcf, 'pos', [0 0 600 800]);
-    subplot(1,2,2); hold on; imagesc(connections);
 end
 
 S = connections;
