@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons, pos] = makeColumn(structure, connectivity, delay)
+function [a,b,c,d, S, delays, excNeurons, pos] = makeColumnParameters(structure, connectivity, delay)
 
 width = structure.width;
 height = structure.height;
@@ -32,7 +32,7 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 1;
+doplot = 0;
 
 n = width*height*layers;
 

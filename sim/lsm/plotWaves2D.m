@@ -1,5 +1,8 @@
-function mv = plotWaves2D( f, pos )
+function mv = plotWaves2D( f, pos, fname )
 
+if nargin < 3
+    fname = 'Waves2D';
+end
 x = pos.x; y = pos.y;
 
 tmax = max(f(:,1));
@@ -9,7 +12,7 @@ dt = 2; %Milliseconds/tenth second
 hf = figure(10);
 set(hf, 'Position', [50 50 800 800]);
 
-vw = VideoWriter('Waves2D_99Exc');
+vw = VideoWriter(fname);
 open(vw);
 
 for tt=0:dt:tmax
