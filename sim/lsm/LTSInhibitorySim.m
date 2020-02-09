@@ -2,7 +2,7 @@
 clear; close all;
 width = 2;
 height = 2;
-layers = 20;
+layers = 200;
 N = width*height*layers;
 
 tmax = 2000;
@@ -17,7 +17,7 @@ structure.displacement = 0;
 
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
-connectivity.lambda = 2.5;
+connectivity.lambda = 3.5;
 connectivity.connStrength = 9;
 connectivity.maxLength = 100;
 
