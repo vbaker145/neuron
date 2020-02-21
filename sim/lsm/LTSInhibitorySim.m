@@ -2,7 +2,7 @@
 clear; close all;
 width = 2;
 height = 2;
-layers = 20;
+layers = 40;
 N = width*height*layers;
 
 tmax = 2000;
@@ -15,19 +15,19 @@ structure.height = height;
 structure.layers = layers;
 structure.displacement = 0;
 
-connectivity.percentExc = 0.8;
+connectivity.percentExc = 1.0;
 connectivity.connType = 1;
-connectivity.lambda = 2.5;
+connectivity.lambda = 3;
 connectivity.connStrength = 9;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
-delay.delayMult = 3;
+delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 delay.delayFrac = 1;
 
-stimStrength = 4;
+stimStrength = 4.5;
 
 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
 
@@ -40,7 +40,7 @@ sidx = 1;
 stimStart = floor(1100/dt);
 stimDuration = floor(20/dt);
 stimDepth = 5;
-st(sidx:stimDepth*(sidx+width*height),stimStart:(stimStart+stimDuration))= 5;
+st(sidx:stimDepth*(sidx+width*height),stimStart:(stimStart+stimDuration))= 8;
 
 sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 

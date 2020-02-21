@@ -6,7 +6,7 @@ layers = 1;
 N = width*height*layers;
 
 tmax = 2000;
-dt = 0.4;
+dt = 0.2;
 t = 0:dt:tmax;
 
 %Column parameters
@@ -17,7 +17,7 @@ structure.displacement = 0;
 
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
-connectivity.lambda = 3.5;
+connectivity.lambda = 4;
 connectivity.connStrength = 6;
 connectivity.maxLength = 100;
 
@@ -49,7 +49,7 @@ set(gca, 'FontSize', 12);
 
 %% Same test, single LTS inhibitory neuron
 
-connectivity.percentExc = 0.5*structure.width*structure.height; %Single LTS inhibitory neuron
+connectivity.percentExc = 0.25*structure.width*structure.height+0.5*structure.height; %Single LTS inhibitory neuron
 %connectivity.connStrength = 12;
 
 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -66,7 +66,7 @@ uinit=b.*vinit;                 % Initial values of u
 [v, vall, u, uall, firingsLTS] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, sti);
 
 figure(30); subplot(1,2,2); 
-plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+plot(firingsLTS(:,1)./1000, firingsLTS(:,2)/(width*height),'k.');
 xlabel('Time (seconds)'); ylabel('Z position');
 set(gca, 'FontSize', 12);
 

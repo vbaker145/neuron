@@ -30,8 +30,6 @@ Our neural circuits contain a mix of neuron types representative of the neurons 
 We observe traveling waves consistent with previous experiments and simulations.
 Low-threshold-spiking inhibitory neurons are shown to create spatially synchronized traveling waves.
 We demonstrate that this synchronization mechanism... (need to propose and test a function for LTS spatial synchronization)
-
-
 \end{abstract}
 
 \section{Introduction} 
@@ -39,10 +37,10 @@ Neurons in the brain that fire sequentially can spread their firings to neighbor
 These travelling waves have been observed in the cortex of mammalian brains as well as in vitro, and subsequently have been reproduced in silico \cite{keane2015}. 
 While the function of travelling waves is unknown, proposed functions include motor coordination, place field coordination in the hippocampus, and spatiotemporal processing in the visual cortex \cite{muller2018}. 
 
-
-
 In this work we explore the dynamics of traveling waves in neural circuits with both one and two dimensions.
+Our circuits are comprised of neuron models that represent typical cortical neurons including regular spiking excitatory neurons, fast spiking inhibitory neurons, and low-threshold spiking inhibitory neurons.
 In both types of circuits we observe traveling waves and show that low-threshold spiking (LTS) inhibitory neurons can spatially synchronize traveling wave activity.
+
 
 
 \section{Methods}
@@ -52,11 +50,18 @@ The column neurons are arranged on a unit spacing with the long dimension of the
 The column is 2 neurons wide in both the X and Y directions.
 Our two-dimensional circuit is a planar arrangement of neurons on a unit grid.
 An example neural column composed of 135 neurons on a unit grid spacing, 3x3 neurons wide and 15 neurons high as shown in figure \ref{fig:column_structure}.
-\begin{figure}[!htb]
- \caption{Example column structure used in this research, $\lambda=2.5$,$C=1$. The left image shows the connections between neurons in the column, the color scale indicates connection length. The right image shows inter-neuron connectivity for excitatory connections (green) and inhibitoruy connections (red).}
+\begin{figure}[!ht]
+ \caption{ The left image shows a 1-D coumn structure, the right image shows a 2-D planar structure. The connections are color-coded by length.}
  \label{fig:column_structure}
  \centering
-   \includegraphics[width=\textwidth]{fig/lambda2}
+    \begin{subfigure}[b]{0.4\textwidth}
+      \centering
+      \includegraphics[height=2in]{fig/1D_Connection_Plot}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+      \centering
+      \includegraphics[height=2in]{fig/2D_Connection_Plot}
+    \end{subfigure}
 \end{figure}
 
 In both types of circuit the neurons are connected with a strong local connectivity according to the distance-based connection probability:
@@ -77,7 +82,7 @@ This model has been used to reproduce common neural firing patterns.
 There is MATLAB code available \cite{izzy_code} that implements this neural model with fixed, single-time-step action potential propagation.
 The model parameters for excitatory and inhibitory neurons are shown in Table \ref{tab:izzy_params}.
 We define $\mathcal{U}\{a,b \}$ as a uniform random variable drawn on $[ a,b ] $.
-\begin{table}[!h]
+\begin{table}[!ht]
  \caption{Izhekevich model parameters}
  \label{tab:izzy_params}
  \centering
@@ -90,6 +95,9 @@ We define $\mathcal{U}\{a,b \}$ as a uniform random variable drawn on $[ a,b ] $
   d & 8-$\mathcal{U}(0,6)$& 2 \\
  \end{tabular}
 \end{table}
+The distribution of model parameters represents the different types of neurons found in the cortex.
+The excitatory neuron parameters create a mix of regular spiking, intrinsically bursting and chattering behavior.
+The inhibitory neuron parameters create a mix of low-threshold spiking and fast spiking behavior \cite{izhikevich2003}.
 
 In the Izhikevich model when a neuron fires the action potential propagates to the target neuron at the next time step.
 The action potential from the firing neuron is added to the target neuron current $I$ (Eq \ref{eq:neuron_v}).
@@ -123,27 +131,8 @@ The uniform background stimulus is:
 \end{align}
 The parameter $M$ is used to adjust the overal strength of the stimulus, $M=1$ corresponds to the original model in \cite{izzy_code}.
 
-
 \section{Results}
 
-
-\begin{table}[!htb]
- \caption{Model parameters used in the experiments in each subsection}
- \label{tab:experiment_params}
- \centering
- \begin{tabularx}{\textwidth}{l | X | c | c | c | c | c | r}
-  \textbf{Section} & \textbf{Topology} & \textbf{$\lambda$} & \textbf{E/I} & \textbf{M} & \textbf{K} & \textbf{$\kappa$} \\
-  \hline
-  Baseline & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $5$ & $1$ \\ 
-  a & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $\textbf{2-6}$ & $1$ \\ 
-  b & $2x2x100$ & $\infty$ & $80\%$ & $5$ & $5$ & $\textbf{0,1}$ \\ 
-  c & $2x2x100$ & $2.5$ & $\textbf{0-100}\%$ & $5$ & $5$ & $1$ \\ 
-  d & $\textbf{(2x2,2x3,3x3)x100}$ & $2.5$ & $80\%$ & $5$ & $5$ & $\textbf{1-5}$ \\ 
-  e & $2x2x50$ & $2.5$ & $\textbf{80\% , 99+\%}$ & $5$ & $5$ & $1$ \\ 
- \end{tabularx}
-\end{table}
-
-\subsection{Wave Initiation and Density} \label{sub:wave_initiation}
 We have observed preferential wave initiation sites in our experiments.
 To understand the initiation mechanisms in our column model we first examine connectivity.
 Figure \ref{fig:initiation_baseline} shows the firing of a typical column compared to the same column with all inter-neuron connections removed.
@@ -208,29 +197,6 @@ The wave density at $Z=40$ is the minimum density within the traveling wave, con
 
 
 \section{Discussion}
-We have demonstrated that representative column structures can support traveling waves.
-Various parameters determine traveling wave formation and propagation including the connectivity, connection strength, excitatory/inhibitory balance and action potential propagation delay.
-Columns with local connectivity support traveling waves, consistent with other simulations and experimental studies of cortical traveling waves.
-We have also shown that even a fully-connected column exhibits traveling waves if the action potential propagation time depends on the inter-neuron distance. 
-
-Traveling waves in neurons have previously been analyzed as a set of coupled local oscillators.
-Although the Izhikevich model is capable of producing self-resonant oscillations when tuned appropriately, the model parameters used in this work did not show any evidence of self-oscillation.
-The waves studied in the present work seem to fall instead into the general category of propagating pulses in an excitable network described in \cite{ermentrout2001}. 
-
-In \cite{muller2018} the authors noted that mesoscopic traveling waves typically have propagation speeds from 0.1 to 0.8 meters per second, consistent with axonal conduction speed of unmyelinated fibers.
-Our linear model of synpatic conduction delay is linear with inter-neuron distance, with a porportionality constant $\kappa$.
-We expected longer synaptic conduction delays to result in slower wave propagation.
-The column topology can also influence the propagation speed.
-Columns with a larger cross-section have a larger number of neurons and synapses for a given length, providing more pathways for the traveling wave to propagate.
-The propagation delay parameter $\kappa$ does effect the wave propagation as expected, but the effect is not linear.
-If the traveling wave velocity was determined by the action potential propagation speed we would expect to see wave velocity of 1000 units/second with $\kappa=1$.
-Instead the wave velocity is less than half the simple prediction (Figure \ref{fig:delay_topology}).
-A four-fold increase in $\kappa$ does not reduce the traveling wave propagation speed by a factor of 4. 
-
-The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
-Real columns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
-The variations in propagation speed could be an important feature of traveling waves in organizing cortical activity.
-
 Our model shows preferential sites for wave initiation due to the presence of inhibitory neurons with low spiking thresholds.
 Low-threshold inhibitory neurons in the Izhikevich model represent the low-threshold spiking inhibitory neurons that are found in the cortex \cite{izhikevich2003}\cite{gibson2009}.
 These low-threshold neurons could act as ''pacemakers'' for traveling waves in the cortex, providing spatial and temporal synchronization.
