@@ -1,7 +1,7 @@
 %% Set up base column
 clear; close all;
-width = 100;
-height = 100;
+width = 300;
+height = 300;
 layers = 1;
 N = width*height*layers;
 
@@ -15,14 +15,14 @@ structure.height = height;
 structure.layers = layers;
 structure.displacement = 0;
 
-connectivity.percentExc = 1.0;
+connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 3.5;
 connectivity.connStrength = 6;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
-delay.delayMult = 1.0;
+delay.delayMult = 0.25;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 delay.delayFrac = 1;
@@ -36,8 +36,11 @@ stimStrength = 4;
 [a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay);
 
 %Make %5 of the neurons LTS
-lts_type = rand(N,1);
-b(lts_type < 0.05) = 0.25;
+%lts_type = rand(N,1);
+%b(lts_type < 0.05) = 0.25;
+
+%EVERYBODY IS LTS!
+%b(:) = 0.25;
 
 st = zeros(N, size(t,2));
 st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);

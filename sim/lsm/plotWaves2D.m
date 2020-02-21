@@ -13,6 +13,7 @@ v_dt = dt/sim_dt;
 hf = figure(10);
 set(hf, 'Position', [50 50 1600 800]);
 subplot(1,2,1); xlabel('X'); ylabel('Y');
+axis([min(pos.x(:)) max(pos.x(:)) min(pos.y(:)) max(pos.y(:))])
 subplot(1,2,2); xlabel('X'); ylabel('Y');
 
 % vf = figure(20);
@@ -28,9 +29,9 @@ open(vw);
 for tt=0:dt:tmax
    fwin = find(f(:,1)>tt & f(:,1)<tt+dt);
    fev = f(fwin,:);
-   figure(10); subplot(1,2,1);
+   subplot(1,2,1);
    plot(x(fev(:,2)), y(fev(:,2)), 'k.');
-   axis([min(pos.x(:)) max(pos.x(:)) min(pos.y(:)) max(pos.y(:))])
+   
    
    %Plot membrane voltage
    ts = floor(tt/sim_dt)+1;
@@ -42,7 +43,7 @@ for tt=0:dt:tmax
    
    imagesc(x(:,1), y(:,1), vt); colorbar;
    set(gca, 'YDir', 'Normal'); caxis([-70 -40]);
-   hold on; plot(x(ecn) );
+   %hold on; plot(x(ecn) );
    title(['T =' num2str(tt)]);
    drawnow
    writeVideo(vw, getframe(gcf));
