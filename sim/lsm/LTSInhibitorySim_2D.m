@@ -1,7 +1,7 @@
 %% Set up base column
 clear; close all;
-width = 60;
-height = 60
+width = 300;
+height = 300;
 layers = 1;
 N = width*height*layers;
 
@@ -22,16 +22,26 @@ connectivity.connStrength = 6;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
-delay.delayMult = 2;
+delay.delayMult = 0.25;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 delay.delayFrac = 1;
 
-stimStrength =4;
+stimStrength = 4;
+
+
+
+%% Excitatory column
 
 [a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay);
 
-%Background, corrected for dt
+%Make %5 of the neurons LTS
+%lts_type = rand(N,1);
+%b(lts_type < 0.05) = 0.25;
+
+%EVERYBODY IS LTS!
+%b(:) = 0.25;
+
 st = zeros(N, size(t,2));
 st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
 st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
@@ -48,25 +58,25 @@ xlabel('Time (seconds)'); ylabel('Z position');
 set(gca, 'FontSize', 12);
 
 %% Same test, single LTS inhibitory neuron
-
-connectivity.percentExc = 0.25*structure.width*structure.height+0.5*structure.height; %Single LTS inhibitory neuron
+%connectivity.percentExc = 0.5*structure.width*structure.height + 0.5*structure.height; %Single LTS inhibitory neuron
+%connectivity.percentExc = 0.9;
 %connectivity.connStrength = 12;
 
-[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+%[a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay);
 
 %Background, corrected for dt
 st = zeros(N, size(t,2));
 st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
 st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
-sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
+st = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 
 vinit=-65*ones(N,1)+5*rand(N,1);    % Initial values of v
 uinit=b.*vinit;                 % Initial values of u
 
-[v, vall, u, uall, firingsLTS] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, sti);
+[v, vall2, u, uall, firings2] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
 
 figure(30); subplot(1,2,2); 
-plot(firingsLTS(:,1)./1000, firingsLTS(:,2)/(width*height),'k.');
+plot(firings2(:,1)./1000, firings2(:,2)/(width*height),'k.');
 xlabel('Time (seconds)'); ylabel('Z position');
 set(gca, 'FontSize', 12);
 

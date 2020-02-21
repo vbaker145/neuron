@@ -75,6 +75,9 @@ end
 a = zeros(n,1); b = zeros(n,1); c = zeros(n,1); d = zeros(n,1);
 a(excNeurons) = 0.02; a(inNeurons) = 0.02 + 0.08*rand(nIn,1);
 b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*rand(nIn,1);
+%b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*randi([0,1],nIn,1);
+%b(excNeurons) = 0.2; b(inNeurons) = 0.25;
+
 if percentExc > 1.0
     b(inNeurons) = 0.25; %Single LTS inhibitory neuron
 end
