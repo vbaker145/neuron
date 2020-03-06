@@ -110,7 +110,7 @@ for jj=1:length(x)
         if dis > 0
             %cp = rand() < exp(-(dis/lambda)^2);
             if connType == 1 
-                cp = rand() < exp(-(dis/lambda)^2);
+                cp = rand() < 1.0*exp(-(dis/lambda)^2);
                 if dis>maxLength
                    cp = 0; 
                 end
