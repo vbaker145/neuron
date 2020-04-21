@@ -53,9 +53,9 @@ for jj=0:colStruct.nCols-1
     idx = colStruct.csec(firings(:,2))==jj;
     f = firings(idx,:);
     fc{jj+1} = f;
-    figure(20); 
-    subplot(1,colStruct.nCols,jj+1);
-    plot(f(:,1)./1000, floor(f(:,2)/colStruct.Nlayer),'k.');
+    figure(20); hold on;
+    %subplot(1,colStruct.nCols,jj+1);
+    plot(f(:,1)./1000, floor(f(:,2)/colStruct.Nlayer),'.');
     axis([0 max(t)/1000 0 colStruct.structure.layers] ); 
     text(0.9,80,['COl #=' num2str(jj)],'BackgroundColor', 'White')
     

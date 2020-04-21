@@ -1,0 +1,224 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nty/global}
+    \entry{ascoli2010}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c86ef2b9db69373eb97362bd7ca3d8e5}{%
+           family={Ascoli},
+           family_i={A\bibinitperiod},
+           given={Giorgio\bibnamedelima A.},
+           given_i={G\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=ca177b2b4b8e8ce08428160ec5846282}{%
+           family={Gasparini},
+           family_i={G\bibinitperiod},
+           given={Sonia},
+           given_i={S\bibinitperiod}}}%
+        {{hash=20f2bb62ec8d09c8d258ed2ec75dcbb1}{%
+           family={Medinilla},
+           family_i={M\bibinitperiod},
+           given={Virginia},
+           given_i={V\bibinitperiod}}}%
+        {{hash=93fba7fb9ee41946a5b749a2449edf48}{%
+           family={Migliore},
+           family_i={M\bibinitperiod},
+           given={Michele},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{73c0c224370b50e00432bfd227c2f78c}
+      \strng{fullhash}{b14f8465a9d3b6acb563ad4805f4e4c6}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Neuroscience}
+      \field{title}{Local Control of Postinhibitory Rebound Spiking in CA1 Pyramidal Neuron Dendrites}
+      \field{volume}{30}
+      \field{year}{2010}
+    \endentry
+    \entry{gibson2009}{article}{}
+      \name{author}{3}{}{%
+        {{hash=88bbb6c6bfda8bf9ed20b68cbaa68aa2}{%
+           family={Gibson},
+           family_i={G\bibinitperiod},
+           given={Jay\bibnamedelima R.},
+           given_i={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=69eccdd5cfd92647ad58ab1bc15e3c5a}{%
+           family={Beierlein},
+           family_i={B\bibinitperiod},
+           given={Michael},
+           given_i={M\bibinitperiod}}}%
+        {{hash=730d100d83724bea9a9ef0f3dd3fe3c5}{%
+           family={Connors},
+           family_i={C\bibinitperiod},
+           given={Barry\bibnamedelima W.},
+           given_i={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{4526d99624818e4468095c280d3fda2f}
+      \strng{fullhash}{4526d99624818e4468095c280d3fda2f}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{title}{Two networks of electrically coupled inhibitory neurons in neocortex}
+      \field{volume}{402}
+      \field{year}{2009}
+    \endentry
+    \entry{izzy_code}{online}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labeltitlesource}{title}
+      \field{title}{Izhikevich MATLAB simulation}
+      \verb{url}
+      \verb https://www.izhikevich.org/publications/net.m
+      \endverb
+    \endentry
+    \entry{izhikevich2003}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9642cfda6bc53fb41e010a58315a926d}{%
+           family={Izhikevich},
+           family_i={I\bibinitperiod},
+           given={E.},
+           given_i={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{9642cfda6bc53fb41e010a58315a926d}
+      \strng{fullhash}{9642cfda6bc53fb41e010a58315a926d}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Neural Networks}
+      \field{title}{Simple Model of Spiking Neuron}
+      \field{volume}{14}
+      \field{year}{2003}
+    \endentry
+    \entry{izhikevich}{book}{}
+      \name{author}{1}{}{%
+        {{hash=5840121fb5ada6b4dfe65a80cf23b832}{%
+           family={Izhikevich},
+           family_i={I\bibinitperiod},
+           given={Eugene},
+           given_i={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{5840121fb5ada6b4dfe65a80cf23b832}
+      \strng{fullhash}{5840121fb5ada6b4dfe65a80cf23b832}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dynamical Systems in Neuroscience}
+      \field{year}{2007}
+    \endentry
+    \entry{keane2015}{article}{}
+      \name{author}{2}{}{%
+        {{hash=0bac8a757569219ae344c2b47b5b290f}{%
+           family={Keane},
+           family_i={K\bibinitperiod},
+           given={Adam},
+           given_i={A\bibinitperiod}}}%
+        {{hash=5f0aa62a9f688169b1d795919b544236}{%
+           family={Gong},
+           family_i={G\bibinitperiod},
+           given={Pulin},
+           given_i={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{ed935b39573286799411d8ab971a5ff9}
+      \strng{fullhash}{ed935b39573286799411d8ab971a5ff9}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Neuroscience}
+      \field{number}{4}
+      \field{title}{Propagating Waves Can Explain Irregular Neural Dynamics}
+      \field{volume}{35}
+      \field{year}{2015}
+    \endentry
+    \entry{markram1998}{article}{}
+      \name{author}{3}{}{%
+        {{hash=96734e7ca80390b8caf8dcebb3d0a5ac}{%
+           family={Markram},
+           family_i={M\bibinitperiod},
+           given={Henry},
+           given_i={H\bibinitperiod}}}%
+        {{hash=8e448470980462cb6c82de10f864754c}{%
+           family={Wang},
+           family_i={W\bibinitperiod},
+           given={Yun},
+           given_i={Y\bibinitperiod}}}%
+        {{hash=f34a78a1cfd971d87a08ef507b5537a3}{%
+           family={Tsodyks},
+           family_i={T\bibinitperiod},
+           given={Misha},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{d3fab017c674dca322ae17f3e74a11de}
+      \strng{fullhash}{d3fab017c674dca322ae17f3e74a11de}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PNAS}
+      \field{title}{Differential signaling via the same axon of neocortical pyramidal neurons}
+      \field{volume}{95}
+      \field{year}{1998}
+    \endentry
+    \entry{muller2018}{article}{}
+      \name{author}{4}{}{%
+        {{hash=ce7c3b818147f305ad3dea84d0eeef93}{%
+           family={Muller},
+           family_i={M\bibinitperiod},
+           given={Lyle},
+           given_i={L\bibinitperiod}}}%
+        {{hash=fb0f5e8725e747a37f83cfe70319ecfa}{%
+           family={Chavane},
+           family_i={C\bibinitperiod},
+           given={Frederic},
+           given_i={F\bibinitperiod}}}%
+        {{hash=59d69504828c6e2c5c6a95994c82acac}{%
+           family={Reynolds},
+           family_i={R\bibinitperiod},
+           given={John},
+           given_i={J\bibinitperiod}}}%
+        {{hash=c1a5f9ca77bf5edd13d3665aa702769f}{%
+           family={Sejnowski},
+           family_i={S\bibinitperiod},
+           given={Terrence},
+           given_i={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{9f70eceb4cd94411799ad2fc36d73653}
+      \strng{fullhash}{499f7871cce730689b0251afdab59477}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Reviews Neuroscience}
+      \field{title}{Cortical travelling waves: mechanicsms and computational principles}
+      \field{volume}{19}
+      \field{year}{2018}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
