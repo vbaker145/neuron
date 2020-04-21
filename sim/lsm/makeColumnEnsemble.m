@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons, columnLabels] = makeColumnEnsemble(structure, connectivity, delay, plotAx)
+function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, plotAx)
 
 width = structure.width;
 height = structure.height;
@@ -66,6 +66,7 @@ n = length(xPts)*length(yPts)*layers;
 
 zv = (0:layers-1);
 [x,y,z] = meshgrid(xPts,yPts,zv);
+pos.x = x; pos.y = y; pos.z = z;
 
 x = x(:); y = y(:); z = z(:);
 x = x+displacement*(rand(size(x))-0.5);

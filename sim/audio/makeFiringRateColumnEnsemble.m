@@ -5,28 +5,28 @@ function colStruct = makeFiringRateColumnEnsemble(dt)
 %Column parameters
 structure.width = 2;
 structure.height = 2;
-structure.nWide = 2;
-structure.nHigh = 2;
+structure.nWide = 3;
+structure.nHigh = 3;
 structure.columnSpacing = 20;
-structure.layers = 25;
+structure.layers = 20;
 structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
 
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 3.5;
-connectivity.connStrength = 10;
+connectivity.connStrength = 8;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
-delay.delayMult = 0.5;
+delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
 Nlayer = structure.width*structure.nWide*structure.height*structure.nHigh;
 N = Nlayer*structure.layers;
 
-[a,b,c,d, S, delays, ecn, csec] = makeColumnEnsemble(structure, connectivity, delay);
+[a,b,c,d, S, delays, ecn, csec, pos] = makeColumnEnsemble(structure, connectivity, delay);
 
 %Modify for audio processing
 %a = a+rand(size(a))*0.06;
@@ -35,7 +35,8 @@ N = Nlayer*structure.layers;
 
 colStruct = struct('structure',structure, 'connectivity', connectivity, ...
     'delay',delay, 'a',a,'b',b,'c',c,'d',d,'S',S, 'delays',delays,...
-    'ecn', ecn, 'csec',csec, 'N', N, 'nCols', nCols, 'Nlayer', Nlayer );
+    'ecn', ecn, 'csec',csec, 'N', N, 'nCols', nCols, 'Nlayer', Nlayer, ...
+    'pos', pos );
 
 
 end
