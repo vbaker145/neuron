@@ -1,4 +1,4 @@
-function [st, stSpikeTrain] = firingRateEnsembleStimulus( structure, colID, dt, t, nInputPool, firingRate )
+function [st, stSpikeTrain] = firingRateEnsembleStimulus( structure, colID, excN, dt, t, nInputPool, firingRate )
 
 % structure: defines structure of microcolumn ensemble
 % colID - column labels for all neurons
@@ -22,11 +22,12 @@ st = zeros(N, length(t));
 %Connect input pool to 1st layer of column ensemble
 inputConnectivity = rand(nInputPool, N_per_layer );
 inputConnectivity = inputConnectivity<0.5;
+inputConnectivity(~excN(1:N_per_layer)) = 0;
 %inputConnectivity = rand(1,N_per_layer).*inputConnectivity;
 inputConnectivity = 5/2*inputConnectivity;
 
 %Caculate firing events for input pool based on firing rate
-dtStep = 50/dt; 
+dtStep = 10/dt; 
 stSpikes = zeros(nInputPool, length(t));
 stSpikeTrain = []; pidx = 1;
 for tidx = 1:dtStep:length(t)
@@ -34,8 +35,8 @@ for tidx = 1:dtStep:length(t)
         pst =  poissonSpikeTrain( dtStep*dt/1000, firingRate(tidx), dt/1000);
         stSpikes(jj, tidx:tidx+dtStep-1) = conv(pst,synResp,'same');
         stSpikeTrain(jj, pidx) = sum(pst);
-        pidx = pidx+1;
     end
+    pidx = pidx+1;
 end
 
 stSpikes = stSpikes(:,1:length(t) ); %Trim any extra time
