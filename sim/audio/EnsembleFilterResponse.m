@@ -21,7 +21,7 @@ colStruct = makeFiringRateColumnEnsemble(dt);
 %    firingRate(sidx:sidx+floor(100/dt)) = 5;
 % end
 
-firingRate = 4*(sin(2*pi*3.*(t./1000))+1);
+firingRate = 4*(cos(2*pi*3.*(t./1000))+1);
 %firingRate = [15*ones(1,length(t)/2) 30*ones(1,length(t)/2)];
 %firingRate = t./20;
 [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
@@ -46,12 +46,12 @@ stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
 stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
 stB = (interp1(0:tmax, stB(:,1:1/dt:end)', 0:dt:tmax))';
 
-st = stImpulse+stB;
+st = st+stB;
 
-%figure(22); subplot(3,1,1); plot(t,firingRate); %Firing rate graph
-%figure(24); subplot(3,1,1); plot(t,firingRate); 
-figure(22); subplot(3,1,1); plot(t, max(stImpulse));
-figure(24); subplot(3,1,1); plot(t, max(stImpulse));
+figure(22); subplot(3,1,1); plot(t,firingRate); %Firing rate graph
+figure(24); subplot(3,1,1); plot(t,firingRate); 
+%figure(22); subplot(3,1,1); plot(t, max(stImpulse));
+%figure(24); subplot(3,1,1); plot(t, max(stImpulse));
 
 %% Simulate column ensemble
 vinit=-65*ones(colStruct.N,1)+0*rand(colStruct.N,1);    % Initial values of v
@@ -92,11 +92,15 @@ for jj=0:colStruct.nCols-1
 end
 
 % Plot total histograms
-figure(24); 
+figure(22); 
 subplot(3,1,2); hold on;
 hcsSum = sum(hcs); hcsStd = std(hcs);
 hceSum = sum(hce); hceStd = std(hce);
 %errorbar(bins(1:end-1)+binDuration/2, hcsSum, hcsStd);
-plot(bins(1:end-1)+binDuration/2, hcsSum);
+plot(bins(1:end-1)+binDuration/2, hcsSum, 'k');
 subplot(3,1,3); hold on;
-plot(bins(1:end-1)+binDuration/2, hceSum);
+plot(bins(1:end-1)+binDuration/2, hceSum, 'k');
+
+hcsInterp = interp1([0 bins(1:end-1)+binDuration/2 tmax], [0 hcsSum 0], t );
+hceInterp = interp1([0 bins(1:end-1)+binDuration/2 tmax], [0 hceSum 0], t );
+figure; plot(t, hcsInterp); hold on; plot(t, hceInterp, 'k');
