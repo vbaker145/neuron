@@ -21,9 +21,8 @@ colStruct = makeFiringRateColumnEnsemble(dt);
 %    firingRate(sidx:sidx+floor(100/dt)) = 5;
 % end
 
-firingRate = 4*(cos(2*pi*3.*(t./1000))+1);
-%firingRate = [15*ones(1,length(t)/2) 30*ones(1,length(t)/2)];
-%firingRate = t./20;
+%firingRate = 5*(cos(2*pi*3.*(t./1000))+1); %Cosine, positive
+firingRate = 5*(cos(2*pi*4.*(t./1000))+1).^2; %Cosine, raised
 [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
 
 %% Impulse stimulus
@@ -40,7 +39,7 @@ for jj=1:floor(tmax/1000)
 end
 
 %% Background, corrected for dt
-stimStrength = 3;
+stimStrength = 1;
 stB = zeros(colStruct.N, size(t,2));
 stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
 stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
@@ -96,10 +95,13 @@ figure(22);
 subplot(3,1,2); hold on;
 hcsSum = sum(hcs); hcsStd = std(hcs);
 hceSum = sum(hce); hceStd = std(hce);
+ymax = max(hceSum);
 %errorbar(bins(1:end-1)+binDuration/2, hcsSum, hcsStd);
 plot(bins(1:end-1)+binDuration/2, hcsSum, 'k');
+ax = axis; ax(4) = ymax; axis(ax);
 subplot(3,1,3); hold on;
 plot(bins(1:end-1)+binDuration/2, hceSum, 'k');
+ax = axis; ax(4) = ymax; axis(ax);
 
 hcsInterp = interp1([0 bins(1:end-1)+binDuration/2 tmax], [0 hcsSum 0], t );
 hceInterp = interp1([0 bins(1:end-1)+binDuration/2 tmax], [0 hceSum 0], t );
