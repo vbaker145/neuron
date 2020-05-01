@@ -15,7 +15,7 @@ N_per_column = N_per_layer/N_cols;
 %Synaptic response model
 ExpSize = 4;  %Length of synaptic response in milliseconds
 synRespLambda = floor(ExpSize/dt);
-synResp = 3*exp(-((0:synRespLambda-1)./synRespLambda).^2);
+synResp = exp(-((0:synRespLambda-1)./synRespLambda).^2);
 
 st = zeros(N, length(t));
 
