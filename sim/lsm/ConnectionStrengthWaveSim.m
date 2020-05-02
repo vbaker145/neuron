@@ -53,7 +53,8 @@ delay.dt = dt;
         
 pidx=1;
 delayMult = 1;
-connStrength = [2:0.5:6];
+%connStrength = [2:0.5:6];
+connStrength = [2.9:0.05:3.2];
 delay.delayFrac = 1;
 stimStrength = 5;
 figure(20); subplot(1, length(connStrength),1); hold on;
@@ -117,12 +118,21 @@ for kk = 1:length(connStrength)
     end
     waveSize(pidx,:) = [mean(waveSizes) std(waveSizes)];
     waveFraction(pidx,:) = [mean(waveFractions) std(waveFractions)];
+    if length(waveFractions) < 5
+       waveFraction(pidx,:) = [0 0]; 
+    end
     waveSlope(pidx,:) = [mean(waveSlopes) std(waveSlopes)];
     pidx = pidx+1;
 end
 
-figure;
 xVals = connStrength;
+figure;
+errorbar(xVals, waveFraction(:,1), waveFraction(:,2),'k'); 
+xlim([xVals(1)-0.2 xVals(end)+0.2]);
+xlabel('Connection strength K')
+ylabel('Wave firing fraction')
+
+figure;
 subplot(3,1,1); errorbar(xVals, waveSize(:,1), waveSize(:,2),'k'); 
 set(gca,'XTick',[]); xlim([xVals(1)-0.2 xVals(end)+0.2]);
 ylabel('# firings/wave');

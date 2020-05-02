@@ -11,7 +11,7 @@ x = x(:); y = y(:); z = z(:);
 figure; subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
 hold on;
 
-lambda = 8;
+lambda = 2.5;
 dmax = 5;
 map = colormap('jet');
 connections = zeros(length(x), length(x));
@@ -19,7 +19,11 @@ for jj=1:length(x)
     for kk=1:length(x)
         d = sqrt((x(jj)-x(kk)).^2+(y(jj)-y(kk))^2+(z(jj)-z(kk))^2);
         if rand() < exp(-(d/lambda)^2)
-            connections(jj,kk) = 1;
+            if rand() > 0.20
+                connections(jj,kk) = 1;
+            else
+                connections(jj,kk) = -1;
+            end
             if d>0
                 didx = d/dmax;
                 didx = min(didx,1);
@@ -31,7 +35,9 @@ for jj=1:length(x)
 end
 title(['Connections, lambda=' num2str(lambda)]);
 axis equal;
+xlabel('X'); ylabel('Y'); zlabel('Z'); set(gca, 'FontSize', 12);
 set(gcf, 'pos', [0 0 600 800]);
-subplot(1,2,2); hold on; imagesc(connections);
+subplot(1,2,2); hold on; imagesc(connections); colormap([1 0 0; 1 1 1; 0 1 0]);
+xlabel('Neuron #'); ylabel('Neuron #'); set(gca, 'FontSize', 12);
 
 

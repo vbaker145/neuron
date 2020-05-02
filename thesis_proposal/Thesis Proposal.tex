@@ -1,0 +1,108 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[font=scriptsize]{caption}
+\usepackage[font=scriptsize]{subcaption}
+\usepackage{wrapfig}
+\usepackage[backend=biber]{biblatex}
+
+\addbibresource{nn.bib}
+\renewcommand\thesubsection{\alph{subsection}}
+
+
+%opening
+\title{Thesis Proposal}
+\author{Vince Baker, advisor: Dr. Luis Cruz Cruz\\ Drexel University Department of Physics}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Cortical traveling waves have been observed in vivo and in simulations of recurrent networks.
+These traveling waves explain observed features of cortical dynamics including spike timing variability and correlated fluctuations in membrane potential.
+The significance of these traveling waves in cortical function is currently not well understood.
+This project examines traveling waves in one-dimensional neural structures to undersatnd how various properties of the network determine wave formation and propagation.
+We examine ensembles of multiple weakly-connected one-dimensional structures to understand the possible computational function of these traveling waves.
+\end{abstract}
+
+\section{Introduction} 
+The mammalian audio and visual cortex are the regions of the brain responsible for processing audio and visual stimulus.
+The cortex has a ``macro scale'' organization, with the human visual cortex separated into five functional areas V1 through V5.
+Each functional area spans a specific region of the cortex and there are well-defined patterns of connectivity between the areas.
+Visual information first enters area V1, the Primary Visual Cortex, which consists of several distinct layers of neurons.
+Area V2 receives many connections from V1 and has many connections into areas V3-V5, as well as connections back to V1 to provide feedback \cite{cortex_wiki}.
+The other areas are defined by similar patterns of connectivity. 
+Subtantial research has established functional roles for this highest-level organization, i.e. V5 is thought to be responsible for processing the perception of motion\cite{born2005}.
+\\
+Extensive research has also established specific properties at the microscopic scale.
+In each neuron a complex interaction of multiple electrical and chemical processes creates a complex dynamic system.
+That dynamic system can enter an excited trajectory characterized by a rapid increase in neuron membrane potential termed a spike.
+Upon a spiking event, the neuron will transmit an action potential through axon connections to many other neurons.
+This action potential excites the recipient neurons, driving their internal dynamic state and making them more likely to fire.
+The activity of a single neuron can be monitored at a high temporal resolution in this microscopic region experiments.
+For example, it has been shown that some neurons are tuned to different aspects of visual and audio stimulus such as location, frequency and orientation, so that certain neurons respond more readily to specific stimulus.
+The microscopic methods have also elucidated more information about the structure and function within the cortical areas.
+There are regions of neurons in V1 that all respond to the same type of stimulus, such as a specific orientation of an objext in the visual field.
+These regions are called columns as they extend through the layers of V1 \cite{horton2005}. 
+Measurements of individual neurons show high variability in their spike times and spiking rates\cite{keane2015}.
+This variation implies that cortical function must not depend upon the activiation of one individual neuron.
+\\
+``Meso-scale'' understanding looks at the aggregate behavior of larger groups of neurons, termed populations.
+Recent advances in brain measurements, especially Voltage Sensitive Dyes, allow for the direct measurement of some population behaviors.
+Populations of neurons can also be simulated using various computer models of neurons and there connections.
+This direct simulation method allows for arbitrary neuron behavior and connectivity, but can involve simulating enormous numbers of neurons and connections.
+Populations can also be studied using higher level models such as mean-field theories and coupled oscillator networks.
+All of these experimental and computational methods attempt to find common mechanisms of population behavior that can inform our understanding of cortical function.
+One such population-level behavior is a traveling wave of neural activations.
+\\
+Traveling waves of neuron activation have been observed in vivo, in vitro and in silico in various parts of the brain at different space and time scales \cite{keane2015}\cite{wu2008}.
+Proposed functions of these traveling waves include motor coordination, place field coordination in the hippocampus, and spatiotemporal processing in the visual cortex \cite{muller2018}. 
+Our interest is in stimulus-evoked traveling waves within the visual and auditory cortex.
+These are waves that are triggered by a visual or auditory stimulus and propagate on a small spatial and short temporal time scale, such that they may be a key mechanism for spatiotemporal processing of visual and auditory signals..
+\\
+In this work we explore the dynamics of traveling waves along neural structures with one long dimension.
+One-dimensional structures will allow us to explore the impact of fundamental neural network properties on the formation and propagation of traveling waves.
+These one-dimensional structures are also representative of observed microcolumn structures in the mammalian cortex \cite{cruz2000}\cite{cruz2005}.
+A one-dimensional column of neurons has also been used as the fundamental cognitive unit in the Liquid State Machine model for machine learning \cite{maas2002}.
+We will use this model to explore the possible functional roles for traveling waves in one dimensional structures.
+
+\section{Literature review}
+Traveling waves have been extensively observed and recorded in the cortex \cite{sato2012} \cite{wu2008} \cite{muller2018}.
+Advanced experimental techniques that achieve the required spatial and temporal resolution \cite{shoham1999}\cite{wu2008} to capture traveling waves have focused on lateral activity near the cortical surface.
+Simulations of traveling waves in a 2-D sheet of neurons have been performed \cite{keane2015}. 
+\\
+There has been substantial speculation on the functional role of traveling waves in the cortex \cite{muller2018}\cite{sato2012}.
+In \cite{keane2015} the authors propose traveling waves as an explanation for the observed phenomenon of high variability in individual neuron spike timing and highly synchronized synaptic inputs to each neuron.
+In \cite{sato2012} traveling waves are proposed as a mechanism for long-range stimulus interaction and as an element of the nornalization model of neural computation \cite{carandini2012}.
+\\
+The seminal work on Liquid State Machines \cite{maas2002} used a microcolumn of neurons as a processing element for a variety of tasks.
+In \cite{pyle2017} the authors use used the liquid state machine model to demonstrate the functional importance of distance-dependent neural connectivity. 
+Recent work in \cite{basawaraj2019} used a neural network based on the minicolumn structure to improve a model for episodic memory.
+
+\section{Statement of the problem}
+We will examine the dynamics and functional utility of traveling waves in one-dimensional columns of neurons.
+We will investigate the relevant neural properties including neuron/synapse dynamics, connectivity, column topology and action potential propagation.
+The goal is to understand how these properties affect the formation and propagation of traveling waves.
+With the neural wave dynamics established we will create an ensemble of neural columns to use as a Liquid State Machine\cite{maas2002}.
+This will allow us to investigate how traveling waves in neural columns may function in processing stimuli and supporting tasks such as object and speech recognition.
+
+\section{Methods}
+See ``Traveling waves in neural columns''.
+
+
+\section{Preliminary Results}
+See ``Traveling waves in neural columns''.
+
+
+\section{Discussion}
+See ``Traveling waves in neural columns''.
+
+
+\clearpage
+\printbibliography
+
+\end{document}

@@ -17,7 +17,7 @@ structure.displacement = 0;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
-connectivity.connStrength = 8;
+connectivity.connStrength = 16;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
@@ -31,7 +31,7 @@ delayMult = 2;
 connStrength = 5;
 delay.delayFrac = 1;
 stimStrength = 5;
-timeSteps = [0.01, 0.1, 0.5, 1];
+timeSteps = [1, 0.5, 0.1, 0.01];
 figure(20); subplot(1,3,1); 
 for kk = 1:length(timeSteps)
     %delay.delayMult = delayMult(kk);
@@ -57,7 +57,7 @@ for kk = 1:length(timeSteps)
         sidx = 1;
         stimDuration = floor(20/dt);
         stimDepth = 5;
-        stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 5;
+        stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 10;
 
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
         size(firings)
@@ -65,12 +65,14 @@ for kk = 1:length(timeSteps)
         %figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
         figure(20); subplot(1,length(timeSteps),kk)
         plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
-        axis([0 0.5 0 100] ); 
+        axis([0 0.3 0 100] ); 
         set(gca, 'XTick', 0:0.1:0.5)
         %set(gca, 'XTickLabel',[]);
         %text(0.9,80,['TS=' num2str(timeSteps(kk))],'BackgroundColor', 'White')
         title(['\delta t=' num2str(timeSteps(kk)) ' ms'])
         xlabel('Time (s)');
+        set(gca, 'FontSize', 12)
+        grid on
         if kk==1
            ylabel('Z position') 
         end

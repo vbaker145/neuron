@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons] = makeColumn(structure, connectivity, delay)
+function [a,b,c,d, S, delays, excNeurons, pos] = makeColumnParameters(structure, connectivity, delay)
 
 width = structure.width;
 height = structure.height;
@@ -40,6 +40,9 @@ xv = (0:width-1);
 yv = (0:height-1);
 zv = (0:layers-1);
 [x,y,z] = meshgrid(xv,yv,zv);
+pos.x = x; 
+pos.y = y;
+pos.z = z;
 
 x = x(:); y = y(:); z = z(:);
 x = x+displacement*(rand(size(x))-0.5);
@@ -47,7 +50,7 @@ y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
 if doplot == 1
-    figure(100); subplot(1,2,1); scatter3(x,y,z,50, 'black','filled')
+    figure(100); scatter3(x,y,z,50, 'black','filled')
     hold on;
 end
 
@@ -55,21 +58,38 @@ if doplot == 1
     map = colormap('jet');
 end
 
-connections = zeros(length(x), length(x));
-rtype = rand(n,1);
-excNeurons = rtype < percentExc; nExc = sum(excNeurons);
-inNeurons = rtype >= percentExc; nIn = sum(inNeurons);
+%connections = zeros(length(x), length(x));
+connections = spalloc(length(x), length(x), 1000);
+
+if percentExc <= 1.0
+    rtype = rand(n,1);
+    excNeurons = rtype < percentExc; nExc = sum(excNeurons);
+    inNeurons = rtype >= percentExc; nIn = sum(inNeurons);
+else
+    excNeurons = ones(1,n); excNeurons(percentExc) = 0; nExc = sum(excNeurons);
+    inNeurons = zeros(1,n); inNeurons(percentExc) = 1; nIn = sum(inNeurons); 
+    excNeurons = logical(excNeurons); inNeurons = logical(inNeurons);
+end
 
 %Izhikevich model parameters
 a = zeros(n,1); b = zeros(n,1); c = zeros(n,1); d = zeros(n,1);
 a(excNeurons) = 0.02; a(inNeurons) = 0.02 + 0.08*rand(nIn,1);
 b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*rand(nIn,1);
+%b(excNeurons) = 0.2; b(inNeurons) = 0.25 - 0.05*randi([0,1],nIn,1);
+%b(excNeurons) = 0.2; b(inNeurons) = 0.25;
+
+if percentExc > 1.0
+    b(inNeurons) = 0.25; %Single LTS inhibitory neuron
+end
 c(excNeurons) = -65+10*rand(nExc,1).^2; c(inNeurons) = -65;
 d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
-delays = zeros(n);
-dmax = layers;
+%delays = zeros(n);
+delays = spalloc(n,n,1000);
+
+%dmax = layers;
+dmax = 2*lambda;
 
 %Synaptic weights
 for jj=1:length(x)
@@ -84,7 +104,7 @@ for jj=1:length(x)
         if dis > 0
             %cp = rand() < exp(-(dis/lambda)^2);
             if connType == 1 
-                cp = rand() < exp(-(dis/lambda)^2);
+                cp = rand() < 0.5*exp(-(dis/lambda)^2);
                 if dis>maxLength
                    cp = 0; 
                 end
@@ -117,29 +137,30 @@ for jj=1:length(x)
                     cm = map(floor(didx*size(map,1)),:);  
                     line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
                 end
-            end
-            
-            if delayType == 1
-                if rand() < delayFrac
-                    delays(jj,kk) = floor(dis*delayMult/dt);
+                
+                %Set delay
+                if delayType == 1
+                    if rand() < delayFrac
+                        delays(jj,kk) = floor(dis*delayMult/dt);
+                    else
+                        delays(jj,kk) = floor(2/dt);
+                    end
+                elseif delayType == 2
+                    delays(jj,kk) = floor(delayMult/dt);
                 else
-                    delays(jj,kk) = floor(2/dt);
-                end
-            elseif delayType == 2
-                delays(jj,kk) = floor(delayMult/dt);
-            else
-                delays(jj,kk) = floor(delayMult*rand()/dt)+1;
-            end
-            
-        end
-    end
-end
+                    delays(jj,kk) = floor(delayMult*rand()/dt)+1;
+                end %End set delay
+                
+            end %End if cp is true
+        end %End if dis>0 (not same neuron)
+        
+     end %End for kk
+end %end for jj
 
 if doplot == 1
     title(['Connections, lambda=' num2str(lambda)]);
     axis equal;
     set(gcf, 'pos', [0 0 600 800]);
-    subplot(1,2,2); hold on; imagesc(connections);
 end
 
 S = connections;
