@@ -15,7 +15,7 @@
 
 
 %opening
-\title{Synchronization of traveling waves by low-threshold-spiking inihibitory neurons}
+\title{A population firing rate encoder based on cortical minicolumns}
 \author{Vince Baker, advisor: Dr. Luis Cruz Cruz\\ Drexel University Department of Physics}
 
 \begin{document}
@@ -29,11 +29,41 @@ The proposed neural circuit provides a strong, sparse encoding of peaks in the p
 \end{abstract}
 
 \section{Introduction} 
+Information in the brain is encoded by the firing rates of neurons.
+Individual neurons in the brain do not reliably respond to a specific stimulus in a consistent manner.
+A stimulus may, however, be reliably encoded in the average firing rate of a pool of neurons with similar tuning \cite{trappenberg}.
 
-Neurons in the brain that fire sequentially can spread their firings to neighboring neurons creating what has been called a travelling wave of neuron activation. 
-These travelling waves have been observed in the cortex of mammalian brains as well as in vitro, and subsequently have been reproduced in silico \cite{keane2015}
+The mammalian cortex has a laminar structure segmented into layers \cite{banich}.
+Perpendicular to these layers are vertical units of organization called minicolumns or microcolumns that travers layers II through VI \cite{buxhoeveden2002}\cite{cruz2005}.
+These minicolumns are about 30-50 $\mu$m wide and contain about 100 neurons.
+Although this minicolumn organization was observed decades ago the functional purpose of minicolumns, if any, remains unclear \cite{horton2005}.
+
+Neurons in the cortex are dominated by local connectivity, such that neurons are most strongly connected to nearby neurons \cite{levy2012}.
+Locally connected neurons can spread their firings to neighboring neurons creating what has been called a travelling wave of neuron activation. 
+These travelling waves in locally connected networks have been observed in the cortex of mammalian brains as well as in vitro, and subsequently have been reproduced in silico \cite{keane2015}\cite{ermentrout2001}\cite{wu2008}.
+Cortical traveling waves have been observed on multiple spatial and temporal scales, and a number of functional roles have been proposed \cite{muller2018}.
+
+We propose a neural circuit to encode the average firing rate of a pool of neurons.
+The proposed circuit is composed of locally connected neurons arranged in minicolumns.
+The pool of input neurons are connected to the base of the minicolumns.
+Peaks in the population firing rate of the input pool evoke traveling waves that travel up the minicolumns.
+These traveling waves produce a strong, sparse representation at the top of the minicolumns.
+We observe that weakly connected minicolumns produce the most reliable, clean and efficient encoding.
+
 
 \section{Methods}
+Neuron and synapse dynamics, single column model
+
+Minicolumn ensembles (big column, weakly connected columns, disconnected minicolumns)
+
+Firing rate stimulus generation:
+-Cricket wind sines
+
+Output characterization
+-Correlation
+-Noise
+-Sparsity
+-Efficiency of column ensemble
 
 \section{Results}
 
