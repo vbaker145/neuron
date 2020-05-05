@@ -55,41 +55,64 @@ Neuron and synapse dynamics, single column model
 \\ \\
 Minicolumn ensembles (one big column, weakly connected columns, disconnected minicolumns)
 \\ \\
-The input to our system is generated from a pool of 50 neurons.
+The input to our system is generated from a pool of 50 neurons with a common instantaneous firing rate.
+We use a raised-cosine function for the firing rate input.
 Each input neuron is connected to every excitatory neuron at the base layer of the minicolumn ensemble with a probability of connection of $50\%$ and a connection strength of $5/2$. 
 The input neurons have a common firing rate that varies over time.
 For each $10 ms$ time window a Poisson spike train of duration $10 ms$ is generated for every input neuron based on the instantaneous firing rate.
 The output from each neuron in the input pool is calculated by convolving the neuron's spike train with an exponential synaptic response $e^{(t-t^f)/\sigma}$ where $t^f$ is the neuron firing time and $\sigma = 4ms$.
 The input signal to each neuron in the base layer of the minicolumn ensemble is summed from the input pool stimulus according to the synaptic connections (Figure \ref{fig:firingrate_input}).
 
-\begin{figure}[!htb]
+\begin{figure}[!ht]
  \caption{Firing rate input. The instantaneous firing rate (top) is encoded into spike trains of a pool of 50 neurons (middle), generating a stimulus to the base layer of the minicolumn ensemble (bottom). The stimulus at the bottom is shown as a membane potential in Volts.}
  \label{fig:firingrate_input}
  \centering
-   \includegraphics[width=0.5\textwidth]{fig/InputFiringRate}
+   \includegraphics[width=0.75\textwidth]{fig/InputFiringRate}
 \end{figure}
 
-We measure the output as the average membrane potential of the neurons in the top layer of the minicolumn ensemble.
-We characterize the quality of the firing rate encoding by the correlation between the output potential and the instantaneous firing rate.
-We also measure 
+All neurons in the neural circuit also receive a background stimulus representative of noise.
+
+The system output is taken as the average membrane potential of the neurons in the top layer of the minicolumn ensemble.
+To characterize the quality of the encoding we measure the correlation of the output signal with the input firing rate.
+
+\begin{figure}[!ht]
+ \caption{The neural circuit is stimulated by the pool of input neurons at the base layer. The output is taken as the mean membrane potential at the top layer. Information is transmitted up the minicolumns via traveling waves. }
+ \label{fig:system_diagram}
+ \centering
+   \includegraphics[width=0.5\textwidth]{fig/SystemDiagram}
+\end{figure}
 
 
-Output characterization
--Correlation
--Noise
--Sparsity
--Efficiency of column ensemble
-
+\clearpage
 \section{Results}
+Our basic circuit is an ensemble of nine minicolumns. 
+Each minicolumn is 2x2x20 neurons. 
+We vary the separation between adjacent columns to acheive different degrees of connectivity.
 
-\begin{figure}[!htb]
- \caption{Firing rate encoding example. The instantaneous firing rate (top) is shown with the mean membrane potential of the input layer (middle) and the output layer (bottom). The output layer shows a cleaner signal with stronger spikes.}
+We observe traveling waves in the minicolumns as illustrated in Figure \ref{fig:firing_video} (full videos online).
+\begin{figure}[!ht]
+ \caption{Three frames of a simulation showing all neurons in the circuit. Colors represent the neuron membrane potential. The traveling waves are initiated at the base of the circuit (left), propoagate upward (center) and terminate at the top (right).} 
+ \label{fig:firing_video}
+ \centering
+   \includegraphics[width=\textwidth]{fig/VideoStills}
+\end{figure}
+
+We capture both the input and output signals from the circuit.
+An example simulation is shown in Figure \ref{fig:firingrate_example}.
+The base layer of neurons responds to changes in the firing rate, but the response is noisy and diffuse in time.
+The synchronized traveling waves result in a stronger, cleaner stimulus at the output layer.
+
+\begin{figure}[!ht]
+ \caption{Firing rate encoding example. The instantaneous firing rate (top) is shown with the mean membrane potential of the input layer (middle) and the output layer (bottom). The output layer shows a cleaner signal with stronger peaks.}
  \label{fig:firingrate_example}
  \centering
-   \includegraphics[width=0.5\textwidth]{fig/FiringRateEncodingExample}
+   \includegraphics[width=0.75\textwidth]{fig/FiringRateEncodingExample}
 \end{figure}
 
+\clearpage
 \section{Discussion}
+We have demonstrated a neural circuit for encoding the firing rate of a population of neurons into a strong, clean signal.
+The proposed neural circuit is inspired by the minicolumn structures found in the mammalian cortex, and could represent a functional role for this type of morphology.
 
 
 \clearpage
