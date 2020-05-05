@@ -4,11 +4,11 @@ clear all; close all;
 
 addpath('../lsm'); %Neural column code
 
-dt = 0.1;
-tmax = 200;
+dt = 0.05;
+tmax = 2000;
 t = 0:dt:tmax;
 nInputPool = 50;
-binDuration = 10;
+binDuration = 1;
 bins = 0:binDuration:tmax;
 
 %Make column ensemble
@@ -22,7 +22,7 @@ colStruct = makeFiringRateColumnEnsemble(dt);
 % end
 
 %firingRate = 5*(cos(2*pi*3.*(t./1000))+1); %Cosine, positive
-firingRate = 10*(sin(2*pi*1.5*(t./1000))).^2; %Cosine, raised
+firingRate = 5*(sin(2*pi*1.5*(t./1000))).^2; %Cosine, raised
 [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
 
 %% Impulse stimulus
@@ -39,7 +39,7 @@ for jj=1:floor(tmax/1000)
 end
 
 %% Background, corrected for dt
-stimStrength = 2;
+stimStrength = 3;
 stB = zeros(colStruct.N, size(t,2));
 stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
 stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
@@ -48,9 +48,7 @@ stB = (interp1(0:tmax, stB(:,1:1/dt:end)', 0:dt:tmax))';
 st = st+stB;
 
 figure(22); subplot(3,1,1); plot(t,firingRate); %Firing rate graph
-figure(24); subplot(3,1,1); plot(t,firingRate); 
 %figure(22); subplot(3,1,1); plot(t, max(stImpulse));
-%figure(24); subplot(3,1,1); plot(t, max(stImpulse));
 
 %% Simulate column ensemble
 vinit=-65*ones(colStruct.N,1)+0*rand(colStruct.N,1);    % Initial values of v
@@ -59,14 +57,22 @@ uinit=(colStruct.b).*vinit;                 % Initial values of u
 [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), ...
     colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
     colStruct.delays, st);                                
-                            
+
 
 %% Plot results
-figure; imagesc(t, 1:nInputPool, stSpikes); colorbar; colormap('gray');
-set(gca, 'YDir', 'Normal');
-title('Input neurons, # spikes/50 ms')
-xlabel('Time (ms)'); ylabel('Input neuron #');
+%figure; imagesc(t, 1:nInputPool, stSpikes); colorbar; colormap('gray');
+figure(100); subplot(3,1,1); plot(t, firingRate,'k');
+set(gca, 'XTick', [])
+ylabel('Firing rate (Hz)');
 set(gca, 'FontSize', 12);
+subplot(3,1,2); imagesc(t, 1:nInputPool, stSpikes==0); colormap('gray');
+set(gca, 'YDir', 'Normal');
+ylabel('Input neuron #');
+set(gca, 'FontSize', 12);
+set(gca, 'XTick', []);
+subplot(3,1,3); imagesc(t, 1:colStruct.Nlayer, st(1:colStruct.Nlayer,:)); colorbar;
+xlabel('Time (ms)'); ylabel('Base layer neuron #'); 
+set(gca, 'FontSize',12); set(gca, 'YDir', 'Normal');
 
 for jj=0:colStruct.nCols-1
     %Firing plot, color-coded by column
@@ -103,6 +109,29 @@ subplot(3,1,3); hold on;
 plot(bins(1:end-1)+binDuration/2, hceSum, 'k');
 ax = axis; ax(4) = ymax; axis(ax);
 
+
+%% Measurements
 hcsInterp = interp1([0 bins(1:end-1)+binDuration/2 tmax], [0 hcsSum 0], t );
 hceInterp = interp1([0 bins(1:end-1)+binDuration/2 tmax], [0 hceSum 0], t );
 figure; plot(t, hcsInterp); hold on; plot(t, hceInterp, 'k');
+
+inputMP = mean(vall(1:colStruct.Nlayer,:));
+outputMP = mean(vall(end-colStruct.Nlayer:end,:));
+yMax= max([max(inputMP) max(outputMP)]);
+yMin= min([min(inputMP) min(outputMP)]);
+
+h = figure(200); h.Position = [2159 -42 712 943];
+h=subplot(3,1,1); plot(t, firingRate,'k');
+h.Position = [0.1300 0.7093 0.7750 0.2157];
+set(gca, 'XTick', [])
+ylabel('Firing rate (Hz)');
+set(gca, 'FontSize', 12);
+h = subplot(3,1,2); plot(t,inputMP,'k');
+ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+ylabel('Mean potential (mV)');
+set(gca, 'FontSize', 12);
+set(gca, 'XTick', []);
+subplot(3,1,3); plot(t, outputMP, 'k');
+ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+xlabel('Time (ms)'); ylabel('Mean potential (mV)'); 
+set(gca, 'FontSize',12); 

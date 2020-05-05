@@ -45,19 +45,34 @@ Cortical traveling waves have been observed on multiple spatial and temporal sca
 
 We propose a neural circuit to encode the average firing rate of a pool of neurons.
 The proposed circuit is composed of locally connected neurons arranged in minicolumns.
-The pool of input neurons are connected to the base of the minicolumns.
+A pool of input neurons is connected to the base of the minicolumns.
 Peaks in the population firing rate of the input pool evoke traveling waves that travel up the minicolumns.
 These traveling waves produce a strong, sparse representation at the top of the minicolumns.
 We observe that weakly connected minicolumns produce the most reliable, clean and efficient encoding.
 
-
 \section{Methods}
 Neuron and synapse dynamics, single column model
+\\ \\
+Minicolumn ensembles (one big column, weakly connected columns, disconnected minicolumns)
+\\ \\
+The input to our system is generated from a pool of 50 neurons.
+Each input neuron is connected to every excitatory neuron at the base layer of the minicolumn ensemble with a probability of connection of $50\%$ and a connection strength of $5/2$. 
+The input neurons have a common firing rate that varies over time.
+For each $10 ms$ time window a Poisson spike train of duration $10 ms$ is generated for every input neuron based on the instantaneous firing rate.
+The output from each neuron in the input pool is calculated by convolving the neuron's spike train with an exponential synaptic response $e^{(t-t^f)/\sigma}$ where $t^f$ is the neuron firing time and $\sigma = 4ms$.
+The input signal to each neuron in the base layer of the minicolumn ensemble is summed from the input pool stimulus according to the synaptic connections (Figure \ref{fig:firingrate_input}).
 
-Minicolumn ensembles (big column, weakly connected columns, disconnected minicolumns)
+\begin{figure}[!htb]
+ \caption{Firing rate input. The instantaneous firing rate (top) is encoded into spike trains of a pool of 50 neurons (middle), generating a stimulus to the base layer of the minicolumn ensemble (bottom). The stimulus at the bottom is shown as a membane potential in Volts.}
+ \label{fig:firingrate_input}
+ \centering
+   \includegraphics[width=0.5\textwidth]{fig/InputFiringRate}
+\end{figure}
 
-Firing rate stimulus generation:
--Cricket wind sines
+We measure the output as the average membrane potential of the neurons in the top layer of the minicolumn ensemble.
+We characterize the quality of the firing rate encoding by the correlation between the output potential and the instantaneous firing rate.
+We also measure 
+
 
 Output characterization
 -Correlation
@@ -67,6 +82,12 @@ Output characterization
 
 \section{Results}
 
+\begin{figure}[!htb]
+ \caption{Firing rate encoding example. The instantaneous firing rate (top) is shown with the mean membrane potential of the input layer (middle) and the output layer (bottom). The output layer shows a cleaner signal with stronger spikes.}
+ \label{fig:firingrate_example}
+ \centering
+   \includegraphics[width=0.5\textwidth]{fig/FiringRateEncodingExample}
+\end{figure}
 
 \section{Discussion}
 

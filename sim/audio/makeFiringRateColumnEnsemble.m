@@ -7,7 +7,7 @@ structure.width = 2;
 structure.height = 2;
 structure.nWide = 3;
 structure.nHigh = 3;
-structure.columnSpacing = 2;
+structure.columnSpacing = 7;
 structure.layers = 20;
 structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
@@ -19,7 +19,7 @@ connectivity.connStrength = 8;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
-delay.delayMult = 1;
+delay.delayMult = 0.2;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
