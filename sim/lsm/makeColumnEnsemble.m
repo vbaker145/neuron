@@ -83,7 +83,8 @@ if doplot == 1
 end
 
 connections = zeros(length(x), length(x));
-rtype = rand(n,1);
+rtype = rand(n,1); 
+%rtype(1:(width*nWide*height*nHigh) ) = 0; %Input layer is all excitatory
 excNeurons = rtype < percentExc; nExc = sum(excNeurons);
 inNeurons = rtype >= percentExc; nIn = sum(inNeurons);
 

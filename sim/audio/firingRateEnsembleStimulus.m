@@ -22,9 +22,9 @@ st = zeros(N, length(t));
 %Connect input pool to 1st layer of column ensemble
 inputConnectivity = rand(nInputPool, N_per_layer );
 inputConnectivity = inputConnectivity<0.5;
-inputConnectivity(~excN(1:N_per_layer)) = 0;
-%inputConnectivity = rand(1,N_per_layer).*inputConnectivity;
-inputConnectivity = 5/2*inputConnectivity;
+inputConnectivity(~excN(1:N_per_layer)) = 2/5*inputConnectivity(~excN(1:N_per_layer));
+inputConnectivity = 5/2*rand(1,N_per_layer).*inputConnectivity;
+%inputConnectivity = 5/2*inputConnectivity;
 
 %Caculate firing events for input pool based on firing rate
 dtStep = 10/dt; 
