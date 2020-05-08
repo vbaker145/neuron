@@ -22,7 +22,7 @@ colStruct = makeFiringRateColumnEnsemble(dt);
 % end
 
 %firingRate = 5*(cos(2*pi*3.*(t./1000))+1); %Cosine, positive
-firingRate = 10*(sin(2*pi*1*(t./1000))).^2; %Cosine, raised
+firingRate = 10*(sin(2*pi*1.5*(t./1000))).^2; %Cosine, raised
 [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
 
 %% Impulse stimulus
@@ -39,7 +39,7 @@ for jj=1:floor(tmax/1000)
 end
 
 %% Background, corrected for dt
-stimStrength = 2;
+stimStrength = 3;
 stB = zeros(colStruct.N, size(t,2));
 stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
 stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
@@ -135,3 +135,50 @@ subplot(3,1,3); plot(t, outputMP, 'k');
 ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
 xlabel('Time (ms)'); ylabel('Mean potential (mV)'); 
 set(gca, 'FontSize',12); 
+
+%% Test output neuron firing
+
+%Remove refractory periods
+spikePeriod = floor(20/dt);
+inp = inputMP; outp=outputMP;
+inp = inp+68; outp = outp+68;
+inp(inp<0) = 0; outp(outp<0) = 0;
+
+%Normalize 
+%inp = inp-min(inputMP); outp = outputMP-min(outputMP);
+%inp = inp./max(abs(inp)); outp = outp./max(abs(outp));
+
+frNorm = firingRate./max(firingRate);
+
+%figure(300); plot(t, inp); hold on; plot(t, outp, 'g'); plot(t, frNorm, 'k')
+
+inpDet = cavg_cfar(inp, spikePeriod, spikePeriod/2, spikePeriod/dt);
+outpDet = cavg_cfar(outp, spikePeriod, spikePeriod/2, spikePeriod/dt);
+
+%figure(301); plot(t, inpDet); hold on; plot(t, outpDet,'g');
+
+%Order statistic noise estimate
+perc90 = floor(0.9*length(inp));
+os_in_est = sort(inp); os_in_est = os_in_est(perc90);
+os_out_est = sort(outp); os_out_est = os_out_est(perc90);
+
+%Smooth and hard threshold
+win = ones(1,spikePeriod)./spikePeriod;
+inp_s = conv(inp, win); inpThresh = max(inp_s)*0.1;
+outp_s = conv(outp,win); outpThresh = max(outp_s)*0.1;
+
+inpDets = find(inp_s>inpThresh);
+idd = diff(inpDets);
+idd = find(idd>1);
+iddWidths = diff(idd)*dt;
+nid = length(idd)+1;
+
+outpDets = find(outp_s>outpThresh);
+odd = diff(outpDets);
+odd = find(odd>1);
+oddWidths = diff(odd)*dt;
+nod = length(odd)+1;
+
+figure; plot(inp_s); hold on; plot(ones(1,length(inp_s)).*max(inp_s)*0.1)
+figure; plot(outp_s); hold on; plot(ones(1,length(outp_s)).*max(outp_s)*0.1)
+
