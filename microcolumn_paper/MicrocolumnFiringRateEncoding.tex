@@ -128,6 +128,16 @@ We found that the more highly connected minicolumn ensembles encode the input fi
    \includegraphics[width=0.75\textwidth]{fig/EncodingError_3Trials}
 \end{figure}
 
+Generating action potentials requires energy, with one estimate of $2.468x10^-7\ J$ required for each spike \cite{zhu2018}.
+We estimate the energy consumption of our neural circuits based on the total number of spikes in the circuit.
+The most highly connected ensembles exhibit higher firing activty resulting in almost an order of magnitude increase in energy consumption (Figure \ref{fig:energy_consumption}).
+\begin{figure}[!ht]
+ \caption{Energy consumption of the minicolumn ensembles.}
+ \label{fig:energy_consumption}
+ \centering
+   \includegraphics[width=0.75\textwidth]{fig/EnergyConsumption}
+\end{figure}
+
 We also simulated a minicolumn ensemble with inter-column spacing 7 for 100 trials.
 With 100 trials of randomized input stimulus we measure an RMS error of 1.79 between the number of output spikes and firing rate spikes (9), or 20\%.
 The RMS error in the spike timing is 41.2 milliseconds, which is 12\% of the firing rate interval of 333 milliseconds.
