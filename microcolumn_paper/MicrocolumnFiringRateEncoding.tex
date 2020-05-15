@@ -72,14 +72,33 @@ The input signal to each neuron in the base layer of the minicolumn ensemble is 
 
 All neurons in the neural circuit also receive a background stimulus representative of noise.
 
-The system output is taken as the average membrane potential of the neurons in the top layer of the minicolumn ensemble.
-To characterize the quality of the encoding we measure the correlation of the output signal with the input firing rate.
-
 \begin{figure}[!ht]
  \caption{The neural circuit is stimulated by the pool of input neurons at the base layer. The output is taken as the mean membrane potential at the top layer. Information is transmitted up the minicolumns via traveling waves. }
  \label{fig:system_diagram}
  \centering
    \includegraphics[width=0.5\textwidth]{fig/SystemDiagram}
+\end{figure}
+
+The system output is taken as the average membrane potential of the neurons in the top layer of the minicolumn ensemble.
+We expect the population mean membrane potential to exhibit similar characteristics to an individual neuron \cite{trappenberg}.
+We therefore characterize the spiking behavior of the output by peaks in the membrane potential.
+
+The spikes in the population membrane potential have a similar shape to an individual neuron spike, with a sharp increase in potential (depolarization) followed by a refractory period below the resting potential (hyperpolarization).
+To locate and characterize the spikes we first remove the refractory periods by clipping the output below $-68\ mV$, our average resting potential.
+We then add $68\ mV$ to the output to shift the base to zero.
+We use a peak detection threshold of $25\%$ of the maximum value in the output data.
+The peak locations and peak widths are then extracted from the data (Figure \ref{fig:peak_det}).
+
+The accuracy of the encoding is measured from the peaks in the output through a peak number error $\kappa$ and a peak position error $\pi$.
+$\kappa$ is the difference in the number of peaks detected in the output and the number of peaks in the input firing rate.
+Our input signal consists of $3$ seconds of a raise-cosine of $1.5\ Hz$, resulting in $9$ peaks in the firing rate spaced $333\ ms$ apart.
+$\pi$ is the difference in milliseconds between the peak position and the closest peak in the firing rate input.
+
+\begin{figure}[!ht]
+ \caption{Illustration of the peak detection. The original output is shown on the left. The data on the right (blue) after removing the refractory period and shifting by $68\ mV$, with a $10\%$ threshold (red). }
+ \label{fig:peak_det}
+ \centering
+   \includegraphics[width=\textwidth]{fig/PeakDetectionExample}
 \end{figure}
 
 
@@ -97,19 +116,19 @@ We observe traveling waves in the minicolumns as illustrated in Figure \ref{fig:
    \includegraphics[width=\textwidth]{fig/VideoStills}
 \end{figure}
 
-We capture both the input and output signals from the circuit.
-An example simulation is shown in Figure \ref{fig:firingrate_example}.
-The base layer of neurons responds to changes in the firing rate, but the response is noisy and diffuse in time.
-The synchronized traveling waves result in a stronger, cleaner stimulus at the output layer.
+We measured $\kappa$ and $\pi$ for minicolumn ensembles with inter-column spacing from 4 to 20.
+The columns were constructed of identical neurons.
+The change in spacing alters the inter-column connectivity and action potential propagation time.
+We found that the more highly connected minicolumn ensembles encode the input firing rate with lower error (Figure \ref{fig:encoding_results}).
 
 \begin{figure}[!ht]
- \caption{Firing rate encoding example. The instantaneous firing rate (top) is shown with the mean membrane potential of the input layer (middle) and the output layer (bottom). The output layer shows a cleaner signal with stronger peaks.}
- \label{fig:firingrate_example}
+ \caption{Firing rate encoding error for minicolumn ensembles of different inter-column spacing. The RMS errors are shown as a percentage of the true values for $\kappa$ (number of peaks) and $\pi$ (peak position).}
+ \label{fig:encoding_results}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/FiringRateEncodingExample}
+   \includegraphics[width=0.75\textwidth]{fig/EncodingError_3Trials}
 \end{figure}
 
-We observe strong corerlation between the peaks in the population firing rate of the input pool of neurons and the spikes in the output membrane potential.
+We also simulated a minicolumn ensemble with inter-column spacing 7 for 100 trials.
 With 100 trials of randomized input stimulus we measure an RMS error of 1.79 between the number of output spikes and firing rate spikes (9), or 20\%.
 The RMS error in the spike timing is 41.2 milliseconds, which is 12\% of the firing rate interval of 333 milliseconds.
 
