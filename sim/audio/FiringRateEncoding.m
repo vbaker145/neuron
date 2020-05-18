@@ -25,7 +25,7 @@ bins = 0:binDuration:tmax;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 4);
 
-colSep = 4:4:20;
+colSep = 3:10;
 colStructs = [];
 for cidx = 1:length(colSep)
     cst = makeFiringRateColumnEnsemble(dt, colSep(cidx));
@@ -46,10 +46,12 @@ end
 % 
 % colStructs = [colStructS colStructC];
 
-nTrials = 3;
+nTrials = 10;
 connErr = zeros(length(colStructs), nTrials, 4);
+nFirings = zeros(length(colStructs), nTrials);
 
 for iTrial = 1:nTrials
+    iTrial
     colStruct = colStructs(1);
 
     %Random stimulus and background
@@ -85,6 +87,7 @@ for iTrial = 1:nTrials
             colStruct.delays, st);  
         [ nErrI, pErrI, nErrO, pErrO ] = firingRateErrorAnalysis( vall, colStruct, firingRatePeaks, dt, 0.25 );
         connErr(connIdx, iTrial, :) = [nErrI pErrI nErrO pErrO ];
+        nFirings(connIdx, iTrial) = size(firings,1);
     end %End loop over columns
 end %End loop over trials
 
@@ -94,11 +97,11 @@ for jj=1:length(colStructs)
     colSep(jj) = colStructs(jj).structure.columnSpacing;
 end
 
-figure(20); plot(colSep, rmsErr(:,3)./9,'kx-');
-hold on; plot(colSep, rmsErr(:,4)./333,'bx-');
+figure(20); plot(colSep, 100*rmsErr(:,3)./9,'kx-');
+hold on; plot(colSep, 100*rmsErr(:,4)./333,'bx-');
 xlabel('Minicolumn separation');
 ylabel('% error');
-legend('# peaks error', 'Peak position error');
+legend('# peaks error \kappa', 'Peak position error \pi');
 set(gca,'FontSize',12);
 
 %% plotting
