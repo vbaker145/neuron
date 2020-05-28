@@ -12,9 +12,9 @@ nErrO = length(op)-length(firingRatePeaks);
 
 %Calculate mean-squared position error
 dp = abs(repmat(ip, length(firingRatePeaks), 1) - repmat(firingRatePeaks', 1, length(ip)));
-pErrI = mean(sqrt(min(dp).^2));
+pErrI = [mean(min(dp)) std(min(dp))];
 dp = abs(repmat(op, length(firingRatePeaks), 1) - repmat(firingRatePeaks', 1, length(op)));
-pErrO = mean(sqrt(min(dp).^2));
+pErrO = [mean(min(dp)) std(min(dp))];
 
     
 end

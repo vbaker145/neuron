@@ -1,4 +1,5 @@
 function [st, stSpikeTrain] = firingRateEnsembleStimulus( structure, colID, excN, dt, t, nInputPool, firingRate )
+doPlot = 0;
 
 % structure: defines structure of microcolumn ensemble
 % colID - column labels for all neurons
@@ -45,16 +46,21 @@ for jj=1:N_per_layer
     st(jj,:) = sum( stSpikes.*repmat(inputConnectivity(:,jj),1 ,length(t) ) );
 end
 
-
-%Map input firings to column stimulus
-% st = zeros(N, length(t));
-% for jj=1:N_cols
-%     idx = find(colID(1:N_per_layer*4)==(jj-1));
-%     sv = bsa(stimVals(:,jj));
-%     st(idx, :) = stimStrength.*repmat(sv', length(idx),1);
-%     %st(idx, :) = stimStrength.*repmat(stimVals(:,jj)', length(idx),1);
-%     %st(idx, :)= repmat(stimStrength*sin(2*pi*stimFrq.*(t/1000)+phs),length(idx),1);
-% end
+if doPlot == 1
+    figure(100); subplot(3,1,1); plot(t, firingRate,'k');
+    set(gca, 'XTick', [])
+    ylabel('Firing rate (Hz)');
+    set(gca, 'FontSize', 12);
+    subplot(3,1,2); imagesc(t, 1:nInputPool, stSpikes==0); colormap('gray');
+    set(gca, 'YDir', 'Normal');
+    ylabel('Input neuron #');
+    set(gca, 'FontSize', 12);
+    set(gca, 'XTick', []);
+    %subplot(3,1,3); imagesc(t, 1:N_per_layer, st(1:N_per_layer,:)); colorbar;
+    subplot(3,1,3); plot(t, mean(st(1:N_per_layer,:)),'k')
+    xlabel('Time (ms)'); ylabel('Base layer neuron #'); 
+    set(gca, 'FontSize',12); set(gca, 'YDir', 'Normal');   
+end
 
     
 

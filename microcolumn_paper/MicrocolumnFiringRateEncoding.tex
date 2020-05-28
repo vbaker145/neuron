@@ -64,7 +64,7 @@ The output from each neuron in the input pool is calculated by convolving the ne
 The input signal to each neuron in the base layer of the minicolumn ensemble is summed from the input pool stimulus according to the synaptic connections (Figure \ref{fig:firingrate_input}).
 
 \begin{figure}[!ht]
- \caption{Firing rate input. The instantaneous firing rate (top) is encoded into spike trains of a pool of 50 neurons (middle), generating a stimulus to the base layer of the minicolumn ensemble (bottom). The stimulus at the bottom is shown as a membane potential in Volts.}
+ \caption{Firing rate input. The instantaneous firing rate (top) is encoded into spike trains of a pool of 50 neurons (middle), generating a stimulus to the base layer of the minicolumn ensemble (bottom). The stimulus at the bottom is shown as a membane potential in mV.}
  \label{fig:firingrate_input}
  \centering
    \includegraphics[width=0.75\textwidth]{fig/InputFiringRate}
@@ -91,7 +91,6 @@ The peak locations and peak widths are then extracted from the data (Figure \ref
 
 The accuracy of the encoding is measured from the peaks in the output through a peak number error $\kappa$ and a peak position error $\pi$.
 $\kappa$ is the difference in the number of peaks detected in the output and the number of peaks in the input firing rate.
-Our input signal consists of $3$ seconds of a raise-cosine of $1.5\ Hz$, resulting in $9$ peaks in the firing rate spaced $333\ ms$ apart.
 $\pi$ is the difference in milliseconds between the peak position and the closest peak in the firing rate input.
 
 \begin{figure}[!ht]
@@ -109,6 +108,9 @@ Each minicolumn is 2x2x20 neurons.
 We vary the separation between adjacent columns to acheive different degrees of connectivity.
 
 We observe traveling waves in the minicolumns as illustrated in Figure \ref{fig:firing_video} (full videos online).
+The stimulus-evoked traveling waves reliably traverse the minicolumns from bottom to top.
+We also observe some traveling waves initiated by the background noise.
+These spontaneous traveling waves can start from anywhere in the minicolumns, and will spread both up and down from the point of origin.
 \begin{figure}[!ht]
  \caption{Three frames of a simulation showing all neurons in the circuit. Colors represent the neuron membrane potential. The traveling waves are initiated at the base of the circuit (left), propoagate upward (center) and terminate at the top (right).} 
  \label{fig:firing_video}
@@ -116,31 +118,39 @@ We observe traveling waves in the minicolumns as illustrated in Figure \ref{fig:
    \includegraphics[width=\textwidth]{fig/VideoStills}
 \end{figure}
 
+We observe strong correlation between input firing rate fluctuation and the output of the minicolumn ensemble.
+\begin{figure}[!h]
+ \caption{The input stimulus (top) is quite noisy and diffuse. The minicolumn ensemble encodes the input into a sequence of strong, clean spikes (bottom).}
+ \label{fig:goodIO}
+ \centering
+   \includegraphics[width=0.75\textwidth]{fig/InputOutput_Sep7}
+\end{figure}
+
 We measured $\kappa$ and $\pi$ for minicolumn ensembles with inter-column spacing from 4 to 20.
 The columns were constructed of identical neurons.
 The change in spacing alters the inter-column connectivity and action potential propagation time.
 We found that the more highly connected minicolumn ensembles encode the input firing rate with lower error (Figure \ref{fig:encoding_results}).
+Minicolumn ensembles with moderate connectivity accurately encoded the population firing rate of the pool of input neurons.
+Less connected ensembles showed less synchronization in the output, with traveling waves in the individual minicolumns arriving at different times.
+Very highly connected ensembles (separation 3) 
 
 \begin{figure}[!ht]
- \caption{Firing rate encoding error for minicolumn ensembles of different inter-column spacing. The RMS errors are shown as a percentage of the true values for $\kappa$ (number of peaks) and $\pi$ (peak position).}
+ \caption{Firing rate encoding error for minicolumn ensembles of different inter-column spacing. The RMS errors are shown for $\kappa$ (number of peaks) and $\pi$ (peak position).}
  \label{fig:encoding_results}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/EncodingError_3Trials}
+   \includegraphics[width=0.75\textwidth]{fig/EncodingError_10Trials}
 \end{figure}
 
-Generating action potentials requires energy, with one estimate of $2.468x10^-7\ J$ required for each spike \cite{zhu2018}.
-We estimate the energy consumption of our neural circuits based on the total number of spikes in the circuit.
-The most highly connected ensembles exhibit higher firing activty resulting in almost an order of magnitude increase in energy consumption (Figure \ref{fig:energy_consumption}).
+Minicolumn ensembles close inter-column spacing (2-4 units) do not effectively encode the firing rate information.
+With spacing of 2 units the entire ensemble is rapidly consumed with firing activity.
+Figure \ref{fig:onebigcolumn} shows the firting events per neuron in such a system.
+After a short time all neurons in the ensemble are highly active with no discernible pattern in the firing activity.
 \begin{figure}[!ht]
- \caption{Energy consumption of the minicolumn ensembles.}
- \label{fig:energy_consumption}
+ \caption{Neuron firing events in a fully connected ensemble with column separation of 2 units.} 
+ \label{fig:onebigcolumn}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/EnergyConsumption}
+   \includegraphics[width=\textwidth]{fig/OneBigColumn}
 \end{figure}
-
-We also simulated a minicolumn ensemble with inter-column spacing 7 for 100 trials.
-With 100 trials of randomized input stimulus we measure an RMS error of 1.79 between the number of output spikes and firing rate spikes (9), or 20\%.
-The RMS error in the spike timing is 41.2 milliseconds, which is 12\% of the firing rate interval of 333 milliseconds.
 
 
 \clearpage

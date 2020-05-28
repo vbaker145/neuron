@@ -16,14 +16,14 @@ outp_s = conv(outp,win); outpThresh = max(outp_s)*thresh;
 %Detect peaks, find position and width
 inpDets = find(inp_s>inpThresh);
 idd = diff(inpDets);
-idd = find(idd>1);
+idd = [find(idd>1) length(inpDets)];
 iwidth = [idd(1) diff(idd)]*dt;
 ipos = inpDets(idd).*dt-0.5*iwidth;
 nid = length(idd)+1;
 
 outpDets = find(outp_s>outpThresh);
 odd = diff(outpDets);
-odd = find(odd>1);
+odd = [find(odd>1) length(outpDets)];
 owidth = [odd(1) diff(odd)]*dt;
 opos = outpDets(odd).*dt-0.5*owidth;
 nod = length(odd)+1;

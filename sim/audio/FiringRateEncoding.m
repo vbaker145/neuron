@@ -25,7 +25,7 @@ bins = 0:binDuration:tmax;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 4);
 
-colSep = 3:10;
+colSep = 5:10;
 colStructs = [];
 for cidx = 1:length(colSep)
     cst = makeFiringRateColumnEnsemble(dt, colSep(cidx));
@@ -46,8 +46,8 @@ end
 % 
 % colStructs = [colStructS colStructC];
 
-nTrials = 10;
-connErr = zeros(length(colStructs), nTrials, 4);
+nTrials = 100;
+connErr = zeros(length(colStructs), nTrials, 6);
 nFirings = zeros(length(colStructs), nTrials);
 
 for iTrial = 1:nTrials
@@ -63,7 +63,7 @@ for iTrial = 1:nTrials
     [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
 
     % Background, corrected for dt
-    stimStrength = 3;
+    stimStrength = 2.5;
     stB = zeros(colStruct.N, size(t,2));
     stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
     stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
@@ -88,19 +88,47 @@ for iTrial = 1:nTrials
         [ nErrI, pErrI, nErrO, pErrO ] = firingRateErrorAnalysis( vall, colStruct, firingRatePeaks, dt, 0.25 );
         connErr(connIdx, iTrial, :) = [nErrI pErrI nErrO pErrO ];
         nFirings(connIdx, iTrial) = size(firings,1);
+        
+        %Plot results
+%         inputMP = mean(vall(1:colStruct.Nlayer,:));
+%         outputMP = mean(vall(end-colStruct.Nlayer:end,:));
+%         yMin = min([inputMP outputMP]);
+%         yMax = max([inputMP outputMP]);
+%         h = figure(200); h.Position = [2159 -42 712 943];
+%         h=subplot(2,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
+%         h.Position = [0.1300 0.7093 0.7750 0.2157];
+%         set(gca, 'XTick', [])
+%         ylabel('Mean input (mV)');
+%         set(gca, 'FontSize', 12);
+%         subplot(2,1,2); plot(t, outputMP, 'k');
+%         ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+%         xlabel('Time (ms)'); ylabel('Mean output (mV)'); 
+%         set(gca, 'FontSize',12); 
+
     end %End loop over columns
 end %End loop over trials
 
 for jj=1:length(colStructs)
     d = squeeze(connErr(jj,:,:));
     rmsErr(jj,:) = sqrt(mean(d.^2));
+    meanErr(jj,:) = mean(d);
+    stdErr(jj,:) = std(d);
     colSep(jj) = colStructs(jj).structure.columnSpacing;
 end
 
-figure(20); plot(colSep, 100*rmsErr(:,3)./9,'kx-');
-hold on; plot(colSep, 100*rmsErr(:,4)./333,'bx-');
+figure; errorbar(colSep, meanErr(:,5), stdErr(:,6), 'kx-')
+
+
+%figure(20); plot(colSep, 100*rmsErr(:,3)./9,'kx-');
+%hold on; plot(colSep, 100*rmsErr(:,4)./333,'bx-');
+figure; [ax h1 h2] = plotyy(colSep, rmsErr(:,3), colSep, rmsErr(:,4));
+%h1.Color = 'black'; h1.LineStyle = '-.';
+%h2.Color = 'black'; h2.Marker = 'x';
+
 xlabel('Minicolumn separation');
-ylabel('% error');
+ylabel(ax(1), 'RMS error, # of peaks')
+ylabel(ax(2), 'RMS peak position error (ms)')
+%ax(1).YColor = 'black'; ax(2).YColor = 'black';
 legend('# peaks error \kappa', 'Peak position error \pi');
 set(gca,'FontSize',12);
 
