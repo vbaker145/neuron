@@ -43,9 +43,9 @@ Locally connected neurons can spread their firings to neighboring neurons creati
 These travelling waves in locally connected networks have been observed in the cortex of mammalian brains as well as in vitro, and subsequently have been reproduced in silico \cite{keane2015}\cite{ermentrout2001}\cite{wu2008}.
 Cortical traveling waves have been observed on multiple spatial and temporal scales, and a number of functional roles have been proposed \cite{muller2018}.
 
-We propose a neural circuit to encode the firing rate of a population of neurons.
+We propose a neural circuit to encode the population firing rate of a pool of neurons.
 The proposed circuit is composed of locally connected neurons arranged in minicolumns.
-A pool of input neurons is connected to the base of the minicolumns.
+The pool of neurons is connected to the base of the minicolumns.
 Peaks in the population firing rate of the input pool evoke traveling waves that travel up the minicolumns.
 These traveling waves produce a strong, sparse representation at the top of the minicolumns.
 We observe that weakly connected minicolumns produce the most reliable, clean and efficient encoding.
@@ -103,10 +103,6 @@ $\pi$ is the difference in milliseconds between the peak position and the closes
 
 \clearpage
 \section{Results}
-Our basic circuit is an ensemble of nine minicolumns. 
-Each minicolumn is 2x2x20 neurons. 
-We vary the separation between adjacent columns to acheive different degrees of connectivity.
-
 We observe traveling waves in the minicolumns as illustrated in Figure \ref{fig:firing_video} (full videos online).
 The stimulus-evoked traveling waves reliably traverse the minicolumns from bottom to top.
 We also observe some traveling waves initiated by the background noise.
@@ -118,27 +114,39 @@ These spontaneous traveling waves can start from anywhere in the minicolumns, an
    \includegraphics[width=\textwidth]{fig/VideoStills}
 \end{figure}
 
-We observe strong correlation between input firing rate fluctuation and the output of the minicolumn ensemble.
-\begin{figure}[!h]
+We observe strong correlation between the firing rate of the input pool of neurons and the output of the minicolumn ensemble.
+The firing rate stimulus signal is noisy, containing many individual small peaks. 
+It is not clear how a neural processing function would decode this signal.
+The minicolumn ensemble encodes the firing rate peaks as individual spike events (Figure \ref{fig:goodIO}).
+\begin{figure}[!ht]
  \caption{The input stimulus (top) is quite noisy and diffuse. The minicolumn ensemble encodes the input into a sequence of strong, clean spikes (bottom).}
  \label{fig:goodIO}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/InputOutput_Sep7}
+   \includegraphics[width=\textwidth]{fig/InputOutput_Sep7}
 \end{figure}
+Each peak in the firing rate is encoded as a single spike.
+The spike events are much stronger than any observed background activity.
 
-We measured $\kappa$ and $\pi$ for minicolumn ensembles with inter-column spacing from 4 to 20.
-The columns were constructed of identical neurons.
-The change in spacing alters the inter-column connectivity and action potential propagation time.
-We found that the more highly connected minicolumn ensembles encode the input firing rate with lower error (Figure \ref{fig:encoding_results}).
-Minicolumn ensembles with moderate connectivity accurately encoded the population firing rate of the pool of input neurons.
-Less connected ensembles showed less synchronization in the output, with traveling waves in the individual minicolumns arriving at different times.
-Very highly connected ensembles (separation 3) 
+We calculate $\pi$ and $\kappa$ for minicolumn ensembles with different inter-column separation (Figure \ref{fig:encoding_results}).  
+Minicolumn ensembles with moderate connectivity accurately encoded the population firing rate of the pool of input neurons, with a column separation of 7 minimizing both $\pi$ and $\kappa$..
+The best average $\kappa$ was less than $1/2$ peak difference, while the best $\pi$ was within 30 $ms$.
+
+Very weakly connected ensembles show less synchronization in the output, with traveling waves in the individual minicolumns arriving at different times.
+This is reflected in both an incorrect number of peaks as well as peak positions that are not well correlated to the input.
 
 \begin{figure}[!ht]
- \caption{Firing rate encoding error for minicolumn ensembles of different inter-column spacing. The RMS errors are shown for $\kappa$ (number of peaks) and $\pi$ (peak position).}
+ \caption{ Error results for 100 random trials. (Left) The peak number error $\kappa$ shows that more strongly connected minicolumn ensembles more accurately encode each firing rate peak as a single spike. (Right) The peak 
+            position error $\pi$ is plotted with errorbars of one standard deviation. Minicolumn ensembles with inter-column spacing 7 most accurately represented the firing rate peak timing. }
  \label{fig:encoding_results}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/EncodingError_10Trials}
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[height=2in]{fig/EncodingError_NumPeaks_100trials}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[height=2in]{fig/EncodingError_PeakPosition_100trials}
+    \end{subfigure}
 \end{figure}
 
 Minicolumn ensembles close inter-column spacing (2-4 units) do not effectively encode the firing rate information.

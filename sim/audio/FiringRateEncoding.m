@@ -25,7 +25,7 @@ bins = 0:binDuration:tmax;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 4);
 
-colSep = 5:10;
+colSep = 7;
 colStructs = [];
 for cidx = 1:length(colSep)
     cst = makeFiringRateColumnEnsemble(dt, colSep(cidx));
@@ -46,7 +46,7 @@ end
 % 
 % colStructs = [colStructS colStructC];
 
-nTrials = 100;
+nTrials = 1;
 connErr = zeros(length(colStructs), nTrials, 6);
 nFirings = zeros(length(colStructs), nTrials);
 
@@ -90,20 +90,24 @@ for iTrial = 1:nTrials
         nFirings(connIdx, iTrial) = size(firings,1);
         
         %Plot results
-%         inputMP = mean(vall(1:colStruct.Nlayer,:));
-%         outputMP = mean(vall(end-colStruct.Nlayer:end,:));
-%         yMin = min([inputMP outputMP]);
-%         yMax = max([inputMP outputMP]);
-%         h = figure(200); h.Position = [2159 -42 712 943];
-%         h=subplot(2,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
-%         h.Position = [0.1300 0.7093 0.7750 0.2157];
-%         set(gca, 'XTick', [])
-%         ylabel('Mean input (mV)');
-%         set(gca, 'FontSize', 12);
-%         subplot(2,1,2); plot(t, outputMP, 'k');
-%         ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
-%         xlabel('Time (ms)'); ylabel('Mean output (mV)'); 
-%         set(gca, 'FontSize',12); 
+        inputMP = mean(vall(1:colStruct.Nlayer,:));
+        outputMP = mean(vall(end-colStruct.Nlayer:end,:));
+        yMin = min([inputMP outputMP]);
+        yMax = max([inputMP outputMP]);
+        h = figure(200); h.Position = [2159 -42 712 943];
+        h=subplot(3,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
+        h.Position = [0.1300 0.7093 0.7750 0.2157];
+        set(gca, 'XTick', [])
+        ylabel('Mean stimulus (mV)');
+        set(gca, 'FontSize', 12);
+        subplot(3,1,2); plot(t, inputMP, 'k');
+        ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+        xlabel('Time (ms)'); ylabel('Mean base layer potential (mV)'); 
+        set(gca, 'FontSize',12);
+        subplot(3,1,3); plot(t, outputMP, 'k');
+        ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+        xlabel('Time (ms)'); ylabel('Mean output layer potential (mV)'); 
+        set(gca, 'FontSize',12); 
 
     end %End loop over columns
 end %End loop over trials
@@ -116,21 +120,28 @@ for jj=1:length(colStructs)
     colSep(jj) = colStructs(jj).structure.columnSpacing;
 end
 
-figure; errorbar(colSep, meanErr(:,5), stdErr(:,6), 'kx-')
+%Plot output results
+h = figure(300); plot(colSep, rmsErr(:,4),'kx-')
+ax = axis; ax(1) = ax(1)-0.5; ax(2) = ax(2)+0.5; axis(ax);
+xlabel('Minicolumn separation'); ylabel('Peak # error \kappa');
+set(gca, 'FontSize', 12);
+h2 = figure(301); errorbar(colSep, meanErr(:,5), stdErr(:,5), 'kx-')
+ax = axis; ax(1) = ax(1)-0.5; ax(2) = ax(2)+0.5; axis(ax);
+xlabel('Minicolumn separation'); ylabel('Peak position error \pi');
+set(gca, 'FontSize', 12);
 
 
-%figure(20); plot(colSep, 100*rmsErr(:,3)./9,'kx-');
-%hold on; plot(colSep, 100*rmsErr(:,4)./333,'bx-');
-figure; [ax h1 h2] = plotyy(colSep, rmsErr(:,3), colSep, rmsErr(:,4));
-%h1.Color = 'black'; h1.LineStyle = '-.';
-%h2.Color = 'black'; h2.Marker = 'x';
-
-xlabel('Minicolumn separation');
-ylabel(ax(1), 'RMS error, # of peaks')
-ylabel(ax(2), 'RMS peak position error (ms)')
-%ax(1).YColor = 'black'; ax(2).YColor = 'black';
-legend('# peaks error \kappa', 'Peak position error \pi');
-set(gca,'FontSize',12);
+%Plot output compared to inpuit
+h = figure(400); plot(colSep, rmsErr(:,4),'kx-')
+hold on; plot(colSep, rmsErr(:,1), 'kx--')
+ax = axis; ax(1) = ax(1)-0.5; ax(2) = ax(2)+0.5; axis(ax);
+xlabel('Minicolumn separation'); ylabel('Peak # error \kappa');
+set(gca, 'FontSize', 12);
+h2 = figure(401); errorbar(colSep, meanErr(:,5), stdErr(:,5), 'kx-')
+hold on; errorbar(colSep, meanErr(:,2), stdErr(:,2), 'kx--')
+ax = axis; ax(1) = ax(1)-0.5; ax(2) = ax(2)+0.5; axis(ax);
+xlabel('Minicolumn separation'); ylabel('Peak position error \pi');
+set(gca, 'FontSize', 12);
 
 %% plotting
 % h = figure(200); h.Position = [2159 -42 712 943];

@@ -1,0 +1,15 @@
+Look at ratio of inter-column connections to intra-column connections. Is there a physical measurement?
+
+Send notes on changing # columns, size.
+
+Send 1st paper w/ summary of progress, don't send second paper
+
+"Converting", or "filtering", instead of encoding? Confusion between "firing rate" and period of input stimulus. 
+
+Show low frequency and high frequency results, match to delta/theta waves?
+
+Draft slides on Monday. Fill in slide notes.
+
+
+
+
