@@ -23,7 +23,7 @@ bins = 0:binDuration:tmax;
 %Make column ensemble
 %Connected microcolumn ensemble
 
-colStructBase    = makeFiringRateColumnEnsemble(dt, 4);
+colStructBase    = makeFiringRateColumnEnsemble(dt, 7);
 
 colSep = 7;
 colStructs = [];

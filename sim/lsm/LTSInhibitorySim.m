@@ -29,7 +29,7 @@ delay.delayFrac = 1;
 
 stimStrength = 4.5;
 
-[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+[a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay);
 
 %Background, corrected for dt
 st = zeros(N, size(t,2));

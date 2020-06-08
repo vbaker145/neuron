@@ -97,7 +97,7 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 
 %Synaptic delays
 delays = zeros(n);
-dmax = layers;
+dmax = 3*lambda;
 
 %Synaptic weights
 for jj=1:length(x)
@@ -143,8 +143,8 @@ for jj=1:length(x)
                     didx = dis/dmax;
                     didx = min(didx,1);
                     cm = map(floor(didx*size(map,1)),:);  
-                    %line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
-                    line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)] );
+                    line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
+                    %line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)] );
                 end
             end
             

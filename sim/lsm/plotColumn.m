@@ -10,7 +10,7 @@ vw = VideoWriter(fname);
 open(vw);
 
 hf = figure(10);
-set(hf, 'Position', [76 1 1279 973]);
+set(hf, 'Position', [76 1 500 973]);
 
 plot_dt = 2;
 v_dt= plot_dt/sim_dt;
