@@ -219,7 +219,7 @@ Below $K=3.5$ no traveling waves are detected.
 We observe the transition around $K=5$ where traveling waves are observed but most of the firing events are still random.
 The wave firing fraction is porportional to $K$, indicating that traveling waves dominate the firing activity as the neurons become more strongly connected.
 At $K>11$ more than $90\%$ of the firing events are part of a traveling wave.
-\begin{figure}[!htb]
+\begin{figure}[!ht]
  \caption{Traveling waves emerge around $K=5$. As the connection strength increases the traveling waves dominate all firing events in the column.}
  \centering
    \includegraphics[width=\textwidth]{fig/ConnectionStrengthWaveFraction}  
@@ -230,24 +230,15 @@ At $K>11$ more than $90\%$ of the firing events are part of a traveling wave.
 To investigate the impact of delay we simulate a column with complete connectivity corresponing to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
 This is analogous to the original Izhikevich simulation \cite{izzy_code} that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
 We first simulated the column with a fixed action potential propagation delay of $1~ms$ regardless of inter-neuron distance.
-The result was highly synchronized simultaneous firing among all neurons in the column (Figure \ref{fig:sync_fire}). \\ 
+The result was highly synchronized simultaneous firing among all neurons in the column.
 We then incorporated our distance-dependent action potential propagation with the $\kappa$ parameter set to 1.
-The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:sync_fire_delay}).
+The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:delay_waves}).
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation time is proportional to the inter-neuron distance.
-\begin{figure}[!htb]
-  \centering
-  \begin{minipage}{0.45\textwidth}
-      \centering
-      \includegraphics[width=0.95\textwidth]{fig/IzzySync}
-      \caption{Synchronized, simultaneous firing in a completely connected column with constant propagation delay.}
-      \label{fig:sync_fire}
-  \end{minipage}\hfill
-  \begin{minipage}{0.45\textwidth}
-      \centering
-      \includegraphics[width=0.9\textwidth]{fig/IzzySync_Delay}
-      \caption{Traveling waves emerge when the propagation delay is porportional to the inter-neuron distance. }
-      \label{fig:sync_fire_delay}
-  \end{minipage}
+\begin{figure}[!ht]
+ \caption{Left: with global connectivity and no action potential propagation delay, the entire structure shows synchornized firing events. Right: With an action potential propagation delay, traveling wave behavior is observed.}
+ \centering
+   \includegraphics[width=\textwidth]{fig/DelayWaves}  
+ \label{fig:delay_waves}
 \end{figure}
 Previous work (\cite{ermentrout2001}, Figure 1) classifies several architectures for apparent traveling waves in the cortex.
 One architecture, ''Delayed Excitations from a Single Oscillator``, is a periodic source driving a sequence of excitable neurons with increasing time delays, but no connectivity between the neurons.
