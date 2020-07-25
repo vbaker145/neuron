@@ -204,7 +204,7 @@ The waves propagate until they interact with another traveling wave or reach the
 We observe that traveling waves annihilate each other when they meet.
 The annihilation effects can be explained by the refractory period of the neurons.
 Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
-\begin{figure}[!htb]
+\begin{figure}[!ht]
  \centering
  \caption{Baseline traveling wave experiment with uniform stimulus.}
  \includegraphics[width=\textwidth]{fig/baseline}
@@ -214,34 +214,16 @@ Neurons that are activated by one traveling wave will be hyperpolarized and less
 \subsection{Connectivity} \label{sub:connectivity}
 We first investigate the impact of connectivity on traveling wave formation.
 We varied the connection strength parameter $K$ and observed the conditions under which uniform background stimulus would produce traveling waves.
-In Figure \ref{fig:strength_effect} we show typical traveling waves for three different values of $K$.
-\begin{figure}[!htb]
- \caption{Effect of connection strength on traveling wave formation. $K$ is the connection strength parameter. At $K=2$ the firing events appear random, while at $K=6$ traveling waves are clearly evident.}
- \centering
-   \includegraphics[width=0.75\textwidth]{fig/ConnectionStrengthWaves}  
- \label{fig:strength_effect}
-\end{figure}
-
-At low connection strength $K=2$ the firing events appear random.
-Traveling waves are evident at a higher connection strength of $K=4$.
-We see visually that the traveling wave patterns dominate the firing activity at $K=6$. \\
-We performed 50 simulations values of $K$ from $2$ to $6$ at intervals of $0.5$ and determine the wave firing fraction as described in methods (Figure \ref{fig:conn_fraction}).
+We performed 100 simulations each of values of $K$ from $3$ to $12$ and determined the wave firing fraction as described in methods (Figure \ref{fig:conn_fraction}).
 Below $K=3.5$ no traveling waves are detected.
-We observe the transition at $K=3.5$ where traveling waves are observed but most of the firing events are still random.
-From $K=3.5$ to $K=5$ the wave firing fraction is porportional to $K$, indicating that traveling waves become more dominant as the neurons become more strongly connected.
-At $K>5$ more than $90\%$ of the firing events are part of a traveling wave.
+We observe the transition around $K=5$ where traveling waves are observed but most of the firing events are still random.
+The wave firing fraction is porportional to $K$, indicating that traveling waves dominate the firing activity as the neurons become more strongly connected.
+At $K>11$ more than $90\%$ of the firing events are part of a traveling wave.
 \begin{figure}[!htb]
- \caption{Traveling waves emerge at $K=3.5$. As the connection strength increases the traveling waves dominate all firing events in the column.}
+ \caption{Traveling waves emerge around $K=5$. As the connection strength increases the traveling waves dominate all firing events in the column.}
  \centering
-   \includegraphics[width=0.5\textwidth]{fig/ConnectionStrengthWaveFraction}  
+   \includegraphics[width=\textwidth]{fig/ConnectionStrengthWaveFraction}  
  \label{fig:conn_fraction}
-\end{figure}
-We examine the critical region between $K=3$ and $K=3.5$ and determine that traveling waves emerge at $K=3.15$ (Figure \ref{fig:conn_fraction_critical}).
-\begin{figure}[!htb]
- \caption{Close-up of the critical region at which traveling waves emerge at $K=3.15$.}
- \centering
-   \includegraphics[width=0.5\textwidth]{fig/ConnectionStrengthWaveFraction_CriticalRegion}  
- \label{fig:conn_fraction_critical}
 \end{figure}
 
 \subsection{Delay} \label{sub:delay}
