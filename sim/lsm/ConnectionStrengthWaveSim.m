@@ -27,7 +27,7 @@ delay.dt = dt;
         
 pidx=1;
 delayMult = 1;
-connStrength = [3:0.5:5.5 5.75:0.25:8 9:12];
+connStrength = [3:0.5:4.5 4.75:0.25:8.75 8:12];
 
 nTrials = 100;
 delay.delayFrac = 1;
@@ -63,15 +63,17 @@ for kk = 1:length(connStrength)
                 waveSizes = [waveSizes sizes];
                 waveFractions = [waveFractions waveFrac];
                 waveSlopes = [waveSlopes slopes];
+            else
+                waveFractions = [waveFractions 0];
             end
         end
 
     end
     waveSize(pidx,:) = [mean(waveSizes) std(waveSizes)];
     waveFraction(pidx,:) = [mean(waveFractions) std(waveFractions)];
-    if length(waveFractions) < 5
-       waveFraction(pidx,:) = [0 0]; 
-    end
+    %if length(waveFractions) < nTrials/2
+    %   waveFraction(pidx,:) = [0 0]; 
+    %end
     waveSlope(pidx,:) = [mean(waveSlopes) std(waveSlopes)];
     pidx = pidx+1;
 end
