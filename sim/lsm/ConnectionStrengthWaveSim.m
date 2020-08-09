@@ -1,11 +1,14 @@
 clear; close all;
+
+rng(42); %Seed random for consistent results
+
 width = 2;
 height = 2;
 layers = 100;
 N = width*height*layers;
 
 tmax = 1000;
-dt = 1;
+dt = 0.2;
 t = 0:dt:tmax;
 
 %Column parameters
@@ -27,9 +30,9 @@ delay.dt = dt;
         
 pidx=1;
 delayMult = 1;
-connStrength = [3:0.5:4.5 4.75:0.25:8.75 8:12];
+connStrength = [4:0.25:12];
 
-nTrials = 20;
+nTrials = 100;
 delay.delayFrac = 1;
 stimStrength = 5;
 figure(20); subplot(1, length(connStrength),1); hold on;
@@ -58,7 +61,7 @@ for kk = 1:length(connStrength)
         wl={};
         if ~isempty(firings)
             [wt wp wl] = findWaves(firings, dt*.001, width*height);
-            if ~isempty(wl)
+            if length(wl) > 3
                 [sizes waveFrac slopes] = analyzeWaves(wt, wp, wl);
                 waveSizes = [waveSizes sizes];
                 waveFractions = [waveFractions waveFrac];
@@ -69,12 +72,17 @@ for kk = 1:length(connStrength)
         end
 
     end
-    waveSize(pidx,:) = [mean(waveSizes) std(waveSizes)];
-    waveFraction(pidx,:) = [mean(waveFractions) std(waveFractions)];
-    %if length(waveFractions) < nTrials/2
-    %   waveFraction(pidx,:) = [0 0]; 
-    %end
-    waveSlope(pidx,:) = [mean(waveSlopes) std(waveSlopes)];
+    
+    if length(waveSizes) > nTrials/10
+        waveSize(pidx,:) = [mean(waveSizes) std(waveSizes)];
+        waveFraction(pidx,:) = [mean(waveFractions) std(waveFractions) min(waveFractions) max(waveFractions)];
+        waveSlope(pidx,:) = [mean(waveSlopes) std(waveSlopes)];
+    else
+        waveSize(pidx,:) = [0 0];
+        waveFraction(pidx,:) = [0 0 0 0];
+        waveSlope(pidx,:) = [0 0];
+    end
+    
     pidx = pidx+1;
 end
 
@@ -83,6 +91,7 @@ xVals = connStrength;
 %Figure 6 in paper
 figure(6);
 errorbar(xVals, waveFraction(:,1), waveFraction(:,2),'k.'); 
+%errorbar(xVals, waveFraction(:,1), waveFraction(:,3), waveFraction(:,4), 'k.'); 
 xlim([xVals(1)-0.2 xVals(end)+0.2]);
 xlabel('Connection strength K')
 ylabel('Wave firing fraction')

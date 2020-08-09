@@ -1,4 +1,4 @@
-function [waveTimes wavePositions waveLabels, figNum] = findWaves(firings, dt, crossSection)
+function [waveTimes wavePositions waveLabels] = findWaves(firings, dt, crossSection, figNum)
 %Find propagating waves in a column
 % firings - firings times by time step/neuron index
 if nargin<4
@@ -9,14 +9,14 @@ waveTimes = [];
 wavePositions = [];
 waveLabels = {};
 
-winSz = .020;
-winStep = .010;
+winSz = 20; %Milliseconds
+winStep = 10; %Milliseconds
 bridge = 3;
 minClusPts = 3;
 
 %Get firing matrix in terms of time and layer #
 f = firings;
-f(:,1) = f(:,1) * dt;
+f(:,1) = f(:,1);
 f(:,2) = floor( f(:,2) / crossSection );
 
 if figNum > 0 
