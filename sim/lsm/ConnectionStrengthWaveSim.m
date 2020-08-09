@@ -29,7 +29,7 @@ pidx=1;
 delayMult = 1;
 connStrength = [3:0.5:4.5 4.75:0.25:8.75 8:12];
 
-nTrials = 100;
+nTrials = 20;
 delay.delayFrac = 1;
 stimStrength = 5;
 figure(20); subplot(1, length(connStrength),1); hold on;
