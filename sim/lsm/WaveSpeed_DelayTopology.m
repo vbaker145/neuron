@@ -1,9 +1,10 @@
 clear all; close all;
-rng(42);
+
+rng(42); %Seed random for consistent results
 
 width = 2;
 height = 2;
-layers = 100;
+layers = 50;
 N = width*height*layers;
 
 %Column parameters
@@ -19,7 +20,7 @@ connectivity.maxLength = 100;
 connectivity.connStrength = 24;
 
 dt = 0.2;
-tmax = 1200;
+tmax = 1000;
 t = 0:dt:tmax;
 
 delay.delayType = 1;
@@ -37,7 +38,7 @@ widthHeights = [2,2; 2,3; 3,3; 3,4; 4,4];
 slopesMean = zeros(length(delayMults), size(widthHeights,1));
 slopesStd = zeros(length(delayMults), size(widthHeights,1));
 
-Ntrials = 3;
+Ntrials = 20;
 slopes = zeros(length(delayMults), size(widthHeights,1), Ntrials);
 for jj=1:length(delayMults)
     delay_t = delay;
@@ -63,24 +64,28 @@ for jj=1:length(delayMults)
                 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure_t, connectivity, delay_t);
 
                 %Simulate column
-                vinit=-65*ones(N,1)+10*rand(N,1);    % Initial values of v
+                vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
                 uinit=b.*vinit;                 % Initial values of u
 
                 %Column impulse response
                 [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
-                figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
-                xlabel('Time (seconds)','FontSize',12)
-                ylabel('Z position', 'FontSize', 12)
-                set(gca, 'FontSize',12)
-                [wt wp wl] = findWaves(firings, dt/1000, structure_t.width*structure_t.height);
+%                 figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
+%                 xlabel('Time (seconds)','FontSize',12)
+%                 ylabel('Z position', 'FontSize', 12)
+%                 set(gca, 'FontSize',12)
+                %[wt wp wl] = findWaves(firings, dt/1000, structure_t.width*structure_t.height, 200);
                 
                 %[sizes waveFrac slope] = analyzeWaves(wt, wp, wl);
                 %slopes(testIdx) = mean(slope);
                 
                 %Alternate slope measurement
-                endTime = min(wt(wp>layers-3)); %Find first activation of top layer
+                fl = firings(:,2)/N_layer;
+                topFires = find(fl > structure.layers-3 );
+                endTime = min( firings(topFires,1) );
+                
+                %endTime = min(wt(wp>layers-3)); %Find first activation of top layer
                 if ~isempty(endTime) 
-                    tslope(testIdx) = endTime-0.020; %Speed is time from stimulus to first activation
+                    tslope(testIdx) = endTime-20*dt; %Speed is time from stimulus to first activation
                 end
                 %figure; plot(wt, wp, 'k.'); title(num2str(kk));
             end 
