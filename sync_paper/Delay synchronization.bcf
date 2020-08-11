@@ -2080,15 +2080,19 @@
     <bcf:citekey order="29">izzy_code</bcf:citekey>
     <bcf:citekey order="30">ermentrout2001</bcf:citekey>
     <bcf:citekey order="31">keane2015</bcf:citekey>
-    <bcf:citekey order="32">gibson2009</bcf:citekey>
-    <bcf:citekey order="33">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="34">ascoli2010</bcf:citekey>
+    <bcf:citekey order="32">muller2018</bcf:citekey>
+    <bcf:citekey order="33">keane2015</bcf:citekey>
+    <bcf:citekey order="34">senk2020</bcf:citekey>
     <bcf:citekey order="35">izhikevich</bcf:citekey>
-    <bcf:citekey order="36">ermentrout2001</bcf:citekey>
-    <bcf:citekey order="37">ermentrout2001</bcf:citekey>
-    <bcf:citekey order="38">muller2018</bcf:citekey>
-    <bcf:citekey order="39">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="40">gibson2009</bcf:citekey>
+    <bcf:citekey order="36">gibson2009</bcf:citekey>
+    <bcf:citekey order="37">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="38">ascoli2010</bcf:citekey>
+    <bcf:citekey order="39">izhikevich</bcf:citekey>
+    <bcf:citekey order="40">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="41">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="42">muller2018</bcf:citekey>
+    <bcf:citekey order="43">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="44">gibson2009</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">
   <bcf:sorting>

@@ -9,6 +9,7 @@
 \usepackage[font=scriptsize]{subcaption}
 \usepackage{wrapfig}
 \usepackage[backend=biber]{biblatex}
+\usepackage[section]{placeins}
 
 \addbibresource{nn.bib}
 \renewcommand\thesubsection{\alph{subsection}}
@@ -25,7 +26,7 @@
 \begin{abstract}
 Traveling waves of neural activity in the cortex have been observed in vivo.
 These traveling waves explain various features of observed cortical dynamics including spike timing variability and correlated fluctuations in neuron membrane potential.
-To undertand networks of neurons as a medium for wave propagation we explore a one-dimensional network of neurons with biologically influenced models of neuron dynamics and connectivity.
+To understand networks of neurons as a medium for wave propagation we explore a one-dimensional network of neurons with biologically influenced models of neuron dynamics and connectivity.
 We find that background stimulus reliably evokes traveling waves in networks with local connectivity between neurons.
 We also observe traveling waves in fully-connected networks when a model for action potential propagation speed is incorporated.
 The biological properties of the neurons influence the generation, annihilation and propagation of the traveling waves. 
@@ -198,28 +199,15 @@ Finally, we investigate the initiation of traveling waves from a uniform backgro
  \begin{tabularx}{\textwidth}{l | X | c | c | c | c | c | r}
   \textbf{Section} & \textbf{Topology} & \textbf{$\lambda$} & \textbf{E/I} & \textbf{M} & \textbf{K} & \textbf{$\kappa$} \\
   \hline
-  Baseline & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $5$ & $1$ \\ 
-  a & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $\textbf{2-6}$ & $1$ \\ 
-  b & $2x2x100$ & $\infty$ & $80\%$ & $5$ & $5$ & $\textbf{0,1}$ \\ 
-  c & $2x2x100$ & $2.5$ & $\textbf{0-100}\%$ & $5$ & $5$ & $1$ \\ 
-  d & $\textbf{(2x2,2x3,3x3)x100}$ & $2.5$ & $80\%$ & $5$ & $5$ & $\textbf{1-5}$ \\ 
-  e & $2x2x50$ & $2.5$ & $\textbf{80\% , 99+\%}$ & $5$ & $5$ & $1$ \\ 
+  a & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $\textbf{3-12}$ & $1$ \\ 
+  b & $2x2x100$ & $\infty$ & $80\%$ & $5$ & $10$ & $\textbf{0,1}$ \\ 
+  c & $2x2x100$ & $2.5$ & $\textbf{0-100}\%$ & $5$ & $10$ & $1$ \\ 
+  d & $\textbf{(2x2,2x3,3x3)x100}$ & $2.5$ & $80\%$ & $5$ & $24$ & $\textbf{1-5}$ \\ 
+  e & $2x2x50$ & $2.5$ & $\textbf{80\% , 99+\%}$ & $5$ & $10$ & $1$ \\ 
  \end{tabularx}
 \end{table}
 
-We first present a baseline experiment with uniform background stimulus to illustrate wave behavior. 
-The firing events in the experiment are plotted in Figure \ref{fig:baseline}.
-We note the visually well-defined traveling waves in the column, with waves being consistently initiated from approximate column positions 15, 32, 52, 70 and 90.
-The waves propagate until they interact with another traveling wave or reach the ends of the column.
-We observe that traveling waves annihilate each other when they meet.
-The annihilation effects can be explained by the refractory period of the neurons.
-Neurons that are activated by one traveling wave will be hyperpolarized and less likely to fire if another traveling waves arrives within a short time period.
-\begin{figure}[!ht]
- \centering
- \caption{Baseline traveling wave experiment with uniform stimulus.}
- \includegraphics[width=\textwidth]{fig/baseline}
- \label{fig:baseline}
-\end{figure}
+\FloatBarrier
 
 \subsection{Connectivity} \label{sub:connectivity}
 We first investigate the impact of connectivity on traveling wave formation.
@@ -227,7 +215,7 @@ We varied the connection strength parameter $K$ and observed the conditions unde
 We performed 100 simulations each of values of $K$ from $3$ to $12$ and determined the wave firing fraction as described in methods (Figure \ref{fig:conn_fraction}).
 Below $K=3.5$ no traveling waves are detected.
 We observe the transition around $K=5$ where traveling waves are observed but most of the firing events are still random.
-The wave firing fraction is porportional to $K$, indicating that traveling waves dominate the firing activity as the neurons become more strongly connected.
+The wave firing fraction is proportional to $K$, indicating that traveling waves dominate the firing activity as the neurons become more strongly connected.
 At $K>11$ more than $90\%$ of the firing events are part of a traveling wave.
 \begin{figure}[!ht]
  \caption{Traveling waves emerge around $K=5$. As the connection strength increases the traveling waves dominate all firing events in the column.}
@@ -237,7 +225,7 @@ At $K>11$ more than $90\%$ of the firing events are part of a traveling wave.
 \end{figure}
 
 \subsection{Delay} \label{sub:delay}
-To investigate the impact of delay we simulate a column with complete connectivity corresponing to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
+To investigate the impact of delay we simulate a column with complete connectivity corresponding to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
 This is analogous to the original Izhikevich simulation \cite{izzy_code} that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
 We first simulated the column with a fixed action potential propagation delay of $1~ms$ regardless of inter-neuron distance.
 The result was highly synchronized simultaneous firing among all neurons in the column.
@@ -245,13 +233,15 @@ We then incorporated our distance-dependent action potential propagation with th
 The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:delay_waves}).
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation time is proportional to the inter-neuron distance.
 \begin{figure}[!ht]
- \caption{Left: with global connectivity and no action potential propagation delay, the entire structure shows synchornized firing events. Right: With an action potential propagation delay, traveling wave behavior is observed.}
+ \caption{Left: with global connectivity and no action potential propagation delay, the entire structure shows synchronized firing events. Right: With an action potential propagation delay, traveling wave behavior is observed.}
  \centering
    \includegraphics[width=\textwidth]{fig/DelayWaves}  
  \label{fig:delay_waves}
 \end{figure}
 Previous work (\cite{ermentrout2001}, Figure 1) classifies several architectures for apparent traveling waves in the cortex.
 One architecture, ''Delayed Excitations from a Single Oscillator``, is a periodic source driving a sequence of excitable neurons with increasing time delays, but no connectivity between the neurons.
+
+\FloatBarrier
 
 \subsection{Excitatory/Inhibitory Balance} \label{sub:ei_balance}
 The excitatory/inhibitory balance is known to have a significant impact on neural network dynamics \cite{keane2015}. 
@@ -270,20 +260,76 @@ When all neurons are excitatory the traveling waves are the dominant mode of fir
    \includegraphics[width=\textwidth]{fig/ExcitatoryWaves}
 \end{figure}
 
+\FloatBarrier
+
 \subsection{Propagation speed} \label{sub:propagation_speed}
-To examine the velocity of the traveling waves we performed 50 velocity for measurements for two parameters of interest.
-We varied the propagation delay constant $\kappa$ from (1 to 4) and the cross section of the column (2x2, 2x3, 3x3).
-The results are shown in Figure \ref{fig:delay_topology}.
+Cortical traveling waves have been observed with propagating speeds from 0.1 to 0.8 meters per second \cite{muller2018}.
+The speed of our traveling waves are determined by a variety of factors including action potential delay parameter $\kappa$, characteristic connection length $\lambda$, and the column topology.
+The waves slow down as $\kappa$ increases, they speed up as $\lambda$ increases, and they speed up as the column cross-section increases.
+
+Observed wave speeds in the cortex are consistent with the action potential propagation speed in the gray matter found within the cortex, suggesting that action potential propagation is an important factor determining wave speed.
+In our framework the delay parameter $\kappa$ controls the action potential propagation time. 
+We find that the propagation speed is inversely related to $\kappa$ (Figure \ref{fig:delay_speed}).
+If wave speed was determined solely by the action potential propagation time we would expect the speed to go as $1/\kappa$, but this relationship does not hold.
+Furthermore, the wave speeds seem to be limited to less than 0.7 units/millisecond as $\kappa \rightarrow 0$.
+We suggest that the limit on wave speed is due in part to the neuron dynamics. 
+As we discuss below, our neurons take time to spike after receiving a stimulus that displaces the neuron from equilibrium.
+This inherent delay places a speed limit on the traveling waves.
+
 \begin{figure}[!htb]
- \caption{Wave speed is inversely proportional to $\kappa$ as expected. Wave speed also increases with the column cross-section.Mean values with $1\sigma$ error bars, 50 trials per measurement.}
- \label{fig:delay_topology}
+ \caption{Wave speed (circles) is inversely related to $\kappa$, but does not go as $1/\kappa$ (dashed line). The measured results do approach $1/\kappa$ at higher values. Data is averaged over 100 trials per value of $\kappa$}
+ \label{fig:delay_speed}
  \centering
-   \includegraphics[width=0.75\textwidth]{fig/WaveSpeed_DelayTopology}
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_Delay}
 \end{figure}
 
-We see that both the delay constant and the column topology influence the propagation speed.
-Increasing the inter-neuron action potential delay slows the traveling wave propagation.
-Waves travel faster in columns with larger cross-sections. 
+\FloatBarrier
+
+Propagation speed is also determined by the characteristic length of the local connectivity, $\lambda$.
+We measured wave speeds in a 2x2x50 column with $\kappa=1$  and varied $\lambda$ from 2 to 5.
+At $\lambda<2.5$ traveling waves were not observed.
+Longer ranger connections allow a spike from a presynaptic neuron to elicit spikes from postsynaptic neurons that are farther away (Figure \ref{fig:delay_lambda}).
+This facilitates faster traveling wave propagation.
+QUESTION: why is the slope 1/4, instead of 1??
+\begin{figure}[!htb]
+ \caption{ Wave speed increases with the characteristic local connection length $\lambda$ (circles). .Data is averaged over 20 trials for each value of $\lambda$.}
+ \label{fig:delay_lambda}
+ \centering
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_Lambda}
+\end{figure}
+
+\FloatBarrier
+
+We have found that the topology of the column also influences wave speed. 
+We measured wave speeds in a column with $\kappa=1$ and $\lambda=2.5$ with cross sections from 2x2 to 4x4.
+Waves travel faster in thicker columns with a larger cross-section (Figure \ref{fig:delay_topology}).
+Thicker columns have more neurons and connections per unit length.
+This leads to each neuron receiving a stronger stimulus from the passing wave.
+\begin{figure}[!htb]
+ \caption{ Waves propagate faster in thicker columns. Data is averaged over 10 trials per column topology.}
+ \label{fig:delay_topology}
+ \centering
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_Topology}
+\end{figure}
+
+The input current may push the neuron's dynamical system out of equilibrium and cause a spike, but the system dynamics take some time to evolve.
+Therefore the spike will occur with some delay after the stimulus.
+This is a common behavior in any multidimensional model of neuron dynamics, but it is not captured by the leaky integrate-and-fire model used in much of the previous research \cite{keane2015}\cite{senk2020}.
+We tested this spike delay by exposing populations of excitatory and inhibitory neurons to current steps of different magnitudes \cite{izhikevich}.
+The average firing delay of the excitatory and inhibitory neurons is shown in Figure \ref{fig:delay_neurondynamics}.
+The inhibitory neurons have a lower firing threshold than the excitatory neurons and fire with a shorter delay when given the same stimulus.
+Both excitatory and inhibitory neurons can take over $10ms$ to fire when the spike is elicited by a weak stimulus.
+\begin{figure}[!htb]
+ \caption{ A stronger stimulus creates a spike with less delay. The excitatory neurons have a higher firing threshold than the inhibitory neurons and do not emit a spike for very weak stimulus.}
+ \label{fig:delay_neurondynamics}
+ \centering
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_NeuronDynamics}
+\end{figure}
+
+This explains the correlation between wave speed and column thickness.
+Neurons in the thicker columns receive a stronger stimulus from the passing wave and therefore fire with a shorter delay, leading to faster wave propagation.
+
+\FloatBarrier
 
 \subsection{Wave Initiation and Density} \label{sub:wave_initiation}
 We have observed preferential wave initiation sites in our experiments.
@@ -333,6 +379,7 @@ The wave density at $Z=40$ is the minimum density within the traveling wave, con
    \includegraphics[width=\textwidth]{fig/SingleLTSInhibit}
 \end{figure}
 
+\FloatBarrier
 
 \section{Discussion}
 We have demonstrated that representative neural structures can support traveling waves in one dimension.
@@ -348,7 +395,7 @@ The column topology can also influence the propagation speed.
 Columns with a larger cross-section have a larger number of neurons and synapses for a given length, providing more pathways for the traveling wave to propagate.
 The propagation delay parameter $\kappa$ does effect the wave propagation as expected, but the effect is not linear.
 If the traveling wave velocity was determined by the action potential propagation speed we would expect to see wave velocity of 1000 units/second with $\kappa=1$.
-Instead the wave velocity is less than half the simple prediction (Figure \ref{fig:delay_topology}).
+Instead the wave velocity is less than half the simple prediction (Figure \ref{fig:delay_speed}).
 A four-fold increase in $\kappa$ does not reduce the traveling wave propagation speed by a factor of 4. 
 
 The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.

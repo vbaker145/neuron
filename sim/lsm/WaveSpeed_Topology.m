@@ -92,9 +92,9 @@ speed = structure.layers./nanmean(slopes);
 
 figure(6);
 xVals = 1:size(widthHeights,1);
-plot(xVals, speed,'ko'); 
+plot(xVals, speed,'ko', 'MarkerSize', 10); 
 xlim([xVals(1)-0.1 xVals(end)+0.1]);
-xlabel('\tau')
+xlabel('Column width x height')
 xticks(xVals);
 xticklabels({'2x2','2x3','3x3','3x4','4x4'})
 ylabel('Speed (units/ms)')

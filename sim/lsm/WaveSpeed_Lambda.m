@@ -6,6 +6,7 @@ width = 2;
 height = 2;
 layers = 50;
 N = width*height*layers;
+N_layer = width*height;
 
 %Column parameters
 structure.width = width;
@@ -32,20 +33,14 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
-delayMults = 0.5:0.25:5;
 
-slopesMean = zeros(length(delayMults),1);
-slopesStd = zeros(length(delayMults), 1);
+Ntrials = 20;
+lambdas = 2:0.5:5;
+slopes = NaN(Ntrials, length(lambdas) );
 
-Ntrials = 100;
-slopes = NaN(Ntrials, length(delayMults) );
-for jj=1:length(delayMults)
-    delay_t = delay;
-    delay_t.delayMult = delayMults(jj);
-    structure_t = structure;
-    N = structure_t.width*structure_t.height*layers;
-    N_layer = structure_t.width*structure_t.height;
-
+for jj=1:length(lambdas)
+    connectivity.lambda = lambdas(jj);
+            
     %Impulsive stimulus
     stImpulse = zeros(N, size(t,2))*rand();
     sidx = 1;
@@ -57,7 +52,7 @@ for jj=1:length(delayMults)
     tslope = NaN(1, Ntrials);
     for testIdx = 1:Ntrials
         %Make column
-        [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure_t, connectivity, delay_t);
+        [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
 
         %Simulate column
         vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
@@ -91,11 +86,10 @@ end
 speed = structure.layers./nanmean(slopes);
 
 figure(6);
-xVals = delayMults;
-plot(xVals, speed,'ko', 'MarkerSize', 10); 
-hold on; plot(delayMults, 1./delayMults, 'k--', 'MarkerSize',10)
+xVals = lambdas;
+plot(xVals, speed,'ko', 'MarkerSize',10); 
 xlim([xVals(1)-0.1 xVals(end)+0.1]);
-xlabel('\kappa')
+xlabel('\lambda')
 ylabel('Speed (units/ms)')
 set(gca,'FontSize',12);
-legend('Measured wave speed', '1/\kappa');
+
