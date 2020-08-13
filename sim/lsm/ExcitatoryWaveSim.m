@@ -30,9 +30,10 @@ delay.dt = dt;
         
 pidx=1;
 nTrials = 100;
-percentExc = 0.3:0.025:1;
+%percentExc = 0.3:0.025:1;
+percentExc = 1;
 stimStrength = 5;
-figure(20); subplot(length(percentExc),1,1); hold on;
+%figure(20); subplot(length(percentExc),1,1); hold on;
 for kk = 1:length(percentExc)
     connectivity.percentExc = percentExc(kk);
     waveSizes = []; waveFractions =[]; waveSlopes = [];
@@ -52,6 +53,7 @@ for kk = 1:length(percentExc)
 
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, sti);
         size(firings)
+        figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
         
         %figure; imagesc(vall); colorbar; title(num2str(delayMult(kk)));
 %         figure(20); subplot(length(percentExc),1,kk)

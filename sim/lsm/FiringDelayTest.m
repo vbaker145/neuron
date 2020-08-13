@@ -31,18 +31,19 @@ delay.dt = dt;
 
 vall = []; uall = [];
 
-currentStepMag = 1:15;
+currentStepMag = 1:25;
 
 %Make column
 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
     
 fdelExc = [];
+    
 for jj=1:length(currentStepMag)
     %Step stimulus to all neurons at t=100 milliseconds
     stImpulse = zeros(N, size(t,2));
     sidx = 100/dt;
-    stImpulse(:, sidx:end)= currentStepMag(jj);
-    stImpulse = (interp1(0:tmax, stImpulse(:,1:1/dt:end)', 0:dt:tmax))';    
+    stImpulse(:, sidx:sidx+floor(2/dt))= currentStepMag(jj);
+    stImpulse = (interp1(0:tmax, stImpulse(:,1:1/dt:end)', 0:dt:tmax))'; 
 
     %Simulate column
     vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
@@ -79,13 +80,13 @@ connectivity.percentExc = 0; %All inhibitory neurons
 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
     
 fdelInhb = [];
-for jj=1:length(currentStepMag)
+for jj=1:length(currentStepMag)   
     %Step stimulus to all neurons at t=100 milliseconds
     stImpulse = zeros(N, size(t,2));
     sidx = 100/dt;
-    stImpulse(:, sidx:end)= currentStepMag(jj);
-    stImpulse = (interp1(0:tmax, stImpulse(:,1:1/dt:end)', 0:dt:tmax))';    
-
+    stImpulse(:, sidx:sidx+floor(2/dt))= currentStepMag(jj);
+    stImpulse = (interp1(0:tmax, stImpulse(:,1:1/dt:end)', 0:dt:tmax))'; 
+    
     %Simulate column
     vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
     uinit=b.*vinit;                 % Initial values of u
@@ -119,6 +120,6 @@ end
 figure; 
 plot(currentStepMag, fdelExc-100, 'ko-','MarkerSize', 10);
 hold on; plot(currentStepMag, fdelInhb-100, 'kx--','MarkerSize', 10);
-xlabel('Input step magnitude (mV)'); ylabel('Average delay before firing (ms)');
+xlabel('Input pulse magnitude (mV)'); ylabel('Average delay before firing (ms)');
 legend(['Excitatory neurons'; 'Inhibitory neurons']);
 set(gca,'FontSize', 12);

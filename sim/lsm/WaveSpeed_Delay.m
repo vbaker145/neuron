@@ -99,3 +99,9 @@ xlabel('\kappa')
 ylabel('Speed (units/ms)')
 set(gca,'FontSize',12);
 legend('Measured wave speed', '1/\kappa');
+
+figure(7); 
+errorbar(xVals, nanmean(slopes), nanstd(slopes),'ko')
+xlabel('\kappa')
+ylabel('Transit time (ms)')
+set(gca,'FontSize',12);

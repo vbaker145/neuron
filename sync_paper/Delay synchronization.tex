@@ -315,10 +315,18 @@ This leads to each neuron receiving a stronger stimulus from the passing wave.
 The input current may push the neuron's dynamical system out of equilibrium and cause a spike, but the system dynamics take some time to evolve.
 Therefore the spike will occur with some delay after the stimulus.
 This is a common behavior in any multidimensional model of neuron dynamics, but it is not captured by the leaky integrate-and-fire model used in much of the previous research \cite{keane2015}\cite{senk2020}.
-We tested this spike delay by exposing populations of excitatory and inhibitory neurons to current steps of different magnitudes \cite{izhikevich}.
+Figure \ref{fig:delay_neuronstep} shows the delayed response of a neuron to a pulse of current.
+\begin{figure}[!htb]
+ \caption{ A pulse of current (bottom) starting at $t=100 ms$ and lasting $2 ms$ disturbs the equilibrium membrane potential of a neuron (top), elicitng a spike at $t=112 ms$. }
+ \label{fig:delay_neuronstep}
+ \centering
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_NeuronStepTest}
+\end{figure}
+
+We characterized this spike delay by exposing populations of excitatory and inhibitory neurons to $2 ms$ current pulses of different magnitudes \cite{izhikevich}.
 The average firing delay of the excitatory and inhibitory neurons is shown in Figure \ref{fig:delay_neurondynamics}.
 The inhibitory neurons have a lower firing threshold than the excitatory neurons and fire with a shorter delay when given the same stimulus.
-Both excitatory and inhibitory neurons can take over $10ms$ to fire when the spike is elicited by a weak stimulus.
+Both excitatory and inhibitory neurons exhibit a delayed response of several $ms$ or more.
 \begin{figure}[!htb]
  \caption{ A stronger stimulus creates a spike with less delay. The excitatory neurons have a higher firing threshold than the inhibitory neurons and do not emit a spike for very weak stimulus.}
  \label{fig:delay_neurondynamics}
