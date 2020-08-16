@@ -88,7 +88,8 @@ for jj=1:length(delayMults)
     end 
 end
 
-speed = structure.layers./nanmean(slopes);
+waveSpan = structure.layers-stimDepth;
+speed = 1./nanmean(slopes./waveSpan);
 
 figure(6);
 xVals = delayMults;
@@ -101,7 +102,7 @@ set(gca,'FontSize',12);
 legend('Measured wave speed', '1/\kappa');
 
 figure(7); 
-errorbar(xVals, nanmean(slopes), nanstd(slopes),'ko')
+errorbar(xVals, nanmean(slopes./waveSpan), nanstd(slopes./waveSpan),'ko')
 xlabel('\kappa')
-ylabel('Transit time (ms)')
+ylabel('Transit time (ms/unit)')
 set(gca,'FontSize',12);
