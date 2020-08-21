@@ -29,12 +29,16 @@ delay.delayFrac = 1.0;
 delay.dt = dt;
         
 pidx=1;
+delayMult = 1;
+lambdas = 1:0.25:4;
+
 nTrials = 100;
-percentExc = 0.3:0.025:1;
+delay.delayFrac = 1;
 stimStrength = 5;
-for kk = 1:length(percentExc)
-    connectivity.percentExc = percentExc(kk);
-    waveSizes = []; waveFractions =[]; waveSlopes = [];
+for kk = 1:length(lambdas)
+    connectivity.lambda = lambdas(kk);
+    waveSizes = []; waveFractions =[]; waveSlopes = []; 
+    wavePts = 0; nFirings = 0;
     for jj=1:nTrials
         vall = []; uall = [];
         
@@ -50,49 +54,49 @@ for kk = 1:length(percentExc)
         sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, sti);
-        size(firings)
-        %figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+        nFirings = nFirings + size(firings,1);
+        %plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
 
         %Analyze results
         wl={};
         if ~isempty(firings)
             [wt wp wl] = findWaves(firings, dt*.001, width*height);
             if length(wl) > 3
-                [sizes waveFrac slopes] = analyzeWaves(wt, wp, wl);
+                [sizes waveFrac slopes nWavePts] = analyzeWaves(wt, wp, wl);
                 waveSizes = [waveSizes sizes];
                 waveFractions = [waveFractions waveFrac];
                 waveSlopes = [waveSlopes slopes];
+                wavePts = wavePts + nWavePts;
             else
                 waveFractions = [waveFractions 0];
             end
         end
 
-        %if ~isempty(wl)
-        %    nWavePts = sum(cellfun(@length,wl));
-        %    frac(midx) = nWavePts/length(wp);
-        %    medWaveSize(midx) = median(cellfun(@length,wl));
-        %    midx=midx+1;
-        %end
     end
+    
     if length(waveSizes) > nTrials/10
         waveSize(pidx,:) = [mean(waveSizes) std(waveSizes)];
         waveFraction(pidx,:) = [mean(waveFractions) std(waveFractions) min(waveFractions) max(waveFractions)];
         waveSlope(pidx,:) = [mean(waveSlopes) std(waveSlopes)];
+        waveFracTotal(pidx) = wavePts/nFirings;
     else
         waveSize(pidx,:) = [0 0];
         waveFraction(pidx,:) = [0 0 0 0];
         waveSlope(pidx,:) = [0 0];
     end
+    
     pidx = pidx+1;
 end
 
-xVals = percentExc;
+xVals = lambdas;
 
+%Figure 6 in paper
 figure(6);
 errorbar(xVals, waveFraction(:,1), waveFraction(:,2),'k.'); 
 %errorbar(xVals, waveFraction(:,1), waveFraction(:,3), waveFraction(:,4), 'k.'); 
-xlim([xVals(1)-0.05 xVals(end)+0.05]);
-set(gca,'FontSize',12);
-xlabel('Excitatory fraction P_{exc}')
+xlim([xVals(1)-0.2 xVals(end)+0.2]);
+xlabel('Connection length \lambda')
 ylabel('Wave firing fraction')
 set(gca,'FontSize',12);
+
+

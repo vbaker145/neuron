@@ -1,4 +1,4 @@
-function [ sizes waveFraction slopes ] = analyzeWaves( wt, wp, labels )
+function [ sizes waveFraction slopes nWavePts] = analyzeWaves( wt, wp, labels )
 %Analyze properties of traveling waves
 % wt - vector of firing cluster times
 % wp - vector of firing cluster z value

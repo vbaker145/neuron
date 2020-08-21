@@ -18,7 +18,7 @@ connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.maxLength = 100;
-connectivity.connStrength = 24;
+connectivity.connStrength = 10;
 
 dt = 0.1;
 tmax = 1000;
@@ -34,12 +34,12 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
 
-Ntrials = 20;
-lambdas = 2:0.25:5;
-slopes = NaN(Ntrials, length(lambdas) );
+Ntrials = 100;
+Ks = 18:40;
+slopes = NaN(Ntrials, length(Ks) );
 
-for jj=1:length(lambdas)
-    connectivity.lambda = lambdas(jj);
+for jj=1:length(Ks)
+    connectivity.connStrength = Ks(jj);
             
     %Impulsive stimulus
     stImpulse = zeros(N, size(t,2))*rand();
@@ -59,8 +59,8 @@ for jj=1:length(lambdas)
         uinit=b.*vinit;                 % Initial values of u
 
         %Column impulse response
-        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
-%         figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
+        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);         
+        %figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
 %         xlabel('Time (seconds)','FontSize',12)
 %         ylabel('Z position', 'FontSize', 12)
 %         set(gca, 'FontSize',12)
@@ -85,20 +85,21 @@ end
 
 waveSpan = structure.layers-stimDepth;
 speed = 1./nanmean(slopes./waveSpan);
-xVals = lambdas;
+xVals = Ks;
 
 figure(6); subplot(1,2,1);
 errorbar(xVals, nanmean(slopes./waveSpan), nanstd(slopes./waveSpan),'ko')
-xlim([xVals(1)-0.1 xVals(end)+0.1]);
-xlabel('\lambda')
+xlim([xVals(1)-1 xVals(end)+1]);
+xlabel('K')
 ylabel('Pace (ms/unit)')
 set(gca,'FontSize',12);
 
 subplot(1,2,2);
 plot(xVals, speed,'ko', 'MarkerSize',10); 
-xlim([xVals(1)-0.1 xVals(end)+0.1]);
-xlabel('\lambda')
+xlim([xVals(1)-1 xVals(end)+1]);
+xlabel('K')
 ylabel('Speed (units/ms)')
 set(gca,'FontSize',12);
 
-save('WaveSpeedLambda.mat', 'slopes', 'speed', 'waveSpan', 'lambdas', 'structure');
+save('WaveSpeedK.mat', 'slopes', 'speed', 'waveSpan', 'Ks', 'structure');
+

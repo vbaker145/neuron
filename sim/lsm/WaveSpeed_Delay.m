@@ -90,19 +90,20 @@ end
 
 waveSpan = structure.layers-stimDepth;
 speed = 1./nanmean(slopes./waveSpan);
-
-figure(6);
 xVals = delayMults;
-plot(xVals, speed,'ko', 'MarkerSize', 10); 
-hold on; plot(delayMults, 1./delayMults, 'k--', 'MarkerSize',10)
+
+figure(6); subplot(1,2,1);
+errorbar(xVals, nanmean(slopes./waveSpan), nanstd(slopes./waveSpan),'ko')
+xlim([xVals(1)-0.1 xVals(end)+0.1]);
+xlabel('\kappa')
+ylabel('Pace (ms/unit)')
+set(gca,'FontSize',12);
+
+subplot(1,2,2);
+plot(xVals, speed,'ko', 'MarkerSize',10); 
 xlim([xVals(1)-0.1 xVals(end)+0.1]);
 xlabel('\kappa')
 ylabel('Speed (units/ms)')
 set(gca,'FontSize',12);
-legend('Measured wave speed', '1/\kappa');
 
-figure(7); 
-errorbar(xVals, nanmean(slopes./waveSpan), nanstd(slopes./waveSpan),'ko')
-xlabel('\kappa')
-ylabel('Transit time (ms/unit)')
-set(gca,'FontSize',12);
+save('WaveSpeedKappa.mat', 'slopes', 'speed', 'waveSpan', 'delayMults', 'structure');
