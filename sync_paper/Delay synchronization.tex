@@ -184,30 +184,17 @@ We found that when verifying convergence of our results as a function of smaller
  \label{fig:time_step}
 \end{figure}
 
+\FloatBarrier
 
 \section{Results}
 The results are organized as a series of experiments into traveling waves.
-We first examine the connectivity between the neurons and find traveling waves for columns with local connectivity.
-We then examine the impact of action potential propagation delay, finding that traveling waves are supported in fully-connected columns when the propagation delay is proportional to distance.
-Wave propagation speed is investigated as a function of the action potential propagation speed and column topology, and we find that wave propagation speed is proportional to action potential propagation speed and column cross-section (\ref{sub:propagation_speed}).
-Finally, we investigate the initiation of traveling waves from a uniform background stimulus and determine why a given column has preferential sites for wave initiation (\ref{sub:wave_initiation}).
-
-\begin{table}[!htb]
- \caption{Model parameters used in the experiments in each subsection}
- \label{tab:experiment_params}
- \centering
- \begin{tabularx}{\textwidth}{l | X | c | c | c | c | c | r}
-  \textbf{Section} & \textbf{Topology} & \textbf{$\lambda$} & \textbf{$P_{exc}$} & \textbf{M} & \textbf{K} & \textbf{$\kappa$} \\
-  \hline
-  a & $2x2x100$ & $2.5$ & $80\%$ & $5$ & $\textbf{3-12}$ & $1$ \\ 
-  b & $2x2x100$ & $\infty$ & $80\%$ & $5$ & $10$ & $\textbf{0,1}$ \\ 
-  c & $2x2x100$ & $2.5$ & $\textbf{0-100}\%$ & $5$ & $10$ & $1$ \\ 
-  d & $\textbf{(2x2,2x3,3x3)x100}$ & $2.5$ & $80\%$ & $5$ & $24$ & $\textbf{1-5}$ \\ 
-  e & $2x2x50$ & $2.5$ & $\textbf{80\% , 99+\%}$ & $5$ & $10$ & $1$ \\ 
- \end{tabularx}
-\end{table}
-
-\FloatBarrier
+We first determine which parameterizations of our model support traveling waves.
+Stronger and more numerous local connections between neurons are found to facilitate the formation of traveling wave patters.
+We then investigate the influence of neural dynamics and connectivity on the speed of traveling waves.
+Stronger neural connections and faster action potential propagation are shown to increase traveling wave speed, but the neuron dynamics enforce an upper limit. 
+Low-threshold-spiking inhibitory neurons are shown to consistently generate traveling waves through the mechanism of post-inhibitory rebound spiking.
+The low-threshold-spiking inhibitory neurons also suppress traveling waves that originate from other points in the column.
+Finally, we examine fully-connected networks and observe that traveling wave patterns can still emerge provided the action potential propagation speed is slow enough.
 
 \subsection{Conditions for traveling waves} \label{sub:waves}
 We first explore which parameterizations of our model will support traveling waves.
@@ -267,12 +254,8 @@ COMBINED FIGURE (needs to be cleaned up).
 Will edit text to accompany this figure, 
 \begin{figure}[!htb]
  \centering
- \includegraphics[width=0.45\textwidth]{fig/ConnectionStrengthWaveFraction}\hfill
- \includegraphics[width=0.45\textwidth]{fig/LambdaWaveFraction}
- \\
- \includegraphics[width=0.45\textwidth]{fig/ExcitatoryWaves}\hfill
- \includegraphics[width=0.45\textwidth]{fig/KappaWaveFraction}
- \caption{Certain model parameters support traveling waves. A) Traveling waves emerge around $K=5.75$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge aaroudn $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves emerge aroudn $\kappa=0,3$, and quickly domiante the firing activity. }
+ \includegraphics[width=\textwidth]{fig/ParamWaveSim}
+ \caption{Certain model parameters support traveling waves. A) Traveling waves emerge around $K=6$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge aaroudn $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves emerge aroudn $\kappa=0,3$, and quickly domiante the firing activity. }
  \label{fig:wave_parameters}
 \end{figure}
 
