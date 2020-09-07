@@ -29,30 +29,29 @@ These traveling waves explain various features of observed cortical dynamics inc
 To understand networks of neurons as a medium for wave propagation we explore a one-dimensional network of neurons with biologically influenced models of neuron dynamics and connectivity.
 We find that background stimulus reliably evokes traveling waves in networks with local connectivity between neurons.
 We also observe traveling waves in fully-connected networks when a model for action potential propagation speed is incorporated.
-The biological properties of the neurons influence the generation, annihilation and propagation of the traveling waves. 
-Our one-dimensional model is not only useful for studying the basic properties of traveling waves in neural networks.
-It also provides a simplified representation of the mini-column or micro-column structural elements that are found in the cortex.
+The biological properties of the neurons influence the generation and propagation of the traveling waves. 
+Our one-dimensional model is not only useful for studying the basic properties of traveling waves in neural networks, it also provides a simplified representation of the mini-column or micro-column structural elements that are found in the cortex.
 
 \end{abstract}
 
 \section{Introduction} 
-Connected neurons that fire sequentially can continue spreading their firings to neighboring neurons creating a traveling wave of neuron action potentials. 
+Connected neurons that fire sequentially can stimulate firings from neighboring neurons, creating a traveling wave of neuron spikes. 
 These traveling waves have been observed in the cortex of mammalian brains \cite{muller2018}\cite{reimer2010}  as well as in vitro \cite{wu2008}\cite{huang2004}, and subsequently have been reproduced in silico \cite{keane2015}\cite{senk2020}. 
-While the function of traveling waves is unknown \cite{wu2008}\cite{muller2018}, proposed functions include motor coordination [REFS], place field coordination in the hippocampus [REFS], and spatiotemporal processing in the visual cortex [10]. 
+While the function of traveling waves is unknown \cite{wu2008}\cite{muller2018}, proposed functions include motor coordination \cite{sanes1993}, place field coordination in the hippocampus \cite{lubernov2009}, and spatiotemporal processing in the visual cortex \cite{wu2008}\cite{muller2014}. 
 
 Neuronal traveling waves are not uniquely defined as they can exist at widely differing frequency and scale lengths.  
-In the sleep and anesthetized states,slow and large-scale wave activity has been recorded [10]. 
+In the sleep and anesthetized states,slow and large-scale wave activity has been recorded \cite{muller2018}. 
 Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \cite{wu2008}\cite{shoham1999}.  
 Similarly, traveling waves also differ by the manner in which they are created. 
 Both spontaneously occurring waves and stimulus-evoked \cite{reimer2010} waves have been observed in the visual and auditory cortex . 
-Computational and mathematical modeling of traveling waves in a variety of models have shown many of the characteristics observed experimentally \cite{ermentrout2001}[8, REFS - Muller 2018 HAS A LOT OF THESE REFERENCES].
+Computational and mathematical modeling of traveling waves in a variety of models have shown many of the characteristics observed experimentally \cite{ermentrout2001}\cite{keane2015}\cite{gibson2009}.
 
 The vast majority of studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \cite{reimer2010}\cite{keane2015}. 
 This is to be expected as this is the geometry of the system on which they are observed. 
-However, there is no apriori reason that prevents the existence of traveling waves on other geometries as long as the network considers time delay of neuronal signaling and local connectivity of its neurons \cite{ermentrout2001}\cite{senk2020}. 
-Of interest, there are regions of the brain where there are what seem to be essentially one-dimensional structures [DeFelipe 1990; Mountcastle 1997, 2003; Rockland and Ichinohe 2004,] typically called micro- or minicolumns. 
+However, there is no a priori reason that prevents the existence of traveling waves on other geometries as long as the network considers time delay of neuronal signaling and local connectivity of its neurons \cite{ermentrout2001}\cite{senk2020}. 
+Of interest, there are regions of the brain where there are what seem to be essentially one-dimensional structures \cite{buxhoeveden2002}\cite{mountcastle1997}\cite{rockland2004} typically called micro- or minicolumns. 
 These minicolumns are aligned perpendicular to the pia and can be hundreds of microns long.  
-Although their relevance to cognition and function is still being debated \cite{horton2005}\cite{cruz2009}\cite{daCosta2010}\cite{buxhoeveden2002}. [see attached PDF: Peters and Sethares 1996;  Constantinidis 2001; Buxhoeveden and Casanova 2002; Vercelli 2004; Rockland and Ichinohe 2004; Buxhoeveden and Casanova 2005; Horton and Adams 2005; Krieger 2007; Cruz 2009 (attached); daCosta and Martin 2010 (attached)], it is possible that they can sustain traveling waves.
+Although their relevance to cognition and function is still being debated \cite{horton2005}\cite{cruz2009}\cite{daCosta2010}\cite{buxhoeveden2002}, it is possible that they can sustain traveling waves.
 
 To address this possibility, here we investigate the conditions under which traveling waves can exist on quasi one-dimensional systems, and their fundamental properties and dynamics.  
 Inspired by minicolumns, our systems consist of thin (few neuron) and long (~100 neuron) networks of locally connected neurons placed on a three-dimensional lattice.  
@@ -60,7 +59,8 @@ We model the neuron dynamics using the Izhikevich model \cite{izhikevich2003} th
 To incorporate elements of a real brain, we consider distance-dependent time delays in the propagation of action potentials using networks with a mix of excitatory and inhibitory neurons.
 
 Among our main findings we determine parameters in our model that allow for the generation of traveling waves in our quasi one-dimensional systems. 
-These traveling waves exhibit properties such as spontaneous creation from a random background stimulus, annihilation of colliding waves, and a wave velocity that is determined by both the propagation speed of the action potential and the specific column topology.
+These traveling waves exhibit properties such as spontaneous creation from a random background stimulus, annihilation of colliding waves, and a wave velocity that is determined by both the propagation speed of the action potential and the neuron dynamics.
+Traveling waves are present in both locally-connected and fully-connected systems, 
 
 \section{Methods}
 To study traveling waves in small columnar ensembles (SCE) of neurons we first construct these assemblies by placing neurons at the vertices of a cubic lattice described by two short (base) and one long dimension (height). 
@@ -71,7 +71,7 @@ After placing, we connect two neurons based on their relative distance according
 \end{align}
 Where $D(a,b)$ is the Euclidean distance between neuron A and B, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is a normalization constant.
 An example of an SCE is given in Figure \ref{fig:column_structure}a, with connections between neurons shown in Figure \ref{fig:column_structure}b.
-\begin{figure}[!ht]
+\begin{figure}[!htb]
  \caption{Example SCE with dimensions 3X3X15 and $\lambda$=2.5, and C=1. (a) SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. (b) Connectivity matrix that indicates existing connections between excitatory (green) and inhibitory neurons (red) using an excitatory to inhibitory ratio of 4:1. }
  \label{fig:column_structure}
  \centering
@@ -92,10 +92,8 @@ where $v$ is the membrane potential of the neuron and $u$ is a membrane recovery
 and I is the sum of all incoming currents to the neuron, explained in detail below. 
 
 Equation \ref{eq:neuron_v} has four parameters (a,b,c,d) that with specific values can model a wide range of neuronal spiking behavior \cite{izhikevich2003}. 
-The parameters used here, shown in Table \ref{tab:izzy_params}, are the same specified in \cite{izhikevich2003} that define a random population of neurons [I SEE DIFFERENCES 
-IN THE EXCIT c AND d AS COMPARED TO Izhikevic 2003, PLEASE VERIFY] where $U(s,t)$ represent a number drawn from a uniform random distribution between s and t. 
-In all of our systems we use a 4:1 ratio of excitatory to inhibitory neurons.
-\begin{table}[!h]
+The parameters used here, shown in Table \ref{tab:izzy_params}, based on those specified in \cite{izhikevich2003} with modification of the $c$ parameter for excitatory neurons, that define a random population of neurons where $U(s,t)$ represent a number drawn from a uniform random distribution between s and t. 
+\begin{table}[!htb]
  \caption{Izhekevich model parameters}
  \label{tab:izzy_params}
  \centering
@@ -108,12 +106,12 @@ In all of our systems we use a 4:1 ratio of excitatory to inhibitory neurons.
   d & 8-$\mathcal{U}(0,6)$& 2 \\
  \end{tabular}
 \end{table}
+For solving equation (2) numerically we use the modified Euler method from \cite{izhikevich2003} with a time step of 0.2 ms except were noted. 
 
 A crucial element to evoke traveling waves in neuronal systems is the existence of time delays between the creation of a presynaptic action potential and the arrival of that spike to a target neuron. 
 For this, we use distance-dependent time delays for the propagation of a spike from neuron $i$to neuron $j$ of $tau_ij = kappa * D(i,j)$, where $kappa$ ranges from 0 (signals only take one time step to reach their target neuron) to 4. 
 
-The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons $I_i$ and external stimuli $I_ie$ applied to the system.
-[I AM SPLITTING THE TOTAL CURRENT INTO TWO PARTS. PLEASE CHECK THAT I AM NOT MISQUOTING YOUR WORK]. 
+The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons $I_i$ and external stimuli $I_ie$ applied to the system. 
 The neuron-neuron incoming current $I_i$ into neuron $i$ is given by:
 \begin{align}
  I_i(t) &= \sum_{j\ne i} \sum_{t^\prime_j} S_{ij}  \Theta(t-t^\prime_j-\tau_{ij})e^{-(\frac{t-t^\prime_j-\tau_{ij}}{\sigma_s})^2}
@@ -130,7 +128,7 @@ The $S_ij$ represent the connection strengths between presynaptic neuron $j$ and
 
 where $K$ is a parameter that modulates the strength of connections, with $K=1$ corresponding to the original model in \cite{izhikevich2003}.
 
-To drive the firing dynamics and create traveling waves we provide stimulation to the systems by using two different and separate external stimulus currents, $I_ie$. 
+To drive the firing dynamics and create traveling waves we provide stimulation to the systems by using two different and separate external stimulus currents, $I_{i,e}$. 
 One of them is a uniform background stimulus applied to each neuron $i$ that depends on whether the neuron is excitatory or inhibitory, given by:
 \begin{align}\label{eq:randomstim}
  \begin{split}
@@ -141,18 +139,20 @@ One of them is a uniform background stimulus applied to each neuron $i$ that dep
 where $M$ is a parameter that tunes the overall strength of the stimulus, with $M=5$ corresponding to the original model in \cite{izhikevich2003}. 
 This stimulus has the effect of creating waves that originate from any point along an SCE and one of the uses is to study interactions between multiple waves.
 
-The other external stimulus $I_ie$ is a short constant input of current applied to all of the neurons in the lowest ten layers of an SCE. 
+The other external stimulus $I_{i,e}$ is a short constant input of current applied to all of the neurons in the lowest ten layers of an SCE. 
 The duration of the stimulus is $20 ms$ with a current of strength $5$. 
-This stimulus has the effect of creating a single wave that can propagate through the total length of an SCE and one of the uses is to measure the speed of the traveling wave.
+This stimulus has the effect of creating a single wave that can propagate through the total length of an SCE.
+One of the uses of this stimulus is to measure the speed of the traveling wave.
 
 For every simulation we record all of the firing events from all neurons. 
 To automatically identify waves we perform a spatial clustering operation to this data to identify spatiotemporal regions identified by high firing density. 
-This clustering operation also removes random background firing activity. 
-After that, we identify and label traveling wave structures and study how they evolve in time. 
-[THIS PARAGRAPH SEEMS VERY DENSE GIVING OUT VERY LITTLE DETAILS. I SUGGEST
-EXPANDING ON THIS SO THAT THE READER IS ABLE TO REPRODUCE THE METHOD IN THEIR
-OWN COMPUTER] 
-An example is shown in Figure 2.
+The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
+Each cluster $C(t,z)$ has a time $t$ and position $z$.
+This clustering removes random background firing activity. 
+The waves are identified using a plane sweep algorithm that proceeds along the dimension of simulation time and applies wave labels to clusters such that all clusters with the same label are part of the same wave.
+When a new cluster $C(t,z)$ is encountered, the algorithm associates $C(t,z)$ with any existing wave if the existing wave has a cluster $C(t_c,z_c)$ within $40 ms$ and $6$ units of the new cluster.
+If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the first cluster.
+An example of the clustering and identification is shown in Figure 2.
 \begin{figure}[!htb]
  \centering
  \begin{subfigure}{0.33\textwidth}
@@ -167,22 +167,12 @@ An example is shown in Figure 2.
   \centering
   \includegraphics[width=\textwidth]{fig/2x2_wave_IDs}
  \end{subfigure}%
- \caption{Spatial Clustering Operation. (A) Raster plot of firing events are filtered in time and position to remove background firing events and yield (B). (C) Individual waves are then labeled with unique identifiers (color coded in the figure). [LABEL GRAPHS WITH (A), (B), (C)]}
+ \caption{Wave identification and labeling. Left: Raster plot of firing events. Center: The clustering operation removes background spikes. Right: Individual waves are labeled with unique identifiers color coded in the figure.}
  \label{fig:wave_analysis}
 \end{figure}
 
 Once identified and labeled, we measure wave propagation speeds and wave initiation locations. 
-We also measure the "wave firing fraction" defined as the fraction of neuronal firing events that are associated with the labeled traveling wave (total events from Fig 2(c) divided by total events from Fig 2(a)). 
-[IS THIS WHAT YOU MEAN?] 
-
-For solving equation (2) numerically we use a time step of 0.5 ms except were noted. 
-We found that when verifying convergence of our results as a function of smaller time steps (Figure 3), the chosen time step gives a good compromise between convergence and speed of execution.
-\begin{figure}[!htb]
- \centering
- \includegraphics[width=\textwidth]{fig/TimeStepEffect}
-  \caption{Convergence test using a traveling wave initiated by external constant current applied to the lowest five layers of neurons as a function of decreasing time step.}
- \label{fig:time_step}
-\end{figure}
+We also measure the "wave firing fraction" defined as the fraction of spikes that are associated with the labeled traveling wave (total number of spikes found within the waves divided by number of spikes in the simulation). 
 
 \FloatBarrier
 
@@ -223,7 +213,7 @@ As the presynaptic activity to each neuron is more excitatory and less inhibitor
 \begin{figure}[!htb]
  \centering
  \includegraphics[width=\textwidth]{fig/ParamWaveSim}
- \caption{Certain model parameters support traveling waves (100 trials for each parameter value, error bars $1\sigma$). The dashed red lines show the wave firing fraction at the fixed point $\Sigma$. A) Traveling waves emerge around $K=6$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge around $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves emerge aroudn $\kappa=0,3$, and quickly domiante the firing activity. }
+ \caption{Certain model parameters support traveling waves (100 trials for each parameter value, error bars $1\sigma$). The dashed red lines show the wave firing fraction at the fixed point $\Sigma$. A) Traveling waves emerge around $K=6$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge around $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves are present at all values of $\kappa$. }
  \label{fig:wave_parameters}
 \end{figure}
 
@@ -282,10 +272,11 @@ We fix $K=24$ for the remainder of the wave speed experiments.
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}
 \end{figure}
 
+\FloatBarrier
+
 We next explore the influence of the action potential propagation speed on the traveling wave propagation speed.
 The delay parameter $\kappa$ is varied from 0 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_speed}).
 The pace is linear in $\kappa$ as expected, but the pace does not approach $0$ as $\kappa \rightarrow 0$ due to the delayed firing inherent in the neuron dynamics.
-This demonstrates that, although the speeds of observed cortical travelingwaves
 \begin{figure}[!htb]
  \caption{The pace (left, error bars $\pm 1 \sigma$) is linear w.r.t. $\kappa$. The intercept at $\kappa=0$ is 1.3, indicating that the neuron dynamics limit the speed of the wave. The wave speed (right) shows the expected relationship. }
  \label{fig:delay_speed}
@@ -369,7 +360,7 @@ The result was highly synchronized simultaneous firing among all neurons in the 
 We then incorporated our distance-dependent action potential propagation with the $\kappa$ parameter set to 1.
 The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:delay_waves}).
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation time is proportional to the inter-neuron distance.
-\begin{figure}[!ht]
+\begin{figure}[!htb]
  \caption{Left: with global connectivity and no action potential propagation delay, the entire structure shows synchronized firing events. Right: With an action potential propagation delay, traveling wave behavior is observed.}
  \centering
    \includegraphics[width=\textwidth]{fig/DelayWaves}  
@@ -388,17 +379,8 @@ The traveling waves observed with these two types of neuron connectivity corresp
 The traveling waves in locally connected networks are "Propagating pulses in an excitable network", while the traveling waves in the fully connected network are "Delayed oscillations from a single oscillator" (Figure 1 of \cite{ermentrout2001}).
 
 In \cite{muller2018} the authors noted that mesoscopic traveling waves typically have propagation speeds from 0.1 to 0.8 meters per second, consistent with the axonal conduction speed of unmyelinated fibers.
-Our linear model of synaptic conduction delay is linear with inter-neuron distance, so we expected longer synaptic conduction delays to result in slower wave propagation.
-The column topology can also influence the propagation speed.
-Columns with a larger cross-section have a larger number of neurons and synapses for a given length, providing more pathways for the traveling wave to propagate.
-The propagation delay parameter $\kappa$ does effect the wave propagation as expected, but the effect is not linear.
-If the traveling wave velocity was determined by the action potential propagation speed we would expect to see wave velocity of 1000 units/second with $\kappa=1$.
-Instead the wave velocity is less than half the simple prediction (Figure \ref{fig:delay_speed}).
-A four-fold increase in $\kappa$ does not reduce the traveling wave propagation speed by a factor of 4. 
-
-The column topology also has a significant impact on wave propagation speed, with waves in the thinner 2x2 columns traveling about $25\%$ slower than in the 3x3 column.
-Real neural minicolumns will have a less regular structure and we may expect them to show a more continuous variation in wave propagation speed. 
-The variations in propagation speed could be an important feature of traveling waves in organizing cortical activity.
+We show that the wave propagation speed does indeed depend on the action potential propagation speed, as expected.
+We find that the neuron dynamics also play an important role in the wave propagation speed, and that through the neuron dynamics the connectivity and connection strengths influence the wave propagation speed.
 
 Our model shows preferential sites for wave initiation due to the presence of inhibitory neurons with low spiking thresholds.
 Low-threshold inhibitory neurons in the Izhikevich model represent the low-threshold spiking inhibitory neurons that are found in the cortex \cite{izhikevich2003}\cite{gibson2009}.
