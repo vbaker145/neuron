@@ -1,7 +1,7 @@
 clear; close all;
 width = 2;
 height = 2;
-layers = 100;
+layers = 50;
 N = width*height*layers;
 
 tmax = 1000;
@@ -17,7 +17,7 @@ structure.displacement = 0;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
-connectivity.connStrength = 16;
+connectivity.connStrength = 24;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
@@ -56,8 +56,9 @@ for kk = 1:length(timeSteps)
         stImpulse = zeros(N, size(t,2));
         sidx = 1;
         stimDuration = floor(20/dt);
-        stimDepth = 5;
-        stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 10;
+        stimDepth = 10;
+        stImpulse(sidx:stimDepth*(sidx+width*height),20:(20+stimDuration))= 20;
+        stImpulse = (interp1(0:tmax, stImpulse(:,1:1/dt:end)', 0:dt:tmax))';
 
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
         size(firings)

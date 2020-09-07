@@ -119,6 +119,7 @@ for simType = 1:4
     figure(100); subplot(2,2,simType);
     errorbar(xVals, waveFraction(:,1), waveFraction(:,2),'k.'); 
     xlim([min(xVals)-0.02*xSpan max(xVals)+0.02*xSpan]);
+    line(xlim, [0.886 0.886], 'Color', 'red', 'LineStyle','--')
     xlabel(simParamNames{simType} );
     ylabel('Wave firing fraction')
     set(gca,'FontSize',12);

@@ -32,7 +32,7 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
-delayMults = 0.5:0.25:5;
+delayMults = 0:0.25:5;
 
 slopesMean = zeros(length(delayMults),1);
 slopesStd = zeros(length(delayMults), 1);
@@ -47,7 +47,7 @@ for jj=1:length(delayMults)
     N_layer = structure_t.width*structure_t.height;
 
     %Impulsive stimulus
-    stImpulse = zeros(N, size(t,2))*rand();
+    stImpulse = zeros(N, size(t,2));
     sidx = 1;
     stimDuration = floor(20/dt);
     stimDepth = 10;

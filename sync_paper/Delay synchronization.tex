@@ -223,7 +223,7 @@ As the presynaptic activity to each neuron is more excitatory and less inhibitor
 \begin{figure}[!htb]
  \centering
  \includegraphics[width=\textwidth]{fig/ParamWaveSim}
- \caption{Certain model parameters support traveling waves (100 trials for each parameter value, error bars $1\sigma$) . A) Traveling waves emerge around $K=6$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge around $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves emerge aroudn $\kappa=0,3$, and quickly domiante the firing activity. }
+ \caption{Certain model parameters support traveling waves (100 trials for each parameter value, error bars $1\sigma$). The dashed red lines show the wave firing fraction at the fixed point $\Sigma$. A) Traveling waves emerge around $K=6$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge around $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves emerge aroudn $\kappa=0,3$, and quickly domiante the firing activity. }
  \label{fig:wave_parameters}
 \end{figure}
 
@@ -283,11 +283,11 @@ We fix $K=24$ for the remainder of the wave speed experiments.
 \end{figure}
 
 We next explore the influence of the action potential propagation speed on the traveling wave propagation speed.
-The delay parameter $\kappa$ is varied from 0.5 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_speed}).
+The delay parameter $\kappa$ is varied from 0 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_speed}).
 The pace is linear in $\kappa$ as expected, but the pace does not approach $0$ as $\kappa \rightarrow 0$ due to the delayed firing inherent in the neuron dynamics.
 This demonstrates that, although the speeds of observed cortical travelingwaves
 \begin{figure}[!htb]
- \caption{The pace (left, error bars $\pm 1 \sigma$) is linear w.r.t. $\kappa$. The intercept at $\kappa=0$ is 1.2, indicating that the neuron dynamics limit the speed of the wave. The wave speed (right) shows the expected relationship. }
+ \caption{The pace (left, error bars $\pm 1 \sigma$) is linear w.r.t. $\kappa$. The intercept at $\kappa=0$ is 1.3, indicating that the neuron dynamics limit the speed of the wave. The wave speed (right) shows the expected relationship. }
  \label{fig:delay_speed}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Delay}

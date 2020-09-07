@@ -42,7 +42,7 @@ for jj=1:length(lambdas)
     connectivity.lambda = lambdas(jj);
             
     %Impulsive stimulus
-    stImpulse = zeros(N, size(t,2))*rand();
+    stImpulse = zeros(N, size(t,2));
     sidx = 1;
     stimDuration = floor(20/dt);
     stimDepth = 10;
