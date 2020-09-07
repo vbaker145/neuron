@@ -32,7 +32,7 @@ delay.dt = dt;
 connStrength = [4:0.25:12];
 lambdas = 1:0.25:4;
 percentExc = 0.3:0.025:1;
-kappas = 0.2:0.1:2;
+kappas = 0:0.1:2;
 
 simParams = {connStrength,lambdas,percentExc,kappas};
 simParamNames = {'K', '\lambda', 'P_{exc}', '\kappa'};

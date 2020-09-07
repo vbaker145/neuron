@@ -191,7 +191,7 @@ The results are organized as a series of experiments into traveling waves.
 We first determine which parameterizations of our model support traveling waves.
 Stronger and more numerous local connections between neurons are found to facilitate the formation of traveling wave patters.
 We then investigate the influence of neural dynamics and connectivity on the speed of traveling waves.
-Stronger neural connections and faster action potential propagation are shown to increase traveling wave speed, but the neuron dynamics enforce an upper limit. 
+Stronger neural connections and faster action potential propagation are shown to increase traveling wave speed, but the neuron dynamics enforce an upper limit on the speed. 
 Low-threshold-spiking inhibitory neurons are shown to consistently generate traveling waves through the mechanism of post-inhibitory rebound spiking.
 The low-threshold-spiking inhibitory neurons also suppress traveling waves that originate from other points in the column.
 Finally, we examine fully-connected networks and observe that traveling wave patterns can still emerge provided the action potential propagation speed is slow enough.
@@ -199,67 +199,39 @@ Finally, we examine fully-connected networks and observe that traveling wave pat
 \subsection{Conditions for traveling waves} \label{sub:waves}
 We first explore which parameterizations of our model will support traveling waves.
 Waves are detected as described in Methods, and we use the wave firing fraction metric to determine for which parameter values our model will produce traveling waves.
-We first examine the connection strength parameter $K$.
-Uniform background stimulus (Eq. \ref{eq:randomstim}) was applied to columns with $K$ values ranging from 4 to 12.
-We performed 100 simulations at each value of $K$ (Figure \ref{fig:conn_fraction}).
-Below $K=5.5$ no traveling waves are detected.
-We observe the transition around $K=5.75$ where traveling waves are observed but most of the firing events are still random.
-The wave firing fraction grows with $K$, indicating that traveling waves dominate the firing activity as the neurons become more strongly connected.
-At $K>11$ more than $90\%$ of the firing events are part of a traveling wave.
-\begin{figure}[!ht]
- \caption{Traveling waves emerge around $K=5$. As the connection strength increases the traveling waves dominate all firing events in the column.}
- \centering
-   \includegraphics[width=\textwidth]{fig/ConnectionStrengthWaveFraction}  
- \label{fig:conn_fraction}
-\end{figure}
+The key parameters to be examined are the connection strength $K$, the characteristic connection length $\lambda$, the fraction of excitatory neurons $P_{exc}$ and the delay parameter $\kappa$.
+First we establish that traveling waves are observed at the fixed point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
+We then vary the individual parameters about about $\Sigma$ to examine how they influence traveling wave formation.
 
-Having observed traveling waves in our model, we proceed to determine critical values of the characteristic connection length $\lambda$.
-Uniform background stimulus is applied to columns with $\lambda$ ranging from 1 to 4, with $K=10$ (Figure \ref{fig:lambda_fraction}).
-Traveling waves emerge at $\lambda=1.5$, and by $\lambda=3$ over $90\%$ of the firing events are part of a traveling wave.
-\begin{figure}[!ht]
- \caption{Traveling waves emerge at $\lambda=1.5$. As $\lambda$ increases the traveling waves dominate all firing events in the column.}
- \centering
-   \includegraphics[width=\textwidth]{fig/LambdaWaveFraction}  
- \label{fig:lambda_fraction}
-\end{figure}
-
-\FloatBarrier
-
-We continue our investigation with the fraction of excitatory neurons $P_{exc}$.
-Again, uniform background stimulus is applied to columns with $P_{exc}$ ranging from 0.3 to 1.
-$K$ is fixed at 10 and $\lambda$ is fixed at 2.5. 
-As the excitatory fraction increases more of the firing events occur within waves structures (Figure \ref{fig:excitatory_effect}).
-When all neurons are excitatory the traveling waves are the dominant mode of firing, with substantially all of the firing events contained within traveling waves. \\
+At the fixed point $\Sigma$ the average wave firing fraction over 100 trials is found to be $88.6\%$ with a standard deviation of $4.38\%$.
+A representative raster plot of the spike events (Figure \ref{fig:sigma_raster}) clearly shows the traveling waves.
 \begin{figure}[!htb]
- \caption{Traveling waves emerge at $P_{exc}=0.45$. As $P_{exc}$ increases the traveling waves dominate all firing events in the column.}
- \label{fig:excitatory_effect}
  \centering
-   \includegraphics[width=\textwidth]{fig/ExcitatoryWaves}
+ \includegraphics[width=0.75\textwidth]{fig/baseline}
+ \caption{Raster plot of neuron firing events over time. The model parameters are at the fixed point $\Sigma$. Each dot represents the spike-time emission of a neuron, as in \cite{senk2020}. Traveling waves can be seen as diagonal structures of dense firing activity. }
+ \label{fig:sigma_raster}
 \end{figure}
 
-Our final test is of the delay parameter $\kappa$.
-Uniform background stimulus is applied to columns with $\kappa$ ranging from 0.2 to 2.
-$K$ is fixed at 10, $\lambda$ is fixed at 2.5 and $P_{exc}$ is fixed at 0.8.
-Traveling waves emerge at $\kappa=0.3$, and are more than $80\%$ o the firing events at $\kappa=0.5$ (Figure \ref{fig:kappa_fraction}).
-\begin{figure}[!htb]
- \caption{Traveling waves emerge at $\kappa=0.3$. The wave firing fraction decreases with $\kappa$..}
- \label{fig:kappa_fraction}
- \centering
-   \includegraphics[width=\textwidth]{fig/KappaWaveFraction}
-\end{figure}
+The effect of the parameter variations on traveling waves are shown in Figure \ref{fig:wave_parameters}.
+The parameters $K$, $\lambda$ and $P_{exc}$ show similar structure.
+Traveling waves are not supported for low values of these parameters.
+As the parameter values increase traveling waves emerge, and as the parameters grow large the traveling waves dominate the firing activity.
+Stronger connections ($K$) or more numerous connections ($\lambda$) makes it easier for firing activity to spread to adjacent neurons.
+A higher excitatory fraction acts similarly to a higher connection strength. 
+As the presynaptic activity to each neuron is more excitatory and less inhibitory, it is easier for the traveling wave to propagate.
 
-\FloatBarrier
-
-COMBINED FIGURE (needs to be cleaned up). 
-Will edit text to accompany this figure, 
 \begin{figure}[!htb]
  \centering
  \includegraphics[width=\textwidth]{fig/ParamWaveSim}
- \caption{Certain model parameters support traveling waves. A) Traveling waves emerge around $K=6$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge aaroudn $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves emerge aroudn $\kappa=0,3$, and quickly domiante the firing activity. }
+ \caption{Certain model parameters support traveling waves (100 trials for each parameter value, error bars $1\sigma$) . A) Traveling waves emerge around $K=6$, and waves dominate the firing activity for large $K$. B) Traveling waves emerge around $\lambda=1.5$, and domiante the firing activity for large $\lambda$. C) Traveling waves emerge around $P_{exc}=0.45$, and dominate the firing activity for large $P_{exc}$. D) Traveling waves emerge aroudn $\kappa=0,3$, and quickly domiante the firing activity. }
  \label{fig:wave_parameters}
 \end{figure}
 
 \FloatBarrier
+
+The parameter $\kappa$ does not show a strong influence on the presence of traveling waves. 
+Slowing the action potential propagation (higher values of $\kappa$) gradually reduces the fraction of neuron spikes that are associated with waves.
+
 
 \subsection{Wave propagation speed} \label{sub:propagation_speed}
 Cortical traveling waves have been observed with propagating speeds from 0.1 to 0.8 meters per second \cite{sato2012}.
@@ -281,9 +253,9 @@ Figure \ref{fig:delay_neuronstep} shows the delayed response of a neuron to a pu
    \includegraphics[width=\textwidth]{fig/WaveSpeed_NeuronStepTest}
 \end{figure}
 
-We characterized this spike delay by exposing populations of excitatory and inhibitory neurons to $2 ms$ current pulses of different magnitudes \cite{izhikevich}.
+We characterized this spike delay by exposing populations of excitatory and inhibitory neurons to current pulses of different magnitudes \cite{izhikevich}.
 The average firing delay of the excitatory and inhibitory neurons is shown in Figure \ref{fig:delay_neurondynamics}.
-The inhibitory neurons have a lower firing threshold than the excitatory neurons and fire with a shorter delay when given the same stimulus.
+The inhibitory neurons have a lower firing threshold than the excitatory neurons \cite{izhikevich2003} and fire with a shorter delay when given the same stimulus.
 Both excitatory and inhibitory neurons exhibit a delayed response of several $ms$ or more.
 \begin{figure}[!htb]
  \caption{ A stronger stimulus creates a spike with less delay. The excitatory neurons have a higher firing threshold than the inhibitory neurons and do not emit a spike for very weak stimulus.}
@@ -297,14 +269,14 @@ Our exploration of wave speed uses a step stimulus applied to the lowest 10 laye
 We then measure the time for the wave to propagate to the top layer to determine the pace in milliseconds per unit traveled.
 The speed can then be calculated as the inverse of the pace in units/millisecond.
 
-The model parameters were fixed as in the preceding section: $K=10$, $\lambda=2.5$, $P_{exc}=0.8$ and $\kappa=1$.
+The model parameters were first fixed at $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ as in the preceding section.
 We do not observe traveling waves that span the column with these parameters.
 Without the uniform background stimulus the neurons in the column are at their equilibrium point when the traveling wave arrives, and it takes a stronger stimulus from the passing wave to elicit a spike.
 We increased the connection strength $K$ to provide this stronger stimulus, and found that traveling waves that span the column are found starting at $K=18$. 
 As $K$ increases the neurons fire with less delay, resulting in faster traveling waves (Figure \ref{fig:delay_k}).
 We fix $K=24$ for the remainder of the wave speed experiments.
 \begin{figure}[!htb]
- \caption{The pace (left, error bars $\pm 1 \sigma$) decreases with $K$, while the wave speed (right) increases with $K$. }
+ \caption{The pace (left, error bars $\pm 1 \sigma$) decreases with $K$, while the corresponding wave speed (right) increases with $K$. }
  \label{fig:delay_k}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}

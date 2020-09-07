@@ -60,7 +60,7 @@ for jj=1:length(Ks)
 
         %Column impulse response
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);         
-        %figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
+        figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
 %         xlabel('Time (seconds)','FontSize',12)
 %         ylabel('Z position', 'FontSize', 12)
 %         set(gca, 'FontSize',12)

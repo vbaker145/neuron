@@ -8,7 +8,7 @@ layers = 100;
 N = width*height*layers;
 
 tmax = 1000;
-dt = 0.2;
+dt = 0.05;
 t = 0:dt:tmax;
 
 %Column parameters
@@ -29,9 +29,10 @@ delay.delayFrac = 1.0;
 delay.dt = dt;
         
 pidx=1;
-kappas = 0.2:0.1:2;
+kappas = 0:0.1:1;
+%kappas = 1.0; %Fixed point graph
 
-nTrials = 100;
+nTrials = 5;
 stimStrength = 5;
 for kk = 1:length(kappas)
     delay.delayMult = kappas(kk);
@@ -54,6 +55,8 @@ for kk = 1:length(kappas)
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, sti);
         nFirings = nFirings + size(firings,1);
         %plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+        %xlabel('Time (seconds)'); ylabel('Neuron height');
+        %set(gca, 'FontSize', 12);
 
         %Analyze results
         wl={};
