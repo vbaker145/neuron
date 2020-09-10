@@ -1,8 +1,11 @@
-%% Set up base column
 clear; close all;
+
+rng(42); %Seed random for consistent results
+
+%% Set up base column
 width = 2;
 height = 2;
-layers = 200;
+layers = 100;
 N = width*height*layers;
 
 tmax = 2000;
@@ -15,10 +18,10 @@ structure.height = height;
 structure.layers = layers;
 structure.displacement = 0;
 
-connectivity.percentExc = 1.0;
+connectivity.percentExc = 1;
 connectivity.connType = 1;
-connectivity.lambda = 3.5;
-connectivity.connStrength = 9;
+connectivity.lambda = 3;
+connectivity.connStrength = 10;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
@@ -27,7 +30,7 @@ delay.delayFrac = 1.0;
 delay.dt = dt;
 delay.delayFrac = 1;
 
-stimStrength = 4.5;
+stimStrength = 5;
 
 [a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay);
 
@@ -35,12 +38,13 @@ stimStrength = 4.5;
 st = zeros(N, size(t,2));
 st(ecn,1:1/dt:end) = stimStrength*rand(sum(ecn),tmax+1);
 st(~ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~ecn),tmax+1);
+        
 %Stimulus
-sidx = 1;
-stimStart = floor(1100/dt);
-stimDuration = floor(20/dt);
-stimDepth = 5;
-st(sidx:stimDepth*(sidx+width*height),stimStart:(stimStart+stimDuration))= 8;
+% sidx = 1;
+% stimStart = floor(1100/dt);
+% stimDuration = floor(20/dt);
+% stimDepth = 5;
+% st(sidx:stimDepth*(sidx+width*height),stimStart:(stimStart+stimDuration))= 8;
 
 sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 
@@ -56,7 +60,7 @@ set(gca, 'FontSize', 12);
 
 %% Same test, single LTS inhibitory neuron
 
-connectivity.percentExc = 15*structure.width*structure.height; %Single LTS inhibitory neuron
+connectivity.percentExc = 50*structure.width*structure.height; %Single LTS inhibitory neuron
 %connectivity.connStrength = 12;
 
 [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);

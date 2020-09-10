@@ -53,13 +53,22 @@ delay.delayMult = 1;
 [a,b,c,d, S, delaysDistance, ecn] = makeColumnParameters(structure, connectivity, delay);
 [v, vall, u, uall, firingsDelay] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
 
-figure; subplot(1,2,1);
+S(:,1:100) = 0; S(:,300:400) = 0;
+[v, vall, u, uall, firingsDelayCut] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
+
+figure; subplot(1,3,1);
 plot(firingsNoDelay(:,1)./1000, firingsNoDelay(:,2)/(width*height),'k.');
 xlabel('Time (seconds)'); ylabel('Neuron position (Z)');
 set(gca, 'XLim',[0 max(t)/1000]);
 set(gca,'FontSize',12);
-subplot(1,2,2);
+subplot(1,3,2);
 plot(firingsDelay(:,1)./1000, firingsDelay(:,2)/(width*height),'k.');
+xlabel('Time (seconds)');
+set(gca, 'XLim',[0 max(t)/1000]);
+set(gca, 'YTick',[])
+set(gca,'FontSize',12);
+subplot(1,3,3);
+plot(firingsDelayCut(:,1)./1000, firingsDelayCut(:,2)/(width*height),'k.');
 xlabel('Time (seconds)');
 set(gca, 'XLim',[0 max(t)/1000]);
 set(gca, 'YTick',[])

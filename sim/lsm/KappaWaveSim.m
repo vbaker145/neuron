@@ -32,7 +32,7 @@ pidx=1;
 kappas = 0:0.1:1;
 %kappas = 1.0; %Fixed point graph
 
-nTrials = 5;
+nTrials = 10;
 stimStrength = 5;
 for kk = 1:length(kappas)
     delay.delayMult = kappas(kk);
