@@ -24,7 +24,7 @@ connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.maxLength = 100;
-connectivity.connStrength = 10;
+connectivity.connStrength = 16;
 
 dt = 0.2;
 tmax = 2000;
@@ -49,7 +49,7 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 vall = []; uall = [];
 min_ccf = 1;
 n_ccf = 1;
-for jj=1:20
+for jj=1:100
     %[pt, v, firings, hb] = ImpulseResponse(2, 1);
     %Make column
     [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
@@ -72,7 +72,7 @@ for jj=1:20
         uinit=b.*vinit;                 % Initial values of u
 
         %Column impulse response
-        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S.*2.5, delays, stImpulse);
+        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
         %figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
         fscale = firings(:,2)/(width*height);
         [bins, edges] = histcounts(fscale, 0:layers/nbins:layers );

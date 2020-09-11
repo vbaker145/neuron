@@ -189,7 +189,9 @@ Finally, we examine fully-connected networks and observe that traveling wave pat
 \subsection{Conditions for traveling waves} \label{sub:waves}
 We first explore which parameterizations of our model will support traveling waves.
 Waves are detected as described in Methods, and we use the wave firing fraction metric to determine for which parameter values our model will produce traveling waves.
+We fix the connection normalization constant $C$ in equation \ref{eq:connectivity} to $0.5$ and we fix the stimulus strength $M$ in equation \ref{eq:randomstim} to $5$.
 The key parameters to be examined are the connection strength $K$, the characteristic connection length $\lambda$, the fraction of excitatory neurons $P_{exc}$ and the delay parameter $\kappa$.
+
 First we establish that traveling waves are observed at the fixed point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
 We then vary the individual parameters about about $\Sigma$ to examine how they influence traveling wave formation.
 
@@ -259,7 +261,8 @@ Our exploration of wave speed uses a step stimulus applied to the lowest 10 laye
 We then measure the time for the wave to propagate to the top layer to determine the pace in milliseconds per unit traveled.
 The speed can then be calculated as the inverse of the pace in units/millisecond.
 
-The model parameters were first fixed at $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ as in the preceding section.
+We fix the connection normalization constant $C$ in equation \ref{eq:connectivity} to $0.5$ and we fix the stimulus strength $M$ in equation \ref{eq:randomstim} to $5$ and do not vary them.
+The other model parameters were first fixed at $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ as in the preceding section.
 We do not observe traveling waves that span the column with these parameters.
 Without the uniform background stimulus the neurons in the column are at their equilibrium point when the traveling wave arrives, and it takes a stronger stimulus from the passing wave to elicit a spike.
 We increased the connection strength $K$ to provide this stronger stimulus, and found that traveling waves that span the column are found starting at $K=18$. 
@@ -301,45 +304,59 @@ At $\lambda<2.5$ traveling waves were not observed.
 
 
 \subsection{Wave Initiation and Density} \label{sub:wave_initiation}
-We have observed preferential wave initiation sites in our experiments.
+Traveling waves spawned by uniform background stimulation do not appear to originate at random places in the column.
+Instead we observe that, for a given randomly generated column, waves tend to spawn from certain locations within the column.
+This was most noticeable for columns with very dense local connectivity with $C=1.0$ in equation \ref{eq:connectivity}.
+To quantify this observation we recorded the initiation sites of all traveling waves that were observed in a column under uniform background stimulus (Figure \ref{fig:wave_initiation_sites}).
+
+\begin{figure}[!htb]
+ \caption{Left: The time and place of origin of every traveling wave produced during a simulation. Right: The histogram of wave initiation sites clearly shows that traveling waves are likely to start in some regions, and unlikely to start in others.}
+ \label{fig:wave_initiation_sites}
+ \centering
+   \includegraphics[width=\textwidth]{fig/InitiationSites_100sims}
+\end{figure}
+
+In general only some of the neurons in the column will fire when a wave passes.
+We observed that a single traveling wave can have regions of higher or lower total firing activity, which we term firing density.
+An example measurement of the firing density in a single traveling wave is shown in Figure \ref{fig:wave_density}.
+\begin{figure}[!htb]
+ \caption{Density of firing events in a traveling wave initiated from a step stimulus. Left: Raster plot of the spike-emission times from a single traveling wave. Right: a histogram of firing events by position shows the density of the wave.}
+ \label{fig:wave_density}
+ \centering
+   \includegraphics[width=\textwidth]{fig/ImpulseWaveDensity}
+\end{figure}
+
+In our experiments we observe an anti-correlation between the preferential wave initiation sites and the wave density for a column.
+The wave initiation sites and wave density of the same column are shown in figure \ref{fig:initiation_density}.
+This visually indicates that the preferential firing sites tend towards lower firing density in the single wave experiments.
+\begin{figure}[!htb]
+ \caption{Wave initiation (left) and wave density (right) for the same column.}
+ \label{fig:initiation_density}
+ \centering
+   \includegraphics[width=\textwidth]{fig/InitiationCorrelationHistogram}
+\end{figure}
+
+To test this hypothesis we create 100 columns, applied first uniform background stimulus and then step stimulus to each column, and measured the correlation between wave initiation and firing density at the positions of the column.
+Although there is substantial variation between columns we measure a consistently negative correlation coefficient (mean $-0.32$, standard deviation $0.16$).
+This demonstrates a consistent, negative correlation between wave initiation sites and wave density.
+
 We hypothesize that these preferential initiation sites are created by neurons with low firing thresholds that are easy to excite.
 In the Izhikevich model, inhibitory neurons can have a lower firing threshold than excitatory neurons, modeling the behavior of real inhibitory neurons in the cortex\cite{gibson2009}\cite{hayut2011}.
 The $b$ parameter in the Izhikevich model sets the firing threshold of the individual neurons.
 Neurons with higher $b$ parameter are easier to excite and therefore more likely to fire.
 Per Table \ref{tab:izzy_params} excitatory neurons all have a $b$ parameter of $0.2$, while inhibitory neurons have $b$ parameters in the range $0.2-0.25$.
-This indicates the preferential wave initiation sites would be due to low-threshold spiking (LTS) inhibitory neurons \cite{izhikevich2003}.
+This indicates the preferential wave initiation sites could be due to low-threshold spiking (LTS) inhibitory neurons \cite{izhikevich2003}.
 It may seem counter-intuitive that firing activity from an \underline{inhibitory} neuron would generate traveling waves.
 In fact, postinhibitory rebound spiking is observed in both cortical neurons \cite{ascoli2010} and the Izhikevich model of neuron dynamics \cite{izhikevich}.
+The LTS hypothesis also explains the reduced wave density at these sites.
+As a traveling wave passes through the region, these same inhibitory neurons suppress the surrounding neurons resulting in fewer local firing events.
 
-In general only some of the neurons in the column will fire when a wave passes.
-We observed that a single traveling wave can have regions of higher or lower total firing activity, which we term firing density.
-An example measurement of the firing activity in a single traveling wave is shown in Figure \ref{fig:wave_density}.
-\begin{figure}[!htb]
- \caption{Density of firing events in a traveling wave initiated from a step stimulus. The traveling wave is shown on the left, a histogram of firing events by position is shown on the right.}
- \label{fig:wave_density}
- \centering
-   \includegraphics[width=0.75\textwidth]{fig/ImpulseWaveDensity}
-\end{figure}
-
-The wave initiation sites and wave density of the same column are shown in figure \ref{fig:initiation_density}.
-This visually illustrates that the preferential firing sites tend towards lower firing density in the single wave experiments.
-\begin{figure}[!htb]
- \caption{Wave initiation (left) and wave density (right) for the same column.}
- \label{fig:initiation_density}
- \centering
-   \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelationHistogram}
-\end{figure}
-
-To test this hypothesis we create 100 columns, applied both uniform background stimulus and step stimulus to each column, and measured the correlation between wave initiation and firing density at the positions of the column.
-Although there is substantial variation between columns we measure a consistently negative correlation coefficient (mean $-0.18$, standard deviation $0.20$).
-We expect that the lower firing density is caused by the low-threshold inhibitory neurons at those sites that are responsible for generating traveling waves under uniform background stimulus.
-
-A comparative experiment shows that low-threshold spiking inhibitory neurons can generate traveling waves under background stimulus.
+A comparative experiment shows that low-threshold spiking inhibitory neurons can indeed generate traveling waves under background stimulus.
 We first created a column with entirely excitatory neurons.
 We then created an identical column except for a single LTS inhibitory neuron at $Z=50$.
-The $b$ parameter of the LTS inhibitory neuron was set to $0.25$, the lowest firing threshold used in our model.
-These columns were stimulated with a uniform background stimulus. 
-Figure \ref{fig:lts_inhibit} clearly shows that adding the single LTS neuron creates traveling waves emanating from $Z=50$. 
+The $b$ parameter of the LTS inhibitory neuron was set to $0.25$, corresponding to the lowest firing threshold used in our model.
+These two columns were stimulated with a uniform background stimulus. 
+Figure \ref{fig:lts_inhibit} clearly shows that adding the single LTS neuron results in traveling waves emanating from $Z=50$. 
 \begin{figure}[!htb]
  \caption{Experiment with a single LTS inhibitory neuron at $Z=50$. Left: a column with entirely excitatory neurons shows traveling waves emerging from various locations. Right: adding a single LTS neuron at $Z=50$ results in consistent wave generation from that location. }
  \label{fig:lts_inhibit}
