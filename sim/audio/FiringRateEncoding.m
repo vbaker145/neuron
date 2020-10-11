@@ -11,9 +11,11 @@
 
 clear all; close all;
 
+rng(42);
+
 addpath('../lsm'); %Neural column code
 
-dt = 0.05;
+dt = 0.2;
 tmax = 3000;
 t = 0:dt:tmax;
 nInputPool = 50;
@@ -25,7 +27,7 @@ bins = 0:binDuration:tmax;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 7);
 
-colSep = 7;
+colSep = 5:10;
 colStructs = [];
 for cidx = 1:length(colSep)
     cst = makeFiringRateColumnEnsemble(dt, colSep(cidx));
@@ -46,7 +48,7 @@ end
 % 
 % colStructs = [colStructS colStructC];
 
-nTrials = 1;
+nTrials = 10;
 connErr = zeros(length(colStructs), nTrials, 6);
 nFirings = zeros(length(colStructs), nTrials);
 
@@ -94,20 +96,20 @@ for iTrial = 1:nTrials
         outputMP = mean(vall(end-colStruct.Nlayer:end,:));
         yMin = min([inputMP outputMP]);
         yMax = max([inputMP outputMP]);
-        h = figure(200); h.Position = [2159 -42 712 943];
-        h=subplot(3,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
-        h.Position = [0.1300 0.7093 0.7750 0.2157];
-        set(gca, 'XTick', [])
-        ylabel('Mean stimulus (mV)');
-        set(gca, 'FontSize', 12);
-        subplot(3,1,2); plot(t, inputMP, 'k');
-        ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
-        xlabel('Time (ms)'); ylabel('Mean base layer potential (mV)'); 
-        set(gca, 'FontSize',12);
-        subplot(3,1,3); plot(t, outputMP, 'k');
-        ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
-        xlabel('Time (ms)'); ylabel('Mean output layer potential (mV)'); 
-        set(gca, 'FontSize',12); 
+%         h = figure(200); h.Position = [2159 -42 712 943];
+%         h=subplot(3,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
+%         h.Position = [0.1300 0.7093 0.7750 0.2157];
+%         set(gca, 'XTick', [])
+%         ylabel('Mean stimulus (mV)');
+%         set(gca, 'FontSize', 12);
+%         subplot(3,1,2); plot(t, inputMP, 'k');
+%         ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+%         xlabel('Time (ms)'); ylabel('Mean base layer potential (mV)'); 
+%         set(gca, 'FontSize',12);
+%         subplot(3,1,3); plot(t, outputMP, 'k');
+%         ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+%         xlabel('Time (ms)'); ylabel('Mean output layer potential (mV)'); 
+%         set(gca, 'FontSize',12); 
 
     end %End loop over columns
 end %End loop over trials

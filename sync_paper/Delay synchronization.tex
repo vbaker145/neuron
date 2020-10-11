@@ -117,8 +117,8 @@ The neuron-neuron incoming current $I_i$ into neuron $i$ is given by:
  I_i(t) &= \sum_{j\ne i} \sum_{t^\prime_j} S_{ij}  \Theta(t-t^\prime_j-\tau_{ij})e^{-(\frac{t-t^\prime_j-\tau_{ij}}{\sigma_s})^2}
 \end{align}
 
-where $t'_j$ are the firing times of neuron $j$, $Theta$ is the Heaviside step function, and the exponential factor models an exponentially decaying synapse response with a time constant of $sigma_s = 4 ms$. 
-The $S_ij$ represent the connection strengths between presynaptic neuron $j$ and postsynaptic neuron $i$ given by
+where $t'_j$ are the firing times of neuron $j$, $\Theta$ is the Heaviside step function, and the exponential factor models an exponentially decaying synapse response with a time constant of $\sigma_s = 4 ms$. 
+The $S_{ij}$ represent the connection strengths between presynaptic neuron $j$ and postsynaptic neuron $i$ given by
 \begin{align}
  \begin{split}
   S_{ij}^{excitatory} &= K \times \mathcal{U}\{0,0.5 \} \\
