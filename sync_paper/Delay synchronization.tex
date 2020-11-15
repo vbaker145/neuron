@@ -38,7 +38,7 @@
 \newcommand{\myycite}[1]{\parencitep{#1}}
 
 % Different font in captions
-\newcommand{\captionfonts}{\small,\it}
+\newcommand{\captionfonts}{\small \it}
 
 \makeatletter  
 \long\def\@makecaption#1#2{%
@@ -391,19 +391,17 @@ An example measurement of the firing activity in a single traveling wave is show
    \includegraphics[width=\textwidth]{fig/ImpulseWaveDensity}
 \end{figure}
 
-In our experiments we observe an anti-correlation between the FIE and the FFE for an SCE.
-The FIE and FFE of the same SCE are shown in figure \ref{fig:initiation_density}.
-This visually indicates that the preferential wave initiation sites tend towards lower firing density in the single wave experiments.
-\begin{figure}[!htb]
- \caption{FIE measured using background stimulus (left) and FFE measured using step stimulus (right) for the same SCE.}
- \label{fig:initiation_density}
- \centering
-   \includegraphics[width=\textwidth]{fig/InitiationCorrelationHistogram}
-\end{figure}
-
-To test that this observation is generally true we create 100 SCEs, applied first uniform background stimulus and then step stimulus to each SCE, and measured the FIE and FFE.
+In our experiments we observe an anti-correlation between the FIE and the FFE for an SCE (see Supplemental Information for examples).
+To test that this observation is generally true we create 100 SCEs, applied first uniform background stimulus and then step stimulus to each SCE, and measured the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
 Although there is substantial variation between SCEs we measure a consistently negative correlation coefficient (mean $-0.32$, standard deviation $0.16$).
 This demonstrates a consistent, negative correlation between FIE and FFE.
+\begin{figure}[!htb]
+ \centering
+ \caption{Correlation between FIE and FFE for 100 different trials. }
+ \label{fig:InitiationCorrelation}
+ \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelation}
+\end{figure}
+
 
 We hypothesize that these preferential wave initiation sites are created by neurons with low firing thresholds that are easy to excite.
 In the Izhikevich model, inhibitory neurons can have a lower firing threshold than excitatory neurons, modeling the behavior of real inhibitory neurons in the cortex\parencite{gibson2009}\parencite{hayut2011}.
