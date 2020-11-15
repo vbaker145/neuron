@@ -50,12 +50,11 @@ y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
 if doplot == 1
-    figure(100); scatter3(x,y,z,50, 'black','filled')
+    figure(100); h1 = subplot(1,2,1);
+    scatter3(x,y,z,50, 'black','filled')
     hold on;
-end
-
-if doplot == 1
-    map = colormap('jet');
+    subplot(1,2,2);
+    hold on;
 end
 
 %connections = zeros(length(x), length(x));
@@ -90,6 +89,9 @@ delays = spalloc(n,n,1000);
 
 %dmax = layers;
 dmax = 2*lambda;
+if doplot == 1
+    map = colormap(jet(dmax));
+end
 
 %Synaptic weights
 for jj=1:length(x)
@@ -133,10 +135,20 @@ for jj=1:length(x)
                 %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
                 
                 if doplot == 1
-                    didx = dis/dmax;
-                    didx = min(didx,1);
-                    cm = map(floor(didx*size(map,1)),:);  
-                    line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
+                    subplot(1,2,1);
+                    dis = min(dis,dmax);
+                    cm = map(floor(dis),:);
+                    line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', dis/2);
+                    
+                    subplot(1,2,2);
+                    if excNeurons(jj) == 1 && excNeurons(kk) == 1
+                        plot(jj,kk,'g.', 'MarkerSize', 10);
+                    elseif excNeurons(jj) == 0
+                        plot(jj,kk,'r.', 'MarkerSize', 10);
+                    else 
+                        plot(jj,kk,'k.', 'MarkerSize', 10);
+                    end
+                    
                 end
                 
                 %Set delay
@@ -159,8 +171,20 @@ for jj=1:length(x)
 end %end for jj
 
 if doplot == 1
-    title(['Connections, lambda=' num2str(lambda)]);
+    subplot(1,2,1);
     axis equal;
+    cl = colorbar;
+    tls = {''};
+    for jj=1:dmax
+       tls{end+1} = jj;
+       tls{end+1} = '';
+    end
+    cl.TickLabels = tls;
+    
+    subplot(1,2,2);
+    xlabel('Presynaptic neuron #');
+    ylabel('Postsynaptic neuron #');
+    set(gca, 'FontSize', 12);
     set(gcf, 'pos', [0 0 600 800]);
 end
 

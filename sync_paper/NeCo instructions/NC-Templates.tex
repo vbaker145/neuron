@@ -1,0 +1,225 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multirow}
+%
+\usepackage[authoryear]{natbib}
+%
+\usepackage{rotating}
+\usepackage{bbm}
+\usepackage{latexsym}
+%\DeclareGraphicsExtensions{.eps,.png}
+
+%%% margins 
+\textheight 23.4cm
+\textwidth 14.65cm
+\oddsidemargin 0.375in
+\evensidemargin 0.375in
+\topmargin  -0.55in
+%
+\renewcommand{\baselinestretch}{2}
+%
+\interfootnotelinepenalty=10000
+%
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsubsection}}
+\newcommand{\myparagraph}[1]{\ \\{\em #1}.\ \ }
+\newcommand{\citealtt}[1]{\citeauthor{#1},\citeyear{#1}}
+\newcommand{\myycite}[1]{\citep{#1}}
+
+% Different font in captions
+\newcommand{\captionfonts}{\normalsize}
+
+\makeatletter  
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\captionfonts #1: #2}}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\captionfonts #1: #2\par}
+  \else
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother   
+%%%%%
+
+\renewcommand{\thefootnote}{\normalsize \arabic{footnote}} 	
+
+\begin{document}
+\hspace{13.9cm}1
+
+\ \vspace{20mm}\\
+
+{\LARGE Prepare Manuscript for Neural Computation}
+
+\ \\
+{\bf \large Author$^{\displaystyle 1, \displaystyle 2}$}\\
+{$^{\displaystyle 1}$Your first affiliation.}\\
+{$^{\displaystyle 2}$Your second affiliation.}\\
+%
+
+%\ \\[-2mm]
+{\bf Keywords:} Manuscript, journal, instructions
+
+\thispagestyle{empty}
+\markboth{}{NC instructions}
+%
+\ \vspace{-0mm}\\
+%
+%Abstract
+\begin{center} {\bf Abstract} \end{center}
+This documentation briefly describes the formats required by Neural Computation. We hope this will help you with the manuscript preparation.
+%%%%%%%%%%%
+
+\section{Introduction}
+To satisfy the formats required by Neural Computation, please follow the instructions. However, depending on the style of the manuscript you choose, some further modifications might be required by Neural Computation. So please take this as a reference.
+
+\section{Citations}
+The citations must follow the APA format. A typical citation is given by $\backslash citep$, for example \citep{Ref2009}. The command $\backslash cite$ will generate \cite{Ref2009}. For references with multiple authors, the command $\backslash citet$ will generate \citet{Ref2008} and $\backslash citep$ will generate \citep{Ref2008}. To put texts in the reference, use command $\backslash citep[see, e.g.,][for instance]\{Ref2009\}$ which generates \citep[see,
+e.g.,][for instance]{Ref2009}. To cite multiple references, use the command $\backslash citep\{ref1,ref2,ref3\}$, for example \citep[compare][]{Ref2008,Ref2009}.
+
+For Neural Computation, the $\backslash citep$ is preferred.
+
+\section{Sections and Subsections}
+\label{sec:1}
+This is the section level. The sections are numbered automatically. The $\backslash label$ and $\backslash ref$ can be used to label and refer to particular sections.
+
+\subsection{Subsections}
+This is the subsection level. An example for a reference is given here, see section \ref{sec:1}.
+
+\section{Itemize}
+The simple example for an $\backslash itemize$ is as following
+\begin{itemize}
+\item First item;
+\item Second item;
+\end{itemize}
+
+The items start with a bullet is as following
+\begin{itemize}
+\item[$\bullet$] First item;
+\item[$\bullet$] Second item;
+\end{itemize}
+
+The items start with a letter is as following
+\begin{itemize}
+\item[A)] First item;
+\item[B)] Second item;
+\end{itemize}
+
+The items start with a number is as following
+\begin{itemize}
+\item[1)] First item;
+\item[2)] Second item;
+\end{itemize}
+
+\section{Figures}
+The Figures are included in the $\backslash begin\{figure\}$ environment, the figures in $eps$ format are preferred, but other formats are acceptable as well.
+
+Here is an example of a figure
+\begin{figure}[h]
+%\nopagenumber
+%\renewcommand{\baselinestretch}{1.0}
+\hfill
+\begin{center}
+\includegraphics[width=2.5in]{sample.eps}
+\end{center}
+\caption{Caption to the figure}
+\label{Fig:sample}
+\end{figure}
+
+To refer to a figure, we can use the reference, for example, see Figure~\ref{Fig:sample}.
+
+
+%\vspace{-42mm}
+%\vspace{-32.5mm}\\
+%
+
+\section{Equations}
+Single line equation is
+\begin{equation}
+a = b+c. \label{eq:1}
+\end{equation}
+
+Equation array is
+\begin{eqnarray}
+x &=& y+z; \label{eq:2} \\
+a &=& b+c.  \label{eq:3}
+\end{eqnarray}
+
+Equations should be numbered, however, we can generate equations without numbers. Use $\backslash nonumber$ and $\backslash begin\{eqnarray\ast\}$ to suppress the equation numbers, for example,
+\begin{equation}
+\nonumber a = b + c;
+\end{equation}
+which is the same as Eq.(\ref{eq:1}).
+
+The equation array without numbers,
+\begin{eqnarray*}
+x &=& y+z;\\
+a &=& b+c.
+\end{eqnarray*}
+which are same as Eq.(\ref{eq:2}) and Eq.(\ref{eq:3}).
+
+\section{Footnote}
+The footnote command is $\backslash footnote$, for example, footnote \footnote{\normalsize This generates a footnote.}. 
+
+\section{Tables}
+The $\backslash table$ and $\backslash tabular$ environments can be used to generate tables. We give two examples here.
+
+Table with multiple columns.
+\begin{table}[h]
+\renewcommand{\arraystretch}{1.3}
+\caption{The caption to the table with multiple columns.}
+\begin{center}
+\begin{tabular}{|l|rr|rr|}\hline
+   Row $1$          &   c1   &    c2    &  c3  &   c4 \\
+   Row $2$          &   d1   &    d2    &  d3  &   d4\\
+   Row $3$          &   e1   &    e2    &  e3  &  e4 \\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Table with single column.
+\begin{table}[h]
+\renewcommand{\arraystretch}{1.3}
+\caption{The caption to the table with single columns.}
+\begin{center}
+\begin{tabular}{|l|c|c|}\hline
+   Row $1$          &   c1  &   c2   \\
+   Row $2$          &   d1  &   d2   \\
+   Row $3$          &   e1  &   e2 \\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section*{Conclusion}
+We have illustrated the basic format to the manuscript that you consider to submit to Neural Computation. We hope this is helpful to the authors.
+
+\subsection*{Acknowledgments}
+The people you want to acknowledge. For this document, we appreciate Jörg Lücke, author of an accepted paper who generously allowed us to use his template.
+
+\section*{Appendix}
+You should put the details that are not required in the main body into this Appendix.
+
+\bibliographystyle{APA}
+\begin{thebibliography}{100}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{LastName(2009)}]{Ref2009}
+LastName, A. (2009).
+\newblock Title for the first reference.
+\newblock \emph{Journal of the first reference}, \emph{3}, 18 -- 88.
+
+
+\bibitem[{Authors et~al.(2008)Author1, Author2, \&
+  Author3}]{Ref2008}
+Author1, A., Author2, A., \& Author3, A. (2008).
+\newblock Title for the second reference.
+\newblock \emph{Journal for the second reference}, \emph{5}, 188 -- 200.
+
+\end{thebibliography}
+\end{document}
