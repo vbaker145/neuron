@@ -13,18 +13,11 @@ structure.height = height;
 structure.layers = layers;
 structure.displacement = 0.0;
 
-% connectivity.percentExc = 1;
-% connectivity.connType = 1;
-% connectivity.lambda = 2.5;
-% connectivity.connStrength = 6;
-% connectivity.connStrengthRange = 1;
-% connectivity.maxLength = 100;
-
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.maxLength = 100;
-connectivity.connStrength = 16;
+connectivity.connStrength = 10;
 
 dt = 0.2;
 tmax = 2000;
@@ -72,14 +65,16 @@ for jj=1:100
         uinit=b.*vinit;                 % Initial values of u
 
         %Column impulse response
-        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
-        %figure; plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+        %Scale connection strengths by 2.4 due to no background stim
+        [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S.*2.4, delays, stImpulse);
+        %figure(50); subplot(1,2,1); plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
         fscale = firings(:,2)/(width*height);
         [bins, edges] = histcounts(fscale, 0:layers/nbins:layers );
         hbins = hbins + bins;
         
         %Column background response
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stBackground);
+        %figure(50); subplot(1,2,2); plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
         [wt wp wl] = findWaves(firings, .001, 2*2);
         
         for labels = 1:length(wl)
@@ -114,14 +109,6 @@ for jj=1:100
         n_ccf = n_ccf+1;
     end
     
-    %figure(20); subplot(3,3,jj); barh(2.5:5:97.5, hbins./sum(hbins),'k')
-    
-    %Analyze waves
-%     [wt wp wl] = findWaves(firings, .001, 2*2);
-%     [sizes waveFrac slopes] = analyzeWaves(wt, wp, wl);
-%     waveSizes = [waveSizes sizes];
-%     waveFractions = [waveFractions waveFrac];
-%     waveSlopes = [waveSlopes slopes];
 end
 
 %Plot minimum correlation results
@@ -138,7 +125,7 @@ delays = delaysmin;
 ecn = ecnmin;
         
 %Column impulse response
-[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), amin, b, c, d, S, delays, stImpulse);
+[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), amin, b, c, d, S.*2.4, delays, stImpulse);
 fscale = firings(:,2)/(width*height);
 [bins, edges] = histcounts(fscale, 0:layers/nbins:layers );
 hbins = hbins + bins;
@@ -184,4 +171,6 @@ ccf = corrcoef(fbins(2:end), hbins(2:end));
 ccf_all(jj) = ccf(1,2);
 
 figure; plot(ccf_all, 'k.');
+xlabel('Trial #', 'FontSize', 12)
+ylabel('Correlation coefficient','FontSize', 12)
 

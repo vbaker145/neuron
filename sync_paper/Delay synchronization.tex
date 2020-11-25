@@ -95,7 +95,7 @@ Neuronal traveling waves are not uniquely defined as they can exist at widely di
 In the sleep and anesthetized states,slow and large-scale wave activity has been recorded \parencite{muller2018}. 
 Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \parencite{wu2008}\parencite{shoham1999}.  
 Similarly, traveling waves also differ by the manner in which they are created. 
-Both spontaneously occurring waves and stimulus-evoked \parencite{reimer2010} waves have been observed in the visual and auditory cortex . 
+Both spontaneously occurring waves and stimulus-evoked \parencite{reimer2010} waves have been observed in the visual and auditory cortex. 
 Computational and mathematical modeling of traveling waves in a variety of models have shown many of the characteristics observed experimentally \parencite{ermentrout2001}\parencite{keane2015}\parencite{gibson2009}.
 
 The vast majority of studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \parencite{reimer2010}\parencite{keane2015}. 
@@ -358,7 +358,7 @@ Since an increase in $\lambda$ results in both longer range connections, and mor
 The characteristic connection length $\lambda$ is varied from 2 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_lambda}).
 At $\lambda<2.25$ traveling waves were not observed.
 \begin{figure}[!htb]
- \caption{ The pace (left, error bars $\pm 1 \sigma$) is  $\lambda$. The wave speed (right) shows . }
+ \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases with $\lambda$. The wave speed (right) shows that the maximum wave speed approaches $0.8$, the limit seen as $\kappa \rightarrow 0$ in Figure \ref{fig:delay_speed}. }
  \label{fig:delay_lambda}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Lambda}
@@ -392,14 +392,14 @@ An example measurement of the firing activity in a single traveling wave is show
 \end{figure}
 
 In our experiments we observe an anti-correlation between the FIE and the FFE for an SCE (see Supplemental Information for examples).
-To test that this observation is generally true we create 100 SCEs, applied first uniform background stimulus and then step stimulus to each SCE, and measured the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
-Although there is substantial variation between SCEs we measure a consistently negative correlation coefficient (mean $-0.32$, standard deviation $0.16$).
+To test that this observation is generally true we create 100 SCEs, applied first uniform background stimulus and then step stimulus to each SCE, and measured the correlation between the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
+Although there is substantial variation between SCEs we measure a consistently negative correlation coefficient (mean $-0.26$, standard deviation $0.18$).
 This demonstrates a consistent, negative correlation between FIE and FFE.
 \begin{figure}[!htb]
  \centering
  \caption{Correlation between FIE and FFE for 100 different trials. }
  \label{fig:InitiationCorrelation}
- \includegraphics[width=0.75\textwidth]{fig/InitiationCorrelation}
+ \includegraphics[width=\textwidth]{fig/InitiationCorrelation.eps}
 \end{figure}
 
 
@@ -418,7 +418,7 @@ A comparative computational experiment shows that low-threshold spiking inhibito
 We first created an SCE with entirely excitatory neurons.
 We then created an identical SCE except for a single LTS inhibitory neuron at $Z=50$.
 The $b$ parameter of the LTS inhibitory neuron was set to $0.25$, corresponding to the lowest firing threshold used in our model.
-These two SCEs were stimulated with a uniform background stimulus. 
+These two SCEs were stimulated with the same uniform background stimulus. 
 Figure \ref{fig:lts_inhibit} clearly shows that adding the single LTS neuron results in traveling waves emanating from $Z=50$. 
 \begin{figure}[!htb]
  \caption{Simulation with a single LTS inhibitory neuron at $Z=50$. Left: an SCE with entirely excitatory neurons shows traveling waves emerging from various locations. Right: adding a single LTS neuron at $Z=50$ results in consistent wave generation from that location. }
@@ -469,10 +469,10 @@ Our model randomly assigns neurons as excitatory or inhibitory and uses a probab
 Due to the stochastic nature of our model a network created with a particular set of parameters may support traveling waves in some regions while blocking traveling waves in other regions.
 This may explain why traveling waves do not dominate the firing activity at a sharply defined parameter region.
 
-Other research \parencite{keane2015} has shown that traveling waves emerge from networks of leaky-integrate-and-fire neurons when the excitation and inhibition are balanced.
-In our model traveling waves are supported even in networks consisting entirely of excitatory neurons (Figure \ref{fig:wave_parameters}C).
-This may be explained by our use of a two-dimensional model of neuron dynamics.
-TODO: EXPLAIN
+Other research \parencite{keane2015} has shown that complex spatial patterns emerge from two-dimensional networks of leaky-integrate-and-fire neurons when the excitation and inhibition are balanced.
+When excitation dominates then only plane waves were observed.
+Similarly, in one dimension we have found that traveling waves dominate the firing activity when the $P_{exc}$ grows close to $1$ (Figure \ref{fig:wave_parameters}).
+
 
 We have found that low-threshold-spiking inhibitory neurons can determine the origin point of traveling waves from a uniform background stimulus.
 This implies that, when no stimulus is applied, a biological neural network might have an equilibrium dynamics governed by traveling waves initiated by low-threshold-spiking inhibitory neurons.

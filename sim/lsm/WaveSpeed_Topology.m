@@ -33,7 +33,7 @@ waveSizes = []; waveFractions = []; waveSlopes = [];
 %figure(20); subplot(3,3,1);
 vall = []; uall = [];
 
-Ntrials = 10;
+Ntrials = 5;
 widthHeights = [2,2; 2,3; 3,3; 3,4; 4,4];
 slopes = NaN(Ntrials, size(widthHeights,1) );
 
@@ -65,10 +65,10 @@ for jj=1:size(widthHeights,1)
 
         %Column impulse response
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, stImpulse);
-%         figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
-%         xlabel('Time (seconds)','FontSize',12)
-%         ylabel('Z position', 'FontSize', 12)
-%         set(gca, 'FontSize',12)
+        figure(5); plot(firings(:,1)./1000, firings(:,2)/(N_layer),'k.');
+        xlabel('Time (seconds)','FontSize',12)
+        ylabel('Z position', 'FontSize', 12)
+        set(gca, 'FontSize',12)
 %         [wt wp wl] = findWaves(firings, dt/1000, structure_t.width*structure_t.height, 200);
 
         %[sizes waveFrac slope] = analyzeWaves(wt, wp, wl);
