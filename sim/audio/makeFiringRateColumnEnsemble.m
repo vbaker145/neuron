@@ -12,14 +12,14 @@ structure.height = 2;
 structure.nWide = 3;
 structure.nHigh = 3;
 structure.columnSpacing = colSep;
-structure.layers = 20;
+structure.layers = 30;
 structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
 
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 3.5;
-connectivity.connStrength = 10;
+connectivity.connStrength = 24;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;

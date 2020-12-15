@@ -12,7 +12,7 @@ binDuration = 1;
 bins = 0:binDuration:tmax;
 
 %Make column ensemble
-colStruct = makeFiringRateColumnEnsemble(dt);
+colStruct = makeFiringRateColumnEnsemble(dt, 7);
 
 %% Firing rate coded stimulus
 % firingRate = 1*ones(1,length(t));
@@ -22,7 +22,7 @@ colStruct = makeFiringRateColumnEnsemble(dt);
 % end
 
 %firingRate = 5*(cos(2*pi*3.*(t./1000))+1); %Cosine, positive
-firingRate = 10*(sin(2*pi*1.5*(t./1000))).^2; %Cosine, raised
+firingRate = 5*(sin(2*pi*1*(t./1000))).^2; %Cosine, raised
 [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
 
 %% Impulse stimulus
@@ -39,7 +39,7 @@ for jj=1:floor(tmax/1000)
 end
 
 %% Background, corrected for dt
-stimStrength = 3;
+stimStrength = 0;
 stB = zeros(colStruct.N, size(t,2));
 stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
 stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);

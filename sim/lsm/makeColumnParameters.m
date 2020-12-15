@@ -32,7 +32,7 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 0;
+doplot = 1;
 
 n = width*height*layers;
 
@@ -142,11 +142,11 @@ for jj=1:length(x)
                     
                     subplot(1,2,2);
                     if excNeurons(jj) == 1 && excNeurons(kk) == 1
-                        plot(jj,kk,'g.', 'MarkerSize', 10);
+                        plot(jj,kk,'g.', 'MarkerSize', 15);
                     elseif excNeurons(jj) == 0
-                        plot(jj,kk,'r.', 'MarkerSize', 10);
+                        plot(jj,kk,'r.', 'MarkerSize', 15);
                     else 
-                        plot(jj,kk,'k.', 'MarkerSize', 10);
+                        plot(jj,kk,'k.', 'MarkerSize', 15);
                     end
                     
                 end
