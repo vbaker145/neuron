@@ -252,9 +252,9 @@ Finally, we examine fully-connected networks and observe that traveling wave pat
 
 \subsection{Conditions for the existence of traveling waves in an SCE} \label{sub:waves}
 We first explore which parameterizations of our model will support traveling waves.
-Waves are detected as described in Methods, and we use the wave firing fraction metric to determine for which parameter values our model will produce traveling waves.
+We detect the waves as described in Methods, and then use the wave firing fraction metric to determine for which parameter values our model will produce traveling waves.
 We fix the connection normalization constant $C$ in equation \ref{eq:connectivity} to $0.5$ and we fix the stimulus strength $M$ in equation \ref{eq:randomstim} to $5$.
-The key parameters of our model to be examined are the connection strength $K$, the characteristic connection length $\lambda$, the fraction of excitatory neurons $P_{exc}$ and the delay parameter $\kappa$.
+The key parameters of our model that we examine are the connection strength $K$, the characteristic connection length $\lambda$, the fraction of excitatory neurons $P_{exc}$ and the delay parameter $\kappa$.
 
 First we establish that traveling waves are observed at the fixed point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
 We then vary the individual parameters about $\Sigma$ to examine how they influence traveling wave formation.
@@ -311,7 +311,7 @@ As an example, Figure \ref{fig:delay_neuronstep} shows the delayed response of a
    \includegraphics[width=\textwidth]{fig/WaveSpeed_NeuronStepTest}
 \end{figure}
 
-To determine this spike delay we exposed populations of excitatory and inhibitory neurons to current pulses of different magnitudes.
+To determine this spike delay we expose populations of excitatory and inhibitory neurons to current pulses of different magnitudes.
 The average firing delay of the excitatory and inhibitory neurons is shown in Figure \ref{fig:delay_neurondynamics}.
 The inhibitory neurons have a lower firing threshold than the excitatory neurons \parencite{izhikevich2003} and fire with a shorter delay when given the same stimulus.
 Both excitatory and inhibitory neurons exhibit a delayed response of several $ms$ or more.
@@ -325,12 +325,12 @@ Both excitatory and inhibitory neurons exhibit a delayed response of several $ms
 To measure wave propagation speed we use an SCE with width 2, height 2, and length 50.
 Our exploration of wave speed uses a step stimulus applied to the lowest 10 layers of neurons (see Methods), while no stimulus is applied to the remaining neurons.
 We then measure the time for the wave to propagate to the top layer to determine the pace in milliseconds per unit length traveled.
-The speed can then be calculated as the inverse of the pace in units/millisecond.
+The speed is then calculated as the inverse of the pace in units/millisecond.
 
 We fix the connection normalization constant $C$ in equation \ref{eq:connectivity} to $0.5$ and we fix the stimulus strength $M$ in equation \ref{eq:randomstim} to $5$ and do not vary them.
 As mentioned in Methods we use $\Sigma_v$ here, with $K=24$, because the SCE cannot sustain traveling waves at $\Sigma$. 
 Here, without the uniform background stimulus the neurons in the SCE are at their equilibrium point when the traveling wave arrives, and it takes a stronger stimulus from the passing wave to elicit a spike.
-We increased the connection strength $K$ to provide this stronger stimulus, and found that traveling waves that span the SCE are found starting at $K=18$. 
+We increase the connection strength $K$ to provide this stronger stimulus, and find traveling waves that span the SCE starting at $K=18$. 
 As $K$ increases the neurons fire with less delay, resulting in faster traveling waves (Figure \ref{fig:delay_k}).
 We fix $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ for the remainder of the wave speed computational experiments.
 \begin{figure}[!htb]
@@ -343,7 +343,7 @@ We fix $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ for the remaind
 \FloatBarrier
 
 We next explore the influence of the action potential propagation speed, here controlled by our parameter $\kappa$, on the traveling wave propagation speed.
-The delay parameter $\kappa$ is varied from 0 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_speed}).
+We vary delay parameter $\kappa$ from 0 to 5 and measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_speed}).
 The pace is linear in $\kappa$ as expected, but the pace does not approach $0$ as $\kappa \rightarrow 0$ due to the delayed firing inherent in the neuron dynamics.
 Because each neuron does not fire instantaneously upon receiving an action potential, even instantaneous transport of action potentials does not result in a wave that can span the column instantaneously.
 \begin{figure}[!htb]
@@ -358,7 +358,7 @@ Because each neuron does not fire instantaneously upon receiving an action poten
 Propagation speed is also influenced by the characteristic length of the local connectivity, $\lambda$.
 Since an increase in $\lambda$ results in both longer range connections, and more incoming and outgoing connections per neuron, we expect $\lambda$ to increase the wave speed through both action potential propagation and neuron dynamics.
 The characteristic connection length $\lambda$ is varied from 2 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_lambda}).
-For $\lambda<2.25$ traveling waves were not observed.
+For $\lambda<2.25$ we do not observe traveling waves.
 \begin{figure}[!htb]
  \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases with $\lambda$. The wave speed (right) shows that the maximum wave speed approaches $0.8$, the limit seen as $\kappa \rightarrow 0$ in Figure \ref{fig:delay_speed}. }
  \label{fig:delay_lambda}
@@ -372,9 +372,9 @@ For $\lambda<2.25$ traveling waves were not observed.
 \subsection{Wave Initiation and Density} \label{sub:wave_initiation}
 Traveling waves spawned by uniform background stimulation do not appear to originate at random places in the SCE.
 Instead we observe that, for a given randomly generated SCE, waves tend to spawn from certain locations within the SCE.
-This was most noticeable for SCEs with very dense local connectivity with $C=1.0$ in equation \ref{eq:connectivity}.
-To quantify this observation we recorded the initiation sites of all traveling waves that were observed in an SCE under uniform background stimulus (Figure \ref{fig:wave_initiation_sites}).
-We then measured the fraction of wave initiation events (FIE) per unit length of the SCE.
+This is most noticeable for SCEs with very dense local connectivity with $C=1.0$ in equation \ref{eq:connectivity}.
+To quantify this observation we record the initiation sites of all traveling waves that were observed in an SCE under uniform background stimulus (Figure \ref{fig:wave_initiation_sites}).
+We then measure the fraction of wave initiation events (FIE) per unit length of the SCE.
 
 \begin{figure}[!htb]
  \caption{Left: The time and place of origin of every traveling wave produced during a simulation. Right: The FIE clearly shows that traveling waves are likely to start in some regions, and unlikely to start in others.}
@@ -384,7 +384,7 @@ We then measured the fraction of wave initiation events (FIE) per unit length of
 \end{figure}
 
 A separate observation is that only some of the neurons in the SCE will fire when a wave passes their location.
-We observed that a single traveling wave initiated by a step stimulus can have regions of higher or lower total firing activity which we quantify by measuring the fractional number of firing events (FFE) per unit length of the SCE.
+We observe that a single traveling wave initiated by a step stimulus can have regions of higher or lower total firing activity which we quantify by measuring the fractional number of firing events (FFE) per unit length of the SCE.
 An example measurement of the firing activity in a single traveling wave is shown in Figure \ref{fig:wave_density}.
 \begin{figure}[!htb]
  \caption{Density of firing events in a traveling wave initiated from a step stimulus. Left: Raster plot of the spike-emission times from a single traveling wave. Right: The FFE shows that some regions of the SCE exhibit more firing activity.}
@@ -393,8 +393,8 @@ An example measurement of the firing activity in a single traveling wave is show
    \includegraphics[width=\textwidth]{fig/ImpulseWaveDensity}
 \end{figure}
 
-By combining these two experiments we observed that the results from the FIE and the FFE appeared anti-correlated for the same SCE (see Supplemental Information for examples).
-To test that this observation is generally true we create 100 SCEs, applied first uniform background stimulus and then step stimulus to each SCE, and measured the correlation between the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
+By combining these two experiments we observe that the results from the FIE and the FFE appeared anti-correlated for the same SCE (see Supplemental Information for examples).
+To test that this observation is generally true we create 100 SCEs, apply first uniform background stimulus and then step stimulus to each SCE, and measure the correlation between the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
 Although there is substantial variation between SCEs we measure a consistently negative correlation coefficient (mean $-0.26$, standard deviation $0.18$) between FIE and FFE results.
 \begin{figure}[!htb]
  \centering
@@ -415,10 +415,10 @@ The LTS hypothesis also explains the reduced wave density at these sites.
 As a traveling wave passes through the region, because of their increased activity these same inhibitory neurons suppress the surrounding neurons resulting in fewer local firing events.
 
 A comparative computational experiment shows that low-threshold spiking inhibitory neurons can indeed generate traveling waves under background stimulus.
-We first created an SCE with entirely excitatory neurons.
-We then created an identical SCE except for a single LTS inhibitory neuron at $Z=50$.
-The $b$ parameter of the LTS inhibitory neuron was set to $0.25$, corresponding to the lowest firing threshold used in our model.
-These two SCEs were stimulated with the same uniform background stimulus. 
+We first create an SCE with entirely excitatory neurons.
+We then create an identical SCE except for a single LTS inhibitory neuron at $Z=50$.
+The $b$ parameter of the LTS inhibitory neuron is set to $0.25$, corresponding to the lowest firing threshold used in our model.
+These two SCEs are stimulated with the same uniform background stimulus. 
 Figure \ref{fig:lts_inhibit} clearly shows that adding the single LTS neuron results in traveling waves emanating from $Z=50$. 
 \begin{figure}[!htb]
  \caption{Simulation with a single LTS inhibitory neuron at $Z=50$. Left: an SCE with entirely excitatory neurons shows traveling waves emerging from various locations. Right: adding a single LTS neuron at $Z=50$ results in consistent wave generation from that location. }
@@ -435,9 +435,9 @@ We now examine whether traveling wave patterns can also be observed in fully con
 We show that this is possible provided we consider the action potential propagation delay proportional to the distance between neurons, as used in all the simulations above.
 We simulate an SCE with complete connectivity corresponding to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
 This is analogous to the original Izhikevich simulation \parencite{izzy_code} that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
-We first simulated the SCE with a fixed action potential propagation delay of $1~ms$ regardless of inter-neuron distance.
-The result was highly synchronized simultaneous firing among all neurons in the SCE.
-We then incorporated our distance-dependent action potential propagation with the $\kappa$ parameter set to 1.
+We first simulate the SCE with a fixed action potential propagation delay of $1~ms$ regardless of inter-neuron distance.
+The result is highly synchronized simultaneous firing among all neurons in the SCE.
+We then incorporate our distance-dependent action potential propagation with the $\kappa$ parameter set to 1.
 The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:delay_waves}).
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation delay is proportional to the inter-neuron distance.
 \begin{figure}[!htb]
@@ -471,7 +471,6 @@ Other research \parencite{keane2015} has shown that complex spatial patterns eme
 In that work, when excitation dominates then only plane waves were observed instead of complex patterns.
 Similarly, in one dimension we have found that traveling waves dominate the firing activity when the $P_{exc}$ grows close to $1$ (Figure \ref{fig:wave_parameters}).
 Both studies show that traveling waves can become the dominant spatial pattern in excitatory networks.
-
 
 We have found that low-threshold-spiking inhibitory neurons can determine the origin point of traveling waves from a uniform background stimulus.
 This implies that, when no stimulus is applied, a biological neural network might have an equilibrium dynamics governed by traveling waves initiated by low-threshold-spiking inhibitory neurons.
