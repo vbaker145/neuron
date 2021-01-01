@@ -27,7 +27,7 @@ bins = 0:binDuration:tmax;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 7);
 
-colSep = 7:10;
+colSep = 6:10;
 colStructs = [];
 for cidx = 1:length(colSep)
     cst = makeFiringRateColumnEnsemble(dt, colSep(cidx));
