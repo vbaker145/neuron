@@ -27,7 +27,7 @@ bins = 0:binDuration:tmax;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 7);
 
-colSep = 5:10;
+colSep = 7:10;
 colStructs = [];
 for cidx = 1:length(colSep)
     cst = makeFiringRateColumnEnsemble(dt, colSep(cidx));
@@ -65,7 +65,7 @@ for iTrial = 1:nTrials
     [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
 
     % Background, corrected for dt
-    stimStrength = 2.5;
+    stimStrength = 0.5;
     stB = zeros(colStruct.N, size(t,2));
     stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
     stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
@@ -92,11 +92,11 @@ for iTrial = 1:nTrials
         nFirings(connIdx, iTrial) = size(firings,1);
         
         %Plot results
-        inputMP = mean(vall(1:colStruct.Nlayer,:));
-        outputMP = mean(vall(end-colStruct.Nlayer:end,:));
-        yMin = min([inputMP outputMP]);
-        yMax = max([inputMP outputMP]);
-%         h = figure(200); h.Position = [2159 -42 712 943];
+%         inputMP = mean(vall(1:colStruct.Nlayer,:));
+%         outputMP = mean(vall(end-colStruct.Nlayer:end,:));
+%         yMin = min([inputMP outputMP]);
+%         yMax = max([inputMP outputMP]);
+%         h = figure(200); %h.Position = [2159 -42 712 943];
 %         h=subplot(3,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
 %         h.Position = [0.1300 0.7093 0.7750 0.2157];
 %         set(gca, 'XTick', [])
