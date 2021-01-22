@@ -9,7 +9,9 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage[font=small]{subcaption}
 \usepackage{wrapfig}
-\usepackage[backend=biber,style=authoryear,citestyle=authoryear,sorting=none]{biblatex}
+\usepackage[american]{babel}
+\usepackage[style=apa,backend=biber,sorting=none]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
 \usepackage[section]{placeins}
 \usepackage{rotating}
 \usepackage{bbm}
@@ -264,7 +266,7 @@ A representative raster plot of the spike events (Figure \ref{fig:sigma_raster})
 \begin{figure}[!htb]
  \centering
  \includegraphics[width=0.75\textwidth]{fig/baseline}
- \caption{Raster plot of neuron firing events over time. The model parameters are at the fixed point $\Sigma$. Each dot represents the spike-time emission of a neuron, as in \parencite{senk2020}. Traveling waves can be seen as diagonal structures of dense firing activity. }
+ \caption{Raster plot of neuron firing events over time. The model parameters are at the fixed point $\Sigma$. Each dot represents the spike-time emission of a neuron. Traveling waves can be seen as diagonal structures of dense firing activity \parencite{senk2020}. }
  \label{fig:sigma_raster}
 \end{figure}
 
@@ -393,7 +395,7 @@ An example measurement of the firing activity in a single traveling wave is show
    \includegraphics[width=\textwidth]{fig/ImpulseWaveDensity}
 \end{figure}
 
-By combining these two experiments we observe that the results from the FIE and the FFE appeared anti-correlated for the same SCE (see Supplemental Information for examples).
+By combining these two experiments we observe that the results from the FIE and the FFE appeared anti-correlated for the same SCE (see Figure S1 in Supplemental Information for examples).
 To test that this observation is generally true we create 100 SCEs, apply first uniform background stimulus and then step stimulus to each SCE, and measure the correlation between the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
 Although there is substantial variation between SCEs we measure a consistently negative correlation coefficient (mean $-0.26$, standard deviation $0.18$) between FIE and FFE results.
 \begin{figure}[!htb]
@@ -463,7 +465,7 @@ We have determined that preferential sites for wave initiation are due to the pr
 
 Previous research into traveling waves in neural networks has identified parameter regions of a neural-field model for which traveling waves exist \parencite{senk2020}.
 In this work the regions of existence were sharply defined as revealed by a linear stability analysis.
-Our exploration of model parameters (Figure \ref{fig:wave_parameters}) instead shows a gradual transition region in which waves emerge and dominate the firing activity
+Our exploration of model parameters (Figure \ref{fig:wave_parameters}) instead shows a gradual transition region in which waves emerge and dominate the firing activity.
 One possible explanation of the difference is that the previous research used highly structured spatial arrangements of excitatory and inhibitory neurons with deterministic connectivity, while our model randomly assigns neurons as excitatory or inhibitory and uses a probabilistic connection model.
 Due to the stochastic nature of our model a network created with a particular set of parameters may support traveling waves in some regions while blocking traveling waves in other regions.
 
