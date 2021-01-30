@@ -1,4 +1,4 @@
-function colStruct = makeFiringRateColumnEnsemble(dt, colSep)
+function colStruct = makeFiringRateColumnEnsemble(dt, colSep, structure)
 
 if nargin<2
    colSep = 7; 
@@ -7,23 +7,25 @@ end
 %Column ensemble for firing rate encoding experiment
 
 %Column parameters
-structure.width = 2;
-structure.height = 2;
-structure.nWide = 3;
-structure.nHigh = 3;
+if nargin < 3
+    structure.width = 2;
+    structure.height = 2;
+    structure.nWide = 3;
+    structure.nHigh = 3;
+    structure.layers = 30;
+    structure.displacement = 0;
+end
 structure.columnSpacing = colSep;
-structure.layers = 30;
-structure.displacement = 0;
 nCols = structure.nWide*structure.nHigh;
-
+    
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
-connectivity.lambda = 3.5;
-connectivity.connStrength = 16;
+connectivity.lambda = 2.5;
+connectivity.connStrength = 24;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
-delay.delayMult = 0.5;
+delay.delayMult = 0.1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 

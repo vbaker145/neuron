@@ -11,14 +11,14 @@
 
 clear all; close all;
 
-rng(42);
+%rng(42);
 
 %Comment 
 
 addpath('../lsm'); %Neural column code
 
-dt = 0.05;
-tmax = 3000;
+dt = 0.2;
+tmax = 1000;
 t = 0:dt:tmax;
 nInputPool = 50;
 binDuration = 1;
@@ -26,14 +26,20 @@ bins = 0:binDuration:tmax;
 
 %Make column ensemble
 %Connected microcolumn ensemble
-
-colStructBase    = makeFiringRateColumnEnsemble(dt, 7);
+structure.width = 2;
+structure.height = 2;
+structure.nWide = 2;
+structure.nHigh = 2;
+structure.columnSpacing = 7;
+structure.layers = 50;
+structure.displacement = 0;
+colStructBase    = makeFiringRateColumnEnsemble(dt, 7, structure);
 
 %colSep = 6:10;
-colSep = 7;
+colSep = 5;
 colStructs = [];
 for cidx = 1:length(colSep)
-    cst = makeFiringRateColumnEnsemble(dt, colSep(cidx));
+    cst = makeFiringRateColumnEnsemble(dt, colSep(cidx), structure);
     cs = colStructBase;
     cs.S = cst.S;
     cs.delay = cst.delay;
@@ -60,15 +66,18 @@ for iTrial = 1:nTrials
     colStruct = colStructs(1);
 
     %Random stimulus and background
-    firingRateHz = 3;
-    %firingRate = 5*(cos(2*pi*3.*(t./1000))+1); %Cosine, positive
-    firingRate = 10*(sin(2*pi*(firingRateHz/2)*(t./1000))).^2; %Cosine, raised
-    firingRateInvMs = (1/firingRateHz)*1000;
-    firingRatePeaks = (0.5*firingRateInvMs:firingRateInvMs:tmax);
+    %firingRateHz = 1;
+    %firingRate = 10*(sin(2*pi*(firingRateHz/2)*(t./1000))).^2; %Cosine, raised
+    %firingRateInvMs = (1/firingRateHz)*1000;
+    %firingRatePeaks = (0.5*firingRateInvMs:firingRateInvMs:tmax);
+ 
+    firingRate = 1*rand(1,length(t));
+    firingRate(floor(95/dt):floor(105/dt)) = 30;
+    firingRatePeaks = 100;
     [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
 
     % Background, corrected for dt
-    stimStrength = 2.5;
+    stimStrength = 0;
     stB = zeros(colStruct.N, size(t,2));
     stB(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
     stB(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
@@ -95,24 +104,27 @@ for iTrial = 1:nTrials
         nFirings(connIdx, iTrial) = size(firings,1);
         
         %Plot results
-%         inputMP = mean(vall(1:colStruct.Nlayer,:));
-%         outputMP = mean(vall(end-colStruct.Nlayer:end,:));
-%         yMin = min([inputMP outputMP]);
-%         yMax = max([inputMP outputMP]);
-%         h = figure(200); %h.Position = [2159 -42 712 943];
-%         h=subplot(3,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
-%         h.Position = [0.1300 0.7093 0.7750 0.2157];
-%         set(gca, 'XTick', [])
-%         ylabel('Mean stimulus (mV)');
-%         set(gca, 'FontSize', 12);
-%         subplot(3,1,2); plot(t, inputMP, 'k');
-%         ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
-%         xlabel('Time (ms)'); ylabel('Mean base layer potential (mV)'); 
-%         set(gca, 'FontSize',12);
-%         subplot(3,1,3); plot(t, outputMP, 'k');
-%         ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
-%         xlabel('Time (ms)'); ylabel('Mean output layer potential (mV)'); 
-%         set(gca, 'FontSize',12); 
+        figure(201); plot(firings(:,1) ,firings(:,2), 'k.')
+        
+        inputMP = mean(vall(1:colStruct.Nlayer,:));
+        outputMP = mean(vall(end-colStruct.Nlayer:end,:));
+        yMin = min([inputMP outputMP]);
+        yMax = max([inputMP outputMP]);
+        h = figure(200); %h.Position = [2159 -42 712 943];
+        h=subplot(3,1,1); plot(t, mean(st(1:colStruct.Nlayer,:)),'k')
+        h.Position = [0.1300 0.7093 0.7750 0.2157];
+        set(gca, 'XTick', [])
+        ylabel('Mean stimulus (mV)');
+        set(gca, 'FontSize', 12);
+        subplot(3,1,2); plot(t, inputMP, 'k');
+        ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+        xlabel('Time (ms)'); ylabel('Mean base layer potential (mV)'); 
+        set(gca, 'FontSize',12);
+        subplot(3,1,3); plot(t, outputMP, 'k');
+        ax = axis; ax(3) = yMin; ax(4) = yMax; axis(ax);
+        xlabel('Time (ms)'); ylabel('Mean output layer potential (mV)'); 
+        set(gca, 'FontSize',12); 
+        
 
     end %End loop over columns
 end %End loop over trials
