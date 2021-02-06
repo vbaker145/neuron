@@ -21,7 +21,7 @@ nCols = structure.nWide*structure.nHigh;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
-connectivity.connStrength = 24;
+connectivity.connStrength = 18;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;

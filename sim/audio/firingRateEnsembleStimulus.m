@@ -1,5 +1,5 @@
-function [st, stSpikeTrain] = firingRateEnsembleStimulus( structure, colID, excN, dt, t, nInputPool, firingRate )
-doPlot = 0;
+function [st, stSpikeTrain] = firingRateEnsembleStimulus( structure, colID, excN, dt, t, nInputPool, firingRate, connStrength )
+doPlot = 1;
 
 % structure: defines structure of microcolumn ensemble
 % colID - column labels for all neurons
@@ -14,7 +14,7 @@ N_cols = structure.nWide*structure.nHigh;
 N_per_column = N_per_layer/N_cols;
 
 %Synaptic response model
-ExpSize = 4;  %Length of synaptic response in milliseconds
+ExpSize = 2;  %Length of synaptic response in milliseconds
 synRespLambda = floor(ExpSize/dt);
 synResp = exp(-((0:synRespLambda-1)./synRespLambda).^2);
 
@@ -24,7 +24,8 @@ st = zeros(N, length(t));
 inputConnectivity = rand(nInputPool, N_per_layer );
 inputConnectivity = inputConnectivity<0.5;
 inputConnectivity(~excN(1:N_per_layer)) = 2/5*inputConnectivity(~excN(1:N_per_layer));
-inputConnectivity = 5/2*rand(1,N_per_layer).*inputConnectivity;
+%inputConnectivity = 5/2*rand(1,N_per_layer).*inputConnectivity;
+inputConnectivity = connStrength*rand(1,N_per_layer).*inputConnectivity;
 %inputConnectivity = 5/2*inputConnectivity;
 
 %Caculate firing events for input pool based on firing rate

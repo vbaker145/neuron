@@ -17,7 +17,7 @@ clear all; close all;
 
 addpath('../lsm'); %Neural column code
 
-dt = 0.2;
+dt = 0.1;
 tmax = 1000;
 t = 0:dt:tmax;
 nInputPool = 50;
@@ -30,13 +30,13 @@ structure.width = 2;
 structure.height = 2;
 structure.nWide = 2;
 structure.nHigh = 2;
-structure.columnSpacing = 7;
-structure.layers = 50;
+structure.columnSpacing = 2.5;
+structure.layers = 10;
 structure.displacement = 0;
 colStructBase    = makeFiringRateColumnEnsemble(dt, 7, structure);
 
 %colSep = 6:10;
-colSep = 5;
+colSep = 2.5;
 colStructs = [];
 for cidx = 1:length(colSep)
     cst = makeFiringRateColumnEnsemble(dt, colSep(cidx), structure);
@@ -57,24 +57,21 @@ end
 % 
 % colStructs = [colStructS colStructC];
 
-nTrials = 10;
+nTrials = 50;
 connErr = zeros(length(colStructs), nTrials, 6);
 nFirings = zeros(length(colStructs), nTrials);
 
 for iTrial = 1:nTrials
     iTrial
     colStruct = colStructs(1);
-
-    %Random stimulus and background
-    %firingRateHz = 1;
-    %firingRate = 10*(sin(2*pi*(firingRateHz/2)*(t./1000))).^2; %Cosine, raised
-    %firingRateInvMs = (1/firingRateHz)*1000;
-    %firingRatePeaks = (0.5*firingRateInvMs:firingRateInvMs:tmax);
  
-    firingRate = 1*rand(1,length(t));
-    firingRate(floor(95/dt):floor(105/dt)) = 30;
-    firingRatePeaks = 100;
-    [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, colStruct.csec, colStruct.ecn, dt, t, nInputPool, firingRate );
+    firingRate = 5*ones(1,length(t));
+    %firingRate(floor(450/dt):floor(550/dt)) = 20;
+    %firingRate(floor(500/dt):end) = 50;
+    firingRatePeaks = 500;
+    [st, stSpikes] = firingRateEnsembleStimulus( colStruct.structure, ...
+                                        colStruct.csec, colStruct.ecn, dt, ...
+                                        t, nInputPool, firingRate, 6 );
 
     % Background, corrected for dt
     stimStrength = 0;
@@ -98,14 +95,15 @@ for iTrial = 1:nTrials
         %Connected minicolumn ensemble
         [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), ...
             colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
-            colStruct.delays, st);  
-        [ nErrI, pErrI, nErrO, pErrO ] = firingRateErrorAnalysis( vall, colStruct, firingRatePeaks, dt, 0.25 );
-        connErr(connIdx, iTrial, :) = [nErrI pErrI nErrO pErrO ];
-        nFirings(connIdx, iTrial) = size(firings,1);
+            colStruct.delays, st); 
+        size(firings)
+        figure(201); plot(firings(:,1) ,firings(:,2)./colStruct.Nlayer, 'k.')
+        
+         [ nErrI, pErrI, nErrO, pErrO ] = firingRateErrorAnalysis( vall, colStruct, firingRatePeaks, dt, 0.25 );
+         connErr(connIdx, iTrial, :) = [nErrI pErrI nErrO pErrO ];
+         nFirings(connIdx, iTrial) = size(firings,1);
         
         %Plot results
-        figure(201); plot(firings(:,1) ,firings(:,2), 'k.')
-        
         inputMP = mean(vall(1:colStruct.Nlayer,:));
         outputMP = mean(vall(end-colStruct.Nlayer:end,:));
         yMin = min([inputMP outputMP]);

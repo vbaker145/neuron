@@ -39,11 +39,11 @@ delayMult = delay.delayMult;
 delayFrac = delay.delayFrac;
 dt = delay.dt;
 
-doplot = 0;
+doplot = 1;
 
 if doplot
    if nargin < 4
-      figure(101);
+      figure(101); clf;
       plotAx = axes;
    end
 end
@@ -60,7 +60,7 @@ y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
 if doplot == 1
-    scatter3(plotAx, x,y,z,10, 'black','filled')
+    scatter3(plotAx, x,y,z,30, 'black','filled')
     hold on;
 end
 
