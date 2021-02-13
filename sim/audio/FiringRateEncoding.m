@@ -35,7 +35,11 @@ structure.displacement = 0;
 colStructBase    = makeFiringRateColumnEnsemble(dt, 7, structure);
 
 
-colSep = [structure.width (structure.width-1)+colStructBase.connectivity.lambda];
+colSep = [structure.width, colStructBase.connectivity.lambda ...
+                1.25*colStructBase.connectivity.lambda, ...
+                1.5*colStructBase.connectivity.lambda, ...
+                1.75*colStructBase.connectivity.lambda, ...
+                2*colStructBase.connectivity.lambda];
 %colSep = structure.width;
 colStructs = [];
 for cidx = 1:length(colSep)
@@ -49,7 +53,7 @@ end
 firingRates = 1:2:21;
 nFiringRates = length(firingRates);
 
-nTrials = 10;
+nTrials = 20;
 
 %connErr = zeros(length(colStructs), nTrials, 6);
 %nFirings = zeros(length(colStructs), nTrials);
@@ -91,7 +95,7 @@ for fr = 1:nFiringRates
 
             %Find peaks in input/output membrane potential
             [ip iw op ow] = findPeaks(inputMP, outputMP, dt, 0.25);
-            npks(fr, connIdx, trial) = length(op);
+            npks(fr, connIdx, trial) = length(op)-1;
         end %End trial loop    
     end %End loop columns
 end %End loop over trial
@@ -99,5 +103,9 @@ end %End loop over trial
 m = mean(npks,3);
 v = std(npks,0,3);
 figure(20); errorbar(firingRates,m(:,1), v(:,1));
-hold on; errorbar(firingRates,m(:,2), v(:,2));
-
+for jj=2:size(m,2)
+    hold on; errorbar(firingRates,m(:,jj), v(:,jj));
+end
+xlabel('Input firing rate (spikes/second)');
+ylabel('Output wave rate (waves/second)');
+set(gca,'FontSize', 14);
