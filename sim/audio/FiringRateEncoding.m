@@ -32,72 +32,76 @@ structure.nHigh = 2;
 structure.columnSpacing = 2.5;
 structure.layers = 10;
 structure.displacement = 0;
-colStructBase    = makeFiringRateColumnEnsemble(dt, 7, structure);
+
+nTrials = 10;
+
+for trial=1:nTrials
+    colStructBase    = makeFiringRateColumnEnsemble(dt, 7, structure);
 
 
-colSep = [structure.width, colStructBase.connectivity.lambda ...
-                1.25*colStructBase.connectivity.lambda, ...
-                1.5*colStructBase.connectivity.lambda, ...
-                1.75*colStructBase.connectivity.lambda, ...
-                2*colStructBase.connectivity.lambda];
-%colSep = structure.width;
-colStructs = [];
-for cidx = 1:length(colSep)
-    cst = makeFiringRateColumnEnsemble(dt, colSep(cidx), structure);
-    cs = colStructBase;
-    cs.S = cst.S;
-    cs.delay = cst.delay;
-    cs.structure.columnSpacing = colSep(cidx);
-    colStructs = [colStructs cs];
-end
-firingRates = 1:2:21;
-nFiringRates = length(firingRates);
+    colSep = [structure.width, colStructBase.connectivity.lambda ...
+                    1.25*colStructBase.connectivity.lambda, ...
+                    1.5*colStructBase.connectivity.lambda, ...
+                    1.75*colStructBase.connectivity.lambda, ...
+                    2*colStructBase.connectivity.lambda];
+    %colSep = structure.width;
+    colStructs = [];
+    for cidx = 1:length(colSep)
+        cst = makeFiringRateColumnEnsemble(dt, colSep(cidx), structure);
+        cs = colStructBase;
+        cs.S = cst.S;
+        cs.delay = cst.delay;
+        cs.structure.columnSpacing = colSep(cidx);
+        colStructs = [colStructs cs];
+    end
+    firingRates = 1:2:21;
+    nFiringRates = length(firingRates);
 
-nTrials = 20;
 
-%connErr = zeros(length(colStructs), nTrials, 6);
-%nFirings = zeros(length(colStructs), nTrials);
+    %connErr = zeros(length(colStructs), nTrials, 6);
+    %nFirings = zeros(length(colStructs), nTrials);
 
-for fr = 1:nFiringRates
-    fr
+    for fr = 1:nFiringRates
+        fr
 
-    %% Simulate column ensembles
-    for connIdx =1:length(colStructs)
-        for trial=1:nTrials
-            colStruct = colStructs(connIdx);
-            
-            %Random stimulus and background
-            firingRate = firingRates(fr)*ones(1,length(t));
-            [st, stSpikes] = firingRateEnsembleStimulus( colStructBase.structure, ...
-                                                colStructBase.csec, colStructBase.ecn, dt, ...
-                                                t, nInputPool, firingRate, 6 );
+        %% Simulate column ensembles
+        for connIdx =1:length(colStructs)
 
-            vinit=-65*ones(colStruct.N,1)+0*rand(colStruct.N,1);    % Initial values of v
-            uinit=(colStruct.b).*vinit;                 % Initial values of u
+                colStruct = colStructs(connIdx);
 
-            %Simulate column ensemble
-            [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), ...
-                colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
-                colStruct.delays, st);  
-            size(firings)
+                %Random stimulus and background
+                firingRate = firingRates(fr)*ones(1,length(t));
+                [st, stSpikes] = firingRateEnsembleStimulus( colStructBase.structure, ...
+                                                    colStructBase.csec, colStructBase.ecn, dt, ...
+                                                    t, nInputPool, firingRate, 6 );
 
-            figure(10); subplot(length(colStructs), nFiringRates,(connIdx-1)*nFiringRates+fr);
-            plot(firings(:,1)  ,firings(:,2)./colStruct.Nlayer, 'k.')
-            if connIdx == 1
-                title(num2str(firingRates(fr)));
-                set(gca, 'XTick', []);
-            end
-            set(gca,'FontSize', 12);
+                vinit=-65*ones(colStruct.N,1)+0*rand(colStruct.N,1);    % Initial values of v
+                uinit=(colStruct.b).*vinit;                 % Initial values of u
 
-            %Record # of peaks
-            inputMP = mean(vall(1:colStruct.Nlayer,:));
-            outputMP = mean(vall(end-colStruct.Nlayer:end,:));
+                %Simulate column ensemble
+                [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), ...
+                    colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
+                    colStruct.delays, st);  
+                size(firings)
 
-            %Find peaks in input/output membrane potential
-            [ip iw op ow] = findPeaks(inputMP, outputMP, dt, 0.25);
-            npks(fr, connIdx, trial) = length(op)-1;
-        end %End trial loop    
+                figure(10); subplot(length(colStructs), nFiringRates,(connIdx-1)*nFiringRates+fr);
+                plot(firings(:,1)  ,firings(:,2)./colStruct.Nlayer, 'k.')
+                if connIdx == 1
+                    title(num2str(firingRates(fr)));
+                    set(gca, 'XTick', []);
+                end
+                set(gca,'FontSize', 12);
+
+                %Record # of peaks
+                inputMP = mean(vall(1:colStruct.Nlayer,:));
+                outputMP = mean(vall(end-colStruct.Nlayer:end,:));
+
+                %Find peaks in input/output membrane potential
+                [ip iw op ow] = findPeaks(inputMP, outputMP, dt, 0.25);
+                npks(fr, connIdx, trial) = length(op)-1;
+        end   
     end %End loop columns
+    
 end %End loop over trial
 
 m = mean(npks,3);
