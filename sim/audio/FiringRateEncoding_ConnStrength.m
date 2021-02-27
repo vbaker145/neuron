@@ -9,7 +9,7 @@
 
 clear all; close all;
 
-%rng(42);
+rng(42);
 
 %Comment 
 
@@ -27,13 +27,13 @@ bins = 0:binDuration:tmax;
 %Connected microcolumn ensemble
 structure.width = 2;
 structure.height = 2;
-structure.nWide = 2;
-structure.nHigh = 2;
+structure.nWide = 1;
+structure.nHigh = 1;
 structure.columnSpacing = 2.5;
 structure.layers = 10;
 structure.displacement = 0;
 
-nTrials = 10;
+nTrials = 100;
 
 colSep = 3.125;
 colStruct = makeFiringRateColumnEnsemble(dt, colSep, structure);
