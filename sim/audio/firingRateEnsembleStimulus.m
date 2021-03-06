@@ -1,5 +1,5 @@
 function [st, stSpikeTrain] = firingRateEnsembleStimulus( structure, colID, excN, dt, t, nInputPool, firingRate, connStrength )
-doPlot = 1;
+doPlot = 0;
 
 % structure: defines structure of microcolumn ensemble
 % colID - column labels for all neurons
