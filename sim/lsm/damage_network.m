@@ -1,10 +1,14 @@
-function [ Sdam dam_neuron ] = damage_network( S, p_neuron, p_conn )
+function [ Sdam dam_neuron ] = damage_network( S, p_neuron, seed)
 %Damage network by removing connectivity
 % S - original connectivity matrix
 % p_neuron - percent (0.0-1.0) of neurons to REMOVE
 % p_conn - percent (0.0-1.0) of connections to REMOVE
 
 Sdam = S;
+
+if nargin > 2
+   rng(seed); 
+end
 
 nRemove = ceil(size(S,1)*p_neuron);
 rnd_neuron = rand(1, nRemove);

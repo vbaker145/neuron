@@ -1,5 +1,8 @@
 function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, plotAx)
 
+doplot = 1;
+
+
 width = structure.width;
 height = structure.height;
 nWide = structure.nWide;
@@ -38,8 +41,6 @@ delayType = delay.delayType;
 delayMult = delay.delayMult;
 delayFrac = delay.delayFrac;
 dt = delay.dt;
-
-doplot = 1;
 
 if doplot
    if nargin < 4
@@ -163,7 +164,9 @@ end
 if doplot == 1
     title(['Spacing=' num2str(columnSpacing)]);
     axis equal;
+    xlabel('X'); ylabel('Y'); zlabel('Z');
     set(gcf, 'pos', [0 0 600 800]);
+    set(gca, 'FontSize', 14);
 end
 
 S = connections;
