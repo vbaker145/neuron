@@ -39,7 +39,10 @@ structure.columnSpacing = 3.5;
 structure.layers = 10;
 structure.displacement = 0;
 
-nTrials = 3;
+nTrials = 100;
+
+morphologies = {'One big SCE', 'Independent SCE', 'Coupled SCE'};
+nMorph = length(morphologies);
 
 %Base population, one big SCE
 colStructOneBigSCE = makeFiringRateColumnEnsemble(dt, 2, structure);
@@ -54,19 +57,22 @@ colStructs = {}; neuronsRemoved = [];
 
 for cidx = 1:length(nd)
     for tidx = 1:nTrials
-        rndSeed = randi(100);
+        s = rng();
         
         cs = colStructOneBigSCE;
-        [cs.S neuronsRemoved{cidx,tidx}] = damage_network(colStructOneBigSCE.S, nd(cidx), rndSeed );
-        colStructs{(cidx-1)*3+1,tidx} =  cs;
+        [cs.S, neuronsRemoved{cidx,tidx}] = damage_network(colStructOneBigSCE.S, nd(cidx) );
+        colStructs{(cidx-1)*nMorph+1,tidx} =  cs;
         
+        rng(s);
         cs = colStructIndependent;
-        [cs.S neuronsRemoved{cidx,tidx}] = damage_network(colStructIndependent.S, nd(cidx), rndSeed );
-        colStructs{(cidx-1)*3+2,tidx} = cs;
+        [cs.S, neuronsRemoved{cidx,tidx}] = damage_network(colStructIndependent.S, nd(cidx) );
+        colStructs{(cidx-1)*nMorph+2,tidx} = cs;
         
+        rng(s);
         cs = colStructCoupled;
-        [cs.S neuronsRemoved{cidx,tidx}] = damage_network(colStructCoupled.S, nd(cidx), rndSeed );
-        colStructs{(cidx-1)*3+3, tidx} = cs;
+        [cs.S, neuronsRemoved{cidx,tidx}] = damage_network(colStructCoupled.S, nd(cidx) );
+        colStructs{(cidx-1)*nMorph+3, tidx} = cs;
+        
     end
 end
 
@@ -82,18 +88,18 @@ for fr = 1:nFiringRates
                                         t, nInputPool, firingRate, 6 );
                                     
     %Baseline wave rates for each morphology
-    [npOneBigSCE nfrOneBigSCE] = test_sce(colStructOneBigSCE, dt, t, st, tmax );
-    [npIndependent nfrIndependent] = test_sce(colStructIndependent, dt, t, st, tmax );
-    [npCoupled nfrCoupled] = test_sce(colStructCoupled, dt, t, st, tmax );
+    [npOneBigSCE, nfrOneBigSCE] = test_sce(colStructOneBigSCE, dt, t, st, tmax );
+    [npIndependent, nfrIndependent] = test_sce(colStructIndependent, dt, t, st, tmax );
+    [npCoupled, nfrCoupled] = test_sce(colStructCoupled, dt, t, st, tmax );
                                                 
     %% Simulate column ensembles
     for ndi = 1:length(nd)   
-        for scePopIdx = 1:3
+        for scePopIdx = 1:nMorph
+            colIdx = (ndi-1)*nMorph+scePopIdx;
             for trial = 1:nTrials
-                colIdx = (ndi-1)*3+scePopIdx;
-                %Damage network
                 colStructT = colStructs{colIdx,trial};
-                [np nfr] = test_sce(colStructT, dt, t, st, tmax );
+                [colIdx trial]
+                [np, nfr] = test_sce(colStructT, dt, t, st, tmax );
                 npks(fr, colIdx, trial) = np;
                 nfires(fr,colIdx,trial) = nfr;
             end %End trial loop
@@ -115,9 +121,32 @@ set(gca,'FontSize', 14);
 %Plot of all trials for single firing rate
 if length(firingRates) == 1
    %Plot output wave rates for all trials 
-   popData = squeeze(npks)';
-   popDataMean = mean(popData);
-   popDataDiff = popData(:,4:6) - popData(:,1:3);
+   popWaveRate = squeeze(npks)';
+   popNFires = squeeze(nfires)';
+   
+   %Plot output waves rates for each morphology and damage %
+   figure(40); subplot(length(nd), nMorph,1); hold on;
+   for jj=1:length(nd)
+       for kk=1:nMorph
+           didx = (jj-1)*3+kk;
+           subplot(length(nd), nMorph, didx);
+           histogram(popWaveRate(:,didx), 0:0.5:8);
+           title([morphologies{kk} ', damage ' num2str(nd(jj)*100) '%' ]);
+           xlabel('Wave rate'); ylabel('# trials');
+       end
+   end
+   
+   %Plot firing rates for each morphology and damage %
+   figure(50); subplot(length(nd),1,1); 
+   for jj=1:length(nd)
+       subplot(length(nd),1,jj); 
+       cidx = (jj-1)*nMorph+1;
+       mf = mean(popNFires(:, cidx:cidx+nMorph-1));
+       bar(categorical(morphologies),mf);
+       ylabel('Total # spikes');
+       title(['Damage ' num2str(nd(jj)*100) '%']);
+   end
+   
 end
 
 
