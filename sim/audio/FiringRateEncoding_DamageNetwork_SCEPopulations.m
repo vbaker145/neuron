@@ -33,13 +33,13 @@ nFiringRates = length(firingRates);
 %Connected microcolumn ensemble
 structure.width = 2;
 structure.height = 2;
-structure.nWide = 2;
-structure.nHigh = 2;
+structure.nWide = 3;
+structure.nHigh = 3;
 structure.columnSpacing = 3.5;
 structure.layers = 10;
 structure.displacement = 0;
 
-nTrials = 100;
+nTrials = 10;
 
 morphologies = {'One big SCE', 'Independent SCE', 'Coupled SCE'};
 nMorph = length(morphologies);
