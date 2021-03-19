@@ -464,6 +464,11 @@
   </bcf:optionscope>
   <!-- SOURCEMAP -->
   <bcf:sourcemap>
+    <bcf:maps datatype="bibtex" level="user">
+      <bcf:map>
+        <bcf:map_step map_field_set="abstract" map_null="1"/>
+      </bcf:map>
+    </bcf:maps>
     <bcf:maps datatype="bibtex" level="style">
       <bcf:map>
         <bcf:map_step map_field_source="year" map_final="1"/>
@@ -2184,63 +2189,71 @@
     <bcf:citekey order="2">reimer2010</bcf:citekey>
     <bcf:citekey order="3">wu2008</bcf:citekey>
     <bcf:citekey order="4">huang2004</bcf:citekey>
-    <bcf:citekey order="5">keane2015</bcf:citekey>
-    <bcf:citekey order="6">Senk2018</bcf:citekey>
-    <bcf:citekey order="7">wu2008</bcf:citekey>
-    <bcf:citekey order="8">Muller2018</bcf:citekey>
-    <bcf:citekey order="9">Rubino2006</bcf:citekey>
-    <bcf:citekey order="10">lubernov2009</bcf:citekey>
-    <bcf:citekey order="11">wu2008</bcf:citekey>
-    <bcf:citekey order="12">Muller2014</bcf:citekey>
-    <bcf:citekey order="13">Muller2018</bcf:citekey>
-    <bcf:citekey order="14">Rubino2006</bcf:citekey>
-    <bcf:citekey order="15">sanes1993</bcf:citekey>
-    <bcf:citekey order="16">wu2008</bcf:citekey>
-    <bcf:citekey order="17">Shoham1999</bcf:citekey>
-    <bcf:citekey order="18">Xu2007</bcf:citekey>
-    <bcf:citekey order="19">reimer2010</bcf:citekey>
-    <bcf:citekey order="20">ermentrout2001</bcf:citekey>
-    <bcf:citekey order="21">keane2015</bcf:citekey>
-    <bcf:citekey order="22">gibson2009</bcf:citekey>
-    <bcf:citekey order="23">reimer2010</bcf:citekey>
+    <bcf:citekey order="5">Colomb1999</bcf:citekey>
+    <bcf:citekey order="6">keane2015</bcf:citekey>
+    <bcf:citekey order="7">Senk2018</bcf:citekey>
+    <bcf:citekey order="8">Golomb1996</bcf:citekey>
+    <bcf:citekey order="9">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="10">wu2008</bcf:citekey>
+    <bcf:citekey order="11">Muller2018</bcf:citekey>
+    <bcf:citekey order="12">Rubino2006</bcf:citekey>
+    <bcf:citekey order="13">lubernov2009</bcf:citekey>
+    <bcf:citekey order="14">wu2008</bcf:citekey>
+    <bcf:citekey order="15">Muller2014</bcf:citekey>
+    <bcf:citekey order="16">Muller2018</bcf:citekey>
+    <bcf:citekey order="17">Rubino2006</bcf:citekey>
+    <bcf:citekey order="18">sanes1993</bcf:citekey>
+    <bcf:citekey order="19">wu2008</bcf:citekey>
+    <bcf:citekey order="20">Shoham1999</bcf:citekey>
+    <bcf:citekey order="21">Xu2007</bcf:citekey>
+    <bcf:citekey order="22">reimer2010</bcf:citekey>
+    <bcf:citekey order="23">ermentrout2001</bcf:citekey>
     <bcf:citekey order="24">keane2015</bcf:citekey>
-    <bcf:citekey order="25">Townsend2018</bcf:citekey>
-    <bcf:citekey order="26">ermentrout2001</bcf:citekey>
-    <bcf:citekey order="27">Senk2018</bcf:citekey>
-    <bcf:citekey order="28">buxhoeveden2002</bcf:citekey>
-    <bcf:citekey order="29">mountcastle1997</bcf:citekey>
-    <bcf:citekey order="30">rockland2004</bcf:citekey>
-    <bcf:citekey order="31">horton2005</bcf:citekey>
-    <bcf:citekey order="32">Cruz2009</bcf:citekey>
-    <bcf:citekey order="33">DaCosta2010</bcf:citekey>
-    <bcf:citekey order="34">buxhoeveden2002</bcf:citekey>
-    <bcf:citekey order="35">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="36">keane2015</bcf:citekey>
-    <bcf:citekey order="37">Senk2018</bcf:citekey>
-    <bcf:citekey order="38">maass2002</bcf:citekey>
-    <bcf:citekey order="39">Levy2012</bcf:citekey>
-    <bcf:citekey order="40">Pyle2017</bcf:citekey>
-    <bcf:citekey order="41">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="42">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="43">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="44">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="25">gibson2009</bcf:citekey>
+    <bcf:citekey order="26">Wilson1973</bcf:citekey>
+    <bcf:citekey order="27">reimer2010</bcf:citekey>
+    <bcf:citekey order="28">keane2015</bcf:citekey>
+    <bcf:citekey order="29">Townsend2018</bcf:citekey>
+    <bcf:citekey order="30">Golomb1997</bcf:citekey>
+    <bcf:citekey order="31">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="32">Senk2018</bcf:citekey>
+    <bcf:citekey order="33">buxhoeveden2002</bcf:citekey>
+    <bcf:citekey order="34">mountcastle1997</bcf:citekey>
+    <bcf:citekey order="35">horton2005</bcf:citekey>
+    <bcf:citekey order="36">Cruz2009</bcf:citekey>
+    <bcf:citekey order="37">DaCosta2010</bcf:citekey>
+    <bcf:citekey order="38">buxhoeveden2002</bcf:citekey>
+    <bcf:citekey order="39">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="40">keane2015</bcf:citekey>
+    <bcf:citekey order="41">Senk2018</bcf:citekey>
+    <bcf:citekey order="42">maass2002</bcf:citekey>
+    <bcf:citekey order="43">Levy2012</bcf:citekey>
+    <bcf:citekey order="44">Pyle2017</bcf:citekey>
     <bcf:citekey order="45">izhikevich2003</bcf:citekey>
     <bcf:citekey order="46">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="47">Senk2018</bcf:citekey>
-    <bcf:citekey order="48">Senk2018</bcf:citekey>
-    <bcf:citekey order="49">Sato2012</bcf:citekey>
-    <bcf:citekey order="50">Muller2018</bcf:citekey>
-    <bcf:citekey order="51">keane2015</bcf:citekey>
+    <bcf:citekey order="47">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="48">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="49">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="50">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="51">Senk2018</bcf:citekey>
     <bcf:citekey order="52">Senk2018</bcf:citekey>
-    <bcf:citekey order="53">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="54">gibson2009</bcf:citekey>
-    <bcf:citekey order="55">hayut2011</bcf:citekey>
-    <bcf:citekey order="56">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="57">ascoli2010</bcf:citekey>
-    <bcf:citekey order="58">ermentrout2001</bcf:citekey>
-    <bcf:citekey order="59">Senk2018</bcf:citekey>
-    <bcf:citekey order="60">keane2015</bcf:citekey>
-    <bcf:citekey order="61">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="53">Sato2012</bcf:citekey>
+    <bcf:citekey order="54">Golomb1997</bcf:citekey>
+    <bcf:citekey order="55">Chervin1988</bcf:citekey>
+    <bcf:citekey order="56">Muller2018</bcf:citekey>
+    <bcf:citekey order="57">Golomb1997</bcf:citekey>
+    <bcf:citekey order="58">Chervin1988</bcf:citekey>
+    <bcf:citekey order="59">keane2015</bcf:citekey>
+    <bcf:citekey order="60">Senk2018</bcf:citekey>
+    <bcf:citekey order="61">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="62">gibson2009</bcf:citekey>
+    <bcf:citekey order="63">hayut2011</bcf:citekey>
+    <bcf:citekey order="64">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="65">ascoli2010</bcf:citekey>
+    <bcf:citekey order="66">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="67">Senk2018</bcf:citekey>
+    <bcf:citekey order="68">keane2015</bcf:citekey>
+    <bcf:citekey order="69">ermentrout2001</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global" type="entry" sortscheme="none" sortnamekeyscheme="global">
   <bcf:sorting>

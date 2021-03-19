@@ -10,6 +10,7 @@
 \usepackage[font=small]{subcaption}
 \usepackage{wrapfig}
 \usepackage[american]{babel}
+\usepackage{csquotes}
 \usepackage[style=apa,backend=biber,sorting=none]{biblatex}
 \DeclareLanguageMapping{american}{american-apa}
 \usepackage[section]{placeins}
@@ -18,8 +19,17 @@
 \usepackage{latexsym}
 
 
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldset=abstract, null]
+    }
+  }
+}
+
 \addbibresource{nn.bib}
 %\renewcommand\thesubsection{\alph{subsection}}
+
 
 %\DeclareGraphicsExtensions{.eps,.png}
 
@@ -91,22 +101,23 @@ Our one-dimensional model is not only useful for studying the basic properties o
 
 \section{Introduction} 
 Connected neurons that fire sequentially can stimulate firings from neighboring neurons, creating a traveling wave of neuron spikes. 
-These traveling waves have been observed in the cortex of mammalian brains \parencite{Muller2018}\parencite{reimer2010}  as well as in vitro \parencite{wu2008}\parencite{huang2004}, and subsequently have been reproduced in silico \parencite{keane2015}\parencite{Senk2018}. 
+These traveling waves have been observed in the cortex of mammalian brains \parencite{Muller2018}\parencite{reimer2010}  as well as in vitro \parencite{wu2008}\parencite{huang2004}\parencite{Colomb1999}, and subsequently have been reproduced in silico \parencite{keane2015}\parencite{Senk2018}\parencite{Golomb1996}\parencite{ermentrout2001}. 
 While the function of traveling waves is unknown \parencite{wu2008}\parencite{Muller2018}, proposed functions include motor coordination \parencite{Rubino2006}, place field coordination in the hippocampus \parencite{lubernov2009}, and spatiotemporal processing in the visual cortex \parencite{wu2008}\parencite{Muller2014}.
 
 
 Neuronal traveling waves are not uniquely defined as they can exist at widely differing frequency and scale lengths.  
 In the sleep and anesthetized states,slow and large-scale wave activity has been recorded \parencite{Muller2018}. 
-Traveling waves have been detected in local-field potentials measured with electrodes \cite{Rubino2006}\parencite{sanes1993}
+Traveling waves have been detected in local-field potentials measured with electrodes \cite{Rubino2006}\parencite{sanes1993}.
 Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \parencite{wu2008}\parencite{Shoham1999}\parencite{Xu2007}.  
 Similarly, traveling waves also differ by the manner in which they are created. 
 Both spontaneously occurring waves and stimulus-evoked \parencite{reimer2010} waves have been observed in the visual and auditory cortex. 
 Computational and mathematical modeling of traveling waves in a variety of models have shown many of the characteristics observed experimentally \parencite{ermentrout2001}\parencite{keane2015}\parencite{gibson2009}.
 
-The vast majority of studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \parencite{reimer2010}\parencite{keane2015}\cite{Townsend2018}. 
+The vast majority of studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \parencite{Wilson1973}\parencite{reimer2010}\parencite{keane2015}\cite{Townsend2018}\parencite{Golomb1997}. 
 This is to be expected as this is the geometry of the system on which they are observed. 
 However, there is no a priori reason that prevents the existence of traveling waves on other geometries as long as the network considers time delay of neuronal signaling and local connectivity of its neurons \parencite{ermentrout2001}\parencite{Senk2018}. 
-Of interest, there are regions of the brain where there are what seem to be essentially one-dimensional structures \parencite{buxhoeveden2002}\parencite{mountcastle1997}\parencite{rockland2004} typically called micro- or minicolumns. 
+Of interest, there are regions of the brain where there are what seem to be essentially one-dimensional structures \parencite{buxhoeveden2002}\parencite{mountcastle1997} typically called micro- or minicolumns. 
+%\parencite{rockland2004} 
 These minicolumns are aligned perpendicular to the pia and can be hundreds of microns long.  
 Although their relevance to cognition and function is still being debated \parencite{horton2005}\parencite{Cruz2009}\parencite{DaCosta2010}\parencite{buxhoeveden2002}, it is possible that they can sustain traveling waves.
 
@@ -168,7 +179,9 @@ The parameters used here (see Table \ref{tab:izzy_params}) are based on those sp
 For solving equation (2) numerically we use the modified Euler method from \parencite{izhikevich2003} with a time step of $0.2 ms$ except were noted. 
 
 A crucial element to evoke traveling waves in neuronal systems is the existence of time delays between the creation of a presynaptic action potential and the arrival of that spike to a target neuron. 
-For this, we use distance-dependent time delays for the propagation of a spike from neuron $i$ to neuron $j$ of $\tau_{ij} = \kappa  D(i,j)$, where $\kappa$ ranges from 0 (signals only take one time step to reach their target neuron) to 4. 
+For this, we use distance-dependent time delays for the propagation of a spike from neuron $i$ to neuron $j$ of $\tau_{ij} = \kappa  D(i,j)$. 
+The constant of porportionality $\kappa$ ranges from $0$ to $4$.
+When $\kappa=0$ the action potential excites the post-synaptic neuron on the succeeding simulation time step.
 
 The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons $I_i$ and external stimuli $I_{i,e}$ applied to the system. 
 The neuron-neuron incoming current $I_i$ into neuron $i$ is given by:
@@ -298,12 +311,14 @@ For the range of values tested, the parameter $\kappa$ does not show a strong in
 However, increasing $\kappa$ gradually reduces the fraction of neuron spikes that are associated with waves.
 
 \subsection{Wave propagation speed} \label{sub:propagation_speed}
-Cortical traveling waves have been observed with propagating speeds from 0.1 to 0.8 meters per second \parencite{Sato2012}.
-This is consistent with the action potential propagation speeds in the gray matter of the cortex \parencite{Muller2018}.
-It is thus clear that the dynamics of action potential propagation will influence wave propagation.
+Cortical traveling waves have been observed with propagating speeds from $<0.1 to >0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}.
+In \parencite{Muller2018} the authors considers this consistent with the action potential propagation speeds in the gray matter of the cortex. 
+We include action potential propagation in our model with a propagation time porpotional to the length of the axon.
 The key elements of the dynamics include the speed at which an action potential is carried to the postsynaptic neurons, and the length of the connections.
 
-A second key element, namely neuron dynamics, will also influence wave propagation speed.
+In \parencite{Golomb1997} the authors neglected action potential propagation in their model of disinhibited cortical slices as they consider their observed wave velocity of $~0.15 m/s$ to be an order of magnitudefaster than axon potential propagation.
+\parencite{Chervin1988} found even slower propagation of $0.06-0.09 m/s$ in disinhibited slices of rat cortex.
+This indicates that a second key element, namely neuron amd synapse dynamics, will also influence wave propagation speed.
 Biological neurons have complex internal dynamics, and will not fire instantaneously upon receiving a stimulus.
 The input may push the neuron's dynamical system out of equilibrium and cause a spike, but the system dynamics take some time to evolve.
 Therefore the spike will occur with some delay after the stimulus.

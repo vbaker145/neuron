@@ -88,9 +88,10 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 delays = spalloc(n,n,1000);
 
 %dmax = layers;
-dmax = 2*lambda;
+dmax = 3*lambda;
+cmapRes = 20;
 if doplot == 1
-    map = colormap(jet(dmax));
+    map = colormap(jet(dmax*cmapRes));
 end
 
 %Synaptic weights
@@ -137,7 +138,7 @@ for jj=1:length(x)
                 if doplot == 1
                     subplot(1,2,1);
                     dis = min(dis,dmax);
-                    cm = map(floor(dis),:);
+                    cm = map(floor(dis*cmapRes),:);
                     line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', dis/2);
                     
                     subplot(1,2,2);
@@ -174,12 +175,16 @@ if doplot == 1
     subplot(1,2,1);
     axis equal;
     cl = colorbar;
-    tls = {''};
-    for jj=1:dmax
-       tls{end+1} = jj;
-       tls{end+1} = '';
+    nTickLabels = length(cl.TickLabels);
+    tickInc = dmax/nTickLabels;
+    tls = {};
+    for jj=0:tickInc:dmax
+       tls{end+1} = num2str(jj,2);
+       %tls{end+1} = '';
     end
     cl.TickLabels = tls;
+    xlabel('X'); ylabel('Y'); zlabel('Z');
+    set(gca,'FontSize',12);
     
     subplot(1,2,2);
     xlabel('Presynaptic neuron #');
