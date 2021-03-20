@@ -133,20 +133,23 @@ Traveling waves are present in both locally-connected and fully-connected system
 The traveling waves in fully connected systems are dependent upon the action potential propagation speed, while traveling waves can propagate in locally-connected systems even when action potential propagation is instantaneous.
 
 \section{Methods}
-To study traveling waves in small columnar ensembles (SCE) of neurons we first construct these assemblies by placing neurons at the vertices of a cubic lattice described by two short (base) and one long dimension (height). 
+To study traveling waves in small columnar ensembles (SCE) of neurons we first construct these assemblies by placing neurons at the vertices of a cubic lattice described by two short dimensions (X,Y) and one long dimension (Z). 
 Each neuron is either excitatory (E) or inhibitory (I), with the fraction of excitatory neurons indicated as $P_{exc}$.
 After placing, we connect two neurons based on their relative distance according to a connection probability that favors local connectivity given by: 
 \begin{align}\label{eq:connectivity}
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
 where $D(a,b)$ is the Euclidean distance between neuron A and B, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is a normalization constant.
+Multiple connnections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
+Two neurons may be recurrently connected, however.
 An example of an SCE showing the connectivity structure is shown in Figure \ref{fig:column_structure}.
 \begin{figure}[!htb]
- \caption{Example SCE with dimensions 2x2x15, $\lambda$=2.5, and C=1. Left: SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. Right: Connection matrix. E-E connections are green, E-I are black and all inhibitory connections are red. }
+ \caption{Example SCE with dimensions 2x2x15 (X/Y/Z), $\lambda$=2.5, and C=1. Left: SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. Right: Connection matrix. E-E connections are green, E-I are black and all inhibitory connections are red. }
  \label{fig:column_structure}
  \centering
    \includegraphics[width=\textwidth]{fig/column_structure}
 \end{figure}
+We use open boundary conditions, so neurons near the ends of the SCE will have fewer connections.
 
 We model the firing dynamics of each neuron using the Izhikevich model \parencite{izhikevich2003} that consists of a two-dimensional model of two coupled differential equations given by:
 \begin{align}
@@ -199,6 +202,7 @@ The $S_{ij}$ represent the connection strengths between presynaptic neuron $j$ a
 \end{align}
 
 where $K$ is a parameter that modulates the strength of connections, with $K=1$ corresponding to the original model in \parencite{izhikevich2003}.
+With inhibitory connections being twice as strong as excitatory connections, our models will be balanced between excitation and inhibition when $66.6\%$ of the neurons are excitatory. 
 
 To drive the firing dynamics and create traveling waves we provide stimulation to the systems by using two different and separate external stimulus currents, $I_{i,e}$. 
 One of them is a uniform background stimulus applied to each neuron $k$ that depends on whether the neuron is excitatory or inhibitory.
@@ -252,6 +256,7 @@ We also measure the "wave firing fraction" defined as the fraction of spikes tha
 
 Our exploration of the behavior of traveling waves in an SCE involves testing properties of these waves as a function of the different parameters of our model.
 We use a $2x2x50$ SCE as our ensemble.
+With $C=0.5$ each neuron has an average of $6.90$ input connections, as measured across $100$ randomly-generated SCE. 
 For determining existence of traveling waves we use a background stimulation (Eq \ref{eq:randomstim}) and vary parameters around a neighborhood of the phase point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ that we have determined can sustain traveling waves.
 For instances that use the step stimulus applied to the lower layers of the SCE we use $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
 The increase in $K$ is required when using the step stimulus because the higher layers of the SCE do not receive any stimulus.
@@ -311,12 +316,12 @@ For the range of values tested, the parameter $\kappa$ does not show a strong in
 However, increasing $\kappa$ gradually reduces the fraction of neuron spikes that are associated with waves.
 
 \subsection{Wave propagation speed} \label{sub:propagation_speed}
-Cortical traveling waves have been observed with propagating speeds from $<0.1 to >0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}.
+Cortical traveling waves have been observed with propagating speeds from $<0.1$ to $>0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}.
 In \parencite{Muller2018} the authors considers this consistent with the action potential propagation speeds in the gray matter of the cortex. 
 We include action potential propagation in our model with a propagation time porpotional to the length of the axon.
 The key elements of the dynamics include the speed at which an action potential is carried to the postsynaptic neurons, and the length of the connections.
 
-In \parencite{Golomb1997} the authors neglected action potential propagation in their model of disinhibited cortical slices as they consider their observed wave velocity of $~0.15 m/s$ to be an order of magnitudefaster than axon potential propagation.
+In \parencite{Golomb1997} the authors neglected action potential propagation in their model of disinhibited cortical slices as they consider their observed wave velocity of $~0.15 m/s$ to be an order of magnitude faster than axon potential propagation.
 \parencite{Chervin1988} found even slower propagation of $0.06-0.09 m/s$ in disinhibited slices of rat cortex.
 This indicates that a second key element, namely neuron amd synapse dynamics, will also influence wave propagation speed.
 Biological neurons have complex internal dynamics, and will not fire instantaneously upon receiving a stimulus.

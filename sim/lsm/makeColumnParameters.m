@@ -32,7 +32,7 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 1;
+doplot = 0;
 
 n = width*height*layers;
 
@@ -107,8 +107,8 @@ for jj=1:length(x)
         if dis > 0
             %cp = rand() < exp(-(dis/lambda)^2);
             if connType == 1 
-                %cp = rand() < 0.5*exp(-(dis/lambda)^2);
-                cp = rand() < exp(-(dis/lambda)^2);
+                cp = rand() < 0.5*exp(-(dis/lambda)^2);
+                %cp = rand() < exp(-(dis/lambda)^2);
                 if dis>maxLength
                    cp = 0; 
                 end

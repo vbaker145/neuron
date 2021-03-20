@@ -1,10 +1,10 @@
 clear; close all;
 
-%rng(42); %Seed random for consistent results
+rng(42); %Seed random for consistent results
 
 width = 2;
 height = 2;
-layers = 100;
+layers = 50;
 N = width*height*layers;
 
 %Column parameters
@@ -28,5 +28,14 @@ delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
-%Make column
-[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+nTrials = 100;
+
+for jj=1:nTrials
+    %Make column
+    [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+    [ac(jj) ae(jj) ai(jj) aei(jj)] = SCE_connection_statistics(S);
+end
+
+mean(ac)
+mean(ae)
+mean(ai)
