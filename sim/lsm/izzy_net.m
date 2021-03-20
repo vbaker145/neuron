@@ -2,7 +2,7 @@ function [v, vall, u, uall, firings] = izzy_net(v, u, dt, nsteps, a, b, c, d, S,
 %Izhikevich model
 
 n = size(S,1);
-ExpSize = 2;  %Length of synaptic response in milliseconds
+ExpSize = 4;  %Length of synaptic response in milliseconds
 Dmax = max(max(delays))+ceil(ExpSize/dt);
 PSP = zeros(n, Dmax);
 background_current = 0;
