@@ -9,6 +9,7 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage[font=small]{subcaption}
 \usepackage{wrapfig}
+\usepackage[section]{placeins}
 
 
 
@@ -25,7 +26,7 @@
 
 \pagebreak
 
-\section{Wave detection and labeling}
+\subsection*{Wave detection and labeling}
 To automatically identify waves we perform a spatial clustering operation to this data to identify spatiotemporal regions identified by high firing density. 
 The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
 Each cluster $C(t,z)$ has a time $t$ and position $z$.
@@ -39,17 +40,18 @@ If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the
  \centering
    \includegraphics[width=\textwidth]{fig/DetectorTest}
 \end{figure}
-
+\FloatBarrier
  
+\subsection*{Example FIE and FFE plots}
 \begin{figure}[!htb]
+ \caption{FIE and FFE for nine example columns. } 
  \begin{tabular}{ccc}
      \includegraphics[width=0.3\textwidth]{fig/ccf/ccf1} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf2} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf3} \\
      \includegraphics[width=0.3\textwidth]{fig/ccf/ccf4} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf5} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf6} \\
      \includegraphics[width=0.3\textwidth]{fig/ccf/ccf7} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf8} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf9} 
  \end{tabular}
- \caption{FIE and FFE for nine example columns. }
- 
 \end{figure}
 
+\FloatBarrier
  
 \end{document}

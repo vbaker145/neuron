@@ -87,7 +87,7 @@ for jj=1:100
         ccf = corrcoef(fbins(2:end), hbins(2:end));
         ccf_all(n_ccf) = ccf(1,2);
         
-        if ccf_all(n_ccf) < -0.5
+        if ccf_all(n_ccf) < -0.65
             %Plot wave initiation and density histograms together
             figure; subplot(1,2,1); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
             xlabel('Fraction of initiation events', 'FontSize', 12)
@@ -169,8 +169,13 @@ xlabel('Fraction of total firing events', 'FontSize', 12)
 
 ccf = corrcoef(fbins(2:end), hbins(2:end));
 ccf_all(jj) = ccf(1,2);
+[h, p] = ttest(ccf_all, 0, 'Tail','right');
 
 figure; plot(ccf_all, 'k.');
 xlabel('Trial #', 'FontSize', 12)
 ylabel('Correlation coefficient','FontSize', 12)
 
+figure(20); histogram(ccf_all, -1:0.1:1, 'Normalization', 'probability', 'FaceColor', 'k');
+xlabel('Correlation coefficient'); ylabel('Probability');
+set(gca, 'FontSize', 12);
+set(gcf,'Position',[256 299 994 450]);

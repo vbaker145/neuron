@@ -124,7 +124,7 @@ Although their relevance to cognition and function is still being debated \paren
 To address this possibility, here we investigate the conditions under which traveling waves can exist on quasi one-dimensional systems, and their fundamental properties and dynamics.  
 Inspired by minicolumns, our systems consist of thin (few neuron) and long (~100 neuron) networks of locally connected neurons placed on a three-dimensional lattice.  
 We model the neuron dynamics using the Izhikevich model \parencite{izhikevich2003} that allow us to explore more complex neuron dynamics than typically afforded by integrate-and-fire models \parencite{keane2015}\parencite{Senk2018}.
-We use a morphology annd connectiviy model inspired by \parencite{maass2002},incorporating a local connectivity model \parencite{Levy2012}\parencite{Pyle2017}.
+We use a morphology and connectivity model inspired by \parencite{maass2002},incorporating a local connectivity model \parencite{Levy2012}\parencite{Pyle2017}.
 To incorporate elements of a real brain, we consider distance-dependent time delays in the propagation of action potentials using networks with a mix of excitatory and inhibitory neurons.
 
 Among our main findings we determine parameters in our model that allow for the generation of traveling waves in our quasi one-dimensional systems. 
@@ -140,7 +140,7 @@ After placing, we connect two neurons based on their relative distance according
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
 where $D(a,b)$ is the Euclidean distance between neuron A and B, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is a normalization constant.
-Multiple connnections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
+Multiple connections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
 Two neurons may be recurrently connected, however.
 An example of an SCE showing the connectivity structure is shown in Figure \ref{fig:column_structure}.
 \begin{figure}[!htb]
@@ -183,7 +183,7 @@ For solving equation (2) numerically we use the modified Euler method from \pare
 
 A crucial element to evoke traveling waves in neuronal systems is the existence of time delays between the creation of a presynaptic action potential and the arrival of that spike to a target neuron. 
 For this, we use distance-dependent time delays for the propagation of a spike from neuron $i$ to neuron $j$ of $\tau_{ij} = \kappa  D(i,j)$. 
-The constant of porportionality $\kappa$ ranges from $0$ to $4$.
+The constant of proportionality $\kappa$ ranges from $0$ to $4$.
 When $\kappa=0$ the action potential excites the post-synaptic neuron on the succeeding simulation time step.
 
 The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons $I_i$ and external stimuli $I_{i,e}$ applied to the system. 
@@ -227,10 +227,9 @@ Once identified and labeled, we measure wave propagation speeds and wave initiat
 We also measure the "wave firing fraction" defined as the fraction of spikes that are associated with the labeled traveling wave (total number of spikes found within the waves divided by number of spikes in the simulation). 
 
 Our exploration of the behavior of traveling waves in an SCE involves testing properties of these waves as a function of the different parameters of our model.
-We use a $2x2x50$ SCE as our ensemble.
 With $C=0.5$ each neuron has an average of $6.90$ input connections, as measured across $100$ randomly-generated SCE. 
-For determining existence of traveling waves we use a background stimulation (Eq \ref{eq:randomstim}) and vary parameters around a neighborhood of the phase point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ that we have determined can sustain traveling waves.
-For instances that use the step stimulus applied to the lower layers of the SCE we use $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
+For determining existence of traveling waves we use a $2x2x100$ SCE with background stimulation (Eq \ref{eq:randomstim}) and vary parameters around a neighborhood of the phase point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ that we have determined can sustain traveling waves.
+To measure wave propagation speed we use a $2x2x50$ SCE with a step stimulus applied to the lowest layers of the SCE and adjust our operating point to be $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
 The increase in $K$ is required when using the step stimulus because the higher layers of the SCE do not receive any stimulus.
 This requires stronger connections so that the traveling wave can elicit spikes from neurons resting at equilibrium.
 \FloatBarrier
@@ -290,7 +289,7 @@ However, increasing $\kappa$ gradually reduces the fraction of neuron spikes tha
 \subsection{Wave propagation speed} \label{sub:propagation_speed}
 Cortical traveling waves have been observed with propagating speeds from $<0.1$ to $>0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}.
 In \parencite{Muller2018} the authors considers this consistent with the action potential propagation speeds in the gray matter of the cortex. 
-We include action potential propagation in our model with a propagation time porpotional to the length of the axon.
+We include action potential propagation in our model with a propagation time proportional to the length of the axon.
 The key elements of the dynamics include the speed at which an action potential is carried to the postsynaptic neurons, and the length of the connections.
 
 In \parencite{Golomb1997} the authors neglected action potential propagation in their model of disinhibited cortical slices as they consider their observed wave velocity of $~0.15 m/s$ to be an order of magnitude faster than axon potential propagation.
@@ -393,11 +392,12 @@ An example measurement of the firing activity in a single traveling wave is show
 By combining these two experiments we observe that the results from the FIE and the FFE appeared anti-correlated for the same SCE (see Figure S1 in Supplemental Information for examples).
 To test that this observation is generally true we create 100 SCEs, apply first uniform background stimulus and then step stimulus to each SCE, and measure the correlation between the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
 Although there is substantial variation between SCEs we measure a consistently negative correlation coefficient (mean $-0.26$, standard deviation $0.18$) between FIE and FFE results.
+A one-sided T-test at the $1\%$ confidence level rejects the null hypothesis that the mean of the correlation coefficient is $0$ or greater.
 \begin{figure}[!htb]
  \centering
- \caption{Correlation between FIE and FFE for 100 different trials. }
+ \caption{Distribution of FIE/FFE correlation measured across 100 different trials. }
  \label{fig:InitiationCorrelation}
- \includegraphics[width=\textwidth]{fig/InitiationCorrelation.eps}
+ \includegraphics[width=\textwidth]{fig/InitiationCorrelationPDF}
 \end{figure}
 
 We hypothesize that these preferential wave initiation sites are created by neurons with low firing thresholds that are easy to excite.
