@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{times}
 \usepackage{amsfonts}
+\usepackage{xcolor}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{tabularx}
@@ -27,6 +28,7 @@
 \pagebreak
 
 \subsection*{Wave detection and labeling}
+\color{red}
 To automatically identify waves we perform a spatial clustering operation to this data to identify spatiotemporal regions identified by high firing density. 
 The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
 Each cluster $C(t,z)$ has a time $t$ and position $z$.
@@ -41,6 +43,7 @@ If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the
    \includegraphics[width=\textwidth]{fig/DetectorTest}
 \end{figure}
 \FloatBarrier
+\color{black}
  
 \subsection*{Example FIE and FFE plots}
 \begin{figure}[!htb]
