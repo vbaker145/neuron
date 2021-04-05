@@ -102,10 +102,10 @@ Our one-dimensional model is not only useful for studying the basic properties o
 
 \section{Introduction} 
 Connected neurons that fire sequentially can stimulate firings from neighboring neurons, creating a traveling wave of neuron spikes. 
-\color{red}These traveling waves have been observed in the cortex of mammalian brains \parencite{Muller2018}\parencite{reimer2010}  as well as in vitro \parencite{wu2008}\parencite{huang2004}\parencite{Colomb1999}, and subsequently have been reproduced in silico \parencite{keane2015}\parencite{Senk2018}\parencite{Golomb1996}\parencite{ermentrout2001}. 
-While the function of traveling waves is unknown \parencite{wu2008}\parencite{Muller2018}, proposed functions include motor coordination \parencite{Rubino2006}, place field coordination in the hippocampus \parencite{lubernov2009}, and spatiotemporal processing in the visual cortex \parencite{wu2008}\parencite{Muller2014}.
+These traveling waves have been observed in the cortex of mammalian brains \parencite{Muller2018}\parencite{reimer2010}  as well as in vitro \parencite{wu2008}\parencite{huang2004}\parencite{Colomb1999}, and subsequently have been reproduced in silico \parencite{keane2015}\parencite{Senk2020}\color{red}\parencite{Golomb1996}\parencite{ermentrout2001}\color{black}. 
+While the function of traveling waves is unknown \parencite{wu2008}\parencite{Muller2018}, proposed functions include motor coordination \color{red}\parencite{Rubino2006}\color{black} , place field coordination in the hippocampus \parencite{lubernov2009}, and spatiotemporal processing in the visual cortex \parencite{wu2008}\parencite{Muller2014}.
 
-\color{black}Neuronal traveling waves are not uniquely defined as they can exist at widely differing frequency and scale lengths.  
+Neuronal traveling waves are not uniquely defined as they can exist at widely differing frequency and scale lengths.  
 In the sleep and anesthetized states,slow and large-scale wave activity has been recorded \parencite{Muller2018}. 
 Traveling waves have been detected in local-field potentials measured with electrodes \cite{Rubino2006}\parencite{sanes1993}.
 Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \parencite{wu2008}\parencite{Shoham1999}\color{red}\parencite{Xu2007}\color{black}.  
@@ -115,14 +115,14 @@ Computational and mathematical modeling of traveling waves in a variety of model
 
 The vast majority of studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \color{red}\parencite{Wilson1973}\color{black}\parencite{reimer2010}\parencite{keane2015}\color{red}\cite{Townsend2018}\parencite{Golomb1997}\color{black}. 
 This is to be expected as this is the geometry of the system on which they are observed. 
-However, there is no a priori reason that prevents the existence of traveling waves on other geometries as long as the network considers time delay of neuronal signaling and local connectivity of its neurons \parencite{ermentrout2001}\parencite{Senk2018}. 
+However, there is no a priori reason that prevents the existence of traveling waves on other geometries as long as the network considers time delay of neuronal signaling and local connectivity of its neurons \parencite{ermentrout2001}\parencite{Senk2020}. 
 Of interest, there are regions of the brain where there are what seem to be essentially one-dimensional structures \parencite{buxhoeveden2002}\parencite{mountcastle1997} typically called micro- or minicolumns. 
 These minicolumns are aligned perpendicular to the pia and can be hundreds of microns long.  
-Although their relevance to cognition and function is still being debated \parencite{horton2005}\parencite{Cruz2009}\parencite{DaCosta2010}\parencite{buxhoeveden2002}\color{red}\parencite{rockland2004}\color{black}, it is possible that they can sustain traveling waves.
+Although their relevance to cognition and function is still being debated \parencite{horton2005}\parencite{Cruz2009}\parencite{DaCosta2010}\parencite{buxhoeveden2002}, it is possible that they can sustain traveling waves.
 
 To address this possibility, here we investigate the conditions under which traveling waves can exist on quasi one-dimensional systems, and their fundamental properties and dynamics.  
 Inspired by minicolumns, our systems consist of thin (few neuron) and long (~100 neuron) networks of locally connected neurons placed on a three-dimensional lattice.  
-We model the neuron dynamics using the Izhikevich model \parencite{izhikevich2003} that allow us to explore more complex neuron dynamics than typically afforded by integrate-and-fire models \parencite{keane2015}\parencite{Senk2018}.
+We model the neuron dynamics using the Izhikevich model \parencite{izhikevich2003} that allow us to explore more complex neuron dynamics than typically afforded by integrate-and-fire models \parencite{keane2015}\parencite{Senk2020}.
 \color{red}We use a morphology and connectivity model inspired by \parencite{maass2002},incorporating a local connectivity model \parencite{Levy2012}\parencite{Pyle2017}\parencite{Fino2011}\color{black}.
 To incorporate elements of a real brain, we consider distance-dependent time delays in the propagation of action potentials using networks with a mix of excitatory and inhibitory neurons.
 
@@ -221,7 +221,35 @@ This stimulus has the effect of creating a single wave that can propagate throug
 One of the uses of this stimulus is to measure the speed of the traveling wave in section \ref{sub:propagation_speed}.
 
 For every simulation we record all of the spikes from all neurons. 
-\color{red}We then filter the spike raster plot to identify spatiotemporal regions with high firing density and detect one-dimensional waves in the filtered regions (see Supplemental Material for detail).\color{black} 
+To automatically identify waves we perform a spatial clustering operation to this data to identify spatiotemporal regions identified by high firing density. 
+The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
+Each cluster $C(t,z)$ has a time $t$ and position $z$.
+This clustering removes random background firing activity. 
+The waves are identified using a plane sweep algorithm that proceeds along the dimension of simulation time and applies wave labels to clusters such that all clusters with the same label are part of the same wave.
+When a new cluster $C(t,z)$ is encountered, the algorithm associates $C(t,z)$ with any existing wave if the existing wave has a cluster $C(t_c,z_c)$ within $40 ms$ and $6$ units of the new cluster.
+If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the first cluster.
+An example of the clustering and identification is shown in Figure 2.
+\begin{figure}[!htb]
+ \centering
+ \begin{subfigure}{0.33\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{fig/2x2_firings}
+ \end{subfigure}%
+ \begin{subfigure}{0.33\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{fig/2x2_density_filter}
+ \end{subfigure}%
+ \begin{subfigure}{0.33\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{fig/2x2_wave_IDs}
+ \end{subfigure}%
+ \caption{Wave identification and labeling. Left: Raster plot of firing events where dots represent neuronal action potentials. 
+          Traveling waves can be seen as diagonal structures of dense firing activity. 
+          Center: The clustering operation removes background spikes. 
+          Right: Individual waves are labeled with unique identifiers color coded in the figure.}
+ \label{fig:wave_analysis}
+\end{figure}
+\FloatBarrier
 Once identified and labeled, we measure wave propagation speeds and wave initiation locations. 
 We also measure the "wave firing fraction" defined as the fraction of spikes that are associated with the labeled traveling wave (total number of spikes found within the waves divided by number of spikes in the simulation). 
 
@@ -258,7 +286,7 @@ A representative raster plot of the spike events (Figure \ref{fig:sigma_raster})
 \begin{figure}[!htb]
  \centering
  \includegraphics[width=0.75\textwidth]{fig/baseline}
- \caption{Raster plot of neuron firing events over time. The model parameters are at the \color{red}operating \color{black} point $\Sigma$. Each dot represents the spike-time emission of a neuron. Traveling waves can be seen as diagonal structures of dense firing activity \parencite{Senk2018}. }
+ \caption{Raster plot of neuron firing events over time. The model parameters are at the \color{red}operating \color{black} point $\Sigma$. Each dot represents the spike-time emission of a neuron. Traveling waves can be seen as diagonal structures of dense firing activity \parencite{Senk2020}. }
  \label{fig:sigma_raster}
 \end{figure}
 
@@ -287,9 +315,9 @@ For the range of values tested, the parameter $\kappa$ does not show a strong in
 However, increasing $\kappa$ gradually reduces the fraction of neuron spikes that are associated with waves.
 
 \subsection{Wave propagation speed} \label{sub:propagation_speed}
-\color{red}Cortical traveling waves have been observed with propagating speeds from $<0.1$ to $>0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}.
-In \parencite{Muller2018} the authors considers this consistent with the action potential propagation speeds in the gray matter of the cortex. 
-We include action potential propagation in our model with a propagation time proportional to the length of the axon\color{black}.
+Cortical traveling waves have been observed with propagating speeds from \color{red}$<0.1$ to $>0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}\color{black}.
+\color{red}In \parencite{Muller2018} the authors considers this \color{black}consistent with the action potential propagation speeds in the gray matter of the cortex. 
+We include action potential propagation in our model with a propagation\color{red}  time proportional to the length of the axon\color{black}.
 The key elements of the dynamics include the speed at which an action potential is carried to the postsynaptic neurons, and the length of the connections.
 
 \color{red}In \parencite{Golomb1997} the authors neglected action potential propagation in their model of disinhibited cortical slices as they consider their observed wave velocity of $~0.15 m/s$ to be an order of magnitude faster than axon potential propagation.
@@ -298,7 +326,7 @@ This indicates that a second key element, namely neuron amd synapse dynamics, wi
 Biological neurons have complex internal dynamics, and will not fire instantaneously upon receiving a stimulus.
 The input may push the neuron's dynamical system out of equilibrium and cause a spike, but the system dynamics take some time to evolve.
 Therefore the spike will occur with some delay after the stimulus.
-This is a common behavior in any multidimensional model of neuron dynamics, but it is not captured by the leaky integrate-and-fire model used in much of the previous research \parencite{keane2015}\parencite{Senk2018}.
+This is a common behavior in any multidimensional model of neuron dynamics, but it is not captured by the leaky integrate-and-fire model used in much of the previous research \parencite{keane2015}\parencite{Senk2020}.
 As an example, Figure \ref{fig:delay_neuronstep} shows the delayed response of a neuron to a pulse of current using the Izhikevich model.
 \begin{figure}[!htb]
  \caption{ A pulse of voltage (bottom) with magnitude $2 mV$, starting at $t=100 ms$ and lasting $2 ms$ disturbs the equilibrium membrane potential of a neuron (top), eliciting a spike at $t=112 ms$. }
@@ -395,9 +423,12 @@ Although there is substantial variation between SCEs we measure a consistently n
 \color{red}A one-sided T-test at the $1\%$ confidence level rejects the null hypothesis that the mean of the correlation coefficient is $0$ or greater\color{black}.
 \begin{figure}[!htb]
  \centering
- \caption{\color{red}Distribution of FIE/FFE correlation measured across\color{black} 100 different trials. }
+ \caption{\color{red} A) Correlation between FIE and FFE across 100 trials. B) Distribution of the correlation coefficient. Each trial is a new SCE with random neuron and connectivity parameters\color{black}. }
  \label{fig:InitiationCorrelation}
- \includegraphics[width=\textwidth]{fig/InitiationCorrelationPDF}
+ \begin{tabular}{c}
+     \includegraphics[width=\textwidth]{fig/InitiationCorrelation} \\ 
+     \includegraphics[width=\textwidth]{fig/InitiationCorrelationPDF} 
+ \end{tabular}
 \end{figure}
 
 We hypothesize that these preferential wave initiation sites are created by neurons with low firing thresholds that are easy to excite.
@@ -407,7 +438,7 @@ Neurons with higher $b$ parameter are easier to excite and therefore more likely
 Per Table \ref{tab:izzy_params} excitatory neurons all have a $b$ parameter of $0.2$, while inhibitory neurons have $b$ parameters in the range $0.2-0.25$.
 This indicates the preferential wave initiation sites could be due to low-threshold spiking (LTS) inhibitory neurons \parencite{izhikevich2003}.
 It may seem counter-intuitive that firing activity from an \underline{inhibitory} neuron would generate traveling waves.
-In fact, postinhibitory rebound spiking is observed in both cortical neurons \parencite{ascoli2010} and the Izhikevich model of neuron dynamics.
+In fact, postinhibitory rebound spiking is observed in both cortical neurons \parencite{ascoli2010} and the Izhikevich model of neuron dynamics, \color{red} and was studied in the context of spindle waves in the thalamus in \parencite{Golomb1996}\color{black}.
 The LTS hypothesis also explains the reduced wave density at these sites.
 As a traveling wave passes through the region, because of their increased activity these same inhibitory neurons suppress the surrounding neurons resulting in fewer local firing events.
 
@@ -458,7 +489,7 @@ We found that the neuron dynamics also play an important role in the wave propag
 The connectivity and connection strengths influence the wave propagation speed through the neuron dynamics.
 We have determined that preferential sites for wave initiation are due to the presence of inhibitory neurons with low spiking thresholds.
 
-Previous research into traveling waves in neural networks has identified parameter regions of a neural-field model for which traveling waves exist \parencite{Senk2018}.
+Previous research into traveling waves in neural networks has identified parameter regions of a neural-field model for which traveling waves exist \parencite{Senk2020}.
 In this work the regions of existence were sharply defined as revealed by a linear stability analysis.
 Our exploration of model parameters (Figure \ref{fig:wave_parameters}) instead shows a gradual transition region in which waves emerge and dominate the firing activity.
 One possible explanation of the difference is that the previous research used highly structured spatial arrangements of excitatory and inhibitory neurons with deterministic connectivity, while our model randomly assigns neurons as excitatory or inhibitory and uses a probabilistic connection model.

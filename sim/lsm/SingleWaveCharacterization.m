@@ -171,9 +171,10 @@ ccf = corrcoef(fbins(2:end), hbins(2:end));
 ccf_all(jj) = ccf(1,2);
 [h, p] = ttest(ccf_all, 0, 'Tail','right');
 
-figure; plot(ccf_all, 'k.');
+figure(19); plot(ccf_all, 'k.', 'MarkerSize', 12);
 xlabel('Trial #', 'FontSize', 12)
 ylabel('Correlation coefficient','FontSize', 12)
+set(gcf,'Position',[256 299 994 450]);
 
 figure(20); histogram(ccf_all, -1:0.1:1, 'Normalization', 'probability', 'FaceColor', 'k');
 xlabel('Correlation coefficient'); ylabel('Probability');

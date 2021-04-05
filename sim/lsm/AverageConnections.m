@@ -29,13 +29,30 @@ delay.delayFrac = 1.0;
 delay.dt = dt;
 
 nTrials = 100;
-
+tConn = []; tDelay = [];
 for jj=1:nTrials
     %Make column
     [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
-    [ac(jj) ae(jj) ai(jj) aei(jj)] = SCE_connection_statistics(S);
+    [ac(jj) ae(jj) ai(jj) aei(jj) tc] = SCE_connection_statistics(S);
+    tConn = [tConn tc];
+    
+    tDelay = [tDelay; delays(find(delays>0))*dt];
 end
 
 mean(ac)
 mean(ae)
 mean(ai)
+
+%Histogram of # connections
+figure(20); 
+set(gcf, 'Position', [0 0 1000 500]);
+histogram(tConn, 'FaceColor', 'k');
+xlabel('# connections'); ylabel('#occurences');
+set(gca, 'FontSize', 14)
+
+%Histogram of delays
+figure(21);
+set(gcf, 'Position', [0 0 1000 500]);
+histogram(tDelay, 'FaceColor', 'k', 'BinWidth', 0.25);
+xlabel('Delay (ms)'); ylabel('#occurences');
+set(gca, 'FontSize', 14)

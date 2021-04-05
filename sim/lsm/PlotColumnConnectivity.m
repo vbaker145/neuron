@@ -1,10 +1,10 @@
 clear; close all;
 
-%rng(42); %Seed random for consistent results
+rng(41); %Seed random for consistent results
 
 width = 2;
 height = 2;
-layers = 100;
+layers = 15;
 N = width*height*layers;
 
 %Column parameters
