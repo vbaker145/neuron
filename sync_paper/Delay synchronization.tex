@@ -102,13 +102,13 @@ Our one-dimensional model is not only useful for studying the basic properties o
 
 \section{Introduction} 
 Connected neurons that fire sequentially can stimulate firings from neighboring neurons, creating a traveling wave of neuron spikes. 
-These traveling waves have been observed in the cortex of mammalian brains \parencite{Muller2018}\parencite{reimer2010}  as well as in vitro \parencite{wu2008}\parencite{huang2004}\parencite{Colomb1999}, and subsequently have been reproduced in silico \parencite{keane2015}\parencite{Senk2020}\color{red}\parencite{Golomb1996}\parencite{ermentrout2001}\color{black}. 
+These traveling waves have been observed in the cortex of mammalian brains \parencite{Muller2018}\parencite{reimer2010}  as well as in vitro \parencite{wu2008}\parencite{huang2004}\parencite{Golomb1999}, and subsequently have been reproduced in silico \parencite{keane2015}\parencite{Senk2020}\color{red}\parencite{Golomb1996}\parencite{ermentrout2001}\color{black}. 
 While the function of traveling waves is unknown \parencite{wu2008}\parencite{Muller2018}, proposed functions include motor coordination \color{red}\parencite{Rubino2006}\color{black} , place field coordination in the hippocampus \parencite{lubernov2009}, and spatiotemporal processing in the visual cortex \parencite{wu2008}\parencite{Muller2014}.
 
 Neuronal traveling waves are not uniquely defined as they can exist at widely differing frequency and scale lengths.  
 In the sleep and anesthetized states,slow and large-scale wave activity has been recorded \parencite{Muller2018}. 
-Traveling waves have been detected in local-field potentials measured with electrodes \cite{Rubino2006}\parencite{sanes1993}.
-Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \parencite{wu2008}\parencite{Shoham1999}\color{red}\parencite{Xu2007}\color{black}.  
+Traveling waves have been detected in local-field potentials measured with electrodes \cite{Rubino2006}\parencite{sanes1993}\color{red}\parencite{Riehle2013}\color{black}.
+Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \parencite{wu2008}\parencite{Shoham1999}\color{red}\parencite{Xu2007}\parencite{Ferezou2006}\color{black}.  
 Similarly, traveling waves also differ by the manner in which they are created. 
 Both spontaneously occurring waves and stimulus-evoked \parencite{reimer2010} waves have been observed in the visual and auditory cortex. 
 Computational and mathematical modeling of traveling waves in a variety of models have shown many of the characteristics observed experimentally \parencite{ermentrout2001}\parencite{keane2015}\parencite{gibson2009}.
@@ -255,9 +255,9 @@ We also measure the "wave firing fraction" defined as the fraction of spikes tha
 
 Our exploration of the behavior of traveling waves in an SCE involves testing properties of these waves as a function of the different parameters of our model.
 \color{red}With $C=0.5$ each neuron has an average of $6.90$ input connections, as measured across $100$ randomly-generated SCE\color{black}. 
-For determining existence of traveling waves we use a \color{red}$2x2x100$ SCE\color{black} with background stimulation (Eq \ref{eq:randomstim}) and vary parameters around a neighborhood of the operating point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ that we have determined can sustain traveling waves.
-\color{red}To measure wave propagation speed we use a $2x2x50$ SCE with\color{black} a step stimulus applied to the lowest layers of the SCE and adjust our operating point to be $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
-\color{red}The operating points were chosen experimentally after inspecting the SCE behavior under a wide range of parameter values\color{black}.
+For determining existence of traveling waves we use a \color{red}$2x2x100$ SCE\color{black} with background stimulation (Eq \ref{eq:randomstim}) and vary parameters around a neighborhood of the reference point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ that we have determined can sustain traveling waves.
+\color{red}To measure wave propagation speed we use a $2x2x50$ SCE with\color{black} a step stimulus applied to the lowest layers of the SCE and adjust our reference point to be $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
+\color{red}The reference points were chosen experimentally after inspecting the SCE behavior under a wide range of parameter values\color{black}.
 The increase in $K$ is required when using the step stimulus because the higher layers of the SCE do not receive any stimulus.
 This requires stronger connections so that the traveling wave can elicit spikes from neurons resting at equilibrium.
 \FloatBarrier
@@ -278,15 +278,15 @@ We detect the waves as described in Methods, and then use the wave firing fracti
 We fix the connection normalization constant $C$ in equation \ref{eq:connectivity} to $0.5$ and we fix the stimulus strength $M$ in equation \ref{eq:randomstim} to $5$.
 The key parameters of our model that we examine are the connection strength $K$, the characteristic connection length $\lambda$, the fraction of excitatory neurons $P_{exc}$ and the delay parameter $\kappa$.
 
-First we establish that traveling waves are observed at the \color{red}operating \color{black} point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
+First we establish that traveling waves are observed at the \color{red}reference \color{black} point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
 We then vary the individual parameters about $\Sigma$ to examine how they influence traveling wave formation.
 
-At the \color{red}operating \color{black} point $\Sigma$ the average wave firing fraction over 100 trials is found to be $88.6\%$ with a standard deviation of $4.38\%$.
+At the \color{red}reference \color{black} point $\Sigma$ the average wave firing fraction over 100 trials is found to be $88.6\%$ with a standard deviation of $4.38\%$.
 A representative raster plot of the spike events (Figure \ref{fig:sigma_raster}) clearly shows the traveling waves.
 \begin{figure}[!htb]
  \centering
  \includegraphics[width=0.75\textwidth]{fig/baseline}
- \caption{Raster plot of neuron firing events over time. The model parameters are at the \color{red}operating \color{black} point $\Sigma$. Each dot represents the spike-time emission of a neuron. Traveling waves can be seen as diagonal structures of dense firing activity \parencite{Senk2020}. }
+ \caption{Raster plot of neuron firing events over time. The model parameters are at the \color{red}reference \color{black} point $\Sigma$. Each dot represents the spike-time emission of a neuron. Traveling waves can be seen as diagonal structures of dense firing activity \parencite{Senk2020}. }
  \label{fig:sigma_raster}
 \end{figure}
 
@@ -303,7 +303,7 @@ These data suggest that these three parameters all work towards strengthening th
  \centering
  \includegraphics[width=\textwidth]{fig/ParamWaveSim}
  \caption{Onset of traveling waves as a function of model parameters in the neighborhood of $\Sigma$ (100 trials for each parameter value, error bars $1\sigma$). 
-         The dashed red lines show the wave firing fraction at the \color{red}operating \color{black} point $\Sigma$.  
+         The dashed red lines show the wave firing fraction at the \color{red}reference \color{black} point $\Sigma$.  
          Varying each individual parameter while holding the other parameters at their $\Sigma$ values, we observe onset of traveling waves at $K=6$ (A), $\lambda=1.5$ (B), and $P_{exc}=0.45$ (C).  
          D) Traveling waves are present at all values of $\kappa$. }
  \label{fig:wave_parameters}
@@ -312,7 +312,9 @@ These data suggest that these three parameters all work towards strengthening th
 \FloatBarrier
 
 For the range of values tested, the parameter $\kappa$ does not show a strong influence on the presence of traveling waves. 
-However, increasing $\kappa$ gradually reduces the fraction of neuron spikes that are associated with waves.
+\color{red} This is in contrast to some previous work in largely isotropic networks and neural field models which found that the delay parameter is important for the emergence of traveling waves \parencite{Senk2020}\parencite{Atay2006}\parencite{Roxin2005}.
+However, it is in agreement with other work that found traveling wave pattersn without including propagation delay \parencite{Folias2012}\parencite{Wyller2007}.
+\color{black}
 
 \subsection{Wave propagation speed} \label{sub:propagation_speed}
 Cortical traveling waves have been observed with propagating speeds from \color{red}$<0.1$ to $>0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}\color{black}.
@@ -364,6 +366,11 @@ We fix $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ for the remaind
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}
 \end{figure}
 
+\color{red}A latency of $1.7\pm 0.9\ ms$ was observed between injecting a stimulus in one pyramidal neuron and the resulting excitatory post-synpatic potential in an adjacent pyramidal neuron \parencite{Markram1997}.
+This latency is too large to be due solely to axonal propagation alone given the very short distance between the neurons. 
+The authors also found that a weak negative coorelation between latency and post-synaptic potential amplitude, further indicating that stronger post-synaptic responses result in faster traveling waves. 
+\color{black}
+
 \FloatBarrier
 
 We next explore the influence of the action potential propagation speed, here controlled by our parameter $\kappa$, on the traveling wave propagation speed.
@@ -376,19 +383,21 @@ Because each neuron does not fire instantaneously upon receiving an action poten
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Delay}
 \end{figure}
-
+\color{red} 
 \FloatBarrier
 
 Propagation speed is also influenced by the characteristic length of the local connectivity, $\lambda$.
 Since an increase in $\lambda$ results in both longer range connections, and more incoming and outgoing connections per neuron, we expect $\lambda$ to increase the wave speed through both action potential propagation and neuron dynamics.
 The characteristic connection length $\lambda$ is varied from 2 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_lambda}).
-For $\lambda<2.25$ we do not observe traveling waves.
+For \color{red}$\lambda<2$\color{black} we do not observe traveling waves.
 \begin{figure}[!htb]
  \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases with $\lambda$. The wave speed (right) shows that the maximum wave speed approaches $0.8$, the limit seen as $\kappa \rightarrow 0$ in Figure \ref{fig:delay_speed}. }
  \label{fig:delay_lambda}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Lambda}
 \end{figure}
+\color{red}Previous simulations of thalamic spindle waves in \parencite{Golomb1996} found that wave speed was linear w.r.t. a characteristic synaptic connection length $\lambda$ for exponentially decaying or boxcar synaptic connection profiles.
+These simulations neglected axonal propagation delays which could explain why the wave propagation speed grew linearly with the characteristic connection length. \color{black}
 
 \FloatBarrier
 
