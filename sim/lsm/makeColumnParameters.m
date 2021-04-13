@@ -1,4 +1,9 @@
-function [a,b,c,d, S, delays, excNeurons, pos] = makeColumnParameters(structure, connectivity, delay)
+function [a,b,c,d, S, delays, excNeurons, pos] = makeColumnParameters(structure, connectivity, delay, doplot)
+
+if nargin<4
+    %Default to no plotting
+    doplot= 0;
+end
 
 width = structure.width;
 height = structure.height;
@@ -32,7 +37,6 @@ dt = delay.dt;
 % Dmax = 10;
 % delays=floor( rand(ne+ni)*(Dmax-5) ); %Synaptic delays
 
-doplot = 0;
 
 n = width*height*layers;
 
@@ -50,10 +54,13 @@ y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
 if doplot == 1
-    figure(100); h1 = subplot(1,2,1);
+    figure(100); 
+    set(gcf, 'Position', [0 0 300 500]);
     scatter3(x,y,z,50, 'black','filled')
     hold on;
-    subplot(1,2,2);
+    
+    figure(101);
+    set(gcf, 'Position', [0 0 700 500]);
     hold on;
 end
 
@@ -136,12 +143,12 @@ for jj=1:length(x)
                 %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
                 
                 if doplot == 1
-                    subplot(1,2,1);
+                    figure(100);
                     dis = min(dis,dmax);
                     cm = map(floor(dis*cmapRes),:);
                     line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', dis/2);
                     
-                    subplot(1,2,2);
+                    figure(101);
                     if excNeurons(jj) == 1 && excNeurons(kk) == 1
                         plot(jj,kk,'g.', 'MarkerSize', 15);
                     elseif excNeurons(jj) == 0
@@ -172,7 +179,7 @@ for jj=1:length(x)
 end %end for jj
 
 if doplot == 1
-    subplot(1,2,1);
+    figure(100);
     axis equal;
     cl = colorbar;
     nTickLabels = length(cl.TickLabels);
@@ -186,11 +193,10 @@ if doplot == 1
     xlabel('X'); ylabel('Y'); zlabel('Z');
     set(gca,'FontSize',12);
     
-    subplot(1,2,2);
+    figure(101);
     xlabel('Presynaptic neuron #');
     ylabel('Postsynaptic neuron #');
     set(gca, 'FontSize', 12);
-    set(gcf, 'pos', [0 0 600 800]);
 end
 
 S = connections;

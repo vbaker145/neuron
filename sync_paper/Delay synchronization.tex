@@ -113,8 +113,16 @@ Similarly, traveling waves also differ by the manner in which they are created.
 Both spontaneously occurring waves and stimulus-evoked \parencite{reimer2010} waves have been observed in the visual and auditory cortex. 
 Computational and mathematical modeling of traveling waves in a variety of models have shown many of the characteristics observed experimentally \parencite{ermentrout2001}\parencite{keane2015}\parencite{gibson2009}.
 
-The vast majority of studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \color{red}\parencite{Wilson1973}\color{black}\parencite{reimer2010}\parencite{keane2015}\color{red}\cite{Townsend2018}\parencite{Golomb1997}\color{black}. 
-This is to be expected as this is the geometry of the system on which they are observed. 
+\color{red}
+Traveling waves in one-dimensional neural systems have been previously explored using several methods.
+In the literature on neural fields \parencite{Ermentrout1979}\parencite{Folias2012}\parencite{Wilson1973} isotropic networks of homogeneous neurons with symmetric synaptic coupling give rise to field models which exhibit traveling wave solutions for certain parameter values. 
+One-dimensional waves have also been observed in simulations using firing rate neurons \parencite{Senk2020}\parencite{Roxin2005}, integrate-and-fire neurons \parencite{Bressloff1997}\parencite{Golomb1999} and Hodgkins-Huxley neurons \parencite{Golomb1997}.
+These simulations again use homogeneous neural populations in networks that are invariant to spatial translation, resulting naturally in periodic spatio-temporal patterns.
+Our current work explores traveling waves in quasi-one-dimensional networks with substantial randomness in both individual neurons (randomly selecting type and randomizing some dynamical parameters) as well as connections between neurons.
+\color{black}
+
+\color{red}Other \color{black} studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \parencite{reimer2010}\parencite{keane2015}\color{red}\cite{Townsend2018}\parencite{Golomb1997}\color{black}. 
+This is to be expected as this is the geometry of the system on which they are observed, and \color{red}\parencite{Wilson1973} provide an anatomical argument for focusing on such structure\color{black}. 
 However, there is no a priori reason that prevents the existence of traveling waves on other geometries as long as the network considers time delay of neuronal signaling and local connectivity of its neurons \parencite{ermentrout2001}\parencite{Senk2020}. 
 Of interest, there are regions of the brain where there are what seem to be essentially one-dimensional structures \parencite{buxhoeveden2002}\parencite{mountcastle1997} typically called micro- or minicolumns. 
 These minicolumns are aligned perpendicular to the pia and can be hundreds of microns long.  
@@ -133,22 +141,37 @@ The traveling waves in fully connected systems are dependent upon the action pot
 
 \section{Methods}
 To study traveling waves in small columnar ensembles (SCE) of neurons we first construct these assemblies by placing neurons at the vertices of a cubic lattice described by two short \color{red} dimensions (X,Y) and one long dimension (Z)\color{black}. 
-Each neuron is either excitatory (E) or inhibitory (I), with the fraction of excitatory neurons indicated as $P_{exc}$.
+Each neuron is \color{red} randomly chosen to be \color{black} either excitatory (E) or inhibitory (I), with the fraction of excitatory neurons indicated as $P_{exc}$.
 After placing, we connect two neurons based on their relative distance according to a connection probability that favors local connectivity given by: 
 \begin{align}\label{eq:connectivity}
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
 where $D(a,b)$ is the Euclidean distance between neuron A and B, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is a normalization constant.
 \color{red}Multiple connections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
-Two neurons may be recurrently connected, however.\color{black}
+Two neurons may be recurrently connected, however. \color{black}
 An example of an SCE showing the connectivity structure is shown in Figure \ref{fig:column_structure}.
 \begin{figure}[!htb]
- \caption{Example SCE with dimensions 2x2x15 \color{red}(X/Y/Z)\color{black}, $\lambda$=2.5, and C=1. Left: SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. Right: Connection matrix. E-E connections are green, E-I are black and all inhibitory connections are red. }
+ \caption{Example SCE with dimensions 2x2x\color{red}10 (X/Y/Z)\color{black}, $\lambda$=2.5, and C=1. \color{red}A)\color{black}: SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. 
+ \color{red}B)\color{black}: Connection matrix. E-E connections are green, E-I are black and \color{red}both I-E and I-I\color{black} are red. 
+ \color{red}C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.\color{black}}
  \label{fig:column_structure}
- \centering
-   \includegraphics[width=\textwidth]{fig/column_structure}
+ \begin{subfigure}{0.3\textwidth}
+   \centering
+   \includegraphics[height=60mm]{fig/column_structure_A}
+ \end{subfigure}%
+ \hfill
+ \begin{subfigure}{0.7\textwidth}
+   \centering
+   \includegraphics[height=60mm]{fig/column_structure_B}
+ \end{subfigure}%
+ \hfill
+ 
+  \begin{subfigure}{\textwidth}
+   \centering
+   \includegraphics[width=\textwidth]{fig/column_structure_C}
+ \end{subfigure}%
 \end{figure}
-\color{red}We use open boundary conditions, so neurons near the ends of the SCE will have fewer connections.\color{black}
+\color{red}We use open boundary conditions, so neurons near the ends of the SCE will have fewer connections. \color{black}
 
 We model the firing dynamics of each neuron using the Izhikevich model \parencite{izhikevich2003} that consists of a two-dimensional model of two coupled differential equations given by:
 \begin{align}
@@ -489,7 +512,7 @@ The one most relevant to traveling waves in our fully-connected networks is a dr
 This is a fundamentally different type of traveling wave than a chain of spike events that spreads to neighboring neurons due to local connectivity.
 
 \section{Discussion}
-We have demonstrated that representative neural structures can support traveling waves in one dimension.
+We have demonstrated that \color{red}our model of a small columnar ensemble\color{black} can support traveling waves in one dimension.
 Various parameters determine traveling wave formation and propagation including the connectivity, connection strength, excitatory/inhibitory balance and action potential propagation delay.
 Columns with local connectivity support traveling waves, consistent with other simulations and experimental studies of cortical traveling waves.
 We have also shown that  a fully-connected SCE exhibits traveling waves if the action potential propagation time depends on the inter-neuron distance. 

@@ -1,10 +1,10 @@
-clear; close all;
+ylaclear; close all;
 
-rng(41); %Seed random for consistent results
+rng(42); %Seed random for consistent results
 
 width = 2;
 height = 2;
-layers = 15;
+layers = 10;
 N = width*height*layers;
 
 %Column parameters
@@ -29,4 +29,11 @@ delay.delayFrac = 1.0;
 delay.dt = dt;
 
 %Make column
-[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay, 1);
+
+figure(102); 
+plot(sum(S), 'k+', 'MarkerSize', 12);
+xlabel('Postynaptic neuron #'); ylabel('Total synaptic balance');
+set(gca,'FontSize',12);
+set(gcf, 'Position', [0 0 1000 300]);
+
