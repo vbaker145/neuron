@@ -1,0 +1,19 @@
+MATLAB code to simulate small columnar ensembles (SCE) using the Izhikevich neuron dynamics model.
+
+Support functions (called by analysis scripts):
+-makeColumnParameters: constructs an SCE from the provided parameter structures
+-makeColumnEnsemble:construct an ensemble of multiple SCE (not used in paper #1)
+-izzy_net: numerical simulation of SCE
+-findWaves: wave detection code, takes in spike timing and finds waves, produces wave labels for the spikes.
+-analyzeWaves: calculates several wave statistics including fraction of total spikes found in waves. Note that the "slopes" calculated here ARE NOT used for speed measurements.
+
+
+Analysis functions (each of these is a self-contained script):
+
+ParameterWaveSim: explores parameter variations aroudn reference point, produces Figure 4 in paper.
+-PlotColumnConnectivity: produces plots of example SCE, Figure 1 in paper.
+-WaveSpeed_<X>: Produces wave speed plots including Figures 7/8/9 for K, kappa and lambda. WaveSpeed_B is included in Supplementary Information, WaveSpeed_Topology is my version of speed vs. SCE thickness.
+-SingleWaveCharacterization: Looks at correlation between FIE and FFE, Figure 10, 11 and 12 in paper
+-LTSinhibitorySim: Simulation with single LTS inhibitory neuron, Figure 13 in paper.
+-DelayWaveSim: waves in fully-connected columns, Figure 14 in paper
+

@@ -362,7 +362,7 @@ As an example, Figure \ref{fig:delay_neuronstep} shows the delayed response of a
 
 To determine this spike delay we expose populations of excitatory and inhibitory neurons to current pulses of different magnitudes.
 The average firing delay of the excitatory and inhibitory neurons is shown in Figure \ref{fig:delay_neurondynamics}.
-The inhibitory neurons have a lower firing threshold than the excitatory neurons \parencite{izhikevich2003} and fire with a shorter delay when given the same stimulus.
+The inhibitory neurons have a lower firing threshold than the excitatory neurons \color{red}due to their higher value of $b$ in Equation \ref{eq:neuron_v} \color{black} \parencite{izhikevich2003} and fire with a shorter delay when given the same stimulus.
 Both excitatory and inhibitory neurons exhibit a delayed response of several $ms$ or more.
 \begin{figure}[!htb]
  \caption{ A stronger stimulus creates a spike with less delay. The excitatory neurons have a higher firing threshold than the inhibitory neurons and do not emit a spike for very weak stimulus.}
@@ -370,6 +370,8 @@ Both excitatory and inhibitory neurons exhibit a delayed response of several $ms
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_NeuronDynamics}
 \end{figure}
+
+\FloatBarrier
 
 To measure wave propagation speed we use an SCE with width 2, height 2, and length 50.
 Our exploration of wave speed uses a step stimulus applied to the lowest 10 layers of neurons (see Methods), while no stimulus is applied to the remaining neurons.
@@ -396,7 +398,7 @@ The relationship is logarithmic in shape, in agreement with some previous work i
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}
 \end{figure}
 
-\color{red}A latency of $1.7\pm 0.9\ ms$ was observed between injecting a stimulus in one pyramidal neuron and the resulting excitatory post-synpatic potential in an adjacent pyramidal neuron \parencite{Markram1997}.
+\color{red}In  \parencite{Markram1997} a latency of $1.7\pm 0.9\ ms$ was observed between injecting a stimulus in one pyramidal neuron and the resulting excitatory post-synpatic potential in an adjacent pyramidal neuron.
 This latency is too large to be due solely to axonal propagation alone given the very short distance between the neurons. 
 The authors also found that a weak negative coorelation between latency and post-synaptic potential amplitude, further indicating that stronger post-synaptic responses result in faster traveling waves. 
 \color{black}
@@ -430,6 +432,12 @@ For \color{red}$\lambda<2$\color{black} we do not observe traveling waves.
 \end{figure}
 \color{red}Previous simulations of thalamic spindle waves in \parencite{Golomb1996} found that wave speed was linear w.r.t. a characteristic synaptic connection length $\lambda$ for exponentially decaying or boxcar synaptic connection profiles.
 These simulations neglected axonal propagation delays which could explain why the wave propagation speed grew linearly with the characteristic connection length. \color{black}
+
+\color{red}
+We have placed our neurons on a unit grid and measured speed in units per millisecond.
+If we consider a typical inter-neuron spacing of $20~\mu m$ then our wave propagation speeds are in the range of $2-16~\mu m/ms$ or $2-16~mm/s$.
+This is generally slower than other computational results, but is similar to the experimental velocity of $5~cm/s$ reported in \parencite{Golomb1997}.
+\color{black}
 
 \FloatBarrier
 
@@ -504,13 +512,17 @@ We now examine whether traveling wave patterns can also be observed in fully con
 We show that this is possible provided we consider the action potential propagation delay proportional to the distance between neurons, as used in all the simulations above.
 We simulate an SCE with complete connectivity corresponding to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
 This is analogous to the original Izhikevich simulation that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
-We first simulate the SCE with a fixed action potential propagation delay of $1~ms$ regardless of inter-neuron distance.
+We first simulate the SCE with a fixed action potential propagation delay of \color{red}$1.9~ms$ \parencite{Markram1997} \color{black} regardless of inter-neuron distance.
 The result is highly synchronized simultaneous firing among all neurons in the SCE.
-We then incorporate our distance-dependent action potential propagation with the $\kappa$ parameter set to 1.
-The firing is still highly synchronized, but traveling waves are now evident (Figure \ref{fig:delay_waves}).
-This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation delay is proportional to the inter-neuron distance.
+\color{red} 
+With distance-dependent propagation delays and fast spike propagation ($\kappa=0.1$) we observe similar synchronized firing.
+We then increase $\kappa$ and observe the emergence of traveling wave patterns (Figure \ref{fig:delay_waves}). \color{black}
+This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation delay is proportional to the inter-neuron distance \color{red}and the spike propagation time is above a critical value\color{black}.
 \begin{figure}[!htb]
- \caption{Left: with global connectivity and no action potential propagation delay, the entire structure shows synchronized firing events. Right: With an action potential propagation delay, traveling waves are observed.}
+ \caption{With global connectivity and action potential propagation delay \color{red}fixed at 1.9 ms\color{black}, the entire structure shows synchronized firing events.
+          \color{red}
+          With distance-dependent propagation we also observe synchronized firing at ($\kappa=0.1$).
+          As $\kappa$ increases traveling waves emerge ($\kappa=0.5, 1.0$) \color{black}.}
  \centering
    \includegraphics[width=\textwidth]{fig/DelayWaves}  
  \label{fig:delay_waves}

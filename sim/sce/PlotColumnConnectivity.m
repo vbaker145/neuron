@@ -16,7 +16,7 @@ structure.displacement = 0.0;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
-connectivity.C = 1.0;
+connectivity.C = 0.5;
 connectivity.maxLength = 100;
 connectivity.connStrength = 1;
 

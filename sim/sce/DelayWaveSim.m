@@ -44,33 +44,53 @@ sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 %No delay
 connectivity.connType = 5;
 delay.delayType = 2;
+delay.delayMult = 1.9; %Observed minimum latency from Markram
 [a,b,c,d, S, delaysConstant, ecn] = makeColumnParameters(structure, connectivity, delay);
 [v, vall, u, uall, firingsNoDelay] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysConstant, sti);
 
 %With delay
 delay.delayType = 1; %Delay porportional to inter-neuron distance
+delay.delayMult = 0.01;
+[a,b,c,d, S, delaysDistance, ecn] = makeColumnParameters(structure, connectivity, delay);
+[v, vall, u, uall, firingsDelayp01] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
+
+delay.delayMult = 0.5;
+[a,b,c,d, S, delaysDistance, ecn] = makeColumnParameters(structure, connectivity, delay);
+[v, vall, u, uall, firingsDelayp05] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
+
 delay.delayMult = 1;
 [a,b,c,d, S, delaysDistance, ecn] = makeColumnParameters(structure, connectivity, delay);
-[v, vall, u, uall, firingsDelay] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
+[v, vall, u, uall, firingsDelay1] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
 
-S(:,1:100) = 0; S(:,300:400) = 0;
-[v, vall, u, uall, firingsDelayCut] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysDistance, sti);
-
-figure; subplot(1,3,1);
+figure(100); set(gcf, 'Position', [0 0 1000 400]); 
+subplot(1,4,1);
 plot(firingsNoDelay(:,1)./1000, firingsNoDelay(:,2)/(width*height),'k.');
 xlabel('Time (seconds)'); ylabel('Neuron position (Z)');
 set(gca, 'XLim',[0 max(t)/1000]);
 set(gca,'FontSize',12);
-subplot(1,3,2);
-plot(firingsDelay(:,1)./1000, firingsDelay(:,2)/(width*height),'k.');
+text(0.01, 90, '1.9 ms delay', 'FontSize', 12, 'BackgroundColor', 'White')
+
+subplot(1,4,2);
+plot(firingsDelayp01(:,1)./1000, firingsDelayp01(:,2)/(width*height),'k.');
 xlabel('Time (seconds)');
 set(gca, 'XLim',[0 max(t)/1000]);
 set(gca, 'YTick',[])
 set(gca,'FontSize',12);
-subplot(1,3,3);
-plot(firingsDelayCut(:,1)./1000, firingsDelayCut(:,2)/(width*height),'k.');
+text(0.01, 90, '\kappa=0.1', 'FontSize', 12, 'BackgroundColor', 'White')
+
+subplot(1,4,3);
+plot(firingsDelayp05(:,1)./1000, firingsDelayp05(:,2)/(width*height),'k.');
 xlabel('Time (seconds)');
 set(gca, 'XLim',[0 max(t)/1000]);
 set(gca, 'YTick',[])
 set(gca,'FontSize',12);
+text(0.01, 90, '\kappa=0.5', 'FontSize', 12, 'BackgroundColor', 'White')
+
+subplot(1,4,4);
+plot(firingsDelay1(:,1)./1000, firingsDelay1(:,2)/(width*height),'k.');
+xlabel('Time (seconds)');
+set(gca, 'XLim',[0 max(t)/1000]);
+set(gca, 'YTick',[])
+set(gca,'FontSize',12);
+text(0.01, 90, '\kappa=1.0', 'FontSize', 12, 'BackgroundColor', 'White')
 
