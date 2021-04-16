@@ -94,8 +94,13 @@ xlabel('K')
 ylabel('Pace (ms/unit)')
 set(gca,'FontSize',12);
 
+%Fit log function to data
+logfun = @(b,x)(b(1)*log(b(2)*x));
+bt = nlinfit(xVals, speed, logfun, [1 1]);
+
 subplot(1,2,2);
 plot(xVals, speed,'ko', 'MarkerSize',10); 
+hold on; plot(xVals, bt(1)*log(bt(2)*xVals),'r--');
 xlim([xVals(1)-1 xVals(end)+1]);
 xlabel('K')
 ylabel('Speed (units/ms)')

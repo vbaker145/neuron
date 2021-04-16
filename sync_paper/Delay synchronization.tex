@@ -382,8 +382,15 @@ Here, without the uniform background stimulus the neurons in the SCE are at thei
 We increase the connection strength $K$ to provide this stronger stimulus, and find traveling waves that span the SCE starting at $K=18$. 
 As $K$ increases the neurons fire with less delay, resulting in faster traveling waves (Figure \ref{fig:delay_k}).
 We fix $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ for the remainder of the wave speed computational experiments.
+
+\color{red} We first examine the impact of K on the wave speed.
+The wave speed increases with K as predicted (Figure \ref{fig:delay_k}).
+The relationship is logarithmic in shape, in agreement with some previous work including \parencite{Golomb1999} (Figure 3 for $\tau_d>0$) and \parencite{Golomb1996}(Figure 10, exponential footprint shape).
+
+\color{black}
 \begin{figure}[!htb]
- \caption{The pace (left, error bars $\pm 1 \sigma$) decreases with $K$, while the corresponding wave speed (right) increases with $K$. }
+ \caption{The pace (left, error bars $\pm 1 \sigma$) decreases with $K$, while the corresponding wave speed (right) increases with $K$. 
+          \color{red}The best logarithmic fit is $0.36\log{0.12K}$\color{black}.}
  \label{fig:delay_k}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}
@@ -414,7 +421,9 @@ Since an increase in $\lambda$ results in both longer range connections, and mor
 The characteristic connection length $\lambda$ is varied from 2 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_lambda}).
 For \color{red}$\lambda<2$\color{black} we do not observe traveling waves.
 \begin{figure}[!htb]
- \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases with $\lambda$. The wave speed (right) shows that the maximum wave speed approaches $0.8$, the limit seen as $\kappa \rightarrow 0$ in Figure \ref{fig:delay_speed}. }
+ \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases with $\lambda$. 
+           The wave speed (right) shows that the maximum wave speed approaches $0.8$, the limit seen as $\kappa \rightarrow 0$ in Figure \ref{fig:delay_speed}. 
+           \color{red}The best logarithmic fit to the data is $0.62\log{0.74\lambda}$\color{black}.}
  \label{fig:delay_lambda}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Lambda}

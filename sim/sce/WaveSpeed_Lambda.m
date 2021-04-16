@@ -96,6 +96,10 @@ set(gca,'FontSize',12);
 
 subplot(1,2,2);
 plot(xVals, speed,'ko', 'MarkerSize',10); 
+%Fit log function to data
+logfun = @(b,x)(b(1)*log(b(2)*x));
+bt = nlinfit(xVals, speed, logfun, [1 1]);
+hold on; plot(xVals, bt(1)*log(bt(2)*xVals),'r--');
 xlim([xVals(1)-0.1 xVals(end)+0.1]);
 xlabel('\lambda')
 ylabel('Speed (units/ms)')
