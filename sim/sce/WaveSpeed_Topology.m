@@ -88,14 +88,33 @@ for jj=1:size(widthHeights,1)
     end 
 end
 
-speed = structure.layers./nanmean(slopes);
-
-figure(6);
+waveSpan = structure.layers-stimDepth;
+speed = 1./nanmean(slopes./waveSpan);
 xVals = 1:size(widthHeights,1);
-plot(xVals, speed,'ko', 'MarkerSize', 10); 
+
+figure(100); subplot(1,2,1);
+errorbar(xVals, nanmean(slopes./waveSpan), nanstd(slopes./waveSpan),'ko')
 xlim([xVals(1)-0.1 xVals(end)+0.1]);
 xlabel('Column width x height')
 xticks(xVals);
 xticklabels({'2x2','2x3','3x3','3x4','4x4'})
+ylabel('Speed (units/ms)')
+set(gca,'FontSize',12);
+
+subplot(1,2,2);
+plot(xVals, speed,'ko', 'MarkerSize',10); 
+xlim([xVals(1)-0.1 xVals(end)+0.1]);
+xlabel('Column width x height')
+xticks(xVals);
+xticklabels({'2x2','2x3','3x3','3x4','4x4'})
+ylabel('Speed (units/ms)')
+set(gca,'FontSize',12);
+
+
+xVals2 = [4 6 9 12 16];
+figure(101);
+plot(xVals2, speed,'ko', 'MarkerSize',10); 
+xlim([xVals2(1)-0.1 xVals2(end)+0.1]);
+xlabel('SCE cross-section')
 ylabel('Speed (units/ms)')
 set(gca,'FontSize',12);

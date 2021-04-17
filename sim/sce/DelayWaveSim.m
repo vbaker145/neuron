@@ -44,7 +44,7 @@ sti = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 %No delay
 connectivity.connType = 5;
 delay.delayType = 2;
-delay.delayMult = 1.9; %Observed minimum latency from Markram
+delay.delayMult = 1.7; %Observed minimum latency from Markram
 [a,b,c,d, S, delaysConstant, ecn] = makeColumnParameters(structure, connectivity, delay);
 [v, vall, u, uall, firingsNoDelay] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delaysConstant, sti);
 
@@ -68,7 +68,7 @@ plot(firingsNoDelay(:,1)./1000, firingsNoDelay(:,2)/(width*height),'k.');
 xlabel('Time (seconds)'); ylabel('Neuron position (Z)');
 set(gca, 'XLim',[0 max(t)/1000]);
 set(gca,'FontSize',12);
-text(0.01, 90, '1.9 ms delay', 'FontSize', 12, 'BackgroundColor', 'White')
+text(0.01, 90, '1.7 ms delay', 'FontSize', 12, 'BackgroundColor', 'White')
 
 subplot(1,4,2);
 plot(firingsDelayp01(:,1)./1000, firingsDelayp01(:,2)/(width*height),'k.');

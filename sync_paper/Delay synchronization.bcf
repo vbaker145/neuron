@@ -2259,12 +2259,12 @@
     <bcf:citekey order="72">Muller2018</bcf:citekey>
     <bcf:citekey order="73">Golomb1997</bcf:citekey>
     <bcf:citekey order="74">Chervin1988</bcf:citekey>
-    <bcf:citekey order="75">keane2015</bcf:citekey>
-    <bcf:citekey order="76">Senk2020</bcf:citekey>
-    <bcf:citekey order="77">izhikevich2003</bcf:citekey>
-    <bcf:citekey order="78">Golomb1999</bcf:citekey>
-    <bcf:citekey order="79">Golomb1996</bcf:citekey>
-    <bcf:citekey order="80">Markram1997</bcf:citekey>
+    <bcf:citekey order="75">Markram1997</bcf:citekey>
+    <bcf:citekey order="76">keane2015</bcf:citekey>
+    <bcf:citekey order="77">Senk2020</bcf:citekey>
+    <bcf:citekey order="78">izhikevich2003</bcf:citekey>
+    <bcf:citekey order="79">Golomb1999</bcf:citekey>
+    <bcf:citekey order="80">Golomb1996</bcf:citekey>
     <bcf:citekey order="81">Golomb1996</bcf:citekey>
     <bcf:citekey order="82">Golomb1997</bcf:citekey>
     <bcf:citekey order="83">gibson2009</bcf:citekey>
@@ -2274,9 +2274,11 @@
     <bcf:citekey order="87">Golomb1996</bcf:citekey>
     <bcf:citekey order="88">Markram1997</bcf:citekey>
     <bcf:citekey order="89">ermentrout2001</bcf:citekey>
-    <bcf:citekey order="90">Senk2020</bcf:citekey>
-    <bcf:citekey order="91">keane2015</bcf:citekey>
-    <bcf:citekey order="92">ermentrout2001</bcf:citekey>
+    <bcf:citekey order="90">Wilson1973</bcf:citekey>
+    <bcf:citekey order="91">Ermentrout1979</bcf:citekey>
+    <bcf:citekey order="92">Senk2020</bcf:citekey>
+    <bcf:citekey order="93">keane2015</bcf:citekey>
+    <bcf:citekey order="94">ermentrout2001</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global" type="entry" sortscheme="none" sortnamekeyscheme="global">
   <bcf:sorting>

@@ -341,14 +341,15 @@ However, it is in agreement with other work that found traveling wave pattersn w
 
 \subsection{Wave propagation speed} \label{sub:propagation_speed}
 Cortical traveling waves have been observed with propagating speeds from \color{red}$<0.1$ to $>0.8$ meters per second \parencite{Sato2012}\parencite{Golomb1997}\parencite{Chervin1988}\color{black}.
-\color{red}In \parencite{Muller2018} the authors considers this \color{black}consistent with the action potential propagation speeds in the gray matter of the cortex. 
-We include action potential propagation in our model with a propagation\color{red}  time proportional to the length of the axon\color{black}.
-The key elements of the dynamics include the speed at which an action potential is carried to the postsynaptic neurons, and the length of the connections.
+\color{red}In \parencite{Muller2018} the authors considers this \color{black} consistent with the action potential propagation speeds in the gray matter of the cortex. 
+We include action potential propagation in our model with a propagation \color{red}time proportional to the distance between the neurons\color{black}.
 
 \color{red}In \parencite{Golomb1997} the authors neglected action potential propagation in their model of disinhibited cortical slices as they consider their observed wave velocity of $~0.15 m/s$ to be an order of magnitude faster than axon potential propagation.
 \parencite{Chervin1988} found even slower propagation of $0.06-0.09 m/s$ in disinhibited slices of rat cortex.
+In  \parencite{Markram1997} a latency of $1.7\pm 0.9\ ms$ was observed between injecting a stimulus in one pyramidal neuron and the resulting excitatory post-synpatic potential in an adjacent pyramidal neuron.
+This latency is too large to be due solely to axonal propagation alone given the very short distance between the neurons. 
 This indicates that a second key element, namely neuron amd synapse dynamics, will also influence wave propagation speed\color{black}.
-Biological neurons have complex internal dynamics, and will not fire instantaneously upon receiving a stimulus.
+Biological neurons \color{red}and synapses \color{black} have complex internal dynamics, and will not fire instantaneously upon receiving a stimulus.
 The input may push the neuron's dynamical system out of equilibrium and cause a spike, but the system dynamics take some time to evolve.
 Therefore the spike will occur with some delay after the stimulus.
 This is a common behavior in any multidimensional model of neuron dynamics, but it is not captured by the leaky integrate-and-fire model used in much of the previous research \parencite{keane2015}\parencite{Senk2020}.
@@ -398,10 +399,18 @@ The relationship is logarithmic in shape, in agreement with some previous work i
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}
 \end{figure}
 
-\color{red}In  \parencite{Markram1997} a latency of $1.7\pm 0.9\ ms$ was observed between injecting a stimulus in one pyramidal neuron and the resulting excitatory post-synpatic potential in an adjacent pyramidal neuron.
-This latency is too large to be due solely to axonal propagation alone given the very short distance between the neurons. 
-The authors also found that a weak negative coorelation between latency and post-synaptic potential amplitude, further indicating that stronger post-synaptic responses result in faster traveling waves. 
+\color{red}
+We examine the influence of the $b$ parameter on wave speed.
+We generate $100$ SCE, then multiply the $b$ parameter of all neurons by a scaling factor from $0.7$ to $1.3$.
+When the scale factor is $\leq 1.0$ the wave speed remains consistent, but when the scale factor is $>1.0$ the wave speed increases linearly.
+This is consistent with our observation that the lower firing thresholds that result from increasing the $b$ parameter result in faster traveling waves.
 \color{black}
+\begin{figure}[!htb]
+ \caption{The pace (left, error bars $\pm 1 \sigma$) and the wave speed (right) show a sharp transition above scale factor $1.0$. }
+ \label{fig:delay_b}
+ \centering
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_B}
+\end{figure}
 
 \FloatBarrier
 
@@ -432,6 +441,19 @@ For \color{red}$\lambda<2$\color{black} we do not observe traveling waves.
 \end{figure}
 \color{red}Previous simulations of thalamic spindle waves in \parencite{Golomb1996} found that wave speed was linear w.r.t. a characteristic synaptic connection length $\lambda$ for exponentially decaying or boxcar synaptic connection profiles.
 These simulations neglected axonal propagation delays which could explain why the wave propagation speed grew linearly with the characteristic connection length. \color{black}
+
+\color{red}
+Our SCE topology (the X and Y extents) may influence the wave speed in several ways.
+Increasing X and/or Y increases the total number of neurons, the total nunber of connections, and the average number of connections per neuron.
+We construct columns with topology in X/Y of $2x2, 2x3, 3x3, 3x4$ and $4x4$.
+For each topology we measure the pace and speed over $5$ randomly generated SCE.
+\begin{figure}[!htb]
+ \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases, and the speed (right) increases, as the X/Y extents of the SCE grow.}
+ \label{fig:delay_topology}
+ \centering
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_Topology}
+\end{figure}
+\color{black}
 
 \color{red}
 We have placed our neurons on a unit grid and measured speed in units per millisecond.
@@ -512,16 +534,16 @@ We now examine whether traveling wave patterns can also be observed in fully con
 We show that this is possible provided we consider the action potential propagation delay proportional to the distance between neurons, as used in all the simulations above.
 We simulate an SCE with complete connectivity corresponding to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
 This is analogous to the original Izhikevich simulation that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
-We first simulate the SCE with a fixed action potential propagation delay of \color{red}$1.9~ms$ \parencite{Markram1997} \color{black} regardless of inter-neuron distance.
+We first simulate the SCE with a fixed action potential propagation delay of \color{red}$1.7~ms$ \parencite{Markram1997} \color{black} regardless of inter-neuron distance.
 The result is highly synchronized simultaneous firing among all neurons in the SCE.
 \color{red} 
 With distance-dependent propagation delays and fast spike propagation ($\kappa=0.1$) we observe similar synchronized firing.
 We then increase $\kappa$ and observe the emergence of traveling wave patterns (Figure \ref{fig:delay_waves}). \color{black}
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation delay is proportional to the inter-neuron distance \color{red}and the spike propagation time is above a critical value\color{black}.
 \begin{figure}[!htb]
- \caption{With global connectivity and action potential propagation delay \color{red}fixed at 1.9 ms\color{black}, the entire structure shows synchronized firing events.
+ \caption{With global connectivity and action potential propagation delay \color{red}fixed at $1.7~ms$\color{black}, the entire structure shows synchronized firing events.
           \color{red}
-          With distance-dependent propagation we also observe synchronized firing at ($\kappa=0.1$).
+          With distance-dependent propagation we also observe synchronized firing at $\kappa=0.1$.
           As $\kappa$ increases traveling waves emerge ($\kappa=0.5, 1.0$) \color{black}.}
  \centering
    \includegraphics[width=\textwidth]{fig/DelayWaves}  
@@ -542,11 +564,15 @@ We found that the neuron dynamics also play an important role in the wave propag
 The connectivity and connection strengths influence the wave propagation speed through the neuron dynamics.
 We have determined that preferential sites for wave initiation are due to the presence of inhibitory neurons with low spiking thresholds.
 
-Previous research into traveling waves in neural networks has identified parameter regions of a neural-field model for which traveling waves exist \parencite{Senk2020}.
-In this work the regions of existence were sharply defined as revealed by a linear stability analysis.
+Previous research into traveling waves in neural networks has identified parameter regions of neural-field models for which traveling waves exist \color{red}\parencite{Wilson1973}\parencite{Ermentrout1979}\color{black}. 
+\color{red}
+In these models critical values of model parameters are usually revealed by a linear stability analysis.
+\color{black}
 Our exploration of model parameters (Figure \ref{fig:wave_parameters}) instead shows a gradual transition region in which waves emerge and dominate the firing activity.
-One possible explanation of the difference is that the previous research used highly structured spatial arrangements of excitatory and inhibitory neurons with deterministic connectivity, while our model randomly assigns neurons as excitatory or inhibitory and uses a probabilistic connection model.
-Due to the stochastic nature of our model a network created with a particular set of parameters may support traveling waves in some regions while blocking traveling waves in other regions.
+\color{red}
+In \parencite{Senk2020} the authors derive critical parameters using linear stability analysis of a neural field and find the critical parameter values, then map those parameters to a network of leaky integrate-and-fire neurons.
+Although the stability analysis shows sharply defined regios (their Figure 3 and 4), their network simulation results show a gradual transition between regions (their Figure 7) in agreement with our work.
+\color{black}
 
 Other research \parencite{keane2015} has shown that complex spatial patterns emerge from two-dimensional networks of leaky-integrate-and-fire neurons when the excitation and inhibition are balanced.
 In that work, when excitation dominates then only plane waves were observed instead of complex patterns.
