@@ -84,7 +84,10 @@ for jj=1:length(Ks)
 end
 
 waveSpan = structure.layers-stimDepth;
-speed = 1./nanmean(slopes./waveSpan);
+speed = nanmean(waveSpan./slopes);
+speedStd = nanstd(waveSpan./slopes);
+
+
 xVals = Ks;
 
 figure(6); subplot(1,2,1);
@@ -99,7 +102,7 @@ logfun = @(b,x)(b(1)*log(b(2)*x));
 bt = nlinfit(xVals, speed, logfun, [1 1]);
 
 subplot(1,2,2);
-plot(xVals, speed,'ko', 'MarkerSize',10); 
+errorbar(xVals, speed, speedStd, 'ko')
 hold on; plot(xVals, bt(1)*log(bt(2)*xVals),'r--');
 xlim([xVals(1)-1 xVals(end)+1]);
 xlabel('K')

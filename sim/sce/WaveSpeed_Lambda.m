@@ -84,7 +84,9 @@ for jj=1:length(lambdas)
 end
 
 waveSpan = structure.layers-stimDepth;
-speed = 1./nanmean(slopes./waveSpan);
+speed = nanmean(waveSpan./slopes);
+speedStd = nanstd(waveSpan./slopes);
+
 xVals = lambdas;
 
 figure(6); subplot(1,2,1);
@@ -95,7 +97,7 @@ ylabel('Pace (ms/unit)')
 set(gca,'FontSize',12);
 
 subplot(1,2,2);
-plot(xVals, speed,'ko', 'MarkerSize',10); 
+errorbar(xVals, speed, speedStd, 'ko')
 %Fit log function to data
 logfun = @(b,x)(b(1)*log(b(2)*x));
 bt = nlinfit(xVals, speed, logfun, [1 1]);

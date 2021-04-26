@@ -2,8 +2,14 @@ clear; close all;
 
 rng(42); %Seed random for consistent results
 
-width = 2;
-height = 2;
+%Calculate 'C' scaling factors
+%Array of [Width x Heigh, AvgConnections] pairs
+AvgConnections = [4, 6.9; 6, 9.4; 9, 12.8; 12, 15.2; 16, 17.9 ]; %From previous runs with C=0.5
+%Quadratic fit to predict average # conenctions for a given cross section
+qc = polyfit(AvgConnections(:,1), AvgConnections(:,2), 2);
+
+width = 6;
+height = 6;
 layers = 50;
 N = width*height*layers;
 
@@ -16,6 +22,12 @@ structure.displacement = 0.0;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
+
+%Scaling factor for column cross section
+nn = width*height;
+F = AvgConnections(1,2)/(qc(1)*nn^2+qc(2)*nn+qc(3));
+connectivity.C = F*0.5;
+
 connectivity.maxLength = 100;
 connectivity.connStrength = 1;
 
@@ -28,7 +40,7 @@ delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
-nTrials = 100;
+nTrials = 20;
 tConn = []; tDelay = [];
 for jj=1:nTrials
     %Make column

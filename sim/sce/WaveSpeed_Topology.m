@@ -2,6 +2,13 @@ clear all; close all;
 
 rng(42); %Seed random for consistent results
 
+%Calculate 'C' scaling factors
+%Array of [Width x Heigh, AvgConnections] pairs
+AvgConnections = [4, 6.9; 6, 9.4; 9, 12.8; 12, 15.2; 16, 17.9 ]; %From previous runs with C=0.5
+%Quadratic fit to predict average # conenctions for a given cross section
+qc = polyfit(AvgConnections(:,1), AvgConnections(:,2), 2);
+
+
 width = 2;
 height = 2;
 layers = 50;
@@ -16,6 +23,12 @@ structure.displacement = 0.0;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
+
+%Scaling factor for column cross section
+nn = width*height;
+F = AvgConnections(1,2)/(qc(1)*nn^2+qc(2)*nn+qc(3));
+connectivity.C = F*0.5;
+
 connectivity.maxLength = 100;
 connectivity.connStrength = 24;
 
@@ -45,6 +58,11 @@ for jj=1:size(widthHeights,1)
     structure_t.height = widthHeights(jj,2);
     N = structure_t.width*structure_t.height*layers;
     N_layer = structure_t.width*structure_t.height;
+    
+    %Scaling factor for column cross section
+    nn = structure_t.width*structure_t.height;
+    F = AvgConnections(1,2)/(qc(1)*nn^2+qc(2)*nn+qc(3));
+    connectivity.C = F*0.5;
             
     %Impulsive stimulus
     stImpulse = zeros(N, size(t,2))*rand();
@@ -89,8 +107,8 @@ for jj=1:size(widthHeights,1)
 end
 
 waveSpan = structure.layers-stimDepth;
-speed = 1./nanmean(slopes./waveSpan);
-xVals = 1:size(widthHeights,1);
+speed = nanmean(waveSpan./slopes);
+speedStd = nanstd(waveSpan./slopes);
 
 figure(100); subplot(1,2,1);
 errorbar(xVals, nanmean(slopes./waveSpan), nanstd(slopes./waveSpan),'ko')
@@ -98,18 +116,17 @@ xlim([xVals(1)-0.1 xVals(end)+0.1]);
 xlabel('Column width x height')
 xticks(xVals);
 xticklabels({'2x2','2x3','3x3','3x4','4x4'})
-ylabel('Speed (units/ms)')
+ylabel('Pace (ms/unit)')
 set(gca,'FontSize',12);
 
 subplot(1,2,2);
-plot(xVals, speed,'ko', 'MarkerSize',10); 
-xlim([xVals(1)-0.1 xVals(end)+0.1]);
-xlabel('Column width x height')
+errorbar(xVals, speed, speedStd, 'ko')
+xlim([xVals(1)-1 xVals(end)+1]);
 xticks(xVals);
 xticklabels({'2x2','2x3','3x3','3x4','4x4'})
+xlabel('Column width x height')
 ylabel('Speed (units/ms)')
 set(gca,'FontSize',12);
-
 
 xVals2 = [4 6 9 12 16];
 figure(101);
