@@ -79,7 +79,9 @@ for jj=1:length(bScale)
 end
 
 waveSpan = structure.layers-stimDepth;
-speed = 1./nanmean(slopes./waveSpan);
+speed = nanmean(waveSpan./slopes);
+speedStd = nanstd(waveSpan./slopes);
+
 xVals = bScale;
 
 figure(6); subplot(1,2,1);
@@ -90,7 +92,7 @@ ylabel('Pace (ms/unit)')
 set(gca,'FontSize',12);
 
 subplot(1,2,2);
-plot(xVals, speed,'ko', 'MarkerSize',10); 
+errorbar(xVals, speed, speedStd, 'ko')
 xlim([xVals(1)-0.1 xVals(end)+0.1]);
 xlabel('b scale factor')
 ylabel('Speed (units/ms)')

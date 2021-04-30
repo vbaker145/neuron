@@ -142,11 +142,12 @@ The traveling waves in fully connected systems are dependent upon the action pot
 \section{Methods}
 To study traveling waves in small columnar ensembles (SCE) of neurons we first construct these assemblies by placing neurons at the vertices of a cubic lattice described by two short \color{red} dimensions (X,Y) and one long dimension (Z)\color{black}. 
 Each neuron is \color{red} randomly chosen to be \color{black} either excitatory (E) or inhibitory (I), with the fraction of excitatory neurons indicated as $P_{exc}$.
-After placing, we connect two neurons based on their relative distance according to a connection probability that favors local connectivity given by: 
+After placing, we connect two neurons based on their relative distance according to a connection probability that favors local connectivity given by \color{red} \parencite{maass2002}\color{black}: 
 \begin{align}\label{eq:connectivity}
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
-where $D(a,b)$ is the Euclidean distance between neuron A and B, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is a normalization constant.
+where $D(a,b)$ is the Euclidean distance between neuron A and B, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is \color{red}the peak probability of connection \color{black}.
+\color{red}In \parencite{Levy2012} the authors used the same equation form for connectivity and showed that the synaptic connections in the mouse auditory cortex follow this connection probability.
 \color{red}Multiple connections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
 Two neurons may be recurrently connected, however. \color{black}
 An example of an SCE showing the connectivity structure is shown in Figure \ref{fig:column_structure}.
@@ -439,8 +440,8 @@ For \color{red}$\lambda<2$\color{black} we do not observe traveling waves.
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Lambda}
 \end{figure}
-\color{red}Previous simulations of thalamic spindle waves in \parencite{Golomb1996} found that wave speed was linear w.r.t. a characteristic synaptic connection length $\lambda$ for exponentially decaying or boxcar synaptic connection profiles.
-These simulations neglected axonal propagation delays which could explain why the wave propagation speed grew linearly with the characteristic connection length. \color{black}
+
+\FloatBarrier
 
 \color{red}
 Our SCE topology (the X and Y extents) may influence the wave speed in several ways.
@@ -452,6 +453,16 @@ For each topology we measure the pace and speed over $5$ randomly generated SCE.
  \label{fig:delay_topology}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Topology}
+\end{figure}
+
+Increasing the cross-section of the SCE increases both the total number of neurons as well as the average number of connections per neuron.
+We scale the $C$ parameter in equation \ref{eq:connectivity} to maintain the same average number of connections per neuron across the topologies.
+We see that, when separated from the increase in connectivity, the topology itself does not change the wave propagation speed (Figure \ref{fig:delay_topology_avgconn}).
+\begin{figure}[!htb]
+ \caption{ Wave speed (error bars $1\sigma$) is constant as the topology changes as long as the average number of connections is maintained. The largest topology is $13x13$ (169 neurons at base).}
+ \label{fig:delay_topology_avgconn}
+ \centering
+   \includegraphics[width=\textwidth]{fig/speed_vs_thick_m}
 \end{figure}
 \color{black}
 

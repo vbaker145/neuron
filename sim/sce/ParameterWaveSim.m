@@ -22,7 +22,8 @@ connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.C = 0.5;
 connectivity.connStrength = 10;
-connectivity.maxLength = 100;
+connectivity.maxLength = 100; 
+connectivity.maxLength = 2*connectivity.lambda; %Test pruning long connections
 
 delay.delayType = 1;
 delay.delayMult = 1;

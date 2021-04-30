@@ -12,7 +12,7 @@
 \usepackage{wrapfig}
 \usepackage[section]{placeins}
 
-
+\renewcommand{\arraystretch}{1.5}
 
 
 \begin{document}
@@ -26,6 +26,27 @@
 {$^{\displaystyle 1}$Drexel University, Department of Physics.}\\
 
 \pagebreak
+
+\subsection*{Model Summary}
+\begin{table}[!htb]
+ \caption{Model Summary}
+ \label{tab:all_params}
+ \centering
+ \begin{tabular}{c}
+  \textbf{Model} \\
+  \hline \\
+ \end{tabular} \\
+ \begin{tabular}{l|l}
+  Population & Excitatory, inhibitory \\
+  Topology & Small columnar ensemble, Z extents $\gg$ X,Y extents \\
+  Connectivity & Stochastic, $P_c$ exponentially decays with distance between neurons \\
+  Neuron model & Izhikevich model with distribution of neuron parameters \\
+  Synapse response & Exponential synaptic response with randomized peak connection strength  \\
+  Spike propagation & Delay proportional to distance, Fixed propagation time \\
+  Input & Random input to all neurons, Fixed stimulus to neurons at the bottom of the SCE \\
+ \end{tabular}
+\end{table}
+
 
 \subsection*{Wave detection and labeling}
 \color{red}
@@ -65,5 +86,21 @@ Sample visualizations for varying values of $K$ are shown in Figure \ref{fig:det
 \end{figure}
 
 \FloatBarrier
- 
+
+\subsection*{Effect of long connections}
+\color{red}
+The distance-dependent connectivity allows for a small probability of connections between neurons that are very far apart.
+To understand if these few long-range connections were significant, we recreate Figure 4 but prune all connections with length $>5\ (2\lambda)$.
+We find that removing long-range connections does not significantly alter the formation and propagation of traveling waves (Figure \ref{fig:wave_parameters_nolongconnections}).
+\begin{figure}[!htb]
+ \centering
+ \includegraphics[width=\textwidth]{fig/ParamWaveSim} 
+ \rule{\textwidth}{1bp}
+ \includegraphics[width=\textwidth]{fig/ParamWaveSim_NoLongConnections}
+ \caption{The original results for wave dependence upon model parameters (top) do not substantially change with connections of length $>5$ removed (bottom). }
+ \label{fig:wave_parameters_nolongconnections}
+\end{figure}
+
+
+\color{black}
 \end{document}
