@@ -72,7 +72,7 @@ Sample visualizations for varying values of $K$ are shown in Figure \ref{fig:det
      \includegraphics[width=\textwidth]{fig/DelayDistribution} 
  \end{tabular}
 \end{figure}
- 
+ \FloatBarrier
 \color{black}
  
 \subsection*{Example FIE and FFE plots}
@@ -100,7 +100,19 @@ We find that removing long-range connections does not significantly alter the fo
  \caption{The original results for wave dependence upon model parameters (top) do not substantially change with connections of length $>5$ removed (bottom). }
  \label{fig:wave_parameters_nolongconnections}
 \end{figure}
+\FloatBarrier
 
+\subsection*{SCE with a larger cross-section}
+In section 3.2 we showed that as SCE grow in the X or Y dimension the wave speed increases due to the increased connectivity, but when the average number of connections per neuron were held constant the wave speed was constant.
+We further examine these not-quite-as-one-dimensional SCE by examining the firing activity of purely one-dimensional sub-columns within the larger SCE.
+With the average number of connections held constant, the sub-columns within the larger SCE show similar behavior regardless of the overall topology (Figure \ref{fig:LargeSCESubcolumns}).
+\begin{figure}[!htb]
+ \caption{ Spike raster plots for complete SCE (A) and one-dimensional sub-colmns (B) for different topologies show similar firing patterns in the sub-columns regardless  of topology. 
+           The wave firing fraction (C) measured within the sub-columns show the same dependence on $K$ regardless of the topology.}
+   \includegraphics[width=\textwidth]{fig/WaveFractionVsThick}
+   \label{fig:LargeSCESubcolumns}
+\end{figure}
+\FloatBarrier
 
 \color{black}
 \end{document}

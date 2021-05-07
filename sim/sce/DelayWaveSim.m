@@ -27,7 +27,7 @@ delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
-[a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+[a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay);
 
 vall = []; uall = [];
 
