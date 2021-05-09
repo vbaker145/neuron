@@ -2,8 +2,8 @@ clear; close all;
 
 rng(42); %Seed random for consistent results
 
-width = 2;
-height = 2;
+width = 1;
+height = 1;
 layers = 100;
 N = width*height*layers;
 
@@ -23,7 +23,7 @@ connectivity.lambda = 2.5;
 connectivity.C = 0.5;
 connectivity.connStrength = 10;
 connectivity.maxLength = 100; 
-connectivity.maxLength = 2*connectivity.lambda; %Test pruning long connections
+%connectivity.maxLength = 2*connectivity.lambda; %Test pruning long connections
 
 delay.delayType = 1;
 delay.delayMult = 1;
