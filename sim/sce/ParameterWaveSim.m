@@ -2,8 +2,8 @@ clear; close all;
 
 rng(42); %Seed random for consistent results
 
-width = 1;
-height = 1;
+width = 2;
+height = 2;
 layers = 100;
 N = width*height*layers;
 
