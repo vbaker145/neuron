@@ -107,7 +107,7 @@ While the function of traveling waves is unknown \parencite{wu2008}\parencite{Mu
 
 Neuronal traveling waves are not uniquely defined as they can exist at widely differing frequency and scale lengths.  
 In the sleep and anesthetized states,slow and large-scale wave activity has been recorded \parencite{Muller2018}. 
-\color{red}Traveling waves have been detected in local-field potentials measured with electrodes \cite{Rubino2006}\parencite{sanes1993}\parencite{Riehle2013}\color{black}.
+\color{red}Traveling waves have been detected in local-field potentials measured with electrodes \parencite{Rubino2006}\parencite{sanes1993}\parencite{Riehle2013}\color{black}.
 Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \parencite{wu2008}\parencite{Shoham1999}\color{red}\parencite{Xu2007}\parencite{Ferezou2006}\color{black}.  
 Similarly, traveling waves also differ by the manner in which they are created. 
 Both spontaneously occurring waves and stimulus-evoked \parencite{reimer2010} waves have been observed in the visual and auditory cortex. 
@@ -523,8 +523,9 @@ An example measurement of the firing activity in a single traveling wave is show
 
 By combining these two experiments we observe that the results from the FIE and the FFE appeared anti-correlated for the same SCE (see Figure 3 in Supplemental Information for examples).
 To test that this observation is generally true we create 100 SCEs, apply first uniform background stimulus and then step stimulus to each SCE, and measure the correlation between the FIE and FFE (Figure \ref{fig:InitiationCorrelation}).
+\color{red}The correlation coefficient is estimated from the two histograms using MATLAB 'corrcoef'.  \color{black}
 Although there is substantial variation between SCEs we measure a consistently negative correlation coefficient (mean $-0.26$, standard deviation $0.18$) between FIE and FFE results.
-\color{red}A one-sided T-test at the $1\%$ confidence level rejects the null hypothesis that the mean of the correlation coefficient is $0$ or greater\color{black}.
+\color{red}A one-sided t-test at the $1\%$ confidence level rejects the null hypothesis that the mean of the correlation coefficient is $0$ or greater\color{black}.
 \begin{figure}[!htb]
  \centering
  \caption{\color{red} A) Correlation between FIE and FFE across 100 trials. B) Distribution of the correlation coefficient. Each trial is a new SCE with random neuron and connectivity parameters\color{black}. }
@@ -566,7 +567,7 @@ Our investigation has been concerned with traveling waves of activations that sp
 We now examine whether traveling wave patterns can also be observed in fully connected networks.
 We show that this is possible provided we consider the action potential propagation delay proportional to the distance between neurons, as used in all the simulations above.
 We simulate an SCE with complete connectivity corresponding to $\lambda \rightarrow \infty$: all neurons are connected with probability 1 to all other neurons.
-This is analogous to the original Izhikevich simulation that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
+This is analogous to the original Izhikevich simulation \parencite{izhikevich2003} that demonstrated synchronized firing in a completely connected neural field with random background stimulus.
 We first simulate the SCE with a fixed action potential propagation delay of \color{red}$1.7~ms$ \parencite{Markram1997} \color{black} regardless of inter-neuron distance.
 The result is highly synchronized simultaneous firing among all neurons in the SCE.
 \color{red} 
