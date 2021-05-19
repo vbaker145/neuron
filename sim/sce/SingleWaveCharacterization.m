@@ -145,7 +145,7 @@ end
 %Plot wave initiation sites with histogram
 figure; subplot(1,2,1); plot(startTimes, startPos, 'ko');
 ylabel('Z position', 'FontSize', 12)
-xlabel('Time (s)', 'FontSize', 12)
+xlabel('Time (ms)', 'FontSize', 12)
 set(gca, 'FontSize',12)
 fbins = histcounts(startPos, 0:layers/nbins:layers);
 subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, fbins./sum(fbins), 'k');
@@ -155,7 +155,7 @@ set(gca, 'FontSize',12)
 %plot density histogram
 figure; subplot(1,2,1); plot(stepFire(:,1)./1000, stepFire(:,2)./(width*height), 'k.');
 ylabel('Z position', 'FontSize', 12)
-xlabel('Time (s)', 'FontSize', 12)
+xlabel('Time (ms)', 'FontSize', 12)
 set(gca, 'FontSize',12)
 subplot(1,2,2); barh(edges(1:end-1)+edges(2)/2, hbins./sum(hbins),'k')
 xlabel('Fraction of total firing events', 'FontSize', 12)
