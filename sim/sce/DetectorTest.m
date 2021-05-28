@@ -5,7 +5,7 @@ rng(42);  %Random seed for consistent results
 
 width = 2;
 height = 2;
-layers = 200;
+layers = 100;
 N = width*height*layers;
 
 tmax = 1000;
@@ -31,7 +31,7 @@ delay.dt = dt;
 
 vall = []; uall = [];
 
-K=[14];
+K=[4,8,12];
 figure(100);subplot(length(K),3,1);
 
 for kidx = 1:length(K)

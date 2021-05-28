@@ -158,9 +158,10 @@ Multiple connections from the same presynaptic neuron to the same postsynaptic n
 Two neurons may be recurrently connected, however. \color{black}
 An example of an SCE showing the connectivity structure is shown in Figure \ref{fig:column_structure}.
 \begin{figure}[!htb]
- \caption{Example SCE with dimensions 2x2x\color{red}10 (X/Y/Z)\color{black}, $\lambda$=2.5, and C=1. \color{red}A)\color{black}: SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. 
- \color{red}B)\color{black}: Connection matrix. E-E connections are green, E-I are black and \color{red}both I-E and I-I \color{black} are red. 
- \color{red}C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.\color{black}}
+ \caption{Example SCE with dimensions 2x2x\color{red}10 (X/Y/Z)\color{black}, $\lambda$=2.5, and C=1. \color{red}A) \color{black} SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. 
+ \color{red}B) \color{black} Connection matrix. E-E connections are green, E-I are black and \color{red}both I-E and I-I \color{black} are red. 
+ \color{red}The labels of the neurons used in both axes are sequentially assigned starting at the bottom (Z=0).
+ C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.\color{black}}
  \label{fig:column_structure}
  \begin{subfigure}{0.3\textwidth}
    \centering
@@ -266,19 +267,8 @@ An example of the clustering and identification is shown in Figure 2, with furth
 \color{black}
 \begin{figure}[!htb]
  \centering
- \begin{subfigure}{0.33\textwidth}
-  \centering
-  \includegraphics[width=\textwidth]{fig/2x2_firings}
- \end{subfigure}%
- \begin{subfigure}{0.33\textwidth}
-  \centering
-  \includegraphics[width=\textwidth]{fig/2x2_density_filter}
- \end{subfigure}%
- \begin{subfigure}{0.33\textwidth}
-  \centering
-  \includegraphics[width=\textwidth]{fig/2x2_wave_IDs}
- \end{subfigure}%
- \caption{Wave identification and labeling. Left: Raster plot of firing events where dots represent neuronal action potentials. 
+ \includegraphics[width=\textwidth]{fig/DetectorExample}
+ \caption{Wave identification and labeling \color{red}using an example SCE with dimensions 2x2x200 \color{black}. Left: Raster plot of firing events where dots represent neuronal action potentials. 
           Traveling waves can be seen as diagonal structures of dense firing activity. 
           Center: The clustering operation removes background spikes. 
           Right: Individual waves are labeled with unique identifiers color coded in the figure.}
@@ -468,7 +458,7 @@ For \color{red}$\lambda<2$ \color{black} we do not observe traveling waves.
 Our SCE topology (namely, the X and Y dimensions) may influence the wave speed in several ways.
 Increasing X and/or Y increases the total number of neurons, the total number of connections, and the average number of connections per neuron.
 To test these, we construct columns with topology in X/Y of $2x2, 2x3, 3x3, 3x4$ and $4x4$.
-We also tested the $1x1$ topology but foudn that it did not support traveling waves (data not shown).
+We also tested the $1x1$ topology but found that it did not support traveling waves (data not shown).
 For each topology we measure the pace and speed over $5$ randomly generated SCE (Figure \ref{fig:delay_topology}).
 We see that increasing the X and/or Y dimensions of the SCE increases the speed, and the dependence looks qualitatively similar to increasing the connection strength via $K$ or the number of connections via $\lambda$.
 
@@ -479,10 +469,10 @@ We see that increasing the X and/or Y dimensions of the SCE increases the speed,
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Topology}
 \end{figure}
 
-To separate the effect of the increased connectivity from the effect of different topology (larger X or Y increases both the total number of neurons and changes the proportion of surface neurons) we scale the $C$ parameter in equation \ref{eq:connectivity} to maintain the same average number of connections per neuron (~7) across the topologies.
+To separate the effect of the increased connectivity from the effect of different topology (larger X or Y increases both the total number of neurons and changes the proportion of surface neurons) we scale the $C$ parameter in equation \ref{eq:connectivity} to maintain the same average number of connections per neuron (\textasciitilde{}7) across the topologies.
 Results show that when separated from the increase in connectivity larger cross sections do not change the wave propagation speed (Figure \ref{fig:delay_topology_avgconn}).
 Therefore the increase in speed with cross-section seen in Figure \ref{fig:delay_topology} is due entirely to the increasing number of connections per neuron.
-Figure 5 in the SI shows additional analysis of SCE with larger cross section. 
+Figure 5 in the SI shows additional analysis of SCE with larger cross sections. 
 
 \begin{figure}[!htb]
  \caption{ Wave speed (error bars $1\sigma$) is constant as the topology changes as long as the average number of connections (~7 connections per neuron) is maintained. The largest topology is $13x13$ (169 neurons at base).}
@@ -496,7 +486,7 @@ Figure 5 in the SI shows additional analysis of SCE with larger cross section.
 \color{red}
 It is interesting to compare the speeds obtained here with previous work.
 We have placed our neurons on a unit grid and measured speed in units per millisecond.
-By assuming that our unit grid is about $20~\mu m$ \parencite{cruz2005} then our wave propagation speeds are in the range of $2-16~mm/s$.
+By assuming that our unit grid is about $20~\mu m$ (Cruz et al., 2005) then our wave propagation speeds are in the range of $2-16~mm/s$.
 This is generally slower than other computational results, but of the same order of magnitude as the experimental velocity of $5~cm/s$ reported in \parencite{Golomb1997}.
 \color{black}
 
@@ -544,8 +534,8 @@ Although there is substantial variation between SCEs we measure a consistently n
 
 We hypothesize that these preferential wave initiation sites are created by neurons with low firing thresholds that are easy to excite.
 In the Izhikevich model, inhibitory neurons can have a lower firing threshold than excitatory neurons, modeling the behavior of real inhibitory neurons in the cortex\parencite{gibson2009}\parencite{hayut2011}.
-The $b$ parameter in the Izhikevich model sets the firing threshold of the individual neurons.
-Neurons with higher $b$ parameter are easier to excite and therefore more likely to fire \color{red}(Figure \ref{fig:delay_neurondynamics}) \color{black}.
+\color{red}As we can see from figure \ref{fig:delay_neurondynamics} \color{black} the $b$ parameter in the Izhikevich model sets the firing threshold of the individual neurons.
+Neurons with higher $b$ parameter are easier to excite and therefore more likely to fire.
 Per Table \ref{tab:izzy_params} excitatory neurons all have a $b$ parameter of $0.2$, while inhibitory neurons have $b$ parameters in the range $0.2-0.25$.
 This indicates the preferential wave initiation sites could be due to low-threshold spiking (LTS) inhibitory neurons \parencite{izhikevich2003}.
 It may seem counter-intuitive that firing activity from an \underline{inhibitory} neuron would generate traveling waves.
@@ -590,7 +580,7 @@ This demonstrates that one dimensional traveling waves can emerge from fully-con
  \label{fig:delay_waves}
 \end{figure}
 
-The present case is similar to previous work (\parencite{ermentrout2001}, Figure 1) that proposed several models for traveling waves in the cortex.
+The present case is similar to previous work \color{red}that considered coupled oscillators \color{black} (\parencite{ermentrout2001}, Figure 1) that proposed several models for traveling waves in the cortex.
 The one most relevant to traveling waves in our fully-connected networks is a driving source at a spatial location that produces traveling wave patterns due to the propagation delay of action potentials.
 This is a fundamentally different type of traveling wave than a chain of spike events that spreads to neighboring neurons due to local connectivity.
 
@@ -604,13 +594,13 @@ Because of the substantial randomness in neuronal types and connections between 
 \color{red} In our model \color{black} various parameters determine traveling wave formation and propagation including the connectivity, connection strength \color{red}and \color{black} excitatory/inhibitory balance.
 Columns with local connectivity support traveling waves, consistent with other simulations and experimental studies of cortical traveling waves \color{red}\parencite{Kopell1986}\parencite{ermentrout2001}\parencite{Golomb1999} \color{black}.
 \color{red}
-The speed of these waves are influenced by connectivity, with a logarithmic dependence on connection strength that agrees with previous work \parencite{Golomb1996}\parencite{Golomb1999}.
+The speed of these waves are influenced by connectivity, with a logarithmic dependence on connection strength that is consistent with previous work \parencite{Golomb1996}\parencite{Golomb1999}.
 \color{black}
 We have also shown that  a fully-connected SCE exhibits traveling waves if the action potential propagation time depends on the inter-neuron distance. 
 \color{red}
 From the dynamics point of view, we have shown that the action potential propagation delays affect propagation speed (Figure \ref{fig:delay_speed}) but is not a determinant on whether a wave can exist (Figure \ref{fig:wave_parameters}d).
 \color{black}
-\color{red} We have also shown that \color{black} the connectivity and connection strengths influence the wave propagation speed \color{red}(Figures \ref{fig:delay_k} and \ref{fig:delay_lambda}) \color{black} through the neuron dynamics \color{red}(Figure \ref{fig:delay_neurondynamics}) \color{black}.
+\color{red} We have also shown that \color{black} the connectivity and connection strengths influence the wave propagation speed \color{red}(Figures \ref{fig:delay_k} and \ref{fig:delay_topology}) \color{black} through the neuron dynamics \color{red}(Figure \ref{fig:delay_neurondynamics}) \color{black}.
 \color{red} From the point of view of neuronal types \color{black} we have determined that preferential sites for wave initiation are due to the presence of inhibitory neurons with low spiking thresholds.
 
 Previous research into traveling waves in neuronal networks has identified parameter regions of neural-field models for which traveling waves exist \color{red}\parencite{Wilson1973}\parencite{Ermentrout1979}\color{black}. 
@@ -629,7 +619,7 @@ This means that neurons on average will receive a higher input current that, by 
 We further show that the increased number of connections per neuron is the sole mechanism behind this effect by obtaining a constant speed when keeping constant the average number of connections (Figure \ref{fig:delay_topology_avgconn}).
 By using the same system with a constant number of connections per neuron, but now using a background stimulation to all neurons, we show that the value of the connection strength beyond which traveling waves (or synchronous firing) exist is very similar to that shown in Figure \ref{fig:wave_parameters}a, independent of width of SCE (SI Figure 5).
 Moreover, the graphs of raster plots as a function of width seem to indicate that there is a value for the width at which excitations change from traveling waves to synchronous firing (SI Figure 5).
-Future work will consider whether this change represents a phase transition between traveling waves and synchronous firing.
+Future work will consider whether this change represents a phase transition between traveling waves and synchronous firing, a transition that is not uncommon to find in other systems but controlled by other intrinsic coupling parameters \parencite{ermentrout2001}\parencite{Senk2020}.
 \color{black}
 
 Other research \parencite{keane2015} has shown that complex spatial patterns emerge from two-dimensional networks of leaky-integrate-and-fire neurons when the excitation and inhibition are balanced.
@@ -637,10 +627,10 @@ In that work, when excitation dominates then only plane waves were observed inst
 Similarly, in one dimension we have found that traveling waves dominate the firing activity when the $P_{exc}$ grows close to $1$ (Figure \ref{fig:wave_parameters}).
 Both studies show that traveling waves can become the dominant spatial pattern in excitatory networks.
 
-We have found that low-threshold-spiking inhibitory neurons can determine the origin point of traveling waves from a uniform background stimulus \color{red}(Figure \ref{fig:lts_inhibit})\color{black}.
+We have found that low-threshold-spiking inhibitory neurons can determine the origin point of traveling waves when using a uniform background stimulus \color{red}(Figure \ref{fig:lts_inhibit})\color{black}.
 \color{red}
-Parameter variations in the Izhikevich model \parencite{izhikevich2003} create found low-threshold spiking found in some inhibitory neurons\parencite{gibson2009}\parencite{hayut2011}, leading to post-inhibitory rebound spiking in the connected excitatory neurons \parencite{ascoli2010}.
-Our result is fundamentally different than previous studies of oscillatory behavior in populations of coupled excitatory and inhibitory neurons \parencite{Golomb1996}\parencite{Golomb1999} as that work considered homogeneous populations with highly isotropic connectivity.
+Parameter variations in the Izhikevich model \parencite{izhikevich2003} create low-threshold spiking found in some inhibitory neurons \parencite{gibson2009}\parencite{hayut2011}, leading to post-inhibitory rebound spiking in the connected excitatory neurons \parencite{ascoli2010}.
+Our result is fundamentally different than previous studies of oscillatory behavior in populations of coupled excitatory and inhibitory neurons \parencite{Golomb1996}\parencite{Golomb1999} as that work considered homogeneous populations with isotropic connectivity.
 \color{black}
 Our result implies that, when no stimulus is applied, a biological neuronal network might have an equilibrium dynamics governed by traveling waves initiated by low-threshold-spiking inhibitory neurons.
 An applied stimulus could then disturb the network from this dynamic equilibrium state.
