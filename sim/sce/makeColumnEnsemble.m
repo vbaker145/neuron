@@ -1,6 +1,6 @@
 function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, plotAx)
 
-doplot = 1;
+doplot = 0;
 
 
 width = structure.width;
@@ -34,10 +34,10 @@ displacement = structure.displacement;
 percentExc = connectivity.percentExc;
 connType = connectivity.connType;
 lambda = connectivity.lambda;
-if isfield(connectivity.C)
+if isfield(connectivity,'C')
     C_const = connectivity.C;
 else
-    C_const = 1.0;
+   C_const = 0.5; 
 end
 maxLength = connectivity.maxLength;
 connStrength = connectivity.connStrength;
@@ -114,7 +114,7 @@ for jj=1:length(x)
         if dis > 0
             %cp = rand() < exp(-(dis/lambda)^2);
             if connType == 1 
-                cp = rand() < 1.0*exp(-(dis/lambda)^2);
+                cp = rand() < C_const *exp(-(dis/lambda)^2);
                 if dis>maxLength
                    cp = 0; 
                 end
