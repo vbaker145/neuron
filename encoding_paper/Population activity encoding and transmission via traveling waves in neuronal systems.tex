@@ -119,7 +119,7 @@ These minicolumns are aligned perpendicular to the pia and can be hundreds of mi
 Although their relevance to cognition and function is still being debated \parencite{horton2005}\parencite{buxhoeveden2002}, it is possible that they can sustain traveling waves.
 
 Here we consider how quasi one-dimensional neuronal structures could encode and transmit population activity via traveling waves.
-We perform computational experiments using a quasi one-dimensional model we cal a Small Columnar Ensemble (SCE), first reported in , with a network of Izhikevich neurons \parencite{izhikevich2003} using the same local connectivity model as \parencite{maass2002}.
+We perform computational experiments using a quasi one-dimensional model we call a Small Columnar Ensemble (SCE), first reported in , with a network of Izhikevich neurons \parencite{izhikevich2003} using the same local connectivity model as \parencite{maass2002}.
 We have previously shown that this model supports stimulus-evoked traveling waves across a variety of model parameters.
 We now demonstrate that input from a population of neurons, simulated as Poisson spike trains, can evoke traveling waves in our quasi one-dimensional system.
 The number of waves per second that span the SCE, which we term the wave arrival rate, increases as the average firing rate of the input pool of neurons is increased.
@@ -189,7 +189,7 @@ The parameters used here (see Table \ref{tab:izzy_params}) are based on those sp
   d & 8-$\mathcal{U}(0,6)$& 2 \\
  \end{tabular}
 \end{table}
-For solving equation (2) numerically we use the modified Euler method from \parencite{izhikevich2003} with a time step of $0.2 ms$ except were noted. 
+For solving equation (2) numerically we use the modified Euler method from \parencite{izhikevich2003} with a time step of $0.1 ms$ except were noted. 
 
 A crucial element to evoke traveling waves in neuronal systems is the existence of time delays between the creation of a presynaptic action potential and the arrival of that spike to a target neuron. 
 For this, we use distance-dependent time delays for the propagation of a spike from neuron $i$ to neuron $j$ of $\tau_{ij} = \kappa  D(i,j)$. 
@@ -197,8 +197,7 @@ For this, we use distance-dependent time delays for the propagation of a spike f
 The constant of proportionality $\kappa$ ranges from $0$ to $4$.
 When $\kappa=0$ the action potential excites the post-synaptic neuron on the succeeding simulation time step.
  
-
-The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons $I_i$ and external stimuli $I_{i,e}$ applied to the system. 
+The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons $I_i$ and external stimuli $I_s$ applied to the system. 
 The neuron-neuron incoming current $I_i$ into neuron $i$ is given by:
 \begin{align}
  I_i(t) &= \sum_{j\ne i} \sum_{t^\prime_j} S_{ij}  \Theta(t-t^\prime_j-\tau_{ij})e^{-(\frac{t-t^\prime_j-\tau_{ij}}{\sigma_s})^2}
@@ -212,8 +211,16 @@ The $S_{ij}$ represent the connection strengths between presynaptic neuron $j$ a
   S_{ij}^{inhibitory} &= K \times \mathcal{U}\{-1,0 \} 
  \end{split}
 \end{align}
-
 where $K$ is a parameter that modulates the strength of connections, with $K=1$ corresponding to the original model in \parencite{izhikevich2003}. 
+
+The external stimulus $I_s$ in our experiments comes from a population of 50 neurons that emit spikes according to independent Poisson processes characterized by a common average firing rate.
+Each neuron $a$ in the population is connected to each neuron $b$ in the bottom layer of the SCE with probability $P_{ab} = 1/2$ and connection strength $\Gamma_{ab}=\mathcal{U}(1,2)$.
+\begin{align}\label{eq:populationstim}
+ \begin{split}
+  I_s^{excitatory} {a,b}&= M \times \mathcal{U}\{0,1 \} \\
+  I_k^{inhibitory} {a,b} &= \frac{2}{5} M \times \mathcal{U}\{0,1 \}
+ \end{split}
+\end{align}
 
 \FloatBarrier
 
@@ -231,6 +238,13 @@ where $K$ is a parameter that modulates the strength of connections, with $K=1$ 
  \includegraphics[width=\textwidth]{fig/SCE_2x2_FRE}
  \caption{The SCE encodes the input population firing rate into the wave arrival rate. }
  \label{fig:sce_activation_function}
+\end{figure}
+
+\begin{figure}[!htb]
+ \centering
+ \includegraphics[width=\textwidth]{fig/OutputWaveRate_4x4_3p5separations}
+ \caption{An ensemble of 4 coupled SCEs shows less noise in the activation function. }
+ \label{fig:sce_4x4_coupled_activation_function}
 \end{figure}
 
 \section{Discussion}

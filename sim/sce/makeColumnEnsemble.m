@@ -1,6 +1,6 @@
 function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, plotAx)
 
-doplot = 0;
+doplot = 1;
 
 
 width = structure.width;
