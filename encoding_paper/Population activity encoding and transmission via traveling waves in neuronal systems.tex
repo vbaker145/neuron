@@ -102,7 +102,7 @@ Individual neurons in the brain are tuned to fire upon specific events such as v
 However, even neurons that are tuned to a specific stimulus show variability in their firing rate and timing when the same stimulus is repeatedly applied \parencite{Georgopoulos1982}\parencite{Newsome1989}.
 This indicates that information in the brain is represented by the firing dynamics of populations of many neurons.
 This population coding may take the form of variations in the average firing rate of the neurons in the population (rate coding) or variations in the synchronization between spikes (temporal coding).
-The temporal and rate coding ma also have a functional relation, i.e. through Hebbian learning \parencite{Basawaraj2019}.
+The temporal and rate coding may also have a functional relation, i.e. through Hebbian learning \parencite{Basawaraj2019}.
 Various methods of decoding the information in these population dynamics have been studied \parencite{Deneve1999}\parencite{Xu2019}, and population dynamics are incorporated into modern theories of neural computation \parencite{Pitkow2017}\parencite{Nadeau2020}.
 
 Traveling waves of neuronal activation have been observed in the cortex as reviewed in \parencite{Muller2018}.
@@ -161,6 +161,8 @@ An example of an SCE showing the connectivity structure is shown in Figure \ref{
 \end{figure}
 We use open boundary conditions, so neurons near the ends of the SCE will have fewer connections than those in the middle. 
 
+\FloatBarrier
+
 We model the firing dynamics of each neuron using the Izhikevich model \parencite{izhikevich2003} that consists of a two-dimensional model of two coupled differential equations given by:
 \begin{align}
  \begin{split}
@@ -193,38 +195,54 @@ For solving equation (2) numerically we use the modified Euler method from \pare
 
 A crucial element to evoke traveling waves in neuronal systems is the existence of time delays between the creation of a presynaptic action potential and the arrival of that spike to a target neuron. 
 For this, we use distance-dependent time delays for the propagation of a spike from neuron $i$ to neuron $j$ of $\tau_{ij} = \kappa  D(i,j)$. 
- 
 The constant of proportionality $\kappa$ ranges from $0$ to $4$.
 When $\kappa=0$ the action potential excites the post-synaptic neuron on the succeeding simulation time step.
  
-The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons $I_i$ and external stimuli $I_s$ applied to the system. 
-The neuron-neuron incoming current $I_i$ into neuron $i$ is given by:
+The current I in equation (2) includes the sum of all incoming stimuli into neuron $i$ from other neurons in the SCE $I_i^{SCE}$ and external stimuli $I_i^{stimulus}$ applied to the system. 
+The SCE neuron-neuron incoming current $I_i^{SCE}$ into neuron $i$ is given by:
 \begin{align}
- I_i(t) &= \sum_{j\ne i} \sum_{t^\prime_j} S_{ij}  \Theta(t-t^\prime_j-\tau_{ij})e^{-(\frac{t-t^\prime_j-\tau_{ij}}{\sigma_s})^2}
+ \begin{split}
+  I_i(t)^{SCE} &= \sum_{j\ne i} \sum_{t^\prime_j} S_{ij}  \Theta(t-t^\prime_j-\tau_{ij})e^{-(\frac{t-t^\prime_j-\tau_{ij}}{\sigma_s})^2}\\
+  S_{ij}^{excitatory} &= K^{SCE} \times \mathcal{U}\{0,0.5 \} \\
+  S_{ij}^{inhibitory} &= K^{SCE} \times \mathcal{U}\{-1,0 \} 
+ \end{split}
 \end{align}
 
 where $t'_j$ are the firing times of neuron $j$, $\Theta$ is the Heaviside step function, and the exponential factor models an exponentially decaying synapse response with a time constant of $\sigma_s = 4 ms$. 
-The $S_{ij}$ represent the connection strengths between presynaptic neuron $j$ and postsynaptic neuron $i$ given by
+The $S_{ij}$ represent the connection strengths between presynaptic neuron $j$ and postsynaptic neuron $j$ where $K^{SCE}$ is a parameter that modulates the strength of connections, with $K^{SCE}=1$ corresponding to the original model in \parencite{izhikevich2003}. 
+
+We wish to understand how our SCE may encode and transmit population activity.
+Individual neurons in the cortex fire irregularly \parencite{Maimon2009}, and the spike timing of a single neuron is generally characterized by a Poisson process with some instantaneous firing rate \parencite{Gerstein1964}.
+The external stimulus $I_i^{stim}$ in our simulations is generated from a population of 50 neurons that emit spikes according to independent Poisson processes characterized by a common instantaneous firing rate.
+Each neuron $j$ in the input population of Poisson neurons is connected to each neuron $i$ in the bottom layer (all SCE neurons with Z=0) of the SCE with probability $P_{ab} = 1/2$.
+The stimulus applied to the bottom layer is given by:
 \begin{align}
  \begin{split}
-  S_{ij}^{excitatory} &= K \times \mathcal{U}\{0,0.5 \} \\
-  S_{ij}^{inhibitory} &= K \times \mathcal{U}\{-1,0 \} 
+  I_i(t)^{stim} &= \sum_{i,j} \sum_{t^\prime_j} S_{ij}  \Theta(t-t^\prime_j)e^{-(\frac{t-t^\prime_j}{\sigma_e})^2}\\
+  S_{ij}^{excitatory} &= K^{stim} \times \mathcal{U}\{0,0.5 \} \text{ if i,j connected}\\
+  S_{ij}^{inhibitory} &= K^{stim} \times \mathcal{U}\{-1,0 \} \text{ if i,j connected}\\
+  S_{ij} &= 0 \text{ if i,j not connected}
  \end{split}
 \end{align}
-where $K$ is a parameter that modulates the strength of connections, with $K=1$ corresponding to the original model in \parencite{izhikevich2003}. 
-
-The external stimulus $I_s$ in our experiments comes from a population of 50 neurons that emit spikes according to independent Poisson processes characterized by a common average firing rate.
-Each neuron $a$ in the population is connected to each neuron $b$ in the bottom layer of the SCE with probability $P_{ab} = 1/2$ and connection strength $\Gamma_{ab}=\mathcal{U}(1,2)$.
-\begin{align}\label{eq:populationstim}
- \begin{split}
-  I_s^{excitatory} {a,b}&= M \times \mathcal{U}\{0,1 \} \\
-  I_k^{inhibitory} {a,b} &= \frac{2}{5} M \times \mathcal{U}\{0,1 \}
- \end{split}
-\end{align}
+where $t^\prime_j$ are the spike times of Poisson neuron $j$, $\sigma_e=2\ ms$ is a synaptic response time constant as described above, and $K^{stim}$ is an overall connection strength weight as described above.
 
 \FloatBarrier
 
 \section{Results}
+We performed a series of computational experiments to determine how our SCE can encode and transmit population activity.
+We first verified that our population of Poisson neurons can invoke traveling waves in a single SCE.
+The wave rate in the single SCE was found to be proportional to the instantaneous firing rate of the population of Poisson neurons.
+The relationship between population activity and wave rate resembled the activation functions of both single neurons and populations of neurons, so we termed this relationship the activation function of the SCE.
+The activation function of the SCE showed significant variation across trials with randomly generated stimuli, indicating that the population rate encoding was not reliable.
+We then created SCE with larger cross-section (X and Y extents) with varying topologies and observed that an ensemble of multiple SCE with loose coupling between them reduces the variation in the activation function.
+
+\subsection*{Traveling waves are evoked by population activity}
+Our first configuration is an SCE with dimensions $2x2x40$ (X/Y/Z).
+The SCE parameters are $C=0.5$, $\lambda=2.5$, $\kappa=0.1$, $K^{SCE}=24$ and $K^{stim}=6$.
+The other parameters are fixed for all experiments as described in Methods.
+
+We stimulated the SCE using several instantaneous firing rates for the input population.
+Traveling waves are evoked in the SCE for higher firing rates (Figure \ref{fig:sce_raster}).
 
 \begin{figure}[!htb]
  \centering
@@ -233,6 +251,19 @@ Each neuron $a$ in the population is connected to each neuron $b$ in the bottom 
  \label{fig:sce_raster}
 \end{figure}
 
+\FloatBarrier
+
+\subsection*{The SCE possesses an activation function}
+We stimulated the SCE with instantaneous firing rates from 1 to 21 spikes/second, with 100 random inputs created for each firing rate.
+The resulting waves rates are shown in Figure \ref{fig:sce_activation_function}.
+The mean wave rate showed a clear trend that is similar to a logarithmic curve. 
+It also resembled the population activation rate shown in \cite{Trappenberg2010} Eq. 3.43 for the population response to slowly varying inputs:
+\begin{align}
+ g(x) &= \frac{1}{t^{ref}-\tau \log{(1-\frac{1}{\tau x})}}
+\end{align}
+We therefore consider our SCE to have an nonlinear activation function when stimulated by a  population of neurons.
+This demonstrated that the SCE can be said to encode the population rate into the wave rate in a analogous manner to which single neurons and populations of neurons encode their stimulus strength into their firing rate.
+
 \begin{figure}[!htb]
  \centering
  \includegraphics[width=\textwidth]{fig/SCE_2x2_FRE}
@@ -240,12 +271,30 @@ Each neuron $a$ in the population is connected to each neuron $b$ in the bottom 
  \label{fig:sce_activation_function}
 \end{figure}
 
+Although the mean wave rates showed a clear trend, the trial-to-trial wave rates were highly variable. 
+This indicates that our SCE would not reliably encode population rate into wave rate.
+
+\FloatBarrier
+
+\subsection*{Adding redundant columns to the SCE can reduce variability in the activation function}
+Like our SCE, individual neurons also have variable firing responses to identical stimuli.
+This variability is one of the key motivations for the population activity theories of information encoding in the cortex.
+We next followed a similar approach and investigated the activation function of a population of multiple redundant SCE.
+Several populations of SCE were generated with different distance (and therefore connectivity), between the individual SCE.
+We found that a population of four SCE, with the individual SCE separated by $2\lambda$, produced a much smoother activation function.
+A population of four widely separated SCE with no connectivity between them was still highly variable.
+
+
 \begin{figure}[!htb]
  \centering
- \includegraphics[width=\textwidth]{fig/OutputWaveRate_4x4_3p5separations}
- \caption{An ensemble of 4 coupled SCEs shows less noise in the activation function. }
+ \includegraphics[width=\textwidth]{fig/OneLambdaFourLambda}
+ \caption{Activation functions of a population of 4 SCEs. 
+	    A: When the SCE are spaced $2\lambda$ apart the activation function shows greatly reduced variability. 
+	    B: When the SCE are widely spaced with no connectivity between the SCE there is still substantial variability in the activation function.}
  \label{fig:sce_4x4_coupled_activation_function}
 \end{figure}
+
+\FloatBarrier
 
 \section{Discussion}
 

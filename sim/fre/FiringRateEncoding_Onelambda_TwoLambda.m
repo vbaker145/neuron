@@ -35,7 +35,7 @@ structure.displacement = 0;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 7, structure);
 colSep = [colStructBase.connectivity.lambda + colStructBase.structure.width, ...
-          2*colStructBase.connectivity.lambda + colStructBase.structure.width];
+          4*colStructBase.connectivity.lambda + colStructBase.structure.width];
 
 %colSep = structure.width;
 colStructs = [];
@@ -103,12 +103,22 @@ end %End loop over trial
 
 m = mean(npks,3);
 v = std(npks,0,3);
-figure(20); errorbar(firingRates,m(:,1), v(:,1),'ko', 'MarkerFaceColor', 'k');
-for jj=2:size(m,2)
-    hold on; errorbar(firingRates,m(:,jj), v(:,jj),'ko');
-end
-xlim([0 22]); ylim([0 10]);
 
+h = figure(20);
+set(h, 'Position', [680   388   560   525]); 
+
+subplot(2,1,1); 
+errorbar(firingRates,m(:,1), v(:,1),'ko', 'MarkerFaceColor', 'k');
+xlim([0 22]); ylim([0 11]);
+text(1, 10, 'A', 'FontSize', 20)
+set(gca,'XTickLabel',[]);
+ylabel('Waves/second')
+set(gca,'FontSize', 14);
+
+subplot(2,1,2);
+errorbar(firingRates,m(:,2), v(:,2),'ko', 'MarkerFaceColor', 'k');
+xlim([0 22]); ylim([0 11]);
+text(1, 10, 'B', 'FontSize', 20)
 xlabel('Input firing rate (spikes/second)');
-ylabel('Wave arrival rate (waves/second)')
+ylabel('Waves/second')
 set(gca,'FontSize', 14);
