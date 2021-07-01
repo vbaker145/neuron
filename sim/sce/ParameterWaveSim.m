@@ -15,7 +15,7 @@ t = 0:dt:tmax;
 structure.width = width;
 structure.height = height;
 structure.layers = layers;
-structure.displacement = 1.0;
+structure.displacement = 0;
 
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
