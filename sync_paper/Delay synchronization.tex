@@ -139,9 +139,6 @@ We use a morphology and connectivity model inspired by \parencite{maass2002},inc
 To incorporate elements of a real brain, we consider a model with substantial randomness in both individual neurons and connections between neurons while also considering  distance-dependent time delays in the propagation of action potentials.
 
 Among our main findings we determine parameters in our model that allow for the generation of traveling waves in our quasi one-dimensional systems. 
-\color{red}
-We find that a purely one-dimensional version of our model does not support traveling waves, in contrast with previous, more homogenous models. 
-\color{black}
 These traveling waves exhibit properties such as spontaneous creation from a random background stimulus, annihilation of colliding waves, and a wave velocity that is determined by both the propagation speed of the action potential and the neuron dynamics.
 Traveling waves are present in both locally-connected and fully-connected systems. 
 The traveling waves in fully connected systems are dependent upon the action potential propagation speed, while traveling waves can propagate in locally-connected systems even when action potential propagation is instantaneous.
@@ -256,9 +253,9 @@ One of the uses of this stimulus is to measure the speed of the traveling wave i
 
 For every simulation we record all of the spikes from all neurons. 
 \color{red}
-We visualize the spikes in spike raster plots (see Figure \ref{fig:wave_analysis} and Figure \ref{fig:sigma_raster} for examples).
-Our interest is in traveling waves in the Z direction, so we plot the spikes according to the Z position of the neuron.
-There are multiple neurons at each Z position that will contribute to the spike raster plot at that coordinate.
+We visualize the spikes in spike raster plots (e.g. Figure \ref{fig:sigma_raster} ).
+Because here we focus on traveling waves in the Z direction, so we plot the spikes according to the Z position of the neurons.
+As a consequence, at each Z position there are multiple neurons that could contribute to the spike raster plot at that Z coordinate (e.g. 4 neurons for the X=2, Y=2 SCE case).
 \color{black}
 To automatically identify waves we perform a spatial clustering operation to this data to identify spatiotemporal regions identified by high firing density. 
 The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
@@ -456,7 +453,7 @@ For $\lambda<2$  we do not observe traveling waves.
 Our SCE topology (namely, the X and Y dimensions) may influence the wave speed in several ways.
 Increasing X and/or Y increases the total number of neurons, the total number of connections, and the average number of connections per neuron.
 To test these, we construct columns with topology in \color{red}XxY\color{black} of $2x2, 2x3, 3x3, 3x4$ and $4x4$.
-We also tested the $1x1$ topology but found that it did not support traveling waves (data not shown).
+We also tested the $1x1$ topology but found that it did not support traveling waves (SI Figure 6).
 For each topology we measure the pace and speed over $5$ randomly generated SCE (Figure \ref{fig:delay_topology}).
 We see that increasing the X and/or Y dimensions of the SCE increases the speed, and the dependence looks qualitatively similar to increasing the connection strength via $K$ or the number of connections via $\lambda$.
 
@@ -484,7 +481,7 @@ Figure 5 in the SI shows additional analysis of SCE with larger cross sections.
 It is interesting to compare the speeds obtained here with previous work.
 We have placed our neurons on a unit grid and measured speed in units per millisecond.
 By assuming that our unit grid is about $20~\mu m$ (Cruz et al., 2005) then our wave propagation speeds are in the range of $2-16~mm/s$.
-This is generally slower than other computational results, but of the same order of magnitude as the experimental velocity of \color{red}$50~mm/s$ \color{black} reported in \parencite{Golomb1997}.
+This is generally slower than other computational results, but the mid to upper range is of the same order of magnitude as the experimental velocity of \color{red}$50~mm/s$ \color{black} reported in \parencite{Golomb1997}.
 
 \FloatBarrier
 

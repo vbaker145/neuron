@@ -50,7 +50,7 @@
 \clearpage
 
 \subsection*{Wave detection and labeling}
-\color{red}
+
 Our automated wave detection and labeling process must find and characterize waves under the varying conditions set by our simulation parameters.
 The wave extent, wave speed, and the number of background spikes all depend upon the simulation parameters.
 To validate the detection and labeling process we visually inspected the results for a variety of simulations.
@@ -62,11 +62,11 @@ Sample visualizations for varying values of $K$ are shown in Figure \ref{fig:det
    \includegraphics[width=\textwidth]{fig/DetectorTest}
 \end{figure}
 \FloatBarrier
-\color{black}
+
 
 \clearpage
 
-\color{red}
+
 \subsection*{Additional SCE statistics}
 \begin{figure}[!htb]
  \caption{Distribution of (A) number of post-synaptic connections per neuron and (B) delay time. Data was taken over 100 realizations of a 2x2x50 SCE, $\lambda=2.5$, $\kappa=1$.  } 
@@ -76,7 +76,7 @@ Sample visualizations for varying values of $K$ are shown in Figure \ref{fig:det
  \end{tabular}
 \end{figure}
  \FloatBarrier
-\color{black}
+
  
 \clearpage
 \subsection*{Example FIE and FFE plots}
@@ -92,7 +92,7 @@ Sample visualizations for varying values of $K$ are shown in Figure \ref{fig:det
 \FloatBarrier
 \clearpage
 \subsection*{Effect of long connections}
-\color{red}
+
 The distance-dependent connectivity allows for a small probability of connections between neurons that are very far apart.
 To understand if these few long-range connections were significant, we recreate Figure 4 of the main text but prune all connections with length $>5\ (2\lambda)$.
 We find that removing long-range connections does not significantly alter the formation and propagation of traveling waves (Figure \ref{fig:wave_parameters_nolongconnections}).
@@ -114,12 +114,50 @@ With the average number of connections held constant, the sub-columns within the
 We remark that as the X and Y extents increase, the behavior seems to change from traveling waves to more synchronized firing activity.
 This behavior as a function of width suggests that the system dynamics transition from supporting traveling waves to a system that exhibits global synchrony.
 \begin{figure}[!htb]
- \caption{ Spike raster plots for complete SCE (A) and one-dimensional sub-colmns (B) for different topologies show similar firing patterns in the sub-columns regardless  of topology. 
+ \caption{ Spike raster plots for complete SCE (A) and one-dimensional sub-columns (B) for different topologies show similar firing patterns in the sub-columns regardless  of topology. 
            The wave firing fraction (C) measured within the sub-columns show the same dependence on $K$ regardless of the topology.}
    \includegraphics[width=0.75\textwidth]{fig/WaveFractionVsThick}
    \label{fig:LargeSCESubcolumns}
 \end{figure}
 \FloatBarrier
 
+\clearpage
+\color{red}
+\subsection*{Purely one-dimensional model}
+We establish purely one-dimensional systems in our model for comparison to previous work with purely one-dimensional systems.
+We start with the SCE described in Section 3.1 for measuring wave speed: a 2x2x50 (XxYxZ) SCE with model parameters at the reference point $\Sigma_v$. 
+While previous work with this SCE measured the speed of the waves, here we determine the existence of traveling waves based on whether the neurons in the top layer of the SCE fire.
+The baseline quasi one-dimensional SCE creates $74$ traveling waves in $100$ trials, where each trial is a random draw on all randomized parameters in the model and stimulus.
+An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}A.
+
+We create a purely one-dimensional version of this SCE with X=1 and Y=1 and all other model parameters at $\Sigma_v$.
+No traveling waves are observed in this SCE in $100$ trials. 
+An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}B.
+We then modify this purely one-dimensional SCE by increasing $\lambda$ from $2.5$ to $4$ and increasing $K$ from $2$4 to $30$.
+These parameters represent the highest connectivity and connection strength tested in our quasi one-dimensional SCE.
+We still do not observe any traveling waves in $100$ trials of this SCE with enhanced connectivity and connection strength.
+An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}C.
+
+Finally we look to remove the random elements of our model to make it more comparable to previous work.
+We set $C=1.0$ to create a more uniform and isotropic connectivity between the neurons.
+We set $P_{exc}=1$ so that all neurons are excitatory with no inhibitory neurons at random locations.
+We remove all random factors from the Izhikevich model parameters a, b, c and d (Table 1).
+All neurons therefore have identical dynamics.
+With this more uniform model we observe $98$ traveling waves in $100$ trials, reproducing previous results that have found traveling waves in purely one-dimensional networks.
+An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}D.
+Although we have removed most variation from this SCE, the two trials with no waves are not unexpected as the stimulus is still randomized and the connectivity is still probabilistic (see Equation 1).
+
+\begin{figure}[!htb]
+ \caption{ Example raster plots of the SCE used for comparison to previous work in purely one-dimensional systems.
+           A) The 2x2x50 SCE with model parameters at $\Sigma_v$ supports traveling waves along the entire SCE. 
+	   B) The 1x1x50 version of the same SCE does not exhibit traveling waves.
+	   C) Even with $K$ increased from $24$ to $30$ and $\lambda$ increased from $2.5$ to $4$, the 1x1x50 SCE still does not support traveling waves.
+	   D) Once the random parameters are removed, the 1x1 SCE does support traveling waves. }
+   \includegraphics[width=\textwidth]{fig/OneDimensionalComparison_RasterPlots}
+   \label{fig:OneDimensionalRasterPlots}
+\end{figure}
+\FloatBarrier
+
 \color{black}
+
 \end{document}
