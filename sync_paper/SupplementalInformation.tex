@@ -127,15 +127,15 @@ This behavior as a function of width suggests that the system dynamics transitio
 We establish purely one-dimensional systems in our model for comparison to previous work with purely one-dimensional systems.
 We start with the SCE described in Section 3.1 for measuring wave speed: a 2x2x50 (XxYxZ) SCE with model parameters at the reference point $\Sigma_v$. 
 While previous work with this SCE measured the speed of the waves, here we determine the existence of traveling waves based on whether the neurons in the top layer of the SCE fire.
-The baseline quasi one-dimensional SCE creates $74$ traveling waves in $100$ trials, where each trial is a random draw on all randomized parameters in the model and stimulus.
+\textbf{The baseline quasi one-dimensional SCE creates 74 traveling waves in 100 trials}, where each trial is a random draw on all randomized parameters in the model and stimulus.
 An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}A.
 
 We create a purely one-dimensional version of this SCE with X=1 and Y=1 and all other model parameters at $\Sigma_v$.
-No traveling waves are observed in this SCE in $100$ trials. 
+\textbf{No traveling waves are observed in this SCE in 100 trials}. 
 An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}B.
 We then modify this purely one-dimensional SCE by increasing $\lambda$ from $2.5$ to $4$ and increasing $K$ from $2$4 to $30$.
 These parameters represent the highest connectivity and connection strength tested in our quasi one-dimensional SCE.
-We still do not observe any traveling waves in $100$ trials of this SCE with enhanced connectivity and connection strength.
+\textbf{We still do not observe any traveling waves in 100 trials} of this SCE with enhanced connectivity and connection strength.
 An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}C.
 
 Finally we look to remove the random elements of our model to make it more comparable to previous work.
@@ -143,7 +143,7 @@ We set $C=1.0$ to create a more uniform and isotropic connectivity between the n
 We set $P_{exc}=1$ so that all neurons are excitatory with no inhibitory neurons at random locations.
 We remove all random factors from the Izhikevich model parameters a, b, c and d (Table 1).
 All neurons therefore have identical dynamics.
-With this more uniform model we observe $98$ traveling waves in $100$ trials, reproducing previous results that have found traveling waves in purely one-dimensional networks.
+\textbf{With this more uniform model we observe 98 traveling waves in 100 trials}, reproducing previous results that have found traveling waves in purely one-dimensional networks.
 An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}D.
 Although we have removed most variation from this SCE, the two trials with no waves are not unexpected as the stimulus is still randomized and the connectivity is still probabilistic (see Equation 1).
 
