@@ -1,0 +1,100 @@
+%%
+%% This is file `example.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% drexel-thesis.dtx  (with options: `example')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2010 W. Trevor King
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.3 of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3 or later is part of all distributions of LaTeX version
+%% 2003/06/01 or later.
+%% 
+%% See drexel-thesis.pdf for details.
+\documentclass[subfig,blackref,approvalform]{drexel-thesis}
+
+%% Enter the appropriate information here
+\author{Vincent J. Baker}
+\title{Traveling waves in low-dimensional neuronal systems}
+\DUTmonth{September}
+\DUTyear{2021}
+\degree{Doctor of Philosophy}
+\advisor{Luis Cruz, Ph. D.}
+\copyrighttext{\copyrighttextCCBYSA}
+
+\usepackage[super,sort&compress]{natbib} % fancy citation extensions
+\bibliographystyle{unsrtnat}
+
+\usepackage{fancyvrb} % nicer verbatim handling
+\DefineShortVerb{\|}  % \verb+TEXT+  ->  |TEXT|
+
+\renewenvironment{preamble}{% look, we're clobbering an environment!
+  What preamble?\begingroup\color{white}}{\endgroup}
+
+\usepackage[english]{babel} % English blindtext
+\usepackage{blindtext} % macros for producing dummy output
+\addto\captionsenglish{\DUTnames}
+
+%%Begin packages used in previous papers
+\usepackage{amsmath}
+\usepackage{times}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage{rotating}
+\usepackage{bbm}
+\usepackage{latexsym}
+
+\begin{document}
+\begin{DUTpreamble} % "DUT" because original preamble was clobbered.
+
+\begin{dedications}
+We're in \iffinal{final}{draft} mode!
+
+\Blindtext[3]
+\end{dedications}
+
+\begin{acknowledgments}
+\Blindtext[3]
+\end{acknowledgments}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{abstract}
+\Blindtext[3]
+\end{abstract}
+\end{DUTpreamble}
+
+\begin{thesis}
+\include{c1/chapter1}
+\end{thesis}
+
+\bibliography{thesis}
+
+%\appendix
+%\include{}
+
+\begin{vita}
+\Blindtext[3]
+\end{vita}
+
+\end{document}
+\endinput
+%%
+%% End of file `example.tex'.
