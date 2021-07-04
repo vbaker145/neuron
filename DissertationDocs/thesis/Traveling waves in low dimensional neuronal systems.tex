@@ -58,6 +58,7 @@
 \usepackage{rotating}
 \usepackage{bbm}
 \usepackage{latexsym}
+\usepackage{placeins}
 
 \begin{document}
 \begin{DUTpreamble} % "DUT" because original preamble was clobbered.
@@ -77,12 +78,27 @@ We're in \iffinal{final}{draft} mode!
 \listoffigures
 
 \begin{abstract}
-\Blindtext[3]
+Traveling waves of neuronal activity in the cortex have been observed in vivo.
+These traveling waves have been correlated to various features of observed cortical dynamics including spike timing variability and correlated fluctuations in neuron membrane potential.
+Although traveling waves are typically studied as either strictly one-dimensional or two-dimensional excitations, here we investigate the conditions for the existence of quasi  one-dimensional traveling waves that could be sustainable in parts of the brain containing cortical minicolumns.
+For that, we explore a quasi  one-dimensional network of heterogeneous neurons with a biologically influenced computational model of neuron dynamics and connectivity.
+We find that background stimulus reliably evokes traveling waves in networks with local connectivity between neurons.
+We also observe traveling waves in fully-connected networks when a model for action potential propagation speed is incorporated.
+The biological properties of the neurons influence the generation and propagation of the traveling waves. 
+Our quasi  one-dimensional model is not only useful for studying the basic properties of traveling waves in neuronal networks, but it also provides a simplified representation of possible wave propagation in columnar or minicolumnar networks found in the cortex.
+
 \end{abstract}
 \end{DUTpreamble}
 
 \begin{thesis}
-\include{c1/chapter1}
+\pdfbookmark[-1]{Main Matter}{Main Matter}
+
+\include{c1/Introduction}
+\include{c2/Methods}
+\include{c3/quasi1D}
+\include{c4/lowdim_systems}
+\include{c5/EncodingTransport}
+\include{c6/Conclusion}
 \end{thesis}
 
 \bibliography{thesis}
