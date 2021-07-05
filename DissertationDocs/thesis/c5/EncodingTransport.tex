@@ -21,7 +21,7 @@
 %% 2003/06/01 or later.
 %% 
 
-\chapter{Neuron population activity encoding and transport via traveling waves in neuronal systems }
+\chapter{Popultion activity encoding }
 
 Individual neurons in the brain are tuned to fire upon specific events such as visual stimuli of a particular type \citep{Hubel1962} .
 However, even neurons that are tuned to a specific stimulus show variability in their firing rate and timing when the same stimulus is repeatedly applied \citep{Georgopoulos1982}\citep{Newsome1989}.
@@ -29,19 +29,6 @@ This indicates that information in the brain is represented by the firing dynami
 This population coding may take the form of variations in the average firing rate of the neurons in the population (rate coding) or variations in the synchronization between spikes (temporal coding).
 The temporal and rate coding may also have a functional relation, i.e. through Hebbian learning \citep{Basawaraj2019}.
 Various methods of decoding the information in these population dynamics have been studied \citep{Deneve1999}\citep{Xu2019}, and population dynamics are incorporated into modern theories of neural computation \citep{Pitkow2017}\citep{Nadeau2020}.
-
-Traveling waves of neuronal activation have been observed in the cortex as reviewed in \citet{Muller2018}.
-Various functional roles have been proposed for these traveling waves including spatiotemporal processing in the visual cortex \citep{wu2008}\citep{Muller2014}, place field coordination in the hippocampus \citep{lubernov2009}, and memory consolidation during sleep \citep{Dickey2021}.
-Traveling waves have been shown to carry information in the  motor cortex \citep{Rubino2006} and visual cortex \citep{Besserve2015}.
-These waves can provide synchronous activations of a population to serve functions such as gating perception of low-contrast images \citep{Davis2020}.
-In addition to extensive observations in vivo, traveling waves have also been observed in neuronal network simulations at the mesoscopic level in simple one-dimensional systems \citep{Wilson1973}\citep{Golomb1999} and two-dimensional sheets \citep{keane2015}.
-Traveling waves have also been studied in large-scale simulations of the entire brain \citep{Roberts2019}.
-
-Previous studies have used one-dimensional structures largely for their computational or analytic simplicity. 
-Consideration of a quasi one-dimensional system may seem as an unnecessary complication, but there is no a priori reason that quasi one-dimensional traveling waves may not be found in vivo.
-Of interest, there are regions of the brain where there are what seem to be quasi one-dimensional structures \citep{mountcastle1997}\citep{Cruz2009} typically called micro- or minicolumns. 
-These minicolumns are aligned perpendicular to the pia and can be hundreds of microns long.  
-Although their relevance to cognition and function is still being debated \citep{horton2005}\citep{buxhoeveden2002}, it is possible that they can sustain traveling waves.
 
 Here we consider how quasi one-dimensional neuronal structures could encode and transmit population activity via traveling waves.
 We perform computational experiments using a quasi one-dimensional model we call a Small Columnar Ensemble (SCE), first reported in , with a network of Izhikevich neurons \citep{izhikevich2003} using the same local connectivity model as \citep{maass2002}.
@@ -62,7 +49,24 @@ The relationship between population activity and wave rate resembled the activat
 The activation function of the SCE showed significant variation across trials with randomly generated stimuli, indicating that the population rate encoding was not reliable.
 We then created SCE with larger cross-section (X and Y extents) with varying topologies and observed that an ensemble of multiple SCE with loose coupling between them reduces the variation in the activation function.
 
-\subsection{Traveling waves are evoked by population activity}
+\section{Population activity representation}
+We wish to understand how our SCE may encode and transmit population activity.
+Individual neurons in the cortex fire irregularly \citep{Maimon2009}, and the spike timing of a single neuron is generally characterized by a Poisson process with some instantaneous firing rate \citep{Gerstein1964}.
+The external stimulus $I_i^{stim}$ in our simulations is generated from a population of 50 neurons that emit spikes according to independent Poisson processes characterized by a common instantaneous firing rate.
+Each neuron $j$ in the input population of Poisson neurons is connected to each neuron $i$ in the bottom layer (all SCE neurons with Z=0) of the SCE with probability $P_{ab} = 1/2$.
+The stimulus applied to the bottom layer is given by:
+\begin{align}
+ \begin{split}
+  I_i(t)^{stim} &= \sum_{i,j} \sum_{t^\prime_j} S_{ij}  \Theta(t-t^\prime_j)e^{-(\frac{t-t^\prime_j}{\sigma_e})^2}\\
+  S_{ij}^{excitatory} &= K^{stim} \times \mathcal{U}\{0,0.5 \} \text{ if i,j connected}\\
+  S_{ij}^{inhibitory} &= K^{stim} \times \mathcal{U}\{-1,0 \} \text{ if i,j connected}\\
+  S_{ij} &= 0 \text{ if i,j not connected}
+ \end{split}
+\end{align}
+where $t^\prime_j$ are the spike times of Poisson neuron $j$, $\sigma_e=2\ ms$ is a synaptic response time constant as described above, and $K^{stim}$ is an overall connection strength weight as described above.
+
+
+\section{Traveling waves are evoked by population activity}
 Our first configuration is an SCE with dimensions $2x2x40$ (X/Y/Z).
 The SCE parameters are $C=0.5$, $\lambda=2.5$, $\kappa=0.1$, $K^{SCE}=24$ and $K^{stim}=6$.
 The other parameters are fixed for all experiments as described in Methods.
@@ -79,7 +83,7 @@ Traveling waves are evoked in the SCE for higher firing rates (Figure \ref{fig:s
 
 \FloatBarrier
 
-\subsection{The SCE possesses an activation function}
+\section{The SCE possesses an activation function}
 We stimulated the SCE with instantaneous firing rates from 1 to 21 spikes/second, with 100 random inputs created for each firing rate.
 The resulting waves rates are shown in Figure \ref{fig:sce_activation_function}.
 The mean wave rate showed a clear trend that is similar to a logarithmic curve. 
@@ -103,7 +107,7 @@ This indicates that our SCE would not reliably encode population rate into wave 
 
 \FloatBarrier
 
-\subsection{Adding redundant columns to the SCE can reduce variability in the activation function}
+\section{Adding redundant columns to the SCE can reduce variability in the activation function}
 Like our SCE, individual neurons also have variable firing responses to identical stimuli.
 This variability is one of the key motivations for the population activity theories of information encoding in the cortex.
 We next followed a similar approach and investigated the activation function of a population of multiple redundant SCE.

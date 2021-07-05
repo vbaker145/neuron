@@ -21,7 +21,35 @@
 %% 2003/06/01 or later.
 %% 
 
-\chapter{Traveling waves in quasi one-dimensional neuronal minicolumns}
+\chapter{Quasi 1-D Minicolumns}
+Studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \citep{reimer2010}\citep{keane2015}\citep{Townsend2018}\citep{Golomb1997}\citep{Qi2015}. 
+This is to be expected as this is the geometry of the system on which they are observed, and \citep{Wilson1973} provide an anatomical argument for focusing on such structure. 
+Traveling waves in one-dimensional neuronal systems have been previously explored using several theoretical methods.
+In the literature on neural fields \citep{Ermentrout1979}\citep{Folias2012} and coupled oscillators \citep{Kopell1986}\citep{Williams1997} isotropic networks of homogeneous neurons with symmetric synaptic coupling give rise to field models which exhibit traveling wave solutions for certain parameter values. 
+One-dimensional waves have also been observed in simulations using firing rate neurons \citep{Roxin2005}, integrate-and-fire neurons \citep{Bressloff1997}\citep{Golomb1999} and Hodgkin-Huxley neurons \citep{Golomb1997}.
+\citet{Senk2020} used populations of both rate neurons and integrate-and-fire neurons and developed a method to translate parameters between the two different models.
+These simulations again use homogeneous neuronal populations in networks that are invariant to spatial translation, resulting naturally in periodic spatio-temporal patterns.
+These purely one-dimensional systems may not be robust to realistic variation in neuron properties, connectivity and noise.
+This is exemplified in \citet{Senk2020} where traveling waves are only observed for certain parameter values, and \citet{Strogatz1991} where the stability of systems of coupled oscillators can be radically altered by including infinitesimal noise.
+Our current work explores traveling waves in quasi-one-dimensional networks with substantial randomness in both individual neurons (randomly selecting type and randomizing dynamical parameters), connectivity between neurons, and stimulus to the neurons.
+
+Previous studies have used one-dimensional structures largely for their computational or analytic simplicity. 
+Consideration of a quasi one-dimensional system may seem as an unnecessary complication, but there is no a priori reason that quasi one-dimensional traveling waves may not be found in vivo.
+Of interest, there are regions of the brain where there are what seem to be quasi  one-dimensional structures \citep{buxhoeveden2002}\citep{mountcastle1997} typically called micro- or minicolumns. 
+These minicolumns are aligned perpendicular to the pia and can be hundreds of microns long.  
+Although their relevance to cognition and function is still being debated \citep{horton2005}\citep{Cruz2009}\citep{buxhoeveden2002}, it is possible that they can sustain traveling waves.
+
+To address this possibility, here we investigate the conditions under which traveling waves can exist on quasi one-dimensional systems, and their fundamental properties and dynamics.  
+Inspired by minicolumns, our systems consist of thin (few neuron) and long (~100 neuron) networks of locally connected neurons placed on a three-dimensional lattice.  
+We model the neuron dynamics using the Izhikevich model \citep{izhikevich2003} that allow us to explore more complex neuron dynamics than typically afforded by integrate-and-fire models \citep{keane2015}\citep{Senk2020} while also providing a distribution of neuron dynamical parameters that mimics the type and variety of neurons observed in the mammalian cortex.
+We use a morphology and connectivity model inspired by \citet{maass2002},incorporating a local connectivity model \citep{Levy2012}\citep{Pyle2017}\citep{Fino2011}.
+To incorporate elements of a real brain, we consider a model with substantial randomness in both individual neurons and connections between neurons while also considering  distance-dependent time delays in the propagation of action potentials.
+
+Among our main findings we determine parameters in our model that allow for the generation of traveling waves in our quasi one-dimensional systems. 
+These traveling waves exhibit properties such as spontaneous creation from a random background stimulus, annihilation of colliding waves, and a wave velocity that is determined by both the propagation speed of the action potential and the neuron dynamics.
+Traveling waves are present in both locally-connected and fully-connected systems. 
+The traveling waves in fully connected systems are dependent upon the action potential propagation speed, while traveling waves can propagate in locally-connected systems even when action potential propagation is instantaneous.
+
 The results are organized as a series of computational experiments on traveling waves.
 We first determine which parameterizations of our model support traveling waves.
 Stronger and more numerous local connections between neurons are found to facilitate the formation of traveling wave patters.
@@ -31,7 +59,7 @@ Low-threshold-spiking inhibitory neurons are shown to consistently generate trav
 The low-threshold-spiking inhibitory neurons also suppress traveling waves that originate from other points in the SCE.
 Finally, we examine fully-connected networks and observe that traveling wave patterns can still emerge provided the action potential propagation speed is slow enough.
 
-\section{Conditions for the existence of traveling waves in an SCE} \label{sub:waves}
+\section{Existence of 1-D waves} \label{sub:waves}
 We first explore which parameterizations of our model will support traveling waves.
 We detect the waves as described in Methods, and then use the wave firing fraction metric to determine for which parameter values our model will produce traveling waves.
 We fix the connection normalization constant $C$ in equation \ref{eq:connectivity} to $0.5$ and we fix the stimulus strength $M$ in equation \ref{eq:randomstim} to $5$.
