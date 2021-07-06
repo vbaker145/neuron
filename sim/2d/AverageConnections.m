@@ -35,7 +35,7 @@ nTrials = 20;
 tConn = []; tDelay = [];
 for jj=1:nTrials
     %Make column
-    [a,b,c,d, S, delays, ecn] = makeColumnParameters(structure, connectivity, delay);
+    [a,b,c,d, S, delays, ecn] = makeColumnParametersPBC(structure, connectivity, delay);
     [ac(jj) ae(jj) ai(jj) aei(jj) tc] = SCE_connection_statistics(S);
     tConn = [tConn tc];
     

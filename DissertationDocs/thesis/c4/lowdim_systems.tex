@@ -28,6 +28,19 @@ Computational 2D systems: \citet{keane2015}\citet{Spreizer2019}
 
 Bio 2D waves: \citet{huang2004}\citet{Townsend2018}
 
+A small example quasi 2-D sheet is shown in Figure \ref{fig:sheet_structure}.
+In this small example the periodic boundary conditions are easily seen in the connection matrix.
+
+\begin{figure}[!htb]
+ \caption{Example 2-D sheet with dimensions X=20, Y=20, Z=2, $\lambda$=2.5, and C=0.5. A)  Sheet showing connections between neurons as lines colored using a color scale that indicates the connection length. 
+ B)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. 
+ C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.}
+ \label{fig:sheet_structure}
+ \subfloat[][]{\includegraphics[width=\textwidth]{fig/Sheet_Structure_A}}
+ \subfloat[][]{\includegraphics[width=0.4\textwidth]{fig/Sheet_Structure_B}}
+ \subfloat[][]{\includegraphics[width=0.4\textwidth]{fig/Sheet_Structure_C}}
+\end{figure}
+
 The distribution of post-synaptic connections and delay times are shown in Figure \ref{fig:connection_delay_distrbution_2D} for an example quasi 2-D sheet.
 \begin{figure}[!htb]
  \caption{Distribution of (A) number of post-synaptic connections per neuron and (B) delay time. Data was taken over 100 realizations of an X=100, Y=100, Z=2 system with $\lambda=2.5$, $\kappa=1$.  } 
