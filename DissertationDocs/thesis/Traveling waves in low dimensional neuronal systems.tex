@@ -32,8 +32,10 @@
 \advisor{Luis Cruz, Ph. D.}
 \copyrighttext{\copyrighttextCCBYSA}
 
-\usepackage[super,sort&compress]{natbib} % fancy citation extensions
+\usepackage[super,sort&compress,comma]{natbib} % fancy citation extensions
 \bibliographystyle{unsrtnat}
+%\bibliographystyle{ieeetr}
+\usepackage{notoccite}
 
 \usepackage{fancyvrb} % nicer verbatim handling
 \DefineShortVerb{\|}  % \verb+TEXT+  ->  |TEXT|
@@ -60,6 +62,7 @@
 \usepackage{latexsym}
 \usepackage{placeins}
 
+
 \begin{document}
 \begin{DUTpreamble} % "DUT" because original preamble was clobbered.
 
@@ -79,14 +82,13 @@ We're in \iffinal{final}{draft} mode!
 
 \begin{abstract}
 Traveling waves of neuronal activity have been observed in many locations within the mammalian cortex.
-These traveling waves have been correlated to various features of observed cortical dynamics including spike timing variability and correlated fluctuations in neuron membrane potential.
-Computer simulations of such traveling waves are typically performed in strictly one-dimensional or two-dimensional excitations with homogeneous neurons and isotropic connectivity. 
-Here we investigate the conditions for the existence of quasi one-dimensional traveling waves that could be sustainable in parts of the brain containing cortical minicolumns.
+Several functional roles have been proposed for these traveling waves including visual and audio processing, information transfer between cortical areas and memory consolidation.
+Computer simulations of such traveling waves are typically performed in strictly one-dimensional or two-dimensional systems using homogeneous neurons with isotropic connectivity. 
 Here we perform a computational investigation of traveling waves in more diverse systems with variations in neuron parameters and connectivity.
 We explore quasi one-dimensional and quasi two-dimensional networks of heterogeneous neurons with a biologically influenced computational model of neuron dynamics and connectivity.
-We find that a uniform random stimulus reliably evokes traveling waves in networks with local connectivity between neurons.
-We also propose a role for traveling waves in quasi one-dimensional systems as an encoding and transport mechanism for neural population activity.
-
+Our simulations reveal the model parameters for which traveling waves are supported, as well as how these parameters affect wave characteristics such as speed.
+We find that a uniform random stimulus reliably evokes traveling waves in networks with local connectivity between neurons, with low-threshold-spiking inhibitory neurons influencing the wave initiation sites.
+We extend previous work suggesting that traveling waves mediate information transfer by demonstrating that traveling waves can act as an encoding and transport mechanism for neural population activity.
 
 \end{abstract}
 \end{DUTpreamble}

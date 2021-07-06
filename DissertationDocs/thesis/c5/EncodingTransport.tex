@@ -53,7 +53,7 @@ We then created SCE with larger cross-section (X and Y extents) with varying top
 We wish to understand how our SCE may encode and transmit population activity.
 Individual neurons in the cortex fire irregularly \citep{Maimon2009}, and the spike timing of a single neuron is generally characterized by a Poisson process with some instantaneous firing rate \citep{Gerstein1964}.
 The external stimulus $I_i^{stim}$ in our simulations is generated from a population of 50 neurons that emit spikes according to independent Poisson processes characterized by a common instantaneous firing rate.
-Each neuron $j$ in the input population of Poisson neurons is connected to each neuron $i$ in the bottom layer (all SCE neurons with Z=0) of the SCE with probability $P_{ab} = 1/2$.
+Each neuron $j$ in the input population of Poisson neurons is connected to each neuron $i$ in the bottom layer (all SCE neurons with Z=0) of the SCE with probability $P_{ij} = 1/2$.
 The stimulus applied to the bottom layer is given by:
 \begin{align}
  \begin{split}

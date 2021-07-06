@@ -24,22 +24,92 @@
 \chapter{Introduction}
 Connected neurons that fire sequentially can stimulate firings from neighboring neurons, creating a traveling wave of neuron spikes. 
 These traveling waves of neuronal activation have been observed in the cortex as reviewed in \citet{Muller2018}.
-Trveling waves have been observed in mammalian brains \citep{Muller2018}\citep{reimer2010}  as well as in vitro \citep{wu2008}\citep{huang2004}\citep{Golomb1999}, and subsequently have been reproduced in silico \citep{keane2015}\citep{Senk2020}\citep{Golomb1996}\citep{ermentrout2001}. 
-Various functional roles have been proposed for these traveling waves including spatiotemporal processing in the visual cortex \citep{wu2008}\citep{Muller2014}, place field coordination in the hippocampus \citep{lubernov2009}, and memory consolidation during sleep \citep{Dickey2021}.
+Trveling waves have been observed in mammalian brains \citep{Golomb1997}\citep{reimer2010}\citep{Sato2012}  as well as in vitro \citep{wu2008}\citep{huang2004}\citep{Golomb1999}, and subsequently have been reproduced in silico \citep{keane2015}\citep{Senk2020}\citep{Golomb1996}\citep{ermentrout2001}. 
+Various functional roles have been proposed for these traveling waves including spatiotemporal processing in the visual cortex \citep{Chemla2019}\citep{Muller2014}, place field coordination in the hippocampus \citep{lubernov2009}, and memory consolidation during sleep \citep{Dickey2021}.
 Traveling waves have been shown to carry information in the  motor cortex \citep{Rubino2006} and visual cortex \citep{Besserve2015}.
 These waves can provide synchronous activations of a population to serve functions such as gating perception of low-contrast images \citep{Davis2020}.
-In addition to extensive observations in vivo, traveling waves have also been observed in neuronal network simulations at the mesoscopic level in simple one-dimensional systems \citep{Wilson1973}\citep{Golomb1999} and two-dimensional sheets \citep{keane2015}.
+In addition to extensive observations in vivo, traveling waves have also been observed in neuronal network simulations at the mesoscopic level in simple one-dimensional systems \citep{Wilson1973}\citep{Golomb1999} and two-dimensional sheets \citep{keane2015}\citep{Pyle2017}\citep{Townsend2018}.
 Traveling waves have also been studied in large-scale simulations of the entire brain \citep{Roberts2019}.
 
-Neuronal traveling waves are not uniquely defined as they can exist at widely differing frequency and scale lengths.  
-In the sleep and anesthetized states,slow and large-scale wave activity has been recorded \citep{Muller2018}. 
-Traveling waves have been detected in local-field potentials measured with electrodes \citep{Rubino2006}\citep{sanes1993}\citep{Riehle2013}.
-Local-area traveling waves in the awake cortex have been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \citep{wu2008}\citep{Shoham1999}\citep{Xu2007}\citep{Ferezou2006}.  
-Similarly, traveling waves also differ by the manner in which they are created. 
-Both spontaneously occurring waves and stimulus-evoked \citep{reimer2010} waves have been observed in the visual and auditory cortex. 
-Computational and mathematical modeling of traveling waves in a variety of models have shown many of the characteristics observed experimentally \citep{ermentrout2001}\citep{keane2015}\citep{gibson2009}.
+
+\section{Biological results}
+Neuronal traveling waves can exist at widely differing frequency and scale lengths.  
+In the sleep and anesthetized states, slow and large-scale wave activity has been recorded using EEG\citep{Muller2018}. 
+Mesoscopic traveling waves have been detected in local-field potentials measured with electrodes \citep{Rubino2006}\citep{sanes1993}\citep{Riehle2013}.
+Mesoscopic traveling waves have also been observed using recent advances in optical imaging techniques using voltage-sensitive dyes \citep{wu2008}\citep{Shoham1999}\citep{Xu2007}\citep{Ferezou2006}.  
+
+Traveling waves also differ by the manner in which they are created. 
+Both spontaneously occurring waves \citep{Davis2020}\citep{huang2004} and stimulus-evoked \citep{Nauhaus2009}\citep{reimer2010}\citep{Muller2014} waves have been observed in the visual and auditory cortex. 
+
+\section{Large-scale approximate models}
+Traveling waves have been studied in high-level approximate models of neuronal systems.
+Two of the most relevant approaches have used mean-field approximations and coupled oscillators as behavioral representations of large collections of neurons.
+These approaches provide computational tractability and insight into large-scale behaviors but can not fully capture the complex behavior of coupled systems with the wide variety of neuronal, synaptic and dendritic dynamics found in the brain.
+
+Mean-field models attempt to reduce the complex activity within a large population of neurons to a set of mean-field equations.
+One of the earliest uses of a mean-field approaches was developed by Amari\citep{Amari1972}\citep{Amari1977}.
+Wilson and Cowan\citet{Wilson1973} created one of the earliest models that showed traveling waves. 
+They developed equations for neuronal activity as a function of position and time in a one-dimensional system and showed that there exist traveling waves solutions of those equations.
+This approach was further expanded \citep{Ermentrout1979}\citep{Sompolinsky1988}\citep{Vreeswijk1998}\citep{Faugeras2009} to neural field models incorporating varying degrees of heterogeneity in the neuron dynamics and connectivity models.
+Traveling waves emerge as solutions of most of these mean field equations.
+This is not surprising since the topology and connectivity of the underlying neurons are assumed to be regular and isotropic, naturally leading to spatially periodic potentials with traveling wave solutions similar to crystal lattices in solid-state physics.
+
+Large systems of neurons have also been studied using coupled oscillator models.
+Kopell and Ermentrout \citep{Kopell1986} considered chains of weakly coupled oscillators with symmetric coupling and found stable wave solutions of their equations.
+The coupled oscillator model is also applied to pulse-coupled oscillators \citep{Ermentrout1990}\citep{Mirollo1990}. 
+Ermentrout and Kleinfeld \citep{ermentrout2001} separated wave-like behavior into three categories: delayed excitations from a single oscillator, propagating pulses in an excitable network and phase-locked weakly coupled oscillators.
+We consider the traveling waves observed in our work to belong to the first two classes.
+
+\section{Spiking neuron models}
+Neurons are complex biological assemblies, and neuron membrane potentials are driven by electrochemical processes.
+When the internal neuron dynamics are disturbed far enough from equilibrium there is a sudden depolarization of the membrane potential, followed by an equally sudden return to the equilibrium state.
+This disturbance, termed a neuron spike, results in an electrochemical signal that is sent down the neuron's axis and transmitted to many other neurons through synaptic connections to the post-synaptic neuron's dendrites.
+The axons, synapses and dendrites all have their own rich electrochemical dynamics that determine the post-synaptic neurons response to the spike.
+We review computational models of the neuronal system that are relevant to traveling waves of neuronal activations.
+
+Biophysical modeling of the neuronal systems largely began with Hodgkin and Huxley's work on the giant squid axon \citep{Hodgkin1952}.
+Their equivalent electrical model included three ionic currents and the resulting set of four differential equations is still used in neuron modeling today.
+The Hodgkin-Huxley type of model has been further extended to include more ion channels\citep{Wilson1999}, resulting in more complex models that can better replicate spiking patterns observed in biological neurons.
+This type of model captures the underlying electrochemical processes within the neuron but is computationally challenging, so simpler models must be used when modeling structures of many neurons.
+
+Simplified models of the neuron have been developed to represent the fundamental neural processes in a mode feasible for simulating systems of many neurons.
+McCulloch and Pitts\citep{McCulloch1943} developed one of the earliest simplified models of a neuron:
+\begin{align}
+  \begin{split}
+    g(x_1,x_2...x_n) &= g(\boldmath{x})=\sum_{i=1}^n x_i \\
+    y = f(g(x)) &= 1 \text{ if } g(x)>\Theta \\
+		&= 0 \text{ if } g(x)<\Theta \\
+  \end{split}
+\end{align}
+This simple model includes several features used in many computational models.
+It sums the values from many input neurons \textbf{x}, applies an \textit{activation function} f, and provides an all-or-nothing response based on a threshold $\Theta$.
+
+Many phenomenological studies use the \textit{leaky integrate-and-fire} (LIF) model\citep{Abbott1999}. which may be stated as in (\citet{Trappenberg2010} Section 3.1.1):
+\begin{align}
+  \begin{split}
+    \tau_m \frac{dv(t)}{dt} &= -(v(t)-E_L) + RI(t) \\
+    \displaystyle\lim_{\delta \rightarrow 0} v(t^f + \delta) &= v_{res}\\ 
+    I(t) &= \sum_j \sum_{t^f_j}w_j\alpha(t-t^f_j)
+  \end{split}
+\end{align}
+where $v(t)$ is the membrane voltage of a neuron, $\tau_m$ is the membrane voltage time constant, $E_L$ is the equilibrium membrane voltage, $R$ is the membrane resistance, and
+$I$ is the current due to the sum of spikes from presynaptic neurons $j$ at times $t^f_j$ transformed by a synapse response function $\alpha$ and weighted by synaptic conductances $w_j$.
+The second line is a reset that is performed when the membrane voltage reaches the spike threshold and fires a spike at time $t^f$.
+The LIF model captures the all-or-nothing spiking behavior of biological neurons as well as the tendency of a neuron that is slightly perturbed from equilibrium to return to equilibrium,
+The synaptic weights in the LIF model can capture the stochastic connectivity of biological neurons, and the model can represent excitatory and inhibitory presynaptic neurons through the signs of the $w_j$.
+
+There is a third class of neuron models that seeks to represent the dynamics of neurons without explicitly calculating the ionic currents.
+These models use principles of dynamical systems in phase space such as equilibrium, limit cycles and bifurcation to represent neuron dynamics with simplified models.
+For our work we choose the Izhikevich model\citep{izhikevich2003} which is fully described in Methods.
+The Izhikevich model can replicate neuron behaviors not captured in the LIF model including variable spiking rates, intrinsic bursting, chattering, post-inhibitory rebound spiking amd low-threshold spiking.
+The original presentation of the model also includes stochastic parameter values to represent the variation in dynamics seen in cortical neurons.
+
+\section{Traveling waves in simulation}
+Traveling waves have previously been shown in simulations of neurons.
 
 
+\section{Thesis Organization}
+The remainder of this thesis is organized into chapters on Methods, quasi one-dimensional systems, quasi two-dimensional systems, a chapter on the encoding and transport of population activity via traveling waves, and a conclusion.
 
 \endinput
 %%
