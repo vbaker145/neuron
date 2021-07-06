@@ -8,8 +8,8 @@ AvgConnections = [4, 6.9; 6, 9.4; 9, 12.8; 12, 15.2; 16, 17.9 ]; %From previous 
 %Quadratic fit to predict average # conenctions for a given cross section
 qc = polyfit(AvgConnections(:,1), AvgConnections(:,2), 2);
 
-width = 6;
-height = 6;
+width = 2;
+height = 2;
 layers = 50;
 N = width*height*layers;
 
