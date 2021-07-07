@@ -33,7 +33,7 @@ for tt=0:dt:tmax
    fev = f(fwin,:);
    subplot(1,2,1);
    plot(x(fev(:,2)), y(fev(:,2)), 'k.');
-   
+   axis([min(pos.x(:)) max(pos.x(:)) min(pos.y(:)) max(pos.y(:))])
    
    %Plot membrane voltage
    ts = floor(tt/sim_dt)+1;

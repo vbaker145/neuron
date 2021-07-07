@@ -1,6 +1,8 @@
-function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, plotAx)
+function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, plotAx, doplot)
 
-doplot = 1;
+if nargin<5
+    doplot = 0;
+end
 
 
 width = structure.width;

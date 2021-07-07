@@ -25,6 +25,8 @@ for tt=1:length(frameTimes)
    fev = f(fwin,:);
    subplot(nrows,ncols,tt);
    plot(x(fev(:,2)), y(fev(:,2)), 'k.');
+   axis([min(pos.x(:)) max(pos.x(:)) min(pos.y(:)) max(pos.y(:))])
+   
    text(max(x(:))/10, 0.1*max(y(:)), ['T=' num2str(frameTimes(tt)) ], 'FontSize', 12, 'BackgroundColor', 'White')
    set(gca, 'XTick', []);
    set(gca, 'YTick', []);
