@@ -59,6 +59,83 @@ Low-threshold-spiking inhibitory neurons are shown to consistently generate trav
 The low-threshold-spiking inhibitory neurons also suppress traveling waves that originate from other points in the SCE.
 Finally, we examine fully-connected networks and observe that traveling wave patterns can still emerge provided the action potential propagation speed is slow enough.
 
+\section{Minicolumn structure}
+We use open boundary conditions, so neurons near the ends of the SCE will have fewer connections than those in the middle.
+An example of an SCE showing the connectivity structure is shown in Figure \ref{fig:column_structure}.
+\begin{figure}[!htb]
+ \caption{Example SCE with dimensions 2x2x10 (XxYxZ), $\lambda$=2.5, and C=1. A)  SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. 
+ B)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. 
+ The labels of the neurons used in both axes are sequentially assigned starting at the bottom (Z=0).
+ C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.}
+ \label{fig:column_structure}
+ \subfloat[][]{\includegraphics[height=60mm]{fig/column_structure_A}}
+ \subfloat[][]{\includegraphics[height=60mm]{fig/column_structure_B}}
+ \subfloat[][]{\includegraphics[width=\textwidth]{fig/column_structure_C}}
+\end{figure}
+
+A crucial element in neuronal systems is the existence of time delays between the creation of a presynaptic action potential and the arrival of that spike to a target neuron. 
+We use distance-dependent time delays for the propagation of a spike from neuron $i$ to neuron $j$ of $\tau_{ij} = \kappa  D(i,j)$. 
+The constant of proportionality $\kappa$ ranges from $0$ to $4$.
+When $\kappa=0$ the action potential excites the post-synaptic neuron on the succeeding simulation time step.
+ 
+The distribution of post-synaptic connections and delay times are shown in Figure \ref{fig:connection_delay_distrbution} for an example minicolumn.
+\begin{figure}[!htb]
+ \caption{Distribution of (A) number of post-synaptic connections per neuron and (B) delay time. Data was taken over 100 realizations of a 2x2x50 SCE, $\lambda=2.5$, $\kappa=1$.  } 
+ \begin{tabular}{c}
+     \includegraphics[width=\textwidth]{fig/ConnectionNumberDistribution} \\
+     \includegraphics[width=\textwidth]{fig/DelayDistribution} 
+ \end{tabular}
+ \label{fig:connection_delay_distrbution}
+\end{figure}
+ \FloatBarrier
+ 
+ For every simulation we record all of the spikes from all neurons. 
+We visualize the spikes in spike raster plots (e.g. Figure \ref{fig:sigma_raster} ).
+Because here we focus on traveling waves in the Z direction, we plot the spikes according to the Z position of the neurons.
+As a consequence, at each Z position there are multiple neurons that could contribute to the spike raster plot at that Z coordinate (e.g. 4 neurons for the X=2, Y=2 SCE case).
+
+To automatically identify waves we perform a spatial clustering operation to this data to identify spatiotemporal regions identified by high firing density. 
+The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
+Each cluster $C(t,z)$ has a time $t$ and position $z$.
+This clustering removes random background firing activity. 
+The waves are identified using a plane sweep algorithm that proceeds along the dimension of simulation time and applies wave labels to clusters such that all clusters with the same label are part of the same wave.
+When a new cluster $C(t,z)$ is encountered, the algorithm associates $C(t,z)$ with any existing wave if the existing wave has a cluster $C(t_c,z_c)$ within $40 ms$ and $6$ units of the new cluster.
+If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the first cluster.
+
+An example of the clustering and identification is shown in Figure 2, with further illustration in SI Figure 1.
+\begin{figure}[!htb]
+ \centering
+ \includegraphics[width=\textwidth]{fig/DetectorExample}
+ \caption{Wave identification and labeling using an example SCE with dimensions 2x2x200 . Left: Raster plot of firing events where dots represent neuronal action potentials. 
+          Traveling waves can be seen as diagonal structures of dense firing activity. 
+          Center: The clustering operation removes background spikes. 
+          Right: Individual waves are labeled with unique identifiers color coded in the figure.}
+ \label{fig:wave_analysis}
+\end{figure}
+
+Our wave detection and analysis approach must remain valid across a range of model parameters. 
+We show sample visualizations for varying values of $K$ in Figure \ref{fig:detector_test}.
+This detector test demonstrates that our detection and analysis method detects and labels traveling waves of various lengths even in a noisy background.
+\begin{figure}[!htb]
+ \caption{The clustering and wave labeling process. Spike raster plot (left), filtered clusters (middle) and labeled waves (right, each color is a unique wave) are shown for SCE with different values of $K$. }
+ \label{fig:detector_test}
+ \centering
+   \includegraphics[width=\textwidth]{fig/DetectorTest}
+\end{figure}
+
+\FloatBarrier
+Once identified and labeled, we measure wave propagation speeds and wave initiation locations. 
+We also measure the "wave firing fraction" defined as the fraction of spikes that are associated with the labeled traveling wave (total number of spikes found within the waves divided by number of spikes in the simulation). 
+
+Our exploration of the behavior of traveling waves in an SCE involves testing properties of these waves as a function of the different parameters of our model.
+For determining existence of traveling waves we use a $2x2x100$ SCE  with background stimulation (Eq \ref{eq:randomstim}) and vary parameters around a neighborhood of the reference point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ that we have determined can sustain traveling waves.
+To measure wave propagation speed we use a $2x2x50$ SCE with  a step stimulus applied to the lowest layers of the SCE and adjust our reference point to be $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
+This reference point was selected after inspecting the SCE behavior under a wide range of parameter values.
+The increase in $K$ is required when using the step stimulus because the higher layers of the SCE do not receive any stimulus.
+This requires stronger connections so that the traveling wave can elicit spikes from neurons resting at equilibrium.
+
+\FloatBarrier
+
 \section{Existence of 1-D waves} \label{sub:waves}
 We first explore which parameterizations of our model will support traveling waves.
 We detect the waves as described in Methods, and then use the wave firing fraction metric to determine for which parameter values our model will produce traveling waves.
