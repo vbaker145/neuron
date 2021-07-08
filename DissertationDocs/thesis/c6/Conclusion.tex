@@ -22,71 +22,69 @@
 %% 
 
 \chapter{Conclusion}
-\section{A Section Heading}
-The following sectioning commands are available:
-\begin{quote}
- part \\
- chapter \\
- section \\
- subsection \\
- subsubsection \\
- paragraph \\
- subparagraph
-\end{quote}
 
-\subsection{natbib}
-You can cite your references with |natbib|'s |\citet| and |\citep|
-macros.  See
-\href{http://www.ctan.org/tex-archive/macros/latex/contrib/natbib/}
-{the natbib manual} for details.
+Here we have demonstrated that a biologically influenced model of a small quasi one-dimensional columnar ensemble  can support traveling waves. 
+Our model considers a wide variety of neuronal types using local connectivity and distance-dependent time delays.
+Because of the substantial randomness in neuronal types and connections between neurons, we did not observe traveling waves in the purely one-dimensional ($X=1,Y=1$) version of our model, 
+in contrast to previous work that considered traveling waves in homogeneous neuronal populations in strictly one-dimensional systems. 
 
-Here we have a text citation \citet{Golomb1996} followed by a
-parenthetical citation\citep{Golomb1996}.
+In our model various parameters determine traveling wave formation and propagation including the connectivity, connection strength and excitatory/inhibitory balance.
+Columns with local connectivity support traveling waves, consistent with other simulations and experimental studies of cortical traveling waves \citep{Kopell1986}\citep{ermentrout2001}\citep{Golomb1999} .
+The speed of these waves are influenced by connectivity, with a logarithmic dependence on connection strength that is consistent with previous work \citep{Golomb1996}\citep{Golomb1999}.
 
-\subsubsection{Tables and Figures}
-\begin{table}
-  \begin{center}
-  \begin{tabular}{r@{.}l r@{.}l r@{.}l}
-    \multicolumn{2}{c}{Time (s)} &
-      \multicolumn{2}{c}{John Henry (m)} &
-      \multicolumn{2}{c}{Steam drill (m)} \\
-    0&0 & 0&0 & 0&0 \\
-    10&0 & 4&3 & 3&75 \\
-    30&0 & 11&9 & 10&1 \\
-    \ldots
-  \end{tabular}
-  \caption{A table float.} % low caption allowed with floatrow
-%% Note the strange |r@{.}l| notation in the |\tabular| column
-%% definition.  This allows for numbers aligned at the decimal point
-%% (see \href{http://www.stat.unipg.it/tex-man/ltx-68.html}{here}).
-%%
-%% |\multicolumn{num_cols}{alignment}{contents}| allows the headings
-%% to span the pre- and post-decimal columns.
-  \end{center}
-\end{table}
-\Blindtext[2]
-\begin{figure}
-  \caption{A figure float. \blindtext} % high caption allowed with floatrow
-  \begin{center}
-    \includegraphics[width=0.4\textwidth]{drexel-logo}
-  \end{center}
-\end{figure}
+We have also shown that  a fully-connected SCE exhibits traveling waves if the action potential propagation time depends on the inter-neuron distance. 
+From the dynamics point of view, we have shown that the action potential propagation delays affect propagation speed (Figure \ref{fig:delay_speed}) but is not a determinant on whether a wave can exist 
+(Figure \ref{fig:wave_parameters}d).
+We have also shown that  the connectivity and connection strengths influence the wave propagation speed (Figures \ref{fig:delay_k} and \ref{fig:delay_topology}) 
+through the neuron dynamics (Figure \ref{fig:delay_neurondynamics}) .
+From the point of view of neuronal types  we have determined that preferential sites for wave initiation are due to the presence of inhibitory neurons with low spiking thresholds.
 
-\begin{figure}
-  \begin{center}
-    \subfloat[][]{%
-      \includegraphics[width=0.2\textwidth]{drexel-logo}%
-      \label{fig:sub-a}}
-    \subfloat[][]{%
-      \includegraphics[width=0.2\textwidth]{drexel-logo}%
-      \label{fig:sub-b}}
-    \caption{(a) One subfig float. (b) Another subfig float.%
-      \label{fig:both}}
-  \end{center}
-\end{figure}
-You can reference the subfig floats individually (\ref{fig:sub-a}) or
-together (\ref{fig:both}).
+Previous research into traveling waves in neuronal networks has identified parameter regions of neural-field models for which traveling waves exist \citep{Wilson1973}\citep{Ermentrout1979}. 
+In these models critical values of model parameters are usually revealed by a linear stability analysis.
+Our exploration of model parameters (Figure \ref{fig:wave_parameters}) instead shows a gradual transition region in which waves emerge and dominate the firing activity.
+In \citep{Senk2020} the authors derive critical parameters using linear stability analysis of a neural field and find the critical parameter values, then map those parameters
+to a network of leaky integrate-and-fire neurons.
+Although the stability analysis shows sharply defined regions (their Figure 3 and 4), their spiking neuron simulation results show a gradual transition between regions (their Figure 7) similar to our work.
 
+We have investigated the effect of incrementally increasing the dimensionality of our SCE on the speed and existence of traveling waves by considering a larger base (width described by X and Y) 
+but still preserving its quasi one-dimensional character (ratio of Z to X or Y from 50 to greater than 7).
+Our results show that the speed of the traveling waves initiated at the bottom of the SCE increased as a function of width (Figure \ref{fig:delay_topology}).
+This can be understood by noting that we use open boundary conditions that when considering a larger width will inevitably increase the average number of connections per neuron in the SCE.
+This means that neurons on average will receive a higher input current that, by its similarity to the mechanisms behind Figure \ref{fig:delay_k}, will cause a higher speed. 
+We further show that the increased number of connections per neuron is the sole mechanism behind this effect by obtaining a constant speed when keeping constant the average number of connections
+(Figure \ref{fig:delay_topology_avgconn}).
+By using the same system with a constant number of connections per neuron, but now using a background stimulation to all neurons, we show that the value of the connection strength beyond which traveling waves (or synchronous firing) exist is very similar to that shown in Figure \ref{fig:wave_parameters}a, independent of width of SCE (SI Figure 5).
+Moreover, the graphs of raster plots as a function of width seem to indicate that there is a value for the width at which excitations change from traveling waves to synchronous firing (SI Figure 5).
+Future work will consider whether this change represents a phase transition between traveling waves and synchronous firing, a transition that is not uncommon to find in other systems but controlled by other intrinsic coupling parameters \citep{ermentrout2001}\citep{Senk2020}.
+
+Other research \citep{keane2015} has shown that complex spatial patterns emerge from two-dimensional networks of leaky-integrate-and-fire neurons when the excitation and inhibition are balanced.
+In that work, when excitation dominates then only plane waves were observed instead of complex patterns.
+Similarly, in one dimension we have found that traveling waves dominate the firing activity when the $P_{exc}$ grows close to $1$ (Figure \ref{fig:wave_parameters}).
+Both studies show that traveling waves can become the dominant spatial pattern in excitatory networks.
+
+We have found that low-threshold-spiking inhibitory neurons can determine the origin point of traveling waves when using a uniform background stimulus (Figure \ref{fig:lts_inhibit}).
+Parameter variations in the Izhikevich model \citep{izhikevich2003} create low-threshold spiking found in some inhibitory neurons \citep{gibson2009}\citep{hayut2011}, leading to post-inhibitory rebound spiking in the connected excitatory neurons \citep{ascoli2010}.
+Our result is fundamentally different than previous studies of oscillatory behavior in populations of coupled excitatory and inhibitory neurons \citep{Golomb1996}\citep{Golomb1999} as that work considered homogeneous populations with isotropic connectivity.
+
+Our result implies that, when no stimulus is applied, a biological neuronal network might have an equilibrium dynamics governed by traveling waves initiated by low-threshold-spiking inhibitory neurons.
+An applied stimulus could then disturb the network from this dynamic equilibrium state.
+Our results show  that any network with sufficiently strong connectivity and delayed action potential propagation can exhibit traveling wave structure (Figure \ref{fig:delay_waves}).
+Since biological action potentials always travel with some delay, this indicates that traveling waves could be observed in the brain regardless of the inter-neuron connectivity.
+The numerical results presented here could be further refined to predict biological traveling wave speed for different neuron and network parameters.
+This could help distinguish between the different classes of traveling waves presented in \citep{ermentrout2001}.
+
+Traveling waves in one-dimensional networks have not been observed in the brain. 
+Part of the reason might be that such an observation requires precise experiments that probe structures such as minicolumns in the cortex. 
+These are not easy, as other properties of minicolumns are still elusive. 
+However, our work shows that in biological quasi one-dimensional systems  traveling waves are not only possible, but that because of the wide range of values in their allowed parameter space, their existence should be expected.
+
+We have demonstrated traveling waves in both quasi two-dimensional sheets.
+
+We have demonstrated traveling waves in forests of minicolumns.
+
+We have proposed a mechanism for the encoding and transport of the information contained in population activity via traveling waves of neuronal activation.
+We demonstrated that our minicolumn structure can encode the population firing rate into the minicolumn wave rate.
+Although the single minicolumn encoding was noisy, we demonstrated that a forest of loosely coupled  minicolumns could more reliably encode and transmit the population rate information.
 
 \endinput
 %%
