@@ -120,10 +120,37 @@ This behavior as a function of width suggests that the system dynamics transitio
 \end{figure}
 \FloatBarrier
 
-
+Our forest of minicolumns is an ensemble of 400 or 600 minicolumns arranged in a 20x20 or 30x30 pattern.
+Each minicolumn is 2x2x10.
+The distribution of post-synaptic connections and delay times are shown in Figure \ref{fig:connection_delay_distrbution_forest} for an example minicolumn.
 \begin{figure}[!htb]
- \caption{ Raster plots from a forest of minicolumns. The 2x2 minicolumn in the lower left corner was stimulated at time $t=10\ ms$.}
-   \includegraphics[width=0.75\textwidth]{fig/Rasters_2_5D_Wave}
+ \caption{Distribution of (a) number of post-synaptic connections per neuron and (b) delay time. Data was taken from a 20x20 forest of 400 minicolumns, each minicolumn 2x2x10, $\lambda=2.5$, $\kappa=1$.  } 
+     \subfloat[][]{\includegraphics[width=\textwidth]{fig/ConnectionNumberDistributionForest} }
+     \subfloat[][]{\includegraphics[width=\textwidth]{fig/DelayDistributionForest} }
+ \label{fig:connection_delay_distrbution_forest}
+\end{figure}
+ \FloatBarrier
+
+
+
+We stimulate the forest with a uniform background stimulus. 
+With $M=5$ there are many competing waves resulting in small-scale waves with many collisions.
+We decrease M to 2 and increase K from 10 to 14.
+We then observe traveling wave patterns in the forest.
+\begin{figure}[!htb]
+ \caption{ Raster plots from a forest of minicolumns with uniform background stimulus.}
+   \includegraphics[width=\textwidth]{fig/ForestWaveRaster_Background_K14_M2}
+   \label{fig:ForestBackground}
+\end{figure}
+
+We perform individual wave trials as in section \ref{sub:propagation_speed}.
+In this case stimulate the minicolumn at X={0,1}. Y={0,1}.
+We stimulate the first two layers Z={1,2}.
+We observe a single wave traversing the forest in Figure \ref{fig:2_5D_Wave}.
+\begin{figure}[!htb]
+ \caption{ Raster plots from a forest of minicolumns looking down on the X/Y plane. 
+           The 2x2 minicolumn in the lower left corner was stimulated at time $t=10\ ms$.}
+   \includegraphics[width=\textwidth]{fig/Rasters_2_5D_Wave}
    \label{fig:2_5D_Wave}
 \end{figure}
 
