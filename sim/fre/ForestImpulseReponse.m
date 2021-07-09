@@ -20,15 +20,15 @@ addpath('../2d')
 addpath('../sce'); %Neural column code
 
 dt = 0.1;
-tmax = 250;
+tmax = 500;
 t = 0:dt:tmax;
 
 %Make column ensemble
 %Connected microcolumn ensemble
 structure.width = 2;
 structure.height = 2;
-structure.nWide = 20;
-structure.nHigh = 20;
+structure.nWide = 30;
+structure.nHigh = 30;
 structure.columnSpacing = 2.5+structure.width;
 structure.layers = 10;
 structure.displacement = 0;

@@ -16,7 +16,7 @@ smoother = smoother ./ sum(smoother(:));
 idx = 1;
 
 h = figure(10);
-set(h, 'Position', [100 100 1024 500]);
+set(h, 'Position', [100 100 800 500]);
 nplots = length(frameTimes);
 ncols = 4;
 nrows = ceil(nplots/ncols);

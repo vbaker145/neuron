@@ -42,13 +42,13 @@ tDelay = colStruct.delays(find(colStruct.delays>0))*dt;
 figure(20); 
 set(gcf, 'Position', [0 0 1000 500]);
 histogram(tc, 'FaceColor', 'k', 'Normalization', 'probability');
-xlabel('# connections'); ylabel('#occurences');
+xlabel('# connections'); ylabel('Probability mass');
 set(gca, 'FontSize', 14)
 
 %Histogram of delays
 figure(21);
 set(gcf, 'Position', [0 0 1000 500]);
 histogram(tDelay, 'FaceColor', 'k', 'BinWidth', 0.25, 'Normalization', 'probability');
-xlabel('Delay (ms)'); ylabel('#occurences');
+xlabel('Delay (ms)'); ylabel('Probability mass');
 set(gca, 'FontSize', 14)
 

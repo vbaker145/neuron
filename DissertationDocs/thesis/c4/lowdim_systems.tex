@@ -26,38 +26,49 @@ Studies of traveling waves have focused on two-dimensional waves that spread par
 This is to be expected as this is the geometry of the system on which they are observed, and \citep{Wilson1973} provide an anatomical argument for focusing on such structure. 
 
 We now extend our study of traveling waves in quasi 1-D minicolumns to two-dimensional topologies.
-First we study two-dimensional sheets of neurons extend in the X and Y directions.
+First we study two-dimensional sheets of neurons extended in the X and Y directions.
 As before, we find that our model doesn't support traveling waves in a purely two-dimensional sheet (Z=1) under the model parameters studied.
 When we extend the system to a quasi two-dimensional sheet (Z=2) we find traveling waves are evoked by both the background and impulsive stimulus.
+
 We then further extend our topology to what we term a ``forest'' of minicolumns.
-This structure consists of an ensemble of many of our X=2, Y=2, Z=10 minicolumns arranged on a grid.
-We find that waves travel through the forest.
+This structure consists of an ensemble of our minicolumns arranged on a grid, with the Z extent less than the X/Y extents.
+We find that our forest supports trasverse traveling waves in the X/Y plane.
 
 \section{Two-dimensional sheets of neurons}
-Computational 2D systems: \citet{keane2015}\citet{Spreizer2019}
+Traveling waves in two-dimensional neuronal sheets have been studied in the brain \citep{huang2004}\citep{Townsend2018} and in simulation\citep{keane2015}\citep{Spreizer2019}
+While one-dimensional waves have only one structure, the additional degree of freedom in two dimensions allows for several categories of waves.
+These include circular waves that spread outward from a point, large plane waves that propagate over the entire surface and spiral waves that rotate around a phase singularity.
+We find evidence for all these categories of waves in our quasi two-dimensional sheet.
 
-Bio 2D waves: \citet{huang2004}\citet{Townsend2018}
-
+Each sheet consists of neurons placed on a unit grid. 
+The X and Y extents are much larger than the Z extent.
+We generally use sheets with Z=2 with the exception of one purely two-dimensional example with Z=1.
+Neurons are created and connected as described in Methods.
+Due to the larger area of regard and the more demanding computational experiments we use periodic boundary conditions in our quasi two-dimensional sheets.
 A small example quasi 2-D sheet is shown in Figure \ref{fig:sheet_structure}.
 In this small example the periodic boundary conditions are easily seen in the connection matrix.
 
 \begin{figure}[!htb]
- \caption{Example 2-D sheet with dimensions X=20, Y=20, Z=2, $\lambda$=2.5, and C=0.5. A)  Sheet showing connections between neurons as lines colored using a color scale that indicates the connection length. 
- B)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. 
- C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.}
+ \caption{Example small quasi 2-D sheet with dimensions X=20, Y=20, Z=2, $\lambda$=2.5, and C=0.5. 
+ a)  Sheet showing connections between neurons as lines colored using a color scale that indicates the connection length. 
+ b)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. 
+ c) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.}
  \label{fig:sheet_structure}
  \subfloat[][]{\includegraphics[width=\textwidth]{fig/Sheet_Structure_A}}
  \subfloat[][]{\includegraphics[width=0.4\textwidth]{fig/Sheet_Structure_B}}
  \subfloat[][]{\includegraphics[width=0.4\textwidth]{fig/Sheet_Structure_C}}
 \end{figure}
 
+The topology of our sheet combined with our local connectivity rule (eq. \ref{eq:connectivity}) defines the connection distribution of the sheet.
 The distribution of post-synaptic connections and delay times are shown in Figure \ref{fig:connection_delay_distrbution_2D} for an example quasi 2-D sheet.
+Compared the to minicolumn connection distribution in figure \ref{fig:connection_delay_distrbution} the neurons in our sheet have on average about twice as many connections.
+The length of the connections between neurons tends to be longer in the sheet, resulting in a distribution of longer delays 
+in figure \ref{fig:connection_delay_distrbution_2D} when compared to figure \ref{fig:connection_delay_distrbution}.
 \begin{figure}[!htb]
- \caption{Distribution of (A) number of post-synaptic connections per neuron and (B) delay time. Data was taken over 100 realizations of an X=100, Y=100, Z=2 system with $\lambda=2.5$, $\kappa=1$.  } 
- \begin{tabular}{c}
-     \includegraphics[width=\textwidth]{fig/ConnectionNumberDistribution2D} \\
-     \includegraphics[width=\textwidth]{fig/DelayDistribution2D} 
- \end{tabular}
+ \caption{Distribution of (a) number of post-synaptic connections per neuron and (b) delay time. 
+          Data was taken from a X=100, Y=100, Z=2 sheet with $\lambda=2.5$, $\kappa=1$ and periodic boundary conditions.  } 
+     \subfloat[][]{\includegraphics[width=0.6\textwidth]{fig/ConnectionNumberDistribution2D} }
+     \subfloat[][]{\includegraphics[width=0.6\textwidth]{fig/DelayDistribution2D} }
  \label{fig:connection_delay_distrbution_2D}
 \end{figure}
  \FloatBarrier
@@ -71,12 +82,14 @@ We do not observe traveling waves or other spatiotemporal patterns in this syste
  \centering
    \includegraphics[width=\textwidth]{fig/2DWaveRasters_1LayerNoWaves}
 \end{figure}
+\FloatBarrier
 
 We then extend our system to a quasi 2-D sheet with X=100, Y=100 and Z=2.
-We now observe traveling wave patterns in the system in Figure \ref{fig:2D_waves}.
+We now observe traveling wave patterns in the system.
 These patterns emerge in spite of the high variability in the neuron types, neuron dynamics and connectivity present in our model.
+We can clearly see an example of a circular spreading wave emanating from the upper center of figure \ref{fig:2D_waves}.
 \begin{figure}[!htb]
- \caption{ Raster plots from our quasi 2.5-D system with two layers show wave patterns that spread across the surface of the sheet.}
+ \caption{ Raster plots from our quasi 2-D system with two layers show wave patterns that spread across the surface of the sheet.}
  \label{fig:2D_waves}
  \centering
    \includegraphics[width=\textwidth]{fig/2DWaveRasters}
@@ -92,6 +105,27 @@ Nonetheless, these results show that plane waves can emerge as a stable pattern 
  \centering
    \includegraphics[width=\textwidth]{fig/2DWaveRasters_PlaneWave}
 \end{figure}
+\FloatBarrier
+
+When the wave speed increases we observe attractor states, where waves spawned from a small number of locations come to dominate the firing activity.
+In figure \ref{fig:2DWaveRasters_attractor} we see that the waves come to dominate the firing activity.
+\begin{figure}[!htb]
+ \caption{ Raster plots from our quasi 2-D system showing an attractor forming near X=70,Y=75.}
+ \label{fig:2DWaveRasters_attractor}
+ \centering
+   \includegraphics[width=\textwidth]{fig/2DWaveRasters_Attractor_kappa0p1_seed35}
+\end{figure}
+
+We suspect that these winner-take-all waves may be spawned by low-threshold spiking inhibitory neurons as seen in our minicolumns (section \ref{sub:wave_initiation}).
+To test this hypothesis we plot calculate the density of inhibitory neurons across the sheet using MATlAB's 'ksdensity' function.
+\begin{figure}[!htb]
+ \caption{ Density plot of inhibitory neurons in the sheet. The color scale covers the top 10\% of the density.
+           The area with the highest density of inhibitory neurons includes the location from which the attractor waves are spawned. }
+ \label{fig:2DAttractor_InhibDensity}
+ \centering
+   \includegraphics[width=\textwidth]{fig/2DAttractor_seed35_InhibitoryDensity}
+\end{figure}
+
 
 \FloatBarrier
 
@@ -104,33 +138,32 @@ Despite the complex spatiotemporal patterns the overall mean voltage shows a sma
    \includegraphics[width=\textwidth]{fig/MeanVoltage_PBC}
 \end{figure}
 
-
 \FloatBarrier
+
 \section{Forests of minicolumns}
-In section 3.2 we showed that as SCE grow in the X or Y dimension the wave speed increases due to the increased connectivity, but when the average number of connections per neuron were held constant the wave speed was constant.
-We further examine these thicker, but still quasi one-dimensional SCE by examining the firing activity of purely one-dimensional sub-columns within the larger SCE (with topology 2x2x100 extracted from the central core of the thicker SCE, away from the surfaces, except of course for the 2x2 and 3x3 SCEs).
-With the average number of connections held constant, the sub-columns within the larger SCE show similar firing fraction with $K$ regardless of the overall topology (Figure \ref{fig:LargeSCESubcolumns}).
-We remark that as the X and Y extents increase, the behavior seems to change from traveling waves to more synchronized firing activity.
-This behavior as a function of width suggests that the system dynamics transition from supporting traveling waves to a system that exhibits global synchrony.
+Our forest of minicolumns is an ensemble of 400 or 600 minicolumns arranged in a 20x20 or 30x30 pattern.
+Each minicolumn is 2x2x10.
+A small example foresst is shown in Figure \ref{fig:forest_structure}.
 \begin{figure}[!htb]
- \caption{ Spike raster plots for complete SCE (A) and one-dimensional sub-columns (B) for different topologies show similar firing patterns in the sub-columns regardless  of topology. 
-           The wave firing fraction (C) measured within the sub-columns show the same dependence on $K$ regardless of the topology.}
-   \includegraphics[width=0.75\textwidth]{fig/WaveFractionVsThick}
-   \label{fig:LargeSCESubcolumns}
+ \caption{ Example forest of 16 minicolumns arranged in a 4x4 grid, with $1\lambda$ spacing between the closest neurons of any two minicolumns. 
+              Each minicolumn has dimensions X=2, Y=2, Z=5, $\lambda$=2.5, and C=0.5. 
+          a)  Sheet showing connections between neurons as lines colored using a color scale that indicates the connection length. 
+          b)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. }
+ \label{fig:forest_structure}
+ \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/Forest_Structure_A}}
+ \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/Forest_Structure_B}}
 \end{figure}
 \FloatBarrier
 
-Our forest of minicolumns is an ensemble of 400 or 600 minicolumns arranged in a 20x20 or 30x30 pattern.
-Each minicolumn is 2x2x10.
+We wish to compare the overall 
 The distribution of post-synaptic connections and delay times are shown in Figure \ref{fig:connection_delay_distrbution_forest} for an example minicolumn.
 \begin{figure}[!htb]
  \caption{Distribution of (a) number of post-synaptic connections per neuron and (b) delay time. Data was taken from a 20x20 forest of 400 minicolumns, each minicolumn 2x2x10, $\lambda=2.5$, $\kappa=1$.  } 
-     \subfloat[][]{\includegraphics[width=\textwidth]{fig/ConnectionNumberDistributionForest} }
-     \subfloat[][]{\includegraphics[width=\textwidth]{fig/DelayDistributionForest} }
+     \subfloat[][]{\includegraphics[width=0.6\textwidth]{fig/ConnectionNumberDistributionForest} }
+     \subfloat[][]{\includegraphics[width=0.6\textwidth]{fig/DelayDistributionForest} }
  \label{fig:connection_delay_distrbution_forest}
 \end{figure}
  \FloatBarrier
-
 
 
 We stimulate the forest with a uniform background stimulus. 

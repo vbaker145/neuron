@@ -1,6 +1,6 @@
-function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, plotAx, doplot)
+function [a,b,c,d, S, delays, excNeurons, columnLabels, pos] = makeColumnEnsemble(structure, connectivity, delay, doplot)
 
-if nargin<5
+if nargin<4
     doplot = 0;
 end
 
@@ -49,13 +49,6 @@ delayMult = delay.delayMult;
 delayFrac = delay.delayFrac;
 dt = delay.dt;
 
-if doplot
-   if nargin < 4
-      figure(101); clf;
-      plotAx = axes;
-   end
-end
-
 n = length(xPts)*length(yPts)*layers;
 
 zv = (0:layers-1);
@@ -67,13 +60,15 @@ x = x+displacement*(rand(size(x))-0.5);
 y = y+displacement*(rand(size(y))-0.5);
 z = z+displacement*(rand(size(z))-0.5);
 
-if doplot == 1
-    scatter3(plotAx, x,y,z,30, 'black','filled')
+if doplot
+    figure(100); 
+    set(gcf, 'Position', [0 0 700 500]);
+    scatter3(x,y,z,50, 'black','filled')
     hold on;
-end
-
-if doplot == 1
-    map = colormap('jet');
+    
+    figure(101);
+    set(gcf, 'Position', [0 0 700 500]);
+    hold on;
 end
 
 %connections = zeros(length(x), length(x));
@@ -103,7 +98,12 @@ d(excNeurons) = 8-6*rand(nExc,1).^2; d(inNeurons) = 2;
 %Synaptic delays
 %delays = zeros(n);
 delays = spalloc(n,n,1000);
+
 dmax = 3*lambda;
+cmapRes = 20;
+if doplot == 1
+    map = colormap(jet(dmax*cmapRes));
+end
 
 %Synaptic weights
 for jj=1:length(x)
@@ -146,11 +146,19 @@ for jj=1:length(x)
                 %connections(jj,kk) = excNeurons(jj)*6+inNeurons(jj)*(-2);
                 
                 if doplot == 1
-                    didx = dis/dmax;
-                    didx = min(didx,1);
-                    cm = map(floor(didx*size(map,1)),:);  
-                    line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', 2*didx);
-                    %line(plotAx, [x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)] );
+                    figure(100);
+                    dis = min(dis,dmax);
+                    cm = map(floor(dis*cmapRes),:);
+                    line([x(jj) x(kk)],[y(jj) y(kk)], [z(jj) z(kk)], 'Color',cm, 'LineWidth', dis/2);
+                    
+                    figure(101);
+                    if excNeurons(jj) == 1 && excNeurons(kk) == 1
+                        plot(jj,kk,'g.', 'MarkerSize', 15);
+                    elseif excNeurons(jj) == 0
+                        plot(jj,kk,'r.', 'MarkerSize', 15);
+                    else 
+                        plot(jj,kk,'k.', 'MarkerSize', 15);
+                    end
                 end
                 
                 %Set delay
@@ -171,11 +179,24 @@ for jj=1:length(x)
 end
 
 if doplot == 1
-    title(['Spacing=' num2str(columnSpacing)]);
+    figure(100);
     axis equal;
-    xlabel('X'); ylabel('Y'); zlabel('Z');
-    set(gcf, 'pos', [0 0 600 800]);
-    set(gca, 'FontSize', 14);
+    cl = colorbar;
+    nTickLabels = length(cl.TickLabels);
+    tickInc = dmax/nTickLabels;
+    tls = {};
+    for jj=0:tickInc:dmax
+       tls{end+1} = num2str(jj,2);
+       %tls{end+1} = '';
+    end
+    cl.TickLabels = tls;
+    xlabel('X', 'FontWeight', 'bold'); ylabel('Y', 'FontWeight', 'bold'); zlabel('Z', 'FontWeight', 'bold');
+    set(gca,'FontSize',12);
+    
+    figure(101);
+    xlabel('Presynaptic neuron #');
+    ylabel('Postsynaptic neuron #');
+    set(gca, 'FontSize', 12);
 end
 
 S = connections;

@@ -22,7 +22,7 @@ connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.C = 0.5;
-connectivity.connStrength = 14;
+connectivity.connStrength = 10;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;
@@ -33,7 +33,7 @@ delay.dt = dt;
 Nlayer = structure.width*structure.nWide*structure.height*structure.nHigh;
 N = Nlayer*structure.layers;
 
-[a,b,c,d, S, delays, ecn, csec, pos] = makeColumnEnsemble(structure, connectivity, delay);
+[a,b,c,d, S, delays, ecn, csec, pos] = makeColumnEnsemble(structure, connectivity, delay, 0);
 
 %Modify for audio processing
 %a = a+rand(size(a))*0.06;

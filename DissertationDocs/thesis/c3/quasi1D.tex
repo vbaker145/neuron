@@ -61,14 +61,14 @@ Finally, we examine fully-connected networks and observe that traveling wave pat
 We use open boundary conditions, so neurons near the ends of the SCE will have fewer connections than those in the middle.
 An example of an SCE showing the connectivity structure is shown in Figure \ref{fig:column_structure}.
 \begin{figure}[!htb]
- \caption{Example SCE with dimensions 2x2x10 (XxYxZ), $\lambda$=2.5, and C=1. A)  SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. 
- B)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. 
- The labels of the neurons used in both axes are sequentially assigned starting at the bottom (Z=0).
- C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.}
- \label{fig:column_structure}
  \subfloat[][]{\includegraphics[height=60mm]{fig/column_structure_A}}
  \subfloat[][]{\includegraphics[height=60mm]{fig/column_structure_B}}
  \subfloat[][]{\includegraphics[width=\textwidth]{fig/column_structure_C}}
+  \caption{Example SCE with dimensions 2x2x10 (XxYxZ), $\lambda$=2.5, and C=1. A)  SCE showing connections between neurons as lines colored using a color scale that indicates the connection length. 
+    B)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. 
+    The labels of the neurons used in both axes are sequentially assigned starting at the bottom (Z=0).
+    C) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.}
+  \label{fig:column_structure}
 \end{figure}
 
 A crucial element in neuronal systems is the existence of time delays between the creation of a presynaptic action potential and the arrival of that spike to a target neuron. 
@@ -78,9 +78,9 @@ When $\kappa=0$ the action potential excites the post-synaptic neuron on the suc
  
 The distribution of post-synaptic connections and delay times are shown in Figure \ref{fig:connection_delay_distrbution} for an example minicolumn.
 \begin{figure}[!htb]
+  \subfloat[][]{\includegraphics[width=\textwidth]{fig/ConnectionNumberDistribution} }
+  \subfloat[][]{\includegraphics[width=\textwidth]{fig/DelayDistribution} }
  \caption{Distribution of (A) number of post-synaptic connections per neuron and (B) delay time. Data was taken over 100 realizations of a 2x2x50 SCE, $\lambda=2.5$, $\kappa=1$.  } 
-     \subfloat[][]{\includegraphics[width=\textwidth]{fig/ConnectionNumberDistribution} }
-     \subfloat[][]{\includegraphics[width=\textwidth]{fig/DelayDistribution} }
  \label{fig:connection_delay_distrbution}
 \end{figure}
  \FloatBarrier
@@ -100,23 +100,24 @@ If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the
 
 An example of the clustering and identification is shown in Figure 2, with further illustration in SI Figure 1.
 \begin{figure}[!htb]
- \centering
- \includegraphics[width=\textwidth]{fig/DetectorExample}
- \caption{Wave identification and labeling using an example SCE with dimensions 2x2x200 . Left: Raster plot of firing events where dots represent neuronal action potentials. 
-          Traveling waves can be seen as diagonal structures of dense firing activity. 
-          Center: The clustering operation removes background spikes. 
-          Right: Individual waves are labeled with unique identifiers color coded in the figure.}
- \label{fig:wave_analysis}
+  \centering
+  \includegraphics[width=\textwidth]{fig/DetectorExample}
+  \caption{Wave identification and labeling using an example SCE with dimensions 2x2x200 . Left: Raster plot of firing events where dots represent neuronal action potentials. 
+	Traveling waves can be seen as diagonal structures of dense firing activity. 
+	Center: The clustering operation removes background spikes. 
+	Right: Individual waves are labeled with unique identifiers color coded in the figure.}
+  \label{fig:wave_analysis}
 \end{figure}
 
 Our wave detection and analysis approach must remain valid across a range of model parameters. 
 We show sample visualizations for varying values of $K$ in Figure \ref{fig:detector_test}.
 This detector test demonstrates that our detection and analysis method detects and labels traveling waves of various lengths even in a noisy background.
 \begin{figure}[!htb]
- \caption{The clustering and wave labeling process. Spike raster plot (left), filtered clusters (middle) and labeled waves (right, each color is a unique wave) are shown for SCE with different values of $K$. }
- \label{fig:detector_test}
  \centering
    \includegraphics[width=\textwidth]{fig/DetectorTest}
+    \caption{The clustering and wave labeling process. Spike raster plot (left), filtered clusters (middle) and labeled waves (right, each color is a unique wave) 
+	    are shown for SCE with different values of $K$. }
+  \label{fig:detector_test}
 \end{figure}
 
 \FloatBarrier
@@ -145,10 +146,12 @@ We then vary the individual parameters about $\Sigma$ to examine how they influe
 At the reference  point $\Sigma$ the average wave firing fraction over 100 trials is found to be $88.6\%$ with a standard deviation of $4.38\%$.
 A representative raster plot of the spike events (Figure \ref{fig:sigma_raster}) clearly shows the traveling waves.
 \begin{figure}[!htb]
- \centering
- \includegraphics[width=0.75\textwidth]{fig/baseline}
- \caption{Raster plot of neuron firing events over time. The model parameters are at the reference  point $\Sigma$. Each dot represents the spike-time emission of a neuron. Traveling waves can be seen as diagonal structures of dense firing activity \citet{Senk2020}. }
- \label{fig:sigma_raster}
+  \centering
+  \includegraphics[width=0.75\textwidth]{fig/baseline}
+  \caption{Raster plot of neuron firing events over time. The model parameters are at the reference  point $\Sigma$. 
+	Each dot represents the spike-time emission of a neuron. 
+	Traveling waves can be seen as diagonal structures of dense firing activity \citet{Senk2020}. }
+  \label{fig:sigma_raster}
 \end{figure}
 
 The effect of varying the parameters on traveling waves are shown in Figure \ref{fig:wave_parameters}.
@@ -203,13 +206,13 @@ An example raster plot is shown in Figure \ref{fig:OneDimensionalRasterPlots}D.
 Although we have removed most variation from this SCE, the two trials with no waves are not unexpected as the stimulus is still randomized and the connectivity is still probabilistic (see Equation 1).
 
 \begin{figure}[!htb]
- \caption{ Example raster plots of the SCE used for comparison to previous work in purely one-dimensional systems.
+   \includegraphics[width=\textwidth]{fig/OneDimensionalComparison_RasterPlots}
+   \caption{ Example raster plots of the SCE used for comparison to previous work in purely one-dimensional systems.
            A) The 2x2x50 SCE with model parameters at $\Sigma_v$ supports traveling waves along the entire SCE. 
 	   B) The 1x1x50 version of the same SCE does not exhibit traveling waves.
 	   C) Even with $K$ increased from $24$ to $30$ and $\lambda$ increased from $2.5$ to $4$, the 1x1x50 SCE still does not support traveling waves.
 	   D) Once the random parameters are removed, the 1x1 SCE does support traveling waves. }
-   \includegraphics[width=\textwidth]{fig/OneDimensionalComparison_RasterPlots}
-   \label{fig:OneDimensionalRasterPlots}
+  \label{fig:OneDimensionalRasterPlots}
 \end{figure}
 \FloatBarrier
 
@@ -231,10 +234,10 @@ Therefore the spike will occur with some delay after the stimulus.
 This is a common behavior in any multidimensional model of neuron dynamics, but it is not captured by the leaky integrate-and-fire model used in much of the previous research \citet{keane2015}\citet{Senk2020}.
 As an example, Figure \ref{fig:delay_neuronstep} shows the delayed response of a neuron to a pulse of current using the Izhikevich model.
 \begin{figure}[!htb]
- \caption{ A pulse of voltage (bottom) with magnitude $2 mV$, starting at $t=100 ms$ and lasting $2 ms$ disturbs the equilibrium membrane potential of a neuron (top), eliciting a spike at $t=112 ms$. }
- \label{fig:delay_neuronstep}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_NeuronStepTest}
+   \caption{ A pulse of voltage (bottom) with magnitude $2 mV$, starting at $t=100 ms$ and lasting $2 ms$ disturbs the equilibrium membrane potential of a neuron (top), eliciting a spike at $t=112 ms$. }
+   \label{fig:delay_neuronstep}
 \end{figure}
 
 To determine  that this spike delay is indeed important to consider  we expose populations of excitatory and inhibitory neurons to current pulses of different magnitudes.
@@ -242,10 +245,10 @@ The average firing delay of the excitatory and inhibitory neurons is shown in Fi
 The inhibitory neurons have a lower firing threshold than the excitatory neurons due to their higher value of $b$ in Equation \ref{eq:neuron_v}  \citet{izhikevich2003} and fire with a shorter delay when given the same stimulus.
 Both excitatory and inhibitory neurons exhibit a delayed response of several $ms$ or more.
 \begin{figure}[!htb]
- \caption{ A stronger stimulus creates a spike with less delay. The excitatory neurons have a higher firing threshold than the inhibitory neurons and do not emit a spike for very weak stimulus.}
- \label{fig:delay_neurondynamics}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_NeuronDynamics}
+   \caption{ A stronger stimulus creates a spike with less delay. The excitatory neurons have a higher firing threshold than the inhibitory neurons and do not emit a spike for very weak stimulus.}
+   \label{fig:delay_neurondynamics}
 \end{figure}
 
 \FloatBarrier
@@ -262,20 +265,16 @@ We increase the connection strength $K$ to provide this stronger stimulus, and f
 As $K$ increases the neurons fire with less delay, resulting in faster traveling waves (Figure \ref{fig:delay_k}).
 We fix $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ for the remainder of the wave speed computational experiments.
 
- 
 We first examine the impact of K on the wave speed.
 The wave speed increases with K as anticipated (Figure \ref{fig:delay_k}).
 The relationship is logarithmic in shape, in agreement with some previous work including \citet{Golomb1999} (Figure 3 for $\tau_d>0$) and \citet{Golomb1996}(Figure 10, exponential footprint shape).
-
-
 \begin{figure}[!htb]
- \caption{The pace (left, error bars $\pm 1 \sigma$) decreases with $K$, while the corresponding wave speed (right) increases with $K$. 
-          The logarithmic best fit is $0.36\log{0.12K}$.}
- \label{fig:delay_k}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}
+   \caption{The pace (left, error bars $\pm 1 \sigma$) decreases with $K$, while the corresponding wave speed (right) increases with $K$. 
+          The logarithmic best fit is $0.36\log{0.12K}$.}
+   \label{fig:delay_k}
 \end{figure}
-
 
 We examine the influence of the $b$ parameter on wave speed.
 We generate $100$ SCE, then multiply the $b$ parameter of all neurons by a scaling factor from $0.7$ to $1.3$.
@@ -283,10 +282,10 @@ When the scale factor is $\leq 1.0$ the wave speed remains constant, but when th
 This indicates that the lower firing thresholds (Figure 6) that result from larger values of the $b$ parameter result in faster traveling waves.
 
 \begin{figure}[!htb]
- \caption{The pace (left, error bars $\pm 1 \sigma$) and the wave speed (right) show a sharp transition above scale factor $1.0$. }
- \label{fig:WaveSpeed_B}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_B}
+   \caption{The pace (left, error bars $\pm 1 \sigma$) and the wave speed (right) show a sharp transition above scale factor $1.0$. }
+   \label{fig:WaveSpeed_B}
 \end{figure}
 
 \FloatBarrier
@@ -296,10 +295,11 @@ We vary delay parameter $\kappa$ from 0 to 5 and measure the wave pace and calcu
 The pace is linear in $\kappa$ as expected, but the pace does not approach $0$ as $\kappa \rightarrow 0$ due to the delayed firing inherent in the neuron dynamics.
 Because each neuron does not fire instantaneously upon receiving an action potential, even instantaneous transport of action potentials does not result in a wave that can span the column instantaneously.
 \begin{figure}[!htb]
- \caption{The pace (left, error bars $\pm 1 \sigma$) is linear w.r.t. $\kappa$. The intercept at $\kappa=0$ is 1.3, indicating that the neuron dynamics limit the speed of the wave. The wave speed (right) shows the expected relationship. }
- \label{fig:delay_speed}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Delay}
+   \caption{The pace (left, error bars $\pm 1 \sigma$) is linear w.r.t. $\kappa$. The intercept at $\kappa=0$ is 1.3, indicating that the neuron dynamics limit the speed of the wave. 
+	  The wave speed (right) shows the expected relationship. }
+    \label{fig:delay_speed}
 \end{figure}
 \FloatBarrier
 
@@ -308,12 +308,12 @@ Since an increase in $\lambda$ results in both longer range connections, and mor
 The characteristic connection length $\lambda$ is varied from 2 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_lambda}).
 For $\lambda<2$  we do not observe traveling waves.
 \begin{figure}[!htb]
- \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases with $\lambda$. 
-           The wave speed (right) shows that the maximum wave speed approaches $0.8$, the limit seen as $\kappa \rightarrow 0$ in Figure \ref{fig:delay_speed}. 
-           The logarithmic best fit to the data is $0.62\log{0.74\lambda}$.}
- \label{fig:delay_lambda}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Lambda}
+   \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases with $\lambda$. 
+           The wave speed (right) shows that the maximum wave speed approaches $0.8$, the limit seen as $\kappa \rightarrow 0$ in Figure \ref{fig:delay_speed}. 
+           The logarithmic best fit to the data is $0.62\log{0.74\lambda}$.}
+   \label{fig:delay_lambda}
 \end{figure}
 
 \FloatBarrier
@@ -326,10 +326,10 @@ For each topology we measure the pace and speed over $5$ randomly generated SCE 
 We see that increasing the X and/or Y dimensions of the SCE increases the speed, and the dependence looks qualitatively similar to increasing the connection strength via $K$ or the number of connections via $\lambda$.
 
 \begin{figure}[!htb]
- \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases, and the speed (right) increases, as the XxY extents of the SCE grow.}
- \label{fig:delay_topology}
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_Topology}
+   \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases, and the speed (right) increases, as the XxY extents of the SCE grow.}
+   \label{fig:delay_topology}
 \end{figure}
 
 To separate the effect of the increased connectivity from the effect of different topology (larger X or Y increases both the total number of neurons and changes the proportion of surface neurons) we scale the $C$ parameter in equation \ref{eq:connectivity} to maintain the same average number of connections per neuron (\textasciitilde{}7) across the topologies.
@@ -338,18 +338,31 @@ Therefore the increase in speed with cross-section seen in Figure \ref{fig:delay
 Figure 5 in the SI shows additional analysis of SCE with larger cross sections. 
 
 \begin{figure}[!htb]
- \caption{ Wave speed (error bars $1\sigma$) is constant as the topology changes as long as the average number of connections (~7 connections per neuron) is maintained. The largest topology is $13x13$ (169 neurons at base).}
- \label{fig:delay_topology_avgconn}
  \centering
    \includegraphics[width=\textwidth]{fig/speed_vs_thick_m}
+   \caption{ Wave speed (error bars $1\sigma$) is constant as the topology changes as long as the average number of connections (~7 connections per neuron) is maintained. 
+	   The largest topology is $13x13$ (169 neurons at base).}
+   \label{fig:delay_topology_avgconn}
 \end{figure}
 
+We further examine these thicker, but still quasi one-dimensional SCE by examining the firing activity of purely one-dimensional sub-columns within the larger SCE (with topology 2x2x100 extracted from the central core of the thicker SCE, away from the surfaces, except of course for the 2x2 and 3x3 SCEs).
+With the average number of connections held constant, the sub-columns within the larger SCE show similar firing fraction with $K$ regardless of the overall topology (Figure \ref{fig:LargeSCESubcolumns}).
+We remark that as the X and Y extents increase, the behavior seems to change from traveling waves to more synchronized firing activity.
+This behavior as a function of width suggests that the system dynamics transition from supporting traveling waves to a system that exhibits global synchrony.
+\begin{figure}[!htb]
+   \includegraphics[width=0.75\textwidth]{fig/WaveFractionVsThick}
+   \caption{ Spike raster plots for complete SCE (A) and one-dimensional sub-columns (B) for different topologies show similar firing patterns in the sub-columns regardless  of topology. 
+           The wave firing fraction (C) measured within the sub-columns show the same dependence on $K$ regardless of the topology.}
+   \label{fig:LargeSCESubcolumns}
+\end{figure}
 \FloatBarrier
 
 It is interesting to compare the speeds obtained here with previous work.
 We have placed our neurons on a unit grid and measured speed in units per millisecond.
 By assuming that our unit grid is about $20~\mu m$ (Cruz et al., 2005) then our wave propagation speeds are in the range of $2-16~mm/s$.
-This is generally slower than other computational results, but the mid to upper range is of the same order of magnitude as the experimental velocity of $50~mm/s$  reported in \citet{Golomb1997}.
+This is generally slower than other computational results but in the same range as some in vitro experiments. 
+\citet{Golomb1997} reported a minimal experimental velocity of $50~mm/s$ in slices of rat cortex, \citet{Chervin1988} found velocities ranging from $60~mm/s$ to $90~mm/s$.
+\citet{Wadman1993} reported velocities as low as $8~mm/s$, albeit within a very wide range of $8~mm/s$ to $150~mm/s$.
 
 \FloatBarrier
 
@@ -361,32 +374,35 @@ To quantify this observation we record the initiation sites of all traveling wav
 We then measure the fraction of wave initiation events (FIE) per unit length of the SCE.
 
 \begin{figure}[!htb]
- \caption{Left: The time and place of origin of every traveling wave produced during a simulation. Right: The FIE clearly shows that traveling waves are likely to start in some regions, and unlikely to start in others.}
- \label{fig:wave_initiation_sites}
  \centering
    \includegraphics[width=\textwidth]{fig/InitiationSites_100sims}
+   \caption{Left: The time and place of origin of every traveling wave produced during a simulation. 
+	  Right: The FIE clearly shows that traveling waves are likely to start in some regions, and unlikely to start in others.}
+   \label{fig:wave_initiation_sites}
 \end{figure}
 
 A separate observation is that only some of the neurons in the SCE will fire when a wave passes their location.
 We observe that a single traveling wave initiated by a step stimulus can have regions of higher or lower total firing activity which we quantify by measuring the fractional number of firing events (FFE) per unit length of the SCE.
 An example measurement of the firing activity in a single traveling wave is shown in Figure \ref{fig:wave_density}.
 \begin{figure}[!htb]
- \caption{Density of firing events in a traveling wave initiated from a step stimulus. Left: Raster plot of the spike-emission times from a single traveling wave. Right: The FFE shows that some regions of the SCE exhibit more firing activity.}
- \label{fig:wave_density}
  \centering
    \includegraphics[width=\textwidth]{fig/ImpulseWaveDensity}
+   \caption{Density of firing events in a traveling wave initiated from a step stimulus. 
+	  Left: Raster plot of the spike-emission times from a single traveling wave. 
+	  Right: The FFE shows that some regions of the SCE exhibit more firing activity.}
+   \label{fig:wave_density}
 \end{figure}
 
 By combining these two experiments we observe that the results from the FIE and the FFE appear anti-correlated. 
 In Figure \ref{fig:fie_ffe_plots} we see multiple FIE and FFE plots from the same SCE placed side-by-side.
 There is a visual anti-correlation between the FIE and FFE for each SCE although it is not conclusive from these plots.
 \begin{figure}[!htb]
- \caption{FIE and FFE for nine example columns. } 
  \begin{tabular}{ccc}
      \includegraphics[width=0.3\textwidth]{fig/ccf/ccf1} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf2} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf3} \\
      \includegraphics[width=0.3\textwidth]{fig/ccf/ccf4} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf5} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf6} \\
      \includegraphics[width=0.3\textwidth]{fig/ccf/ccf7} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf8} & \includegraphics[width=0.3\textwidth]{fig/ccf/ccf9} 
  \end{tabular}
+ \caption{FIE and FFE for nine example columns. } 
  \label{fig:fie_ffe_plots}
 \end{figure}
 
@@ -398,12 +414,12 @@ Although there is substantial variation between SCEs we measure a consistently n
 A one-sided t-test at the $1\%$ confidence level rejects the null hypothesis that the mean of the correlation coefficient is $0$ or greater.
 \begin{figure}[!htb]
  \centering
- \caption{ A) Correlation between FIE and FFE across 100 trials. B) Distribution of the correlation coefficient. Each trial is a new SCE with random neuron and connectivity parameters. }
- \label{fig:InitiationCorrelation}
  \begin{tabular}{c}
      \includegraphics[width=\textwidth]{fig/InitiationCorrelation} \\ 
      \includegraphics[width=\textwidth]{fig/InitiationCorrelationPDF} 
  \end{tabular}
+ \caption{ A) Correlation between FIE and FFE across 100 trials. B) Distribution of the correlation coefficient. Each trial is a new SCE with random neuron and connectivity parameters. }
+ \label{fig:InitiationCorrelation}
 \end{figure}
 
 We hypothesize that these preferential wave initiation sites are created by neurons with low firing thresholds that are easy to excite.
@@ -424,10 +440,12 @@ The $b$ parameter of the LTS inhibitory neuron is set to $0.25$, corresponding t
 These two SCEs are stimulated with the same uniform background stimulus. 
 Figure \ref{fig:lts_inhibit} clearly shows that adding the single LTS neuron results in traveling waves emanating from $Z=50$. 
 \begin{figure}[!htb]
- \caption{Simulation with a single LTS inhibitory neuron at $Z=50$. Left: an SCE with entirely excitatory neurons shows traveling waves emerging from various locations. Right: adding a single LTS neuron at $Z=50$ results in consistent wave generation from that location. }
- \label{fig:lts_inhibit}
  \centering
    \includegraphics[width=\textwidth]{fig/SingleLTSInhibit}
+   \caption{Simulation with a single LTS inhibitory neuron at $Z=50$. 
+	  Left: an SCE with entirely excitatory neurons shows traveling waves emerging from various locations. 
+	  Right: adding a single LTS neuron at $Z=50$ results in consistent wave generation from that location. }
+   \label{fig:lts_inhibit}
 \end{figure}
 
 \FloatBarrier
@@ -445,11 +463,11 @@ With distance-dependent propagation delays and fast spike propagation ($\kappa=0
 We then increase $\kappa$ and observe the emergence of traveling wave patterns (Figure \ref{fig:delay_waves}). 
 This demonstrates that one dimensional traveling waves can emerge from fully-connected networks if the propagation delay is proportional to the inter-neuron distance and the spike propagation time is above a critical value.
 \begin{figure}[!htb]
+ \centering
+   \includegraphics[width=\textwidth]{fig/DelayWaves}  
  \caption{With global connectivity and action potential propagation delay fixed at $1.7~ms$ , the entire structure shows synchronized firing events.
           With distance-dependent propagation we also observe synchronized firing at $\kappa=0.1$.
           As $\kappa$ increases traveling waves emerge ($\kappa=0.5, 1.0$) .}
- \centering
-   \includegraphics[width=\textwidth]{fig/DelayWaves}  
  \label{fig:delay_waves}
 \end{figure}
 

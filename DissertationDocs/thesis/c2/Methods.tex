@@ -73,21 +73,20 @@ where $K$ is a parameter that modulates the strength of connections, with $K=1$ 
 
 The distribution of Izhikevich model parameters results in variations between our excitatory and inhibitory neurons, as well as variation in the neurons within those classes.
 We examine the inter-spike interval (ISI) and its inverse, the spike frequency, for the excitatory and inhibitory neurons in our model.
-We generate 1600 excitatory or inhibitory neurons and drive them with a constant stimulus, measuring the resulting ISI/spike rate as shown in Figure \ref{fig:ISI_statistics}.
+We generate 1600 excitatory or inhibitory neurons and drive them with a constant stimulus, measuring the resulting ISI/spike rate as shown in Figure \ref{fig:ISIstatistics}.
 The inhibitory neurons spike at a lower input level and the spike rate rises more quickly with stronger input.
 Due to the stochastic variation in the 'b' parameter for inhibitory neurons, different inhibitory neurons can have a different minimum firing threshold.
 Starting at an input magnitude of $4\ mV$, at which all the inhibitory neurons fire, the spike rate of the inhibitory neurons increase linearly with the input magnitude with a slope of 13.
 The excitatory neurons all have a common firing threshold.
 The spike rate of the excitatory neurons increases linearly with the input magnitude, and the slope of the linear fit is 3.
 \begin{figure}[!htb]
- \centering
- \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/ISIDistribution} } 
- \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/AvgSpikeFrequency} }
- \label{fig:ISI_statistics}
+  \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/ISIDistribution} } 
+  \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/AvgSpikeFrequency} }
   \caption{a) The distribution of inter-spike intervals for our excitatory and inhibitory neurons with a constant $5\ mV$ stimulus.  
-          b) The average ISI of the excitatory and inhibitory neurons decreases as the constant stimulus becomes stronger.} 
+      b) The average ISI of the excitatory and inhibitory neurons decreases as the constant stimulus becomes stronger.}
+  \label{fig:ISIstatistics}
 \end{figure}
- \FloatBarrier
+\FloatBarrier
 
 \section{Neuron stimulus}
 To drive the firing dynamics and create traveling waves we provide stimulation to the systems by using two different and separate external stimulus currents, $I_{i,e}$. 

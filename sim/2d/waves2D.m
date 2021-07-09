@@ -1,6 +1,6 @@
 clear; close all;
 
-rng(42); %Seed random for consistent results
+rng(35); %Seed random for consistent results
 
 addpath('../sce/');
 
@@ -9,7 +9,7 @@ height = 100;
 layers = 2;
 N = width*height*layers;
 
-tmax = 4000;
+tmax = 2000;
 dt = 0.2;
 t = 0:dt:tmax;
 
@@ -22,12 +22,12 @@ structure.displacement = 0;
 connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
-connectivity.C = 0.3; %Scaling connectivity to 1-D minicolumn
+connectivity.C = 0.5; 
 connectivity.connStrength = 10;
 connectivity.maxLength = 100; 
 
 delay.delayType = 1;
-delay.delayMult = 0.5;
+delay.delayMult = 0.1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
@@ -49,4 +49,4 @@ st = (interp1(0:tmax, st(:,1:1/dt:end)', 0:dt:tmax))';
 %plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
 
 %plotWaves2D( firings, pos, vall, dt, ecn, '2DWaves_1layer.avi' );
-plotWaves2D_Frames( firings, pos, vall, dt, 1000:50:2000-50 );
+plotWaves2D_Frames( firings, pos, vall, dt, 2000:20:2220 );
