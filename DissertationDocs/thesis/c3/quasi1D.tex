@@ -318,6 +318,23 @@ For $\lambda<2$  we do not observe traveling waves.
 
 \FloatBarrier
 
+The axonal conduction speed $\kappa$ and characteristic connection length $\lambda$ are likely interdependent.
+The combination of faster axonal conduction with longer connections may result in substantially faster propagation speed.
+We examine the effect of increasing connection length for fast axonal conduction with $\kappa=0.1$ and $\kappa=0.05$.
+We find that the speed increases more quickly with $\lambda$ for the faster axonal conduction (figure \ref{fig:delay_kappalambda}), 
+and the measured wave speeds are more than double the speeds measured in the isolated $\kappa$ and $\lambda$ tests. 
+\begin{figure}[!htb]
+ \centering
+   \includegraphics[width=\textwidth]{fig/WaveSpeed_KappaLambda}
+   \caption{ The wave speed plotted against $\lambda$ for two fast axonal conduction values.
+	     Error bars are one standard deviations measured over 10 trials.
+             Note that the wave speed is similar for lower values of $\lambda$ but rises more quickly for $\kappa=0.05$.}
+   \label{fig:delay_kappalambda}
+\end{figure}
+
+\FloatBarrier
+
+
 Our SCE topology (namely, the X and Y dimensions) may influence the wave speed in several ways.
 Increasing X and/or Y increases the total number of neurons, the total number of connections, and the average number of connections per neuron.
 To test these, we construct columns with topology in XxY of $2x2, 2x3, 3x3, 3x4$ and $4x4$.
@@ -359,10 +376,13 @@ This behavior as a function of width suggests that the system dynamics transitio
 
 It is interesting to compare the speeds obtained here with previous work.
 We have placed our neurons on a unit grid and measured speed in units per millisecond.
-By assuming that our unit grid is about $20~\mu m$ (Cruz et al., 2005) then our wave propagation speeds are in the range of $2-16~mm/s$.
-This is generally slower than other computational results but in the same range as some in vitro experiments. 
+By assuming that our unit grid is about $20~\mu m$ (Cruz et al., 2005) then our wave speed of 1 unit/ms corresponds to a speed of $20~mm/s$. 
+Most of our measured speeds are therefore $<20~mm/s$ which is is generally slower than other biological and computational results.
 \citet{Golomb1997} reported a minimal experimental velocity of $50~mm/s$ in slices of rat cortex, \citet{Chervin1988} found velocities ranging from $60~mm/s$ to $90~mm/s$.
 \citet{Wadman1993} reported velocities as low as $8~mm/s$, albeit within a very wide range of $8~mm/s$ to $150~mm/s$.
+However, for our fast axonal conduction velocities ($\kappa=0.1$ corresponding to $200~mm/s$ or $\kappa=0.05$ corresponding to $400~mm/s$) 
+and longer characteristic connectivity $\lambda$ we measure wave propagation speeds up to $56~mm/s$ comparable to previous results.
+
 
 \FloatBarrier
 
