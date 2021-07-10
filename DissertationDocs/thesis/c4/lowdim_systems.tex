@@ -126,8 +126,20 @@ To test this hypothesis we plot calculate the density of inhibitory neurons acro
    \includegraphics[width=\textwidth]{fig/2DAttractor_seed35_InhibitoryDensity}
 \end{figure}
 
-
 \FloatBarrier
+
+We do not observe spiral waves in our simulations with the model parameters set at $\Sigma$.
+With the higher connectivity observed in the sheet (figure \ref{fig:connection_delay_distrbution_2D}) we see circular waves emanating from a point.
+Although these waves can combine to form a plane wave structure (figure \ref{fig:2D_plane_wave}), we have not observed spiral wave patterns.
+Given that the sheet has higher connectivity than the minicolumn, we reduce the connection strength K from $K=10$ to $K=6$.
+The waves at the lower connection strength are thinner and sparser.
+We now observe the formation of spiral wave pattern in figure \ref{fig:2DWaveRasters_Spiral}.
+\begin{figure}[!htb]
+ \caption{ Raster plots showing spiral wave behavior, especially in the center left. The sheet is 200x200x2, $K=6$, $\kappa=0.4$ }
+ \label{fig:2DWaveRasters_Spiral}
+ \centering
+   \includegraphics[width=\textwidth]{fig/2DWaveRasters_SpiralWave}
+\end{figure}
 
 In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain simultaneous spike timing irregularity with fluctuations in the average firing rate of the ensemble. 
 Despite the complex spatiotemporal patterns the overall mean voltage shows a small, steady oscillation.
