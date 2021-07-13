@@ -38,7 +38,7 @@ These minicolumns are aligned perpendicular to the pia and can be hundreds of mi
 Although their relevance to cognition and function is still being debated \citep{horton2005}\citep{Cruz2009}\citep{buxhoeveden2002}, it is possible that they can sustain traveling waves.
 
 To address this possibility, here we investigate the conditions under which traveling waves can exist on quasi one-dimensional systems, and their fundamental properties and dynamics.  
-Inspired by minicolumns, our systems consist of thin (few neuron) and long (~100 neuron) networks of locally connected neurons placed on a three-dimensional lattice.  
+Inspired by minicolumns, our systems consist of thin (few neuron) and long (100 neuron) networks of locally connected neurons placed on a three-dimensional lattice.  
 We model the neuron dynamics using the Izhikevich model \citep{izhikevich2003} that allow us to explore more complex neuron dynamics than typically afforded by integrate-and-fire models \citep{keane2015}\citep{Senk2020} while also providing a distribution of neuron dynamical parameters that mimics the type and variety of neurons observed in the mammalian cortex.
 We use a morphology and connectivity model inspired by \citet{maass2002},incorporating a local connectivity model \citep{Levy2012}\citep{Pyle2017}\citep{Fino2011}.
 To incorporate elements of a real brain, we consider a model with substantial randomness in both individual neurons and connections between neurons while also considering  distance-dependent time delays in the propagation of action potentials.
@@ -78,8 +78,8 @@ When $\kappa=0$ the action potential excites the post-synaptic neuron on the suc
  
 The distribution of post-synaptic connections and delay times are shown in Figure \ref{fig:connection_delay_distrbution} for an example minicolumn.
 \begin{figure}[!htb]
-  \subfloat[][]{\includegraphics[width=\textwidth]{fig/ConnectionNumberDistribution} }
-  \subfloat[][]{\includegraphics[width=\textwidth]{fig/DelayDistribution} }
+  \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/ConnectionNumberDistribution} }
+  \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/DelayDistribution} }
  \caption{Distribution of (A) number of post-synaptic connections per neuron and (B) delay time. Data was taken over 100 realizations of a 2x2x50 SCE, $\lambda=2.5$, $\kappa=1$.  } 
  \label{fig:connection_delay_distrbution}
 \end{figure}
@@ -153,6 +153,7 @@ A representative raster plot of the spike events (Figure \ref{fig:sigma_raster})
 	Traveling waves can be seen as diagonal structures of dense firing activity \citet{Senk2020}. }
   \label{fig:sigma_raster}
 \end{figure}
+\FloatBarrier
 
 The effect of varying the parameters on traveling waves are shown in Figure \ref{fig:wave_parameters}.
 The graphs of the wave firing fraction versus $K$, $\lambda$ and $P_{exc}$ show similar behavior.
@@ -179,8 +180,11 @@ For the range of values tested, the parameter $\kappa$ does not show a strong in
 This is in contrast to previous work in largely isotropic networks and neural field models which found that the delay parameter is important for the emergence of traveling waves \citet{Senk2020}\citet{Atay2006}\citet{Roxin2005}.
 However, it is consistent with other work that found traveling wave patterns without including propagation delay \citet{Folias2012}\citet{Wyller2007}.
 
-A natural question is whether the few long connections along the Z direction that cannot exist in the X or Y directions exert a dominant role on these results.
-By performing the same experiments as in Figure 4, but now pruning long-range connections, results show that the influence of the longer connections is minimal (SI Figure 4).
+Our model includes several artifacts that may not be important for studyign traveling waves.
+The probabilisitc connection results in a few long connections along the Z direction that cannot exist in the X or Y directions.
+We have also placed neurons an a unit cubic lattice with no spatial perturbation.
+By performing the same experiments as in Figure 4, but now pruning long-range connections and moving the neurons off the lattice, 
+results show that these model artifacts do not substantially affect traveling waves.
 
 We establish purely one-dimensional systems in our model for comparison to previous work with purely one-dimensional systems.
 We start with the SCE described in Section 3.1 for measuring wave speed: a 2x2x50 (XxYxZ) SCE with model parameters at the reference point $\Sigma_v$. 

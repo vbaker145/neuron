@@ -83,7 +83,7 @@ The spike rate of the excitatory neurons increases linearly with the input magni
   \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/ISIDistribution} } 
   \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/AvgSpikeFrequency} }
   \caption{a) The distribution of inter-spike intervals for our excitatory and inhibitory neurons with a constant $5\ mV$ stimulus.  
-      b) The average ISI of the excitatory and inhibitory neurons decreases as the constant stimulus becomes stronger.}
+      b) The spike frequency of the excitatory and inhibitory neurons increases as the constant stimulus becomes stronger.}
   \label{fig:ISIstatistics}
 \end{figure}
 \FloatBarrier
@@ -114,7 +114,7 @@ After placing, we connect two neurons based on their relative distance according
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
 where $D(a,b)$ is the Euclidean distance between neuron a and b, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is the peak probability of connection .
-In \citep{Levy2012} the authors showed that the synaptic connections in the mouse auditory cortex follow this connection probability.
+In \citet{Levy2012} the authors showed that the synaptic connections in the mouse auditory cortex follow this connection probability.
 Multiple connections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
 Two neurons may be recurrently connected, however. 
 
@@ -131,7 +131,7 @@ We summarize our model parameters in Table \ref{tab:all_params}.
  \begin{tabular}{ll}
   Population & Excitatory, inhibitory \\
   Topology & Quasi 1-D minicolumn, quasi 2-D sheet, ``2.5D'' forest of minicolumns \\
-  Connectivity & Stochastic, $P_{cconnect}$ exponentially decays with distance between neurons \\
+  Connectivity & Stochastic, $P_{connect}$ exponentially decays with distance between neurons \\
   Neuron model & Izhikevich model with distribution of neuron parameters \\
   Synapse response & Exponential synaptic response with randomized peak connection strength  \\
   Spike propagation & Delay proportional to distance, Fixed propagation time \\
