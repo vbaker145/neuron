@@ -1,0 +1,1979 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{none/global}
+    \entry{Muller2018}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=ce7c3b818147f305ad3dea84d0eeef93}{%
+           family={Muller},
+           family_i={M\bibinitperiod},
+           given={Lyle},
+           given_i={L\bibinitperiod}}}%
+        {{uniquename=0,hash=d12120a760bbf747cd3b1c4d279c7f34}{%
+           family={Chavane},
+           family_i={C\bibinitperiod},
+           given={Frédéric},
+           given_i={F\bibinitperiod}}}%
+        {{uniquename=0,hash=59d69504828c6e2c5c6a95994c82acac}{%
+           family={Reynolds},
+           family_i={R\bibinitperiod},
+           given={John},
+           given_i={J\bibinitperiod}}}%
+        {{uniquename=0,hash=6033f260b519e26ab1638b247f68b6cb}{%
+           family={Sejnowski},
+           family_i={S\bibinitperiod},
+           given={Terrence\bibnamedelima J.},
+           given_i={T\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{9f70eceb4cd94411799ad2fc36d73653}
+      \strng{fullhash}{e0636786419173d7413c55ee8560e6b2}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2018}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{14710048}
+      \field{journaltitle}{Nature Reviews Neuroscience}
+      \field{number}{5}
+      \field{title}{{Cortical travelling waves: Mechanisms and computational principles}}
+      \field{volume}{19}
+      \field{year}{2018}
+      \field{pages}{255\bibrangedash 268}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1038/nrn.2018.20
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Cortical Traveling Waves Mechanisms and Computational Principles.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1038/nrn.2018.20
+      \endverb
+    \endentry
+    \entry{reimer2010}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=ff700a5f9c7cdffd9408b4095b200d73}{%
+           family={Reimer},
+           family_i={R\bibinitperiod},
+           given={Antonia},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=a855bc4de719184e75f15d95472af19a}{%
+           family={Hubka},
+           family_i={H\bibinitperiod},
+           given={Peter},
+           given_i={P\bibinitperiod}}}%
+        {{uniquename=0,hash=f556d24f97d3f3cc3632eaa054562b1c}{%
+           family={Engel},
+           family_i={E\bibinitperiod},
+           given={Andreas\bibnamedelima K.},
+           given_i={A\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{uniquename=0,hash=42eb874d2f1736a1af083833c004a29f}{%
+           family={Kral},
+           family_i={K\bibinitperiod},
+           given={Andrej},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e9c3afefa78a2ef32dcdf8c3ccd3323f}
+      \strng{fullhash}{e178b49c4c1700487238dd43c89b8793}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2011}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{10473211}
+      \field{journaltitle}{Cerebral Cortex}
+      \field{number}{1}
+      \field{title}{{Fast propagating waves within the rodent auditory cortex}}
+      \field{volume}{21}
+      \field{year}{2011}
+      \field{pages}{166\bibrangedash 177}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1093/cercor/bhq073
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Fast Propagating Waves within the Rodent Auditory Cortex.pdf:pdf
+      \endverb
+      \keyw{Anesthesia,Cortical hierarchy,Cortical organization,Spatiotemporal pattern,Traveling wave}
+    \endentry
+    \entry{wu2008}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=48403a0f8104fadbe37647246ae5b921}{%
+           family={Wu},
+           family_i={W\bibinitperiod},
+           given={Jian\bibnamedelima Young},
+           given_i={J\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{uniquename=0,hash=06181082a18352f9a72926eb94debef1}{%
+           family={Huang},
+           family_i={H\bibinitperiod},
+           given={Xiaoying},
+           given_i={X\bibinitperiod}}}%
+        {{uniquename=0,hash=9adff71f7560bbcaebadc85c4427b8d1}{%
+           family={Zhang},
+           family_i={Z\bibinitperiod},
+           given={Chuan},
+           given_i={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{9927aa466f1bd4af1efafb8cb6a1ec6b}
+      \strng{fullhash}{7ff88e9ecac02b40987d92cd90890c96}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2008}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{10738584}
+      \field{journaltitle}{Neuroscientist}
+      \field{number}{5}
+      \field{title}{{Propagating waves of activity in the neocortex: What they are, what they do}}
+      \field{volume}{14}
+      \field{year}{2008}
+      \field{pages}{487\bibrangedash 502}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1177/1073858408317066
+      \endverb
+      \keyw{Barrel cortex,Neuronal population activity,Propagating waves,Sensory processing,Visual cortex,Voltage-sensitive dye imaging}
+    \endentry
+    \entry{huang2004}{article}{}
+      \name{author}{7}{}{%
+        {{uniquename=0,hash=06181082a18352f9a72926eb94debef1}{%
+           family={Huang},
+           family_i={H\bibinitperiod},
+           given={Xiaoying},
+           given_i={X\bibinitperiod}}}%
+        {{uniquename=0,hash=3399bfb253f168f4da99175a25302238}{%
+           family={Troy},
+           family_i={T\bibinitperiod},
+           given={William\bibnamedelima C.},
+           given_i={W\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{uniquename=0,hash=d16aa0879612f82c2aae3699ff89e232}{%
+           family={Yang},
+           family_i={Y\bibinitperiod},
+           given={Qian},
+           given_i={Q\bibinitperiod}}}%
+        {{uniquename=0,hash=041af8ba0cd432fb5fcaad3beaec4e49}{%
+           family={Ma},
+           family_i={M\bibinitperiod},
+           given={Hongtao},
+           given_i={H\bibinitperiod}}}%
+        {{uniquename=0,hash=60732be31717254e2636a9f2598292d9}{%
+           family={Laing},
+           family_i={L\bibinitperiod},
+           given={Carlo\bibnamedelima R.},
+           given_i={C\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{uniquename=0,hash=ebc33a2e9b13f8a1eb57527c6431d6f2}{%
+           family={Schiff},
+           family_i={S\bibinitperiod},
+           given={Steven\bibnamedelima J.},
+           given_i={S\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{uniquename=0,hash=48403a0f8104fadbe37647246ae5b921}{%
+           family={Wu},
+           family_i={W\bibinitperiod},
+           given={Jian\bibnamedelima Young},
+           given_i={J\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{091da5d5f08e6af7b9c50b1ec1ab5faf}
+      \strng{fullhash}{7f7cb2425b6db46af6da89651fc0a949}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2004}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{02706474}
+      \field{journaltitle}{Journal of Neuroscience}
+      \field{number}{44}
+      \field{title}{{Spiral waves in disinhibited mammalian neocortex}}
+      \field{volume}{24}
+      \field{year}{2004}
+      \field{pages}{9897\bibrangedash 9902}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1523/JNEUROSCI.2705-04.2004
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Spiral waves in disinhibited mammalian neocortex.pdf:pdf
+      \endverb
+      \keyw{Optical imaging,Oscillation,Partial differential equations,Spiral waves,Tangential slice,Voltage-sensitive dye}
+    \endentry
+    \entry{Golomb1999}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=a9331e0902a63f6377de7300212f75ac}{%
+           family={Golomb},
+           family_i={G\bibinitperiod},
+           given={David},
+           given_i={D\bibinitperiod}}}%
+        {{uniquename=2,hash=5bc6011a8670da8e7f465f8477a8700c}{%
+           family={Ermentrout},
+           family_i={E\bibinitperiod},
+           given={G.\bibnamedelimi Bard},
+           given_i={G\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{cea796ad9f49e0bb55e72166bb0e0fbb}
+      \strng{fullhash}{cea796ad9f49e0bb55e72166bb0e0fbb}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1999}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00278424}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
+      \field{number}{23}
+      \field{title}{{Continuous and lurching traveling pulses in neuronal networks with delay and spatially decaying connectivity}}
+      \field{volume}{96}
+      \field{year}{1999}
+      \field{pages}{13480\bibrangedash 13485}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.96.23.13480
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Continuous and lurching traveling pulses in neuronal networks with delay and spatially decaying connectivity.pdf:pdf
+      \endverb
+      \keyw{Discharge,Lurching,Neocortex,Pulse,Thalamus}
+    \endentry
+    \entry{keane2015}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=0bac8a757569219ae344c2b47b5b290f}{%
+           family={Keane},
+           family_i={K\bibinitperiod},
+           given={Adam},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=5f0aa62a9f688169b1d795919b544236}{%
+           family={Gong},
+           family_i={G\bibinitperiod},
+           given={Pulin},
+           given_i={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{ed935b39573286799411d8ab971a5ff9}
+      \strng{fullhash}{ed935b39573286799411d8ab971a5ff9}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2015}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{15292401}
+      \field{journaltitle}{Journal of Neuroscience}
+      \field{number}{4}
+      \field{title}{{Propagating waves can explain irregular neural dynamics}}
+      \field{volume}{35}
+      \field{year}{2015}
+      \field{pages}{1591\bibrangedash 1605}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1523/JNEUROSCI.1669-14.2015
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Propagating Wave Can Explain Irregular Neural Dynamics.pdf:pdf
+      \endverb
+      \keyw{Balanced excitation and inhibition,Cerebral cortex,Computer simulation,Cross-correlation,Propagating waves,Synchrony}
+    \endentry
+    \entry{Senk2020}{article}{}
+      \name{author}{7}{}{%
+        {{uniquename=0,hash=e063c4f4f823efdd0dbba8fc361d259f}{%
+           family={Senk},
+           family_i={S\bibinitperiod},
+           given={Johanna},
+           given_i={J\bibinitperiod}}}%
+        {{uniquename=0,hash=51fb98c448b619b5e60bc4a8a4f37d2f}{%
+           family={Korvasová},
+           family_i={K\bibinitperiod},
+           given={Karol},
+           given_i={K\bibinitperiod}}}%
+        {{uniquename=0,hash=6396d88a2cfde0fc44c81de1192accb9}{%
+           family={Schuecker},
+           family_i={S\bibinitperiod},
+           given={Jannis},
+           given_i={J\bibinitperiod}}}%
+        {{uniquename=0,hash=176185cd3410bf4e0c07f7a56b9973c7}{%
+           family={Hagen},
+           family_i={H\bibinitperiod},
+           given={Espen},
+           given_i={E\bibinitperiod}}}%
+        {{uniquename=0,hash=8b78dcd6c069478ed493378f5de4d8c1}{%
+           family={Tetzlaff},
+           family_i={T\bibinitperiod},
+           given={Tom},
+           given_i={T\bibinitperiod}}}%
+        {{uniquename=0,hash=a6e9c8b3b1dc422f6d4f5f42ab3051bc}{%
+           family={Diesmann},
+           family_i={D\bibinitperiod},
+           given={Markus},
+           given_i={M\bibinitperiod}}}%
+        {{uniquename=0,hash=eb14f1985bed361a0e0522291cb6ce38}{%
+           family={Helias},
+           family_i={H\bibinitperiod},
+           given={Moritz},
+           given_i={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{d58ee8e03ab60c3f0eab4bfc8e2dc97d}
+      \strng{fullhash}{02352b8ab7ecde225363bf72805ba8ac}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2020}
+      \field{labelmonth}{05}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Phys. Rev. Research}
+      \field{month}{05}
+      \field{number}{2}
+      \field{title}{{Conditions for wave trains in spiking neural networks}}
+      \field{volume}{2}
+      \field{year}{2020}
+      \field{pages}{23174}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevResearch.2.023174
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevResearch.2.023174
+      \endverb
+    \endentry
+    \entry{Golomb1996}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=a9331e0902a63f6377de7300212f75ac}{%
+           family={Golomb},
+           family_i={G\bibinitperiod},
+           given={David},
+           given_i={D\bibinitperiod}}}%
+        {{uniquename=0,hash=1098205efeeec99d678fdd1d167ce663}{%
+           family={Wang},
+           family_i={W\bibinitperiod},
+           given={Xiao\bibnamedelima Jing},
+           given_i={X\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{uniquename=0,hash=2e33d9b4e019e474e0f284b5744bf0f6}{%
+           family={Rinzel},
+           family_i={R\bibinitperiod},
+           given={John},
+           given_i={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{845e01a0742e83da6d313189990b3076}
+      \strng{fullhash}{7608b278819d85f5d30fe93ab038956c}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1996}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00223077}
+      \field{journaltitle}{Journal of Neurophysiology}
+      \field{number}{2}
+      \field{title}{{Propagation of spindle waves in a thalamic slice model}}
+      \field{volume}{75}
+      \field{year}{1996}
+      \field{pages}{750\bibrangedash 769}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1152/jn.1996.75.2.750
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Propagation of Spindle Waves in a Thalamic Slice Model .pdf:pdf
+      \endverb
+    \endentry
+    \entry{ermentrout2001}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=2,hash=5bc6011a8670da8e7f465f8477a8700c}{%
+           family={Ermentrout},
+           family_i={E\bibinitperiod},
+           given={G.\bibnamedelimi Bard},
+           given_i={G\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{uniquename=0,hash=1858ac2731e79acf4633186ff1f23ae0}{%
+           family={Kleinfeld},
+           family_i={K\bibinitperiod},
+           given={David},
+           given_i={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{a226f4f4a8f623fdbf8967b70ad34e7b}
+      \strng{fullhash}{a226f4f4a8f623fdbf8967b70ad34e7b}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2001}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{08966273}
+      \field{journaltitle}{Neuron}
+      \field{number}{1}
+      \field{title}{{Traveling electrical waves in cortex: Insights from phase dynamics and speculation on a computational role}}
+      \field{volume}{29}
+      \field{year}{2001}
+      \field{pages}{33\bibrangedash 44}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/S0896-6273(01)00178-7
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Traveling Electrical Waves in Cortex\: Insights from Phase Dynamics and Speculation on a Computational Role.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Rubino2006}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=2972d7f28e4b16cc8ef7fa82eb92d92f}{%
+           family={Rubino},
+           family_i={R\bibinitperiod},
+           given={Doug},
+           given_i={D\bibinitperiod}}}%
+        {{uniquename=0,hash=39876ae82650ad4b60c8b8d5134d1a3f}{%
+           family={Robbins},
+           family_i={R\bibinitperiod},
+           given={Kay\bibnamedelima A.},
+           given_i={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{uniquename=0,hash=e708b079ee092dcbac7a76f406fce763}{%
+           family={Hatsopoulos},
+           family_i={H\bibinitperiod},
+           given={Nicholas\bibnamedelima G.},
+           given_i={N\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{89b4bd2287a4c09c444e8e7f3d5ea2bf}
+      \strng{fullhash}{728ae3e21d9b9d3721b656f59b1b75cc}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2006}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{10976256}
+      \field{journaltitle}{Nature Neuroscience}
+      \field{number}{12}
+      \field{title}{{Propagating waves mediate information transfer in the motor cortex}}
+      \field{volume}{9}
+      \field{year}{2006}
+      \field{pages}{1549\bibrangedash 1557}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1038/nn1802
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Propagating Waves Mediate Information Transfer in the Motor Cortex.pdf:pdf
+      \endverb
+    \endentry
+    \entry{lubernov2009}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=a1a51033f059a59432bb628b934b94d2}{%
+           family={Lubenov},
+           family_i={L\bibinitperiod},
+           given={Evgueniy\bibnamedelima V.},
+           given_i={E\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{uniquename=0,hash=d6822155d5d33b86a02602ef1e756aad}{%
+           family={Siapas},
+           family_i={S\bibinitperiod},
+           given={Athanassios\bibnamedelima G.},
+           given_i={A\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{15dc70fbbec1fc710bd9a80a64f07329}
+      \strng{fullhash}{15dc70fbbec1fc710bd9a80a64f07329}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2009}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00280836}
+      \field{journaltitle}{Nature}
+      \field{number}{7246}
+      \field{title}{{Hippocampal theta oscillations are travelling waves}}
+      \field{volume}{459}
+      \field{year}{2009}
+      \field{pages}{534\bibrangedash 539}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1038/nature08010
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Hippocampal Theta Oscillations are Traveling Waves.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Muller2014}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=ce7c3b818147f305ad3dea84d0eeef93}{%
+           family={Muller},
+           family_i={M\bibinitperiod},
+           given={Lyle},
+           given_i={L\bibinitperiod}}}%
+        {{uniquename=0,hash=6156c9f10670dd7a7d8fb1f47c58cf66}{%
+           family={Reynaud},
+           family_i={R\bibinitperiod},
+           given={Alexandre},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=d12120a760bbf747cd3b1c4d279c7f34}{%
+           family={Chavane},
+           family_i={C\bibinitperiod},
+           given={Frédéric},
+           given_i={F\bibinitperiod}}}%
+        {{uniquename=0,hash=bb75b070b774ddeb8d2843d3509c662c}{%
+           family={Destexhe},
+           family_i={D\bibinitperiod},
+           given={Alain},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{9f70eceb4cd94411799ad2fc36d73653}
+      \strng{fullhash}{96c3eccba04160ee4c8c39686a7f4edb}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2014}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{20411723}
+      \field{journaltitle}{Nature Communications}
+      \field{title}{{The stimulus-evoked population response in visual cortex of awake monkey is a propagating wave}}
+      \field{volume}{5}
+      \field{year}{2014}
+      \verb{doi}
+      \verb 10.1038/ncomms4675
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Stimulus-evoked population response in visual cortex of awake monkey is a propagating wave:
+      \endverb
+    \endentry
+    \entry{sanes1993}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=131203789698c84c510a2e1454d9da7c}{%
+           family={Sanes},
+           family_i={S\bibinitperiod},
+           given={J.\bibnamedelimi N.},
+           given_i={J\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{uniquename=0,hash=8c1c0afbe5cb07f9ed0ddef174171b0b}{%
+           family={Donoghue},
+           family_i={D\bibinitperiod},
+           given={J.\bibnamedelimi P.},
+           given_i={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{f985a00a485af776f6be6a5024d6c929}
+      \strng{fullhash}{f985a00a485af776f6be6a5024d6c929}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1993}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00278424}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
+      \field{number}{10}
+      \field{title}{{Oscillations in local field potentials of the primate motor cortex during voluntary movement}}
+      \field{volume}{90}
+      \field{year}{1993}
+      \field{pages}{4470\bibrangedash 4474}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1073/pnas.90.10.4470
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Oscillations in local field potentials of the primate motor cortex.pdf:pdf
+      \endverb
+      \keyw{forearm,instructed voluntary movements,local neural circuits,monkeys,neural oscillations}
+    \endentry
+    \entry{Riehle2013}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=0840237d57f02a400049f66f51b385d9}{%
+           family={Riehle},
+           family_i={R\bibinitperiod},
+           given={Alexa},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=ba7be3236d94f8e49c4357c211b62f9e}{%
+           family={Wirtssohn},
+           family_i={W\bibinitperiod},
+           given={Sarah},
+           given_i={S\bibinitperiod}}}%
+        {{uniquename=0,hash=53e64085ba1c7e0fd687afbb264d9e30}{%
+           family={Grün},
+           family_i={G\bibinitperiod},
+           given={Sonja},
+           given_i={S\bibinitperiod}}}%
+        {{uniquename=0,hash=ddb562435742d96f14d13cc20ed3f0c7}{%
+           family={Brochier},
+           family_i={B\bibinitperiod},
+           given={Thomas},
+           given_i={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Frontiers}%
+      }
+      \strng{namehash}{88d15238933e9482c8be9dbf1e0af060}
+      \strng{fullhash}{0fb8090469ea515af909c30d9052267e}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2013}
+      \field{labelmonth}{03}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1662-5110}
+      \field{journaltitle}{Frontiers in Neural Circuits}
+      \field{month}{03}
+      \field{number}{MAR}
+      \field{title}{{Mapping the spatio-temporal structure of motor cortical LFP and spiking activities during reach-to-grasp movements}}
+      \field{volume}{7}
+      \field{year}{2013}
+      \field{pages}{48}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3389/fncir.2013.00048
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Riehle et al. - 2013 - Mapping the spatio-temporal structure of motor cortical LFP and spiking activities during reach-to-grasp movement.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://journal.frontiersin.org/article/10.3389/fncir.2013.00048/abstract
+      \endverb
+      \keyw{Cortical map,High-density recordings,LFP,Monkey motor cortex,Spiking activity}
+    \endentry
+    \entry{Shoham1999}{article}{}
+      \name{author}{8}{}{%
+        {{uniquename=0,hash=6a8bb32e43982a93fe97bde0915d95fe}{%
+           family={Shoham},
+           family_i={S\bibinitperiod},
+           given={Doron},
+           given_i={D\bibinitperiod}}}%
+        {{uniquename=0,hash=722e8cfd0a2730922a2e756680532adb}{%
+           family={Glaser},
+           family_i={G\bibinitperiod},
+           given={Daniel\bibnamedelima E.},
+           given_i={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{uniquename=0,hash=f74b5cc49d6df4813a8c4c28342facb8}{%
+           family={Arieli},
+           family_i={A\bibinitperiod},
+           given={Amos},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=98dc15c1614fafd8486a9c70244ddbec}{%
+           family={Kenet},
+           family_i={K\bibinitperiod},
+           given={Tal},
+           given_i={T\bibinitperiod}}}%
+        {{uniquename=0,hash=07b1fa2b1cf84d7d8b30d78a8b04b4b3}{%
+           family={Wijnbergen},
+           family_i={W\bibinitperiod},
+           given={Chaipi},
+           given_i={C\bibinitperiod}}}%
+        {{uniquename=0,hash=0b94a664f85d91d65ec8d6f0b2c5fbc0}{%
+           family={Toledo},
+           family_i={T\bibinitperiod},
+           given={Yuval},
+           given_i={Y\bibinitperiod}}}%
+        {{uniquename=0,hash=6b79b489d294613f53563ad328cfab2d}{%
+           family={Hildesheim},
+           family_i={H\bibinitperiod},
+           given={Rina},
+           given_i={R\bibinitperiod}}}%
+        {{uniquename=0,hash=6e8078873cd3488bee430fdb319ee56a}{%
+           family={Grinvald},
+           family_i={G\bibinitperiod},
+           given={Amiram},
+           given_i={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cell Press}%
+      }
+      \strng{namehash}{fbd7bce6f489c046a6235f2f827b6ea9}
+      \strng{fullhash}{73f4d59df9d5d18c5b75f9130161effa}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1999}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{08966273}
+      \field{journaltitle}{Neuron}
+      \field{number}{4}
+      \field{title}{{Imaging cortical dynamics at high spatial and temporal resolution with novel blue voltage-sensitive dyes}}
+      \field{volume}{24}
+      \field{year}{1999}
+      \field{pages}{791\bibrangedash 802}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/S0896-6273(00)81027-2
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Shoham et al. - 1999 - Imaging cortical dynamics at high spatial and temporal resolution with novel blue voltage-sensitive dyes.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb https://pubmed.ncbi.nlm.nih.gov/10624943/
+      \endverb
+      \keyw{A Grinvald,Animals,Brain Mapping,Cats,Cerebral Cortex / anatomy & histology*,Cerebral Cortex / physiology*,Coloring Agents*,Computer-Assisted / methods*,D E Glaser,D Shoham,Electrophysiology,Haplorhini,Heart Rate / physiology,Image Processing,MEDLINE,NCBI,NIH,NLM,National Center for Biotechnology Information,National Institutes of Health,National Library of Medicine,Non-U.S. Gov't,Orientation / physiology,Photic Stimulation,PubMed Abstract,Rats,Research Support,doi:10.1016/s0896-6273(00)81027-2,pmid:10624943}
+    \endentry
+    \entry{Xu2007}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=47e9da83c191a07b7df5c9d9f2ce1f9e}{%
+           family={Xu},
+           family_i={X\bibinitperiod},
+           given={Weifeng},
+           given_i={W\bibinitperiod}}}%
+        {{uniquename=0,hash=06181082a18352f9a72926eb94debef1}{%
+           family={Huang},
+           family_i={H\bibinitperiod},
+           given={Xiaoying},
+           given_i={X\bibinitperiod}}}%
+        {{uniquename=0,hash=c325eeb5ede6d0217963b82926a805a0}{%
+           family={Takagaki},
+           family_i={T\bibinitperiod},
+           given={Kentaroh},
+           given_i={K\bibinitperiod}}}%
+        {{uniquename=0,hash=7a9f69493001780b8c9ab5506e76d8e7}{%
+           prefix={young},
+           prefix_i={y\bibinitperiod},
+           family={Wu},
+           family_i={W\bibinitperiod},
+           given={Jian},
+           given_i={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{eb4b05e68977b46994a6c6f0bbfca18f}
+      \strng{fullhash}{511c7b67ac85748b4bc8b9f328c54c23}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2007}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{08966273}
+      \field{journaltitle}{Neuron}
+      \field{number}{1}
+      \field{title}{{Compression and Reflection of Visually Evoked Cortical Waves}}
+      \field{volume}{55}
+      \field{year}{2007}
+      \field{pages}{119\bibrangedash 129}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1016/j.neuron.2007.06.016
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Compression and Reflection of Visually Evoked Cortical Waves.pdf:pdf
+      \endverb
+      \keyw{SIGNALING,SYSNEURO}
+    \endentry
+    \entry{Ferezou2006}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=94c22463548fa9d2114ce2b3fa7a41d1}{%
+           family={Ferezou},
+           family_i={F\bibinitperiod},
+           given={Isabelle},
+           given_i={I\bibinitperiod}}}%
+        {{uniquename=0,hash=3f72f8235604f9466fa3847fc961d1dc}{%
+           family={Bolea},
+           family_i={B\bibinitperiod},
+           given={Sonia},
+           given_i={S\bibinitperiod}}}%
+        {{uniquename=0,hash=aad6b8195e6da537491f3d8179a6e65e}{%
+           family={Petersen},
+           family_i={P\bibinitperiod},
+           given={Carl\bibnamedelima C.H.},
+           given_i={C\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{380cf151136609aadc4c8acf0318010d}
+      \strng{fullhash}{93466d87c4aedd6a66221aba6217cebf}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2006}
+      \field{labelmonth}{05}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{08966273}
+      \field{journaltitle}{Neuron}
+      \field{month}{05}
+      \field{number}{4}
+      \field{title}{{Visualizing the Cortical Representation of Whisker Touch: Voltage-Sensitive Dye Imaging in Freely Moving Mice}}
+      \field{volume}{50}
+      \field{year}{2006}
+      \field{pages}{617\bibrangedash 629}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.neuron.2006.03.043
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Ferezou, Bolea, Petersen - 2006 - Visualizing the Cortical Representation of Whisker Touch Voltage-Sensitive Dye Imaging in Freely Movin.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.cell.com/article/S0896627306002704/fulltext%20http://www.cell.com/article/S0896627306002704/abstract%20https://www.cell.com/neuron/abstract/S0896-6273(06)00270-4
+      \endverb
+      \keyw{SYSNEURO}
+    \endentry
+    \entry{gibson2009}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=88bbb6c6bfda8bf9ed20b68cbaa68aa2}{%
+           family={Gibson},
+           family_i={G\bibinitperiod},
+           given={Jay\bibnamedelima R.},
+           given_i={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{uniquename=0,hash=6f4315193019d7829c467e3a7f161443}{%
+           family={Belerlein},
+           family_i={B\bibinitperiod},
+           given={Michael},
+           given_i={M\bibinitperiod}}}%
+        {{uniquename=0,hash=730d100d83724bea9a9ef0f3dd3fe3c5}{%
+           family={Connors},
+           family_i={C\bibinitperiod},
+           given={Barry\bibnamedelima W.},
+           given_i={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{1abb4f16082ceec72e39c1fffb6adbd1}
+      \strng{fullhash}{9dd65cd5367bf7b77b07d19e94a746ba}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1999}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00280836}
+      \field{journaltitle}{Nature}
+      \field{number}{6757}
+      \field{title}{{Two networks of electrically coupled inhibitory neurons in neocortex}}
+      \field{volume}{402}
+      \field{year}{1999}
+      \field{pages}{75\bibrangedash 79}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1038/47035
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Two networks of electrically coupled inhibitory neurons in neocortex.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Townsend2018}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=e91e99fb5a2bc3e1b46f44ec164fa148}{%
+           family={Townsend},
+           family_i={T\bibinitperiod},
+           given={Rory\bibnamedelima G.},
+           given_i={R\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{uniquename=0,hash=5f0aa62a9f688169b1d795919b544236}{%
+           family={Gong},
+           family_i={G\bibinitperiod},
+           given={Pulin},
+           given_i={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{5da63ef21541317dd4a98c54e6ba2a34}
+      \strng{fullhash}{5da63ef21541317dd4a98c54e6ba2a34}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2018}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{1111111111}
+      \field{issn}{15537358}
+      \field{journaltitle}{PLoS Computational Biology}
+      \field{number}{12}
+      \field{title}{{Detection and analysis of spatiotemporal patterns in brain activity}}
+      \field{volume}{14}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 29}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.1371/journal.pcbi.1006643
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/detection and analysis of spatiotemporal patterns in brain activity.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Golomb1997}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=a9331e0902a63f6377de7300212f75ac}{%
+           family={Golomb},
+           family_i={G\bibinitperiod},
+           given={David},
+           given_i={D\bibinitperiod}}}%
+        {{uniquename=0,hash=b12ed02ba8c835faa099bb14f6ce5c9e}{%
+           family={Amitai},
+           family_i={A\bibinitperiod},
+           given={Yael},
+           given_i={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{2678a6a025abeea4fdab1b1d6cecf555}
+      \strng{fullhash}{2678a6a025abeea4fdab1b1d6cecf555}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1997}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00223077}
+      \field{journaltitle}{Journal of Neurophysiology}
+      \field{number}{3}
+      \field{title}{{Propagating neuronal discharges in neocortical slices: Computational and experimental study}}
+      \field{volume}{78}
+      \field{year}{1997}
+      \field{pages}{1199\bibrangedash 1211}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1152/jn.1997.78.3.1199
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Propagating Neuronal Discharges in Neocortical Slices\: Computational and Experimental Study.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Qi2015}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=5500c30e4574fc1978c3660919563e16}{%
+           family={Qi},
+           family_i={Q\bibinitperiod},
+           given={Yang},
+           given_i={Y\bibinitperiod}}}%
+        {{uniquename=0,hash=5f0aa62a9f688169b1d795919b544236}{%
+           family={Gong},
+           family_i={G\bibinitperiod},
+           given={Pulin},
+           given_i={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{fc3aef39805d424ae85b8c6d129761b5}
+      \strng{fullhash}{fc3aef39805d424ae85b8c6d129761b5}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2015}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{15502376}
+      \field{journaltitle}{Physical Review E - Statistical, Nonlinear, and Soft Matter Physics}
+      \field{number}{2}
+      \field{title}{{Dynamic patterns in a two-dimensional neural field with refractoriness}}
+      \field{volume}{92}
+      \field{year}{2015}
+      \field{pages}{1\bibrangedash 13}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1103/PhysRevE.92.022702
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Dynamic patterns in a Two Dimensional Neural Field with Refractoriness.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Wilson1973}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=6737f9bc021111d1355f2a5665f6bc71}{%
+           family={Wilson},
+           family_i={W\bibinitperiod},
+           given={H.\bibnamedelimi R.},
+           given_i={H\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{uniquename=0,hash=a51985cc72f6b5e36bed52417b403e65}{%
+           family={Cowan},
+           family_i={C\bibinitperiod},
+           given={J.\bibnamedelimi D.},
+           given_i={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c28cb9e12ee3d273983d70d719180809}
+      \strng{fullhash}{c28cb9e12ee3d273983d70d719180809}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1973}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{03401200}
+      \field{journaltitle}{Kybernetik}
+      \field{number}{2}
+      \field{title}{{A mathematical theory of the functional dynamics of cortical and thalamic nervous tissue}}
+      \field{volume}{13}
+      \field{year}{1973}
+      \field{pages}{55\bibrangedash 80}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1007/BF00288786
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/A Mathematical Theory of the Functional Dynamics of Cortical and Thalamic Nervous Tissue.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Ermentrout1979}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=2,hash=0e4f343cf5ae626f791dbc9d3e9b8d70}{%
+           family={Ermentrout},
+           family_i={E\bibinitperiod},
+           given={G.\bibnamedelimi B.},
+           given_i={G\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{uniquename=0,hash=a51985cc72f6b5e36bed52417b403e65}{%
+           family={Cowan},
+           family_i={C\bibinitperiod},
+           given={J.\bibnamedelimi D.},
+           given_i={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{cda51965577fa24531179c21cc0f9fdb}
+      \strng{fullhash}{cda51965577fa24531179c21cc0f9fdb}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1979}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{14321416}
+      \field{journaltitle}{Journal of Mathematical Biology}
+      \field{number}{3}
+      \field{title}{{Temporal oscillations in neuronal nets}}
+      \field{volume}{7}
+      \field{year}{1979}
+      \field{pages}{265\bibrangedash 280}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1007/BF00275728
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Ermentrout, Cowan - 1979 - Temporal oscillations in neuronal nets.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb https://link.springer.com/article/10.1007/BF00275728
+      \endverb
+      \keyw{Bifurcation theory,Neurobiology,Nonlinear integro-differential equations}
+    \endentry
+    \entry{Folias2012}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=9f8f5b8f7a805d93f61ba86102ab3cb7}{%
+           family={Folias},
+           family_i={F\bibinitperiod},
+           given={Stefanos\bibnamedelima E.},
+           given_i={S\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{uniquename=2,hash=5bc6011a8670da8e7f465f8477a8700c}{%
+           family={Ermentrout},
+           family_i={E\bibinitperiod},
+           given={G.\bibnamedelimi Bard},
+           given_i={G\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics}%
+      }
+      \strng{namehash}{2868c6bcb58b18ed23b6f887b2433dbf}
+      \strng{fullhash}{2868c6bcb58b18ed23b6f887b2433dbf}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2012}
+      \field{labelmonth}{08}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{15360040}
+      \field{journaltitle}{SIAM Journal on Applied Dynamical Systems}
+      \field{month}{08}
+      \field{number}{3}
+      \field{title}{{Bifurcations of stationary solutions in an interacting pair of E-I neural fields}}
+      \field{volume}{11}
+      \field{year}{2012}
+      \field{pages}{895\bibrangedash 938}
+      \range{pages}{44}
+      \verb{doi}
+      \verb 10.1137/110860094
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Bifurcations of stationary solutions in an interacting pair of E-I neural fields.pdf:pdf
+      \endverb
+      \keyw{Neural field equations,Pattern formation,Stationary bumps,Wilson-Cowan equations}
+    \endentry
+    \entry{Kopell1986}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=ce3861a53644d65d7c5524371794af23}{%
+           family={Kopell},
+           family_i={K\bibinitperiod},
+           given={N.},
+           given_i={N\bibinitperiod}}}%
+        {{uniquename=2,hash=0e4f343cf5ae626f791dbc9d3e9b8d70}{%
+           family={Ermentrout},
+           family_i={E\bibinitperiod},
+           given={G.\bibnamedelimi B.},
+           given_i={G\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley & Sons, Ltd}%
+      }
+      \strng{namehash}{d368f4b57e2433ac02f71af7b74da456}
+      \strng{fullhash}{d368f4b57e2433ac02f71af7b74da456}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1986}
+      \field{labelmonth}{09}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00103640}
+      \field{journaltitle}{Communications on Pure and Applied Mathematics}
+      \field{month}{09}
+      \field{number}{5}
+      \field{title}{{Symmetry and phaselocking in chains of weakly coupled oscillators}}
+      \field{volume}{39}
+      \field{year}{1986}
+      \field{pages}{623\bibrangedash 660}
+      \range{pages}{38}
+      \verb{doi}
+      \verb 10.1002/cpa.3160390504
+      \endverb
+      \verb{url}
+      \verb http://doi.wiley.com/10.1002/cpa.3160390504
+      \endverb
+    \endentry
+    \entry{Williams1997}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=9c5aff072e3818b7549d5630abebe5c6}{%
+           family={Williams},
+           family_i={W\bibinitperiod},
+           given={Thelma\bibnamedelima L.},
+           given_i={T\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{uniquename=0,hash=4aacf1d1eb45d91efd557067fe5d2e27}{%
+           family={Bowtell},
+           family_i={B\bibinitperiod},
+           given={Graham},
+           given_i={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Kluwer Academic Publishers}%
+      }
+      \strng{namehash}{0b4ffb2510a5e36c403f88cf245102c9}
+      \strng{fullhash}{0b4ffb2510a5e36c403f88cf245102c9}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1997}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{09295313}
+      \field{journaltitle}{Journal of Computational Neuroscience}
+      \field{number}{1}
+      \field{title}{{The calculation of frequency-shift functions for chains of coupled oscillators, with application to a network model of the Iamprey locomotor pattern generator}}
+      \field{volume}{4}
+      \field{year}{1997}
+      \field{pages}{47\bibrangedash 55}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1023/A:1008864410375
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Williams, Bowtell - 1997 - The calculation of frequency-shift functions for chains of coupled oscillators, with application to a network.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb https://link.springer.com/article/10.1023/A:1008864410375
+      \endverb
+      \keyw{Central pattern generator,Coupled oscillators,Iamprey spinal cord,Intersegmental coordination,Locomotion}
+    \endentry
+    \entry{Roxin2005}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=4c99271df12e4fc147e74fe83edce225}{%
+           family={Roxin},
+           family_i={R\bibinitperiod},
+           given={Alex},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=7389d1d1a49483310688d954a8feba47}{%
+           family={Brunel},
+           family_i={B\bibinitperiod},
+           given={Nicolas},
+           given_i={N\bibinitperiod}}}%
+        {{uniquename=0,hash=86e7f4a587547cf5bf0a5a57d8298484}{%
+           family={Hansel},
+           family_i={H\bibinitperiod},
+           given={David},
+           given_i={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{52f94c101ad424b10b288c8e631c8fd9}
+      \strng{fullhash}{1faa5d5e3549fed14aecf12085ff624f}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2005}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00319007}
+      \field{journaltitle}{Physical Review Letters}
+      \field{number}{23}
+      \field{title}{{Role of delays in shaping spatiotemporal dynamics of neuronal activity in large networks}}
+      \field{volume}{94}
+      \field{year}{2005}
+      \field{pages}{1\bibrangedash 4}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.94.238103
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Role of delays in shaping spatiotemporal dynamics of neuronal activity in large networks.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Bressloff1997}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=acedb6d88dc9e9d63e560ad86a8e677e}{%
+           family={Bressloff},
+           family_i={B\bibinitperiod},
+           given={P.\bibnamedelimi C.},
+           given_i={P\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{uniquename=0,hash=ae867ebd209d545273cf7a01d8a2514e}{%
+           family={Coombes},
+           family_i={C\bibinitperiod},
+           given={S.},
+           given_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{2a8354c12ce487252145facf7f8011ec}
+      \strng{fullhash}{2a8354c12ce487252145facf7f8011ec}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1997}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{10797114}
+      \field{journaltitle}{Physical Review Letters}
+      \field{number}{24}
+      \field{title}{{Synchrony in an Array of Integrate-and-Fire Neurons with Dendritic Structure}}
+      \field{volume}{78}
+      \field{year}{1997}
+      \field{pages}{4665\bibrangedash 4668}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.78.4665
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Synchrony in an array of integrate and fire neurons with dendritic structure.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Strogatz1991}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=68fade108c3a43705e86ba210a516cf9}{%
+           family={Strogatz},
+           family_i={S\bibinitperiod},
+           given={Steven\bibnamedelima H.},
+           given_i={S\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{uniquename=0,hash=dc83911dc4cbb45d440edad1ea4ae405}{%
+           family={Mirollo},
+           family_i={M\bibinitperiod},
+           given={Renato\bibnamedelima E.},
+           given_i={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Kluwer Academic Publishers-Plenum Publishers}%
+      }
+      \strng{namehash}{97bd6d95ca08e3b5bcb405a0a5ff8725}
+      \strng{fullhash}{97bd6d95ca08e3b5bcb405a0a5ff8725}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1991}
+      \field{labelmonth}{05}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00224715}
+      \field{journaltitle}{Journal of Statistical Physics}
+      \field{month}{05}
+      \field{number}{3-4}
+      \field{title}{{Stability of incoherence in a population of coupled oscillators}}
+      \field{volume}{63}
+      \field{year}{1991}
+      \field{pages}{613\bibrangedash 635}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1007/BF01029202
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Strogatz, Mirollo - 1991 - Stability of incoherence in a population of coupled oscillators.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb https://link.springer.com/article/10.1007/BF01029202
+      \endverb
+      \keyw{Nonlinear oscillator,bifurcation,collective phenomena,mean-field model,phase locking,phase transition,synchronization}
+    \endentry
+    \entry{buxhoeveden2002}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=a1824de5eea351e8802d5bee2624cd12}{%
+           family={Buxhoeveden},
+           family_i={B\bibinitperiod},
+           given={Daniel\bibnamedelima P.},
+           given_i={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{uniquename=0,hash=4fc93f34553d83f3fb3905661d9bb01f}{%
+           family={Casanova},
+           family_i={C\bibinitperiod},
+           given={Manuel\bibnamedelima F.},
+           given_i={M\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{d6f9f70d9473166a645a925d154f049a}
+      \strng{fullhash}{d6f9f70d9473166a645a925d154f049a}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2002}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00068950}
+      \field{journaltitle}{Brain}
+      \field{number}{5}
+      \field{title}{{The minicolumn hypothesis in neuroscience}}
+      \field{volume}{125}
+      \field{year}{2002}
+      \field{pages}{935\bibrangedash 951}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1093/brain/awf110
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/The minicolumn hypothesis in neuroscience.pdf:pdf
+      \endverb
+      \keyw{Columnar organization,Minicolumns,Modules}
+    \endentry
+    \entry{mountcastle1997}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=ccc1f3d06d93dcf7dba1ec6b48cca2a0}{%
+           family={Mountcastle},
+           family_i={M\bibinitperiod},
+           given={Vernon\bibnamedelima B.},
+           given_i={V\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{ccc1f3d06d93dcf7dba1ec6b48cca2a0}
+      \strng{fullhash}{ccc1f3d06d93dcf7dba1ec6b48cca2a0}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1997}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00068950}
+      \field{journaltitle}{Brain}
+      \field{number}{4}
+      \field{title}{{The columnar organization of the neocortex}}
+      \field{volume}{120}
+      \field{year}{1997}
+      \field{pages}{701\bibrangedash 722}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1093/brain/120.4.701
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/The columnar organization of the neocortex.pdf:pdf
+      \endverb
+      \keyw{Columnar organization,Distributed systems,Modules,Neocortex,Primates}
+    \endentry
+    \entry{horton2005}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=6b36ddc1819e8dd40de50a1d5581d68b}{%
+           family={Horton},
+           family_i={H\bibinitperiod},
+           given={Jonathan\bibnamedelima G.},
+           given_i={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{uniquename=0,hash=1587995805331f73f4b1df3976a319a2}{%
+           family={Adams},
+           family_i={A\bibinitperiod},
+           given={Daniel\bibnamedelima L.},
+           given_i={D\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{d89bbef789e585652289d28ed96d762b}
+      \strng{fullhash}{d89bbef789e585652289d28ed96d762b}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2005}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{09628436}
+      \field{journaltitle}{Philosophical Transactions of the Royal Society B: Biological Sciences}
+      \field{number}{1456}
+      \field{title}{{The cortical column: A structure without a function}}
+      \field{volume}{360}
+      \field{year}{2005}
+      \field{pages}{837\bibrangedash 862}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1098/rstb.2005.1623
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Cortical Column a Structure Without Function.pdf:pdf
+      \endverb
+      \keyw{Angioscotoma,Barrel,Macaque,Pinwheel,Retinal wave,Spandrel}
+    \endentry
+    \entry{Cruz2009}{article}{}
+      \name{author}{6}{}{%
+        {{uniquename=0,hash=f1a6f6a32333ebe6642c99a9bfcf4738}{%
+           family={Cruz},
+           family_i={C\bibinitperiod},
+           given={L.},
+           given_i={L\bibinitperiod}}}%
+        {{uniquename=0,hash=6cf65286c08c4c126ac63ecbd75bd5bc}{%
+           family={Roe},
+           family_i={R\bibinitperiod},
+           given={D.\bibnamedelimi L.},
+           given_i={D\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{uniquename=0,hash=634ba3887b87ffe4a1340368d4a16d90}{%
+           family={Urbanc},
+           family_i={U\bibinitperiod},
+           given={B.},
+           given_i={B\bibinitperiod}}}%
+        {{uniquename=0,hash=8836cb899220870e96e17ca9167475ac}{%
+           family={Inglis},
+           family_i={I\bibinitperiod},
+           given={A.},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=8633cc6cfade827487ffa6bf7a9a83e1}{%
+           family={Stanley},
+           family_i={S\bibinitperiod},
+           given={H.\bibnamedelimi E.},
+           given_i={H\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{uniquename=0,hash=83d69dcb9e80714ea11fbabc6f690165}{%
+           family={Rosene},
+           family_i={R\bibinitperiod},
+           given={D.\bibnamedelimi L.},
+           given_i={D\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IBRO}%
+      }
+      \strng{namehash}{49ee182a27f0e4ff24ffd9dfe0d03ddb}
+      \strng{fullhash}{2cb64e49728cb04ef176f09df2f27cc9}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2009}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{1215895593}
+      \field{issn}{03064522}
+      \field{journaltitle}{Neuroscience}
+      \field{number}{4}
+      \field{title}{{Age-related reduction in microcolumnar structure correlates with cognitive decline in ventral but not dorsal area 46 of the rhesus monkey}}
+      \field{volume}{158}
+      \field{year}{2009}
+      \field{pages}{1509\bibrangedash 1520}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.neuroscience.2008.11.033
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Age-related reduction in microcolumnar structure correlates with cognitive decline in rhesus monkey.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1016/j.neuroscience.2008.11.033
+      \endverb
+      \keyw{aging,cognition,microcolumns,minicolumns,neuronal organization,primate brain}
+    \endentry
+    \entry{izhikevich2003}{article}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,hash=4f70a30c8784f5e364723e31d686dae1}{%
+           family={Izhikevich},
+           family_i={I\bibinitperiod},
+           given={Eugene\bibnamedelima M.},
+           given_i={E\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{4f70a30c8784f5e364723e31d686dae1}
+      \strng{fullhash}{4f70a30c8784f5e364723e31d686dae1}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2003}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{10459227}
+      \field{journaltitle}{IEEE Transactions on Neural Networks}
+      \field{number}{6}
+      \field{title}{{Simple model of spiking neurons}}
+      \field{volume}{14}
+      \field{year}{2003}
+      \field{pages}{1569\bibrangedash 1572}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1109/TNN.2003.820440
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Izhikevich model of spiking neurons.pdf:pdf
+      \endverb
+      \keyw{Bursting,Cortex,Hodgkin-Huxley,PCNN,Quadratic integrate-and-fire,Spiking,Thalamus}
+    \endentry
+    \entry{maass2002}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=1b7071d23a59fcc869863e969ca2e992}{%
+           family={Maass},
+           family_i={M\bibinitperiod},
+           given={Wolfgang},
+           given_i={W\bibinitperiod}}}%
+        {{uniquename=0,hash=a06dae178295aa0645821889e3834a3d}{%
+           family={Natschläger},
+           family_i={N\bibinitperiod},
+           given={Thomas},
+           given_i={T\bibinitperiod}}}%
+        {{uniquename=0,hash=96734e7ca80390b8caf8dcebb3d0a5ac}{%
+           family={Markram},
+           family_i={M\bibinitperiod},
+           given={Henry},
+           given_i={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{889c346b72043b233508d2f60174d413}
+      \strng{fullhash}{3899405beef0792bc3f6dd4e9e706662}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2002}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{08997667}
+      \field{journaltitle}{Neural Computation}
+      \field{number}{11}
+      \field{title}{{Real-time computing without stable states: A new framework for neural computation based on perturbations}}
+      \field{volume}{14}
+      \field{year}{2002}
+      \field{pages}{2531\bibrangedash 2560}
+      \range{pages}{30}
+      \verb{doi}
+      \verb 10.1162/089976602760407955
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Real-Time Computing Without Stable States A New Framework For Neural Computation.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Levy2012}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=0953761ff096922ccba6741f27fb5452}{%
+           family={Levy},
+           family_i={L\bibinitperiod},
+           given={Robert\bibnamedelima B.},
+           given_i={R\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{uniquename=0,hash=206b3809c350e9b8f220dbb5eb079720}{%
+           family={Reyes},
+           family_i={R\bibinitperiod},
+           given={Alex\bibnamedelima D.},
+           given_i={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{452a529efbf13a9ebb171df4c65120a3}
+      \strng{fullhash}{452a529efbf13a9ebb171df4c65120a3}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{02706474}
+      \field{journaltitle}{Journal of Neuroscience}
+      \field{number}{16}
+      \field{title}{{Spatial profile of excitatory and inhibitory synaptic connectivity in mouse primary auditory cortex}}
+      \field{volume}{32}
+      \field{year}{2012}
+      \field{pages}{5609\bibrangedash 5619}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1523/jneurosci.5158-11.2012
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Spatial Profile of Excitatory and Inhibitory Synaptic Connectivity in Mouse Primary Auditory Cortex.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Pyle2017}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=0f708ae2f1ebb19449b419d1f60dba43}{%
+           family={Pyle},
+           family_i={P\bibinitperiod},
+           given={Ryan},
+           given_i={R\bibinitperiod}}}%
+        {{uniquename=0,hash=ed0f5db66e914b05946d2959f04125b5}{%
+           family={Rosenbaum},
+           family_i={R\bibinitperiod},
+           given={Robert},
+           given_i={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0f2705153767123d299d97c53ced21ea}
+      \strng{fullhash}{0f2705153767123d299d97c53ced21ea}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2017}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{issn}{10797114}
+      \field{journaltitle}{Physical Review Letters}
+      \field{number}{1}
+      \field{title}{{Spatiotemporal Dynamics and Reliable Computations in Recurrent Spiking Neural Networks}}
+      \field{volume}{118}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.118.018103
+      \endverb
+      \verb{eprint}
+      \verb 1611.01557
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Spatiotemporal Dynamics and Reliable COmputations in Recurrent Spiking Neural Networks.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Fino2011}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=2f1e1e24fd5207435c64e5ae4ec0434c}{%
+           family={Fino},
+           family_i={F\bibinitperiod},
+           given={Elodie},
+           given_i={E\bibinitperiod}}}%
+        {{uniquename=0,hash=40dacdc7344ad830f9fcda8cb5805c47}{%
+           family={Yuste},
+           family_i={Y\bibinitperiod},
+           given={Rafael},
+           given_i={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bff5a811cd2e4481e617a4ee77240d5}
+      \strng{fullhash}{8bff5a811cd2e4481e617a4ee77240d5}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2011}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{08966273}
+      \field{journaltitle}{Neuron}
+      \field{number}{6}
+      \field{title}{{Dense inhibitory connectivity in neocortex}}
+      \field{volume}{69}
+      \field{year}{2011}
+      \field{pages}{1188\bibrangedash 1203}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1016/j.neuron.2011.02.025
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Dense inhibitory connectivity in neocortex.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Atay2006}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=9b2768881286a831e6521323028acccc}{%
+           family={Atay},
+           family_i={A\bibinitperiod},
+           given={Fatihcan\bibnamedelima M.},
+           given_i={F\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{uniquename=0,hash=8e6c2ba147f30770f82d8d2bc2a8dabd}{%
+           family={Hutt},
+           family_i={H\bibinitperiod},
+           given={Axel},
+           given_i={A\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics Publications}%
+      }
+      \strng{namehash}{6a9299c51b8cc77d7f70cede84643d5a}
+      \strng{fullhash}{6a9299c51b8cc77d7f70cede84643d5a}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2006}
+      \field{labelmonth}{12}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{15360040}
+      \field{journaltitle}{SIAM Journal on Applied Dynamical Systems}
+      \field{month}{12}
+      \field{number}{4}
+      \field{title}{{Neural fields with distributed transmission speeds and long-range feedback delays}}
+      \field{volume}{5}
+      \field{year}{2006}
+      \field{pages}{670\bibrangedash 698}
+      \range{pages}{29}
+      \verb{doi}
+      \verb 10.1137/050629367
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Atay, Hutt - 2006 - Neural fields with distributed transmission speeds and long-range feedback delays.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.siam.org/journals/siads/5-4/62936.html
+      \endverb
+      \keyw{Distributed delays,Nonlocal interaction,Spatio-temporal patterns,Synaptic networks,Traveling fronts}
+    \endentry
+    \entry{Wyller2007}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=3c3d05665fd76f94df3c10517193bbad}{%
+           family={Wyller},
+           family_i={W\bibinitperiod},
+           given={John},
+           given_i={J\bibinitperiod}}}%
+        {{uniquename=0,hash=c0b0e97be7f2a265b6b9de6afe546296}{%
+           family={Blomquist},
+           family_i={B\bibinitperiod},
+           given={Patrick},
+           given_i={P\bibinitperiod}}}%
+        {{uniquename=0,hash=3099d0735bf9e55a430268b4dd0e33d5}{%
+           family={Einevoll},
+           family_i={E\bibinitperiod},
+           given={Gaute\bibnamedelima T.},
+           given_i={G\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{cdb5fe2b42df25f9c63bc3eb250889a1}
+      \strng{fullhash}{8154fce506914ae74397a7f89b8dc93c}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2007}
+      \field{labelmonth}{01}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{01672789}
+      \field{journaltitle}{Physica D: Nonlinear Phenomena}
+      \field{month}{01}
+      \field{number}{1}
+      \field{title}{{Turing instability and pattern formation in a two-population neuronal network model}}
+      \field{volume}{225}
+      \field{year}{2007}
+      \field{pages}{75\bibrangedash 93}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1016/j.physd.2006.10.004
+      \endverb
+      \keyw{Neural network,Nonlocal,Pattern formation,Turing instability}
+    \endentry
+    \entry{Sato2012}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=ce320bdcdd4b4ce60e64bfffecfa712d}{%
+           family={Sato},
+           family_i={S\bibinitperiod},
+           given={Tatsuo\bibnamedelima K.},
+           given_i={T\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{uniquename=0,hash=aa2a662427561c72a593ba49f418d2c2}{%
+           family={Nauhaus},
+           family_i={N\bibinitperiod},
+           given={Ian},
+           given_i={I\bibinitperiod}}}%
+        {{uniquename=0,hash=dafd079b7d71e4d0831c3d38be135499}{%
+           family={Carandini},
+           family_i={C\bibinitperiod},
+           given={Matteo},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{bc715d43248fbb3b63e64c089fd54e5c}
+      \strng{fullhash}{8c6a1404fe99d08253835bac043dca40}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2012}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{08966273}
+      \field{journaltitle}{Neuron}
+      \field{number}{2}
+      \field{title}{{Traveling Waves in Visual Cortex}}
+      \field{volume}{75}
+      \field{year}{2012}
+      \field{pages}{218\bibrangedash 229}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.neuron.2012.06.029
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Traveling Waves in Visual Cortex.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Chervin1988}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=60463ad205d3f4193104cb49b03ecea0}{%
+           family={Chervin},
+           family_i={C\bibinitperiod},
+           given={R.\bibnamedelimi D.},
+           given_i={R\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{uniquename=0,hash=c97df3a5ffd03ec036d39559ad51421e}{%
+           family={Pierce},
+           family_i={P\bibinitperiod},
+           given={P.\bibnamedelimi A.},
+           given_i={P\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{uniquename=0,hash=f958a39e7ee0681fef8f3f66cdd44c8b}{%
+           family={Connors},
+           family_i={C\bibinitperiod},
+           given={B.\bibnamedelimi W.},
+           given_i={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{34ccc9f974b94892ead6854e6169a822}
+      \strng{fullhash}{33e09598bc0c91f62fd13e43f2931ce4}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1988}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00223077}
+      \field{journaltitle}{Journal of Neurophysiology}
+      \field{number}{5}
+      \field{title}{{Periodicity and directionality in the propagation of epileptiform discharges across neocortex}}
+      \field{volume}{60}
+      \field{year}{1988}
+      \field{pages}{1695\bibrangedash 1713}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1152/jn.1988.60.5.1695
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/bio/Periodicity and directionality in the propagation of epileptiform discharges across neocortex.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Markram1997}{article}{}
+      \name{author}{5}{}{%
+        {{uniquename=0,hash=96734e7ca80390b8caf8dcebb3d0a5ac}{%
+           family={Markram},
+           family_i={M\bibinitperiod},
+           given={Henry},
+           given_i={H\bibinitperiod}}}%
+        {{uniquename=0,hash=397617cb9cd250c4a100db00dab82976}{%
+           family={Lübke},
+           family_i={L\bibinitperiod},
+           given={Joachim},
+           given_i={J\bibinitperiod}}}%
+        {{uniquename=0,hash=5e52dbe6ec9dc574ba54b14cc9727c37}{%
+           family={Frotscher},
+           family_i={F\bibinitperiod},
+           given={Michael},
+           given_i={M\bibinitperiod}}}%
+        {{uniquename=0,hash=77d54ce57dbda995a62b3ba180eef256}{%
+           family={Roth},
+           family_i={R\bibinitperiod},
+           given={Arnd},
+           given_i={A\bibinitperiod}}}%
+        {{uniquename=0,hash=cd976ef2a692f54af47155e3ea294a66}{%
+           family={Sakmann},
+           family_i={S\bibinitperiod},
+           given={Bert},
+           given_i={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Blackwell Publishing Ltd}%
+      }
+      \strng{namehash}{c08d8286f0015a4f10be3957c89546c7}
+      \strng{fullhash}{95b6bd1e92c109731c48b24bbf5d9406}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{1997}
+      \field{labelmonth}{04}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00223751}
+      \field{journaltitle}{Journal of Physiology}
+      \field{month}{04}
+      \field{number}{2}
+      \field{title}{{Physiology and anatomy of synaptic connections between thick tufted pyramidal neurones in the developing rat neocortex}}
+      \field{volume}{500}
+      \field{year}{1997}
+      \field{pages}{409\bibrangedash 440}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.1113/jphysiol.1997.sp022031
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Markram et al. - 1997 - Physiology and anatomy of synaptic connections between thick tufted pyramidal neurones in the developing rat neo.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb /pmc/articles/PMC1159394/?report=abstract%20https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1159394/
+      \endverb
+    \endentry
+    \entry{hayut2011}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=bc25763dc5e2c4eb4e30f523ca235316}{%
+           family={Hayut},
+           family_i={H\bibinitperiod},
+           given={Itai},
+           given_i={I\bibinitperiod}}}%
+        {{uniquename=0,hash=eace8ee189644326c2618e01cae4cfea}{%
+           family={Fanselow},
+           family_i={F\bibinitperiod},
+           given={Erika\bibnamedelima E.},
+           given_i={E\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{uniquename=0,hash=730d100d83724bea9a9ef0f3dd3fe3c5}{%
+           family={Connors},
+           family_i={C\bibinitperiod},
+           given={Barry\bibnamedelima W.},
+           given_i={B\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{uniquename=0,hash=a9331e0902a63f6377de7300212f75ac}{%
+           family={Golomb},
+           family_i={G\bibinitperiod},
+           given={David},
+           given_i={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{f87aaa5a4b720e2b74335cfd33b897d4}
+      \strng{fullhash}{24729c9ec9240744efb776fc05bc57fd}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2011}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1553734X}
+      \field{journaltitle}{PLoS Computational Biology}
+      \field{number}{10}
+      \field{title}{{LTS and FS inhibitory interneurons, short-term synaptic plasticity, and cortical circuit dynamics}}
+      \field{volume}{7}
+      \field{year}{2011}
+      \verb{doi}
+      \verb 10.1371/journal.pcbi.1002248
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/LTS and FTS Inhibitory Interneurons Short Term Synaptic Plasticity and Cortical Circuit Dynamics.PDF:PDF
+      \endverb
+    \endentry
+    \entry{ascoli2010}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=c86ef2b9db69373eb97362bd7ca3d8e5}{%
+           family={Ascoli},
+           family_i={A\bibinitperiod},
+           given={Giorgio\bibnamedelima A.},
+           given_i={G\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{uniquename=0,hash=ca177b2b4b8e8ce08428160ec5846282}{%
+           family={Gasparini},
+           family_i={G\bibinitperiod},
+           given={Sonia},
+           given_i={S\bibinitperiod}}}%
+        {{uniquename=0,hash=20f2bb62ec8d09c8d258ed2ec75dcbb1}{%
+           family={Medinilla},
+           family_i={M\bibinitperiod},
+           given={Virginia},
+           given_i={V\bibinitperiod}}}%
+        {{uniquename=0,hash=93fba7fb9ee41946a5b749a2449edf48}{%
+           family={Migliore},
+           family_i={M\bibinitperiod},
+           given={Michele},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{73c0c224370b50e00432bfd227c2f78c}
+      \strng{fullhash}{b14f8465a9d3b6acb563ad4805f4e4c6}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelyear}{2010}
+      \field{datelabelsource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{02706474}
+      \field{journaltitle}{Journal of Neuroscience}
+      \field{number}{18}
+      \field{title}{{Local control of postinhibitory rebound spiking in CA1 pyramidal neuron dendrites}}
+      \field{volume}{30}
+      \field{year}{2010}
+      \field{pages}{6434\bibrangedash 6442}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1523/JNEUROSCI.4066-09.2010
+      \endverb
+      \verb{file}
+      \verb :home/vbaker/neuron/lit/Local Control of Postinhibitory Rebound Spiking in CA1 Pyramidal Neuron Dendrites.pdf:pdf
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
