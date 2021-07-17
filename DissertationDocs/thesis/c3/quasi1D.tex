@@ -180,11 +180,21 @@ For the range of values tested, the parameter $\kappa$ does not show a strong in
 This is in contrast to previous work in largely isotropic networks and neural field models which found that the delay parameter is important for the emergence of traveling waves \citet{Senk2020}\citet{Atay2006}\citet{Roxin2005}.
 However, it is consistent with other work that found traveling wave patterns without including propagation delay \citet{Folias2012}\citet{Wyller2007}.
 
-Our model includes several artifacts that may not be important for studyign traveling waves.
+Our model includes several artifacts that may not be important for traveling waves.
 The probabilisitc connection results in a few long connections along the Z direction that cannot exist in the X or Y directions.
 We have also placed neurons an a unit cubic lattice with no spatial perturbation.
 By performing the same experiments as in Figure 4, but now pruning long-range connections and moving the neurons off the lattice, 
 results show that these model artifacts do not substantially affect traveling waves.
+\begin{figure}[!htb]
+ \centering
+ \includegraphics[width=\textwidth]{fig/LongConnections_SpatialDisorder}
+ \caption{Comparison of reglar minicolumns (left) with no long connections (middle) and spatial disorder (right).  }
+ \label{fig:long_connx}
+\end{figure}
+
+\FloatBarrier
+
+
 
 We establish purely one-dimensional systems in our model for comparison to previous work with purely one-dimensional systems.
 We start with the SCE described in Section 3.1 for measuring wave speed: a 2x2x50 (XxYxZ) SCE with model parameters at the reference point $\Sigma_v$. 

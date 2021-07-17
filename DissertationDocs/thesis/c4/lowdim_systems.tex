@@ -37,7 +37,8 @@ We find that our forest supports trasverse traveling waves in the X/Y plane.
 \section{Two-dimensional sheets of neurons}
 Traveling waves in two-dimensional neuronal sheets have been studied in the brain \citep{huang2004}\citep{Townsend2018} and in simulation\citep{keane2015}\citep{Spreizer2019}
 While one-dimensional waves have only one structure, the additional degree of freedom in two dimensions allows for several categories of waves.
-These include circular waves that spread outward from a point, large plane waves that propagate over the entire surface and spiral waves that rotate around a phase singularity.
+These include circular waves that spread outward from a point, large plane waves that propagate over the entire surface and spiral waves\citep{Huang2010} that rotate around a phase singularity.
+Different types of waves have been associated with different elements of visual stimulus\citep{Benucci2007}.
 We find evidence for all these categories of waves in our quasi two-dimensional sheet.
 
 Each sheet consists of neurons placed on a unit grid. 
@@ -66,7 +67,7 @@ The length of the connections between neurons tends to be longer in the sheet, r
 in figure \ref{fig:connection_delay_distrbution_2D} when compared to figure \ref{fig:connection_delay_distrbution}.
 \begin{figure}[!htb]
  \caption{Distribution of (a) number of post-synaptic connections per neuron and (b) delay time. 
-          Data was taken from a X=100, Y=100, Z=2 sheet with $\lambda=2.5$, $\kappa=1$ and periodic boundary conditions.  } 
+          Data was taken from an X=100, Y=100, Z=2 sheet with $\lambda=2.5$, $\kappa=1$ and periodic boundary conditions.  } 
      \subfloat[][]{\includegraphics[width=0.6\textwidth]{fig/ConnectionNumberDistribution2D} }
      \subfloat[][]{\includegraphics[width=0.6\textwidth]{fig/DelayDistribution2D} }
  \label{fig:connection_delay_distrbution_2D}
@@ -120,7 +121,7 @@ We suspect that these winner-take-all waves may be spawned by low-threshold spik
 To test this hypothesis we plot calculate the density of inhibitory neurons across the sheet using MATlAB's 'ksdensity' function.
 \begin{figure}[!htb]
  \caption{ Density plot of inhibitory neurons in the sheet. The color scale covers the top 10\% of the density.
-           The area with the highest density of inhibitory neurons includes the location from which the attractor waves are spawned. }
+           The area with the highest density of inhibitory neurons includes the location from which the attractor waves are spawned near X=70, Y=75. }
  \label{fig:2DAttractor_InhibDensity}
  \centering
    \includegraphics[width=\textwidth]{fig/2DAttractor_seed35_InhibitoryDensity}
