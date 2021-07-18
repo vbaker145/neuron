@@ -83,7 +83,7 @@ Mean-field models attempt to reduce the complex activity within a large populati
 One of the earliest uses of a mean-field approaches was developed by Amari\citep{Amari1972}\citep{Amari1977}.
 Wilson and Cowan\citep{Wilson1973} created one of the earliest models that showed traveling waves. 
 They developed equations for neuronal activity as a function of position and time in a one-dimensional system and showed that there exist traveling waves solutions of those equations.
-This approach was further expanded \citep{Ermentrout1979}\citep{Sompolinsky1988}\citep{Vreeswijk1998}\citep{Faugeras2009} to neural field models incorporating 
+This approach was further expanded \citep{Ermentrout1979}\citep{Sompolinsky1988}\citep{Vreeswijk1998}\citep{Faugeras2009}\citep{Zhang2016} to neural field models incorporating 
 varying degrees of heterogeneity in the neuron dynamics and connectivity models.
 Traveling waves emerge as solutions of most of these mean field equations.
 This is not surprising since the topology and connectivity of the underlying neurons are assumed to be regular and isotropic, naturally leading to 
@@ -124,7 +124,7 @@ McCulloch and Pitts\citep{McCulloch1943} developed one of the earliest simplifie
 		&= 0 \text{ if } g(x)<\Theta \\
   \end{split}
 \end{align}
-This simple model includes several features used in many computational models.
+The \textit{McCulloch-Pitts} model includes several features used in many computational models.
 It sums the values from many input neurons \textbf{x}, applies an \textit{activation function} f, and provides an all-or-nothing response based on a threshold $\Theta$.
 
 Many phenomenological studies use the \textit{leaky integrate-and-fire} (LIF) model\citep{Abbott1999}. which may be stated as in (\citet{Trappenberg2010} Section 3.1.1):
@@ -151,9 +151,16 @@ The original presentation of the model also includes stochastic parameter values
 Traveling waves have previously been shown in simulations of neurons.
 One-dimensional waves have been observed in simulations using firing rate neurons \citep{Roxin2005}, integrate-and-fire neurons \citep{Bressloff1997}\citep{Golomb1999} and Hodgkin-Huxley neurons \citep{Golomb1997}.
 \citet{Senk2020} used populations of both rate neurons and integrate-and-fire neurons and developed a method to translate parameters between the two different models.
-More recently, two-dimensional waves of multiple types have been studied using integrate-and-fire neurons\citep{keane2015}\citep{Keane2018}\citep{Spreizer2019}\citep{Chen2019}.
+More recently, two-dimensional waves of multiple types have been studied using integrate-and-fire neurons \citep{Mehring2003}\citep{keane2015}\citep{Keane2018}\citep{Spreizer2019}\citep{Chen2019}.
 It is somewhat surprising that a  more complete study of traveling waves in simulation has not been undertaken given the extensive biological observations of traveling waves
 and their proposed functional significance.
+
+\section{Neuromorphic processing}
+Although our primary interest lies in understanding cortical function there are also applications of our modeling to purely computational systems.
+Modern machine learning is focused on feedforward networks with the equivalent of McCulloch-Pitts neurons.
+Recurrent networks of spiking neurons may offer a more powerful, energy-efficient computational paradigm.
+Modern work on analog neural networks including photonic neurons\citep{Xiang2016}\citep{Coarer2018}\citep{Fok2010} and electrical neurons has shown the potential for low power computation.
+Traveling waves in analog systems have been proposed as an efficient machine learning platform\citep{Hughes2019}.
 
 \section{Thesis Organization}
 The remainder of the thesis includes a chapter on the methods used, three chapters presenting the research and results, and a conclusion.

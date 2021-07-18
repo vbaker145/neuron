@@ -109,12 +109,12 @@ One of the uses of this stimulus is to measure the speed of the traveling wave i
 \section{Neuron connectivity}
 We first construct these assemblies by placing neurons at the vertices of a cubic lattice with coordinates X, Y and Z. 
 Each neuron is  randomly chosen to be  either excitatory (E) or inhibitory (I), with the fraction of excitatory neurons indicated as $P_{exc}$.
-After placing, we connect two neurons based on their relative distance according to a connection probability that favors local connectivity given by  \citep{maass2002}: 
+After placing, we connect two neurons based on their relative distance according to a connection probability that favors local connectivity given by \citep{maass2002}: 
 \begin{align}\label{eq:connectivity}
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
 where $D(a,b)$ is the Euclidean distance between neuron a and b, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is the peak probability of connection .
-In \citet{Levy2012} the authors showed that the synaptic connections in the mouse auditory cortex follow this connection probability.
+This local ceopnnectivity model has been observed in the mouse visual cortex\citep{Hellwig2000} and auditory cortex\citep{Levy2012}.
 Multiple connections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
 Two neurons may be recurrently connected, however. 
 

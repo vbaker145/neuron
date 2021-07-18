@@ -194,8 +194,6 @@ results show that these model artifacts do not substantially affect traveling wa
 
 \FloatBarrier
 
-
-
 We establish purely one-dimensional systems in our model for comparison to previous work with purely one-dimensional systems.
 We start with the SCE described in Section 3.1 for measuring wave speed: a 2x2x50 (XxYxZ) SCE with model parameters at the reference point $\Sigma_v$. 
 While previous work with this SCE measured the speed of the waves, here we determine the existence of traveling waves based on whether the neurons in the top layer of the SCE fire.
@@ -240,6 +238,7 @@ Action potential velocity may not be the only factor in the traveling wave propa
 In \citet{Golomb1997} the authors neglected action potential propagation in their model of disinhibited cortical slices as they considered their observed wave velocity of $~0.15 m/s$ to be an order of magnitude faster than axon potential propagation.
 In \citet{Chervin1988} the authors found an even slower propagation of $0.06-0.09 m/s$ in disinhibited slices of rat cortex.
 In  \citet{Markram1997} a latency of $1.7\pm 0.9\ ms$ was observed between injecting a stimulus in one pyramidal neuron and the resulting excitatory post-synpatic potential in an adjacent pyramidal neuron.
+\citet{Mehring2003} used a fix delay of $1.5~ms$ in their 2-D simulation.
 This latency is too large to be due solely to axonal propagation alone given the very short distance between the neurons. 
 These results indicate that a second key element, namely neuron and synapse dynamics, will also influence wave propagation speed.
 Biological neurons and synapses  have complex internal dynamics, and will not fire instantaneously upon receiving a stimulus.
@@ -318,7 +317,8 @@ Because each neuron does not fire instantaneously upon receiving an action poten
 \FloatBarrier
 
 Propagation speed is also influenced by the characteristic length of the local connectivity, $\lambda$.
-Since an increase in $\lambda$ results in both longer range connections, and more incoming and outgoing connections per neuron, we expect $\lambda$ to increase the wave speed through both action potential propagation and neuron dynamics.
+Since an increase in $\lambda$ results in both longer range connections, and more incoming and outgoing connections per neuron, 
+we expect $\lambda$ to increase the wave speed through both longer action potential propagation\citep{Zhang2016} and neuron dynamics.
 The characteristic connection length $\lambda$ is varied from 2 to 5 and we measure the wave pace and calculate the wave speed (Figure \ref{fig:delay_lambda}).
 For $\lambda<2$  we do not observe traveling waves.
 \begin{figure}[!htb]
@@ -347,7 +347,6 @@ and the measured wave speeds are more than double the speeds measured in the iso
 \end{figure}
 
 \FloatBarrier
-
 
 Our SCE topology (namely, the X and Y dimensions) may influence the wave speed in several ways.
 Increasing X and/or Y increases the total number of neurons, the total number of connections, and the average number of connections per neuron.
