@@ -85,22 +85,25 @@ We do not observe traveling waves or other spatiotemporal patterns in this syste
 \end{figure}
 \FloatBarrier
 
-We then extend our system to a quasi 2-D sheet with X=100, Y=100 and Z=2.
+We then extend our system to a quasi 2-D sheet with X=200, Y=200 and Z=2.
 We now observe traveling wave patterns in the system.
 These patterns emerge in spite of the high variability in the neuron types, neuron dynamics and connectivity present in our model.
 We can clearly see an example of a circular spreading wave emanating from the upper center of figure \ref{fig:2D_waves}.
 These types of spreading waves have been observed in vivo\citep{Mohajerani2013} and and in vitro, both spontaneous and stimulus-evoked\citep{Stroh2013}.
 \begin{figure}[!htb]
- \caption{ Raster plots from our quasi 2-D system with two layers show wave patterns that spread across the surface of the sheet.}
+ \caption{ Wave patterns spreading across the surface of a 200x200x2 sheet. Model parameters at $\Sigma$.}
  \label{fig:2D_waves}
  \centering
-   \includegraphics[width=\textwidth]{fig/2DWaveRasters}
+   \includegraphics[width=\textwidth]{fig/2DSpreadingWaves_Sigma}
 \end{figure}
+
+\FloatBarrier
 
 In some simulations we see the formation of large-scale plane waves across the entire system as seen by \citet{keane2015}.
 In their work, plane waves were formed when excitation dominated their neuronal system.
 The formation of these plane waves in our system does not seem deterministic, as a different random draw of the uniform background stimulus for the same neuronal system may not exhibit plane waves.
 Nonetheless, these results show that plane waves can emerge as a stable pattern in systems of this type even when excitation does not dominate.
+These plane waves seem to form due to the interaction of spreading circular waves.
 \begin{figure}[!htb]
  \caption{ Raster plots from our quasi 2.5-D system showing large-scale plane waves moving from top to bottom.}
  \label{fig:2D_plane_wave}
