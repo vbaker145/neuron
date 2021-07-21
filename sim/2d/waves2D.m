@@ -27,7 +27,7 @@ connectivity.connStrength = 6;
 connectivity.maxLength = 100; 
 
 delay.delayType = 1;
-delay.delayMult = 0.4;
+delay.delayMult = 0.1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 

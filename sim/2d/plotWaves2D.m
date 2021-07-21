@@ -16,6 +16,7 @@ set(hf, 'Position', [50 50 1600 800]);
 subplot(1,2,1); xlabel('X'); ylabel('Y');
 axis([min(pos.x(:)) max(pos.x(:)) min(pos.y(:)) max(pos.y(:))])
 subplot(1,2,2); xlabel('X'); ylabel('Y');
+colormap('jet');
 
 % vf = figure(20);
 % set(vf, 'Position', [900 50 800 800] );
