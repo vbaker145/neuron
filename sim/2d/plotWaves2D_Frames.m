@@ -17,6 +17,7 @@ idx = 1;
 
 h = figure(10);
 set(h, 'Position', [100 100 800 550]);
+colormap('jet');
 nplots = length(frameTimes);
 ncols = 4;
 nrows = ceil(nplots/ncols);

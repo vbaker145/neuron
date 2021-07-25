@@ -91,7 +91,9 @@ These patterns emerge in spite of the high variability in the neuron types, neur
 We can clearly see an example of a circular spreading wave emanating from the upper center of figure \ref{fig:2D_waves}.
 These types of spreading waves have been observed in vivo\citep{Mohajerani2013} and and in vitro, both spontaneous and stimulus-evoked\citep{Stroh2013}.
 \begin{figure}[!htb]
- \caption{ Wave patterns spreading across the surface of a 200x200x2 sheet. Model parameters at $\Sigma$.}
+ \caption{ Wave patterns spreading across the surface of a sheet. 
+           the sheet dimensions are 200x200x2, model parameters are at $\Sigma$. 
+           Circular spreading waves are the dominant type, but multiple waves can interact to form more complex patterns.}
  \label{fig:2D_waves}
  \centering
    \includegraphics[width=\textwidth]{fig/2DSpreadingWaves_Sigma}
@@ -105,10 +107,11 @@ The formation of these plane waves in our system does not seem deterministic, as
 Nonetheless, these results show that plane waves can emerge as a stable pattern in systems of this type even when excitation does not dominate.
 These plane waves seem to form due to the interaction of spreading circular waves.
 \begin{figure}[!htb]
- \caption{ Raster plots from our quasi 2.5-D system showing large-scale plane waves moving from top to bottom.}
+ \caption{ A plane wave front forming from multiple circular spreading waves.
+          The sheet is 200x200x2, model parameters are at $\Sigma$.}
  \label{fig:2D_plane_wave}
  \centering
-   \includegraphics[width=\textwidth]{fig/2DWaveRasters_PlaneWave}
+   \includegraphics[width=\textwidth]{fig/2DPlaneWave}
 \end{figure}
 \FloatBarrier
 
@@ -120,7 +123,6 @@ In figure \ref{fig:2DWaveRasters_attractor} we see that the waves come to domina
  \centering
    \includegraphics[width=\textwidth]{fig/2DWaveRasters_Attractor_kappa0p1_seed35}
 \end{figure}
-
 We suspect that these winner-take-all waves may be spawned by low-threshold spiking inhibitory neurons as seen in our minicolumns (section \ref{sub:wave_initiation}).
 To test this hypothesis we plot calculate the density of inhibitory neurons across the sheet using MATlAB's 'ksdensity' function.
 \begin{figure}[!htb]
