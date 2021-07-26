@@ -155,6 +155,42 @@ We now observe the formation of spiral wave pattern in figure \ref{fig:2DSpiralW
 The firing activity at the edge of the plane wave will spread in directions that are not parallel to the plane wave propagation.
 We reproduce this behavior in our model as shown in figure , where two spiral waves are shed from either side of a plane wave.
 
+The traveling wave mechanism in the locally connected two dimensional sheet is the same as the locally connected one dimensional minicolumn.
+We therefore expect similar traveling wave speeds, with the model parameters playing the same role as in the one dimensional minicolumn.
+To measure speed in the sheet we extend the approach taken for the minicolumn by using an impulsive stimulus (equation ).
+We use open boundary conditions when measuring wave speed in the two dimensional sheet.
+We again find that we need to increase the connection strength $K$ when using an impulsive stimulus instead of a uniform background stimulus.
+The neurons in the lower left corner near X=0, Y=0 are stimulated with a constant current for the first 10 milliseconds of the simulation.
+This induces a circular spreading wave that spans the sheet as shown in figure \ref{fig:2DWaveSpeedRaster}.
+The wave propagates isotropically with the same speed along both the X and Y axes.
+The wave spans $100$ units in $192~ms$ for a speed of $0.52$ units/millisecond.
+This is faster than the measured wave speed of $0.38$ units/millisecond in the minicolumn with the same model parameters.
+As seen in figure \ref{fig:delay_topology} increasing the physical extents of our system increases the 
+connectivity (figure \ref{fig:connection_delay_distrbution_2D}) leading to faster wave speeds.
+\begin{figure}[!htb]
+ \caption{ 2-D spike raster plots showing a single traveling wave.
+           The sheet is 100x100x2 with model parameters at $\Sigma_v$ and $\kappa=1.0$.
+           }
+ \label{fig:2DWaveSpeedRaster}
+ \centering
+   \includegraphics[width=\textwidth]{fig/2DWaveRasters_WaveSpeedExample}
+\end{figure}
+\FloatBarrier
+
+The wave speed in our sheet depends on $\kappa$ (figure \ref{fig:2DWavePaceKappa}).
+The slope of the linear fit matches the one-dimensional system (figure \ref{fig:delay_speed}). 
+The lower y-intercept point in the sheet compared to the minicolumn indicates the lower pace (higher speed) due to the higher connectivity in the sheet.
+\begin{figure}[!htb]
+ \caption{ The pace of the wave depends linearly on $\kappa$.
+           }
+ \label{fig:2DWavePaceKappa}
+ \centering
+   \includegraphics[width=0.5\textwidth]{fig/2DWavePace_Kappa}
+\end{figure}
+\FloatBarrier
+
+
+
 In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain simultaneous spike timing irregularity with fluctuations in the average firing rate of the ensemble. 
 Despite the complex spatiotemporal patterns the overall mean voltage shows a small, steady oscillation.
 \begin{figure}[!htb]

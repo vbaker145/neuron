@@ -27,21 +27,25 @@ connectivity.connStrength = 24;
 connectivity.maxLength = 100; 
 
 delay.delayType = 1;
-delay.delayMult = 0.5;
+delay.delayMult = 1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
 %Make 2-D sheet
 [a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay, 0);
-
-vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
-uinit=b.*vinit;                 % Initial values of u
-
 %Background, corrected for dt
 st = impulseStim2D(pos, 10, t);
 
-[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
-%plot(firings(:,1)./1000, firings(:,2)/(width*height),'k.');
+kappaScale = [1.0 0.75 0.5 0.25 0.1];
 
-%plotWaves2D( firings, pos, vall, dt, ecn, '2DWaves_1layer.avi' );
-%plotWaves2D_Frames( firings, pos, vall, dt, 1000:20:1220 );
+for jj=1:length(kappaScale)
+
+    vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
+    uinit=b.*vinit;                 % Initial values of u
+
+    [v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, floor(delays*kappaScale(jj)), st);
+    
+    kappaFiring{jj} = firings;
+    
+end
+
