@@ -28,7 +28,7 @@ for jj=1:1000
        norm = sqrt(Nij_var(jj)*Nij_var(kk) );
        if norm > 0
            CCtmp =  xcorr(Nij(:,jj)-Nij_mean(jj), Nij(:,kk)-Nij_mean(kk))/norm;
-           CC(jj,kk) = max(CCtmp);
+           CC(jj,kk) = (Nij(:,jj)-Nij_mean(jj))'*(Nij(:,kk)-Nij_mean(kk));
            d(jj,kk) = sqrt((xp(jj)-xp(kk))^2+(yp(jj)-yp(kk))^2+(zp(jj)-zp(kk))^2 );
        end
     end
