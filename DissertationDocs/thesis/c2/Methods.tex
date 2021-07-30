@@ -101,10 +101,9 @@ The stimulus values are drawn from a random distribution every $1 ms$ according 
 where $M$ is a parameter that tunes the overall strength of the stimulus, with $M=5$ corresponding to the original model in \citep{izhikevich2003}. 
 This stimulus has the effect of creating waves that originate from any point along an SCE and one of the uses is to study interactions between multiple waves in section \ref{sub:wave_initiation}.
 
-The other external stimulus $I_{i,e}$ is a short constant input of current applied to all of the neurons in one area of a system. 
-The duration of the stimulus is $20 ms$ with a strength of $5 mV$. 
-This stimulus has the effect of creating a single wave with a well-defined starting location and time.
-One of the uses of this stimulus is to measure the speed of the traveling wave in section \ref{sub:propagation_speed}.
+The other external stimulus $I_{i,e}$ is a short constant input of current applied to all of the neurons in one area of a system.
+This stimulus is used to measure wave speed and is described in section \ref{sec:wave_speed_method}.
+
 
 \section{Neuron connectivity}
 We first construct these assemblies by placing neurons at the vertices of a cubic lattice with coordinates X, Y and Z. 
@@ -139,6 +138,67 @@ We summarize our model parameters in Table \ref{tab:all_params}.
  \end{tabular}
 \end{table}
 
+\section{Wave analysis}
+For every simulation we record all of the spikes from all neurons. 
+We visualize the spikes in spike raster plots (e.g. Figure \ref{fig:sigma_raster} ).
+For quasi one-dimensional minicolumns we focus on traveling waves in the Z direction so we plot the spikes according to the Z position of the neurons.
+As a consequence, at each Z position there are multiple neurons that could contribute to the spike raster plot at that Z coordinate (e.g. 4 neurons for the X=2, Y=2 minicolumn case).
+For quasi two-dimensional sheets and forests we focus on traveling waves in the X/Y plan so we plot the spikes according to the X/Y positions of the neurons.
+Therefore multiple neurons can again contribute to the spike raster at a given X/Y location on the plot.
+
+For our quasi one-dimensional minicolumns we use an automated wave detection, identification and analysis method.
+To automatically identify waves in the minicolumn we perform a spatial clustering operation to the spike data to identify spatiotemporal regions identified by high firing density. 
+The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
+Each cluster $C(t,z)$ has a time $t$ and position $z$.
+This clustering removes random background firing activity. 
+The waves are identified using a plane sweep algorithm that proceeds along the dimension of simulation time and applies wave labels to clusters such that all clusters with the same label are part of the same wave.
+When a new cluster $C(t,z)$ is encountered, the algorithm associates $C(t,z)$ with any existing wave if the existing wave contains a cluster $C(t_c,z_c)$ within $40~ms$ and $6$ units of the new cluster.
+If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the first cluster.
+An example of the clustering and identification is shown in Figure 2, with further illustration in SI Figure 1.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{fig/DetectorExample}
+  \caption{Wave identification and labeling using an example SCE with dimensions 2x2x200 . Left: Raster plot of firing events where dots represent neuronal action potentials. 
+	Traveling waves can be seen as diagonal structures of dense firing activity. 
+	Center: The clustering operation removes background spikes. 
+	Right: Individual waves are labeled with unique identifiers color coded in the figure.}
+  \label{fig:wave_analysis}
+\end{figure}
+\FloatBarrier
+
+Our wave detection and analysis approach must remain valid across a range of model parameters. 
+We show sample visualizations for varying values of $K$ in Figure \ref{fig:detector_test}.
+This detector test demonstrates that our detection and analysis method detects and labels traveling waves of various lengths even in a noisy background.
+\begin{figure}[!htb]
+ \centering
+   \includegraphics[width=\textwidth]{fig/DetectorTest}
+    \caption{The clustering and wave labeling process. Spike raster plot (left), filtered clusters (middle) and labeled waves (right, each color is a unique wave) 
+	    are shown for SCE with different values of $K$. }
+  \label{fig:detector_test}
+\end{figure}
+
+\FloatBarrier
+Once identified and labeled, we measure wave propagation speeds and wave initiation locations. 
+We also measure the "wave firing fraction" defined as the fraction of spikes that are associated with the labeled traveling wave (total number of spikes found within the waves divided by number of spikes in the simulation). 
+
+For the quasi two-dimensional sheets and forests we also visualize traveling waves with color plots of the membrane potential (see for example \ref{fig:2D_waves}).
+The membrane potential at at X/Y position is averaged across all neurons at that position over a $2~ms$ window.
+A $5x5$ smoothing filter is applied to the resulting image to improve the visibility of the wave fronts. 
+For two dimensional waves we show a sequential series of these plots to illustrate the two dimensional wave behavior.
+
+\section{Wave speed measurements}\label{sec:wave_speed_method}
+To measure wave speeds we apply a constant stimulus $I_{i,e}$ over a short time period to a local area of the system.
+There is no stimulus to the other neurons in the system.
+This short stimulus initiates a single traveling wave that spans the entire system.
+The wave arrival time is measured at some reference point in the system, and the wave speed is calculated from the wave arrival time and the distance the wave travels.
+
+For the minicolumn system $I_{i,e}$ has a magnitude of $5$ units and is applied to the lowest $10$ layers of the minicolumn for $20~ms$.
+The one-dimensional waves travel in the Z direction and the wave arrival time is measured at the top of the minicolumns.
+For the two-dimensional sheet $I_{i,e}$ has a magnitude of $5$ units and is applied for $10~ms$ to the neurons at X=\{0,1\}, Y=\{0,1\} and Z=\{0.1\} in the lower left corner of the sheet.
+The waves span the entire sheet in both the X and Y directions, and the wave arrival time is measured at the lower right edge (Y=0, X at maximum value). 
+For the forest of minicolumns $I_{i,e}$ has a magnitude of $5$ units and is applied for $10~ms$ to the single minicolumn in the lower left corner of the forest.
+The stimulus evokes waves that travel in the X/Y plane and the wave arrival time is measured at the minicolumn in the lower right corner of the forest.
 
 \endinput
 %%

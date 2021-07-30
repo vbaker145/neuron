@@ -23,16 +23,17 @@
 
 \chapter{Quasi 2-D and 2.5-D Systems}
 Studies of traveling waves have focused on two-dimensional waves that spread parallel to the surface (pia) of the brain \citep{reimer2010}\citep{keane2015}\citep{Townsend2018}\citep{Golomb1997}\citep{Qi2015}. 
-This is to be expected as this is the geometry of the system on which they are observed, and \citep{Wilson1973} provide an anatomical argument for focusing on such structure. 
+This is to be expected as this is the geometry of the system on which they are observed, and \citet{Wilson1973} provide an anatomical argument for focusing on such structure. 
 
 We now extend our study of traveling waves in quasi 1-D minicolumns to two-dimensional topologies.
 First we study two-dimensional sheets of neurons extended in the X and Y directions.
 As before, we find that our model doesn't support traveling waves in a purely two-dimensional sheet (Z=1) under the model parameters studied.
 When we extend the system to a quasi two-dimensional sheet (Z=2) we find traveling waves are evoked by both the background and impulsive stimulus.
+Our model exhibits the same categories of two-dimensional waves observed in the brain.
 
 We then further extend our topology to what we term a ``forest'' of minicolumns.
 This structure consists of an ensemble of our minicolumns arranged on a grid, with the Z extent less than the X/Y extents.
-We find that our forest supports trasverse traveling waves in the X/Y plane.
+We find that our forest supports transverse traveling waves in the X/Y plane.
 
 \section{Two-dimensional sheets of neurons}
 Traveling waves in two-dimensional neuronal sheets have been studied in the brain \citep{huang2004}\citep{Townsend2018} and in simulation\citep{keane2015}\citep{Spreizer2019}
@@ -50,7 +51,7 @@ A small example quasi 2-D sheet is shown in Figure \ref{fig:sheet_structure}.
 In this small example the periodic boundary conditions are easily seen as multiple diagonals in the connection matrix.
 
 \begin{figure}[!htb]
- \caption{Example small quasi 2-D sheet with dimensions X=20, Y=20, Z=2, $\lambda$=2.5, and C=0.5. 
+ \caption{Example small quasi 2-D sheet with dimensions X=10, Y=10, Z=2. The connection parameters are set to $\lambda$=2.5 and C=0.5. 
  a)  Sheet showing connections between neurons as lines colored using a color scale that indicates the connection length. 
  b)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. 
  c) The sum of presynaptic weights for each neuron shows the anisotropy of this model, with substantial variation in input strength and sign between the neuron inputs.}
@@ -88,8 +89,8 @@ We do not observe traveling waves or other spatiotemporal patterns in this syste
 We then extend our system to a quasi 2-D sheet with X=200, Y=200 and Z=2.
 We now observe traveling wave patterns in the system.
 These patterns emerge in spite of the high variability in the neuron types, neuron dynamics and connectivity present in our model.
-We can clearly see an example of a circular spreading wave emanating from the upper center of figure \ref{fig:2D_waves}.
-These types of spreading waves have been observed in vivo\citep{Mohajerani2013} and and in vitro, both spontaneous and stimulus-evoked\citep{Stroh2013}.
+We can clearly see  circular spreading waves emanating from multiple points within the sheet \ref{fig:2D_waves}.
+These types of spreading waves have been observed in vivo\citep{Mohajerani2013} and and in vitro, and can be spontaneously generated or evoked by a stimulus\citep{Stroh2013}.
 \begin{figure}[!htb]
  \caption{ Wave patterns spreading across the surface of a sheet. 
            the sheet dimensions are 200x200x2, model parameters are at $\Sigma$. 
@@ -103,9 +104,9 @@ These types of spreading waves have been observed in vivo\citep{Mohajerani2013} 
 
 In some simulations we see the formation of large-scale plane waves across the entire system as seen by \citet{keane2015}.
 In their work, plane waves were formed when excitation dominated their neuronal system.
-The formation of these plane waves in our system does not seem deterministic, as a different random draw of the uniform background stimulus for the same neuronal system may not exhibit plane waves.
-Nonetheless, these results show that plane waves can emerge as a stable pattern in systems of this type even when excitation does not dominate.
 These plane waves seem to form due to the interaction of spreading circular waves.
+The formation of plane waves in our system does not seem deterministic, as a different random draw of the uniform background stimulus for the same neuronal system may not exhibit plane waves.
+Nonetheless, these results show that plane waves can emerge as a stable pattern in systems of this type even when excitation does not dominate.
 \begin{figure}[!htb]
  \caption{ A plane wave front forming from multiple circular spreading waves.
           The sheet is 200x200x2, model parameters are at $\Sigma$.}
@@ -116,7 +117,7 @@ These plane waves seem to form due to the interaction of spreading circular wave
 \FloatBarrier
 
 When the wave speed increases we observe attractor states, where waves spawned from a small number of locations come to dominate the firing activity.
-In figure \ref{fig:2DWaveRasters_attractor} we see that the waves come to dominate the firing activity.
+In figure \ref{fig:2DWaveRasters_attractor} we see that the waves spawned from the upper right section of the sheet come to dominate the firing activity.
 \begin{figure}[!htb]
  \caption{ Raster plots from our quasi 2-D system showing an attractor forming near X=70,Y=75.}
  \label{fig:2DWaveRasters_attractor}
@@ -140,7 +141,7 @@ With the higher connectivity observed in the sheet (figure \ref{fig:connection_d
 Although these waves can combine to form a plane wave structure (figure \ref{fig:2D_plane_wave}), we have not observed spiral wave patterns.
 Given that the sheet has higher connectivity than the minicolumn, we reduce the connection strength K from $K=10$ to $K=6$.
 The waves at the lower connection strength are thinner and sparser.
-We now observe the formation of spiral wave pattern in figure \ref{fig:2DSpiralWaves}.
+We now observe the formation of spiral wave pattern as seen in figure \ref{fig:2DSpiralWaves}.
 \begin{figure}[!htb]
  \caption{ Spiral waves are apparent in the average membrane potential observed in a 2D sheet over time. 
            The sheet is 200x200x2 with periodic boundary conditions, $K=6$, $\kappa=0.1$.
@@ -189,9 +190,13 @@ The lower y-intercept point in the sheet compared to the minicolumn indicates th
 \end{figure}
 \FloatBarrier
 
+In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain why individual spike timing is highly irregular 
+but membrane potential fluctuations can be correlated.
+We calculate the coefficient of variation of the inter-spike intervals for the spiral wave experiment.
+Our overall coefficient of variation is <> indicating highly variable firing in agreement with experimental results.
+However, the spike count correlation shows a strong dependence on the distance between neurons.
+The traveling waves in our model thus also exhibit strong spike correlations with highly irregular spike times.
 
-
-In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain simultaneous spike timing irregularity with fluctuations in the average firing rate of the ensemble. 
 Despite the complex spatiotemporal patterns the overall mean voltage shows a small, steady oscillation.
 \begin{figure}[!htb]
  \caption{ After initial fluctuations settle out, the system mean voltage settles into small oscillations.}
@@ -210,7 +215,7 @@ Each minicolumn is 2x2x10.
 A small example foresst is shown in Figure \ref{fig:forest_structure}.
 \begin{figure}[!htb]
  \caption{ Example forest of 16 minicolumns arranged in a 4x4 grid, with $1\lambda$ spacing between the closest neurons of any two minicolumns. 
-              Each minicolumn has dimensions X=2, Y=2, Z=5, $\lambda$=2.5, and C=0.5. 
+              Each minicolumn has dimensions X=2, Y=2, Z=5. The connection parameters are $\lambda$=2.5 and C=0.5. 
           a)  Sheet showing connections between neurons as lines colored using a color scale that indicates the connection length. 
           b)  Connection matrix. E-E connections are green, E-I are black and both I-E and I-I  are red. }
  \label{fig:forest_structure}

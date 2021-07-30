@@ -84,45 +84,6 @@ The distribution of post-synaptic connections and delay times are shown in Figur
  \label{fig:connection_delay_distrbution}
 \end{figure}
  \FloatBarrier
- 
-For every simulation we record all of the spikes from all neurons. 
-We visualize the spikes in spike raster plots (e.g. Figure \ref{fig:sigma_raster} ).
-Because here we focus on traveling waves in the Z direction, we plot the spikes according to the Z position of the neurons.
-As a consequence, at each Z position there are multiple neurons that could contribute to the spike raster plot at that Z coordinate (e.g. 4 neurons for the X=2, Y=2 SCE case).
-
-To automatically identify waves we perform a spatial clustering operation to this data to identify spatiotemporal regions identified by high firing density. 
-The clustering operation produces an output cluster for any group of more than $3$ spike events that fall within a $20ms$ time window from neurons that are no more than $3$ layers apart.
-Each cluster $C(t,z)$ has a time $t$ and position $z$.
-This clustering removes random background firing activity. 
-The waves are identified using a plane sweep algorithm that proceeds along the dimension of simulation time and applies wave labels to clusters such that all clusters with the same label are part of the same wave.
-When a new cluster $C(t,z)$ is encountered, the algorithm associates $C(t,z)$ with any existing wave if the existing wave has a cluster $C(t_c,z_c)$ within $40 ms$ and $6$ units of the new cluster.
-If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the first cluster.
-
-An example of the clustering and identification is shown in Figure 2, with further illustration in SI Figure 1.
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{fig/DetectorExample}
-  \caption{Wave identification and labeling using an example SCE with dimensions 2x2x200 . Left: Raster plot of firing events where dots represent neuronal action potentials. 
-	Traveling waves can be seen as diagonal structures of dense firing activity. 
-	Center: The clustering operation removes background spikes. 
-	Right: Individual waves are labeled with unique identifiers color coded in the figure.}
-  \label{fig:wave_analysis}
-\end{figure}
-
-Our wave detection and analysis approach must remain valid across a range of model parameters. 
-We show sample visualizations for varying values of $K$ in Figure \ref{fig:detector_test}.
-This detector test demonstrates that our detection and analysis method detects and labels traveling waves of various lengths even in a noisy background.
-\begin{figure}[!htb]
- \centering
-   \includegraphics[width=\textwidth]{fig/DetectorTest}
-    \caption{The clustering and wave labeling process. Spike raster plot (left), filtered clusters (middle) and labeled waves (right, each color is a unique wave) 
-	    are shown for SCE with different values of $K$. }
-  \label{fig:detector_test}
-\end{figure}
-
-\FloatBarrier
-Once identified and labeled, we measure wave propagation speeds and wave initiation locations. 
-We also measure the "wave firing fraction" defined as the fraction of spikes that are associated with the labeled traveling wave (total number of spikes found within the waves divided by number of spikes in the simulation). 
 
 Our exploration of the behavior of traveling waves in an SCE involves testing properties of these waves as a function of the different parameters of our model.
 For determining existence of traveling waves we use a $2x2x100$ SCE  with background stimulation (Eq \ref{eq:randomstim}) and vary parameters around a neighborhood of the reference point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ that we have determined can sustain traveling waves.
