@@ -1,6 +1,6 @@
 clear; close all;
 
-rng(42); %Seed random for consistent results
+rng(10); %Seed random for consistent results
 
 addpath('../sce/');
 
