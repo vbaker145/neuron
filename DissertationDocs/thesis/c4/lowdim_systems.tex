@@ -154,7 +154,38 @@ We now observe the formation of spiral wave pattern as seen in figure \ref{fig:2
 
 \citet{Huang2010} provide the observation that a plane wave with limited extents can generate a spiral wave pattern.
 The firing activity at the edge of the plane wave will spread in directions that are not parallel to the plane wave propagation.
-We reproduce this behavior in our model as shown in figure , where two spiral waves are shed from either side of a plane wave.
+We observe similar behavior when the propagation of a circular spreading wave is not isotropic.
+In this case we can see spiral waves shed from both edges of the circular wave as seen in figure \ref{fig:2DHeartWaves}.
+We term these 'heart' waves.
+\begin{figure}[!htb]
+ \caption{ Spiral 'heart' waves are apparent in the average membrane potential observed in a 2D sheet over time. 
+           The sheet is 200x200x2 with periodic boundary conditions, $K=6$, $\kappa=0.1$.
+           A 5x5 smoothing filter has been applied. }
+ \label{fig:2DHeartWaves}
+ \centering
+   \includegraphics[width=\textwidth]{fig/2DSpiralWaves_HeartWaves}
+\end{figure}
+\FloatBarrier
+
+In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain why individual spike timing is highly irregular 
+but membrane potential fluctuations can be correlated.
+We calculate the coefficient of variation of the inter-spike intervals for the spiral wave experiment.
+Our overall coefficient of variation is <> indicating highly variable firing in agreement with experimental results.
+However, the spike count correlation shows a strong dependence on the distance between neurons.
+The traveling waves in our model thus also exhibit strong spike correlations with highly irregular spike times.
+\begin{figure}[!htb]
+ \caption{Spike timing characterization of the spiral waves seen in figure \ref{fig:2DHeartWaves}.
+          a) The spike raster from a small number of neurons show regular spike events that correspond to passing waves.
+          b) The distribution of the coefficient of variation confirms the regular spiking behavior as most of the CV values are near 0 (perfectly regular).
+          c) The average correlation coefficient as a function of distance shows that the firing times of nearby neurons are highly correlated due to the wave structure.
+          } 
+     \subfloat[][]{\includegraphics[width=0.4\textwidth]{fig/2DSpiralWaves_CorrelationRasterPlot} }
+     \subfloat[][]{\includegraphics[width=0.4\textwidth]{fig/2DSpiralWaves_CVDist} }
+     \subfloat[][]{\includegraphics[width=0.4\textwidth]{fig/2DSpiralWaves_CorrelationCoefficient} }
+ \label{fig:2DSpiralWave_SpikeTiming}
+\end{figure}
+ \FloatBarrier
+ 
 
 The traveling wave mechanism in the locally connected two dimensional sheet is the same as the locally connected one dimensional minicolumn.
 We therefore expect similar traveling wave speeds, with the model parameters playing the same role as in the one dimensional minicolumn.
@@ -190,22 +221,6 @@ The lower y-intercept point in the sheet compared to the minicolumn indicates th
 \end{figure}
 \FloatBarrier
 
-In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain why individual spike timing is highly irregular 
-but membrane potential fluctuations can be correlated.
-We calculate the coefficient of variation of the inter-spike intervals for the spiral wave experiment.
-Our overall coefficient of variation is <> indicating highly variable firing in agreement with experimental results.
-However, the spike count correlation shows a strong dependence on the distance between neurons.
-The traveling waves in our model thus also exhibit strong spike correlations with highly irregular spike times.
-
-Despite the complex spatiotemporal patterns the overall mean voltage shows a small, steady oscillation.
-\begin{figure}[!htb]
- \caption{ After initial fluctuations settle out, the system mean voltage settles into small oscillations.}
- \label{fig:2D_mean_voltage}
- \centering
-   \includegraphics[width=\textwidth]{fig/MeanVoltage_PBC}
-\end{figure}
-
-\FloatBarrier
 
 \section{Forests of minicolumns}
 The cortex has a laminar vertical organization.
