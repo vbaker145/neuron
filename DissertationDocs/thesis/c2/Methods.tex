@@ -24,6 +24,18 @@
 \chapter{Methods}
 
 \section{Neuron model}
+Computational neuroscience makes use of a number of neuron models.
+By far the most common model used when studying traveling waves and other mesoscopic behavior is the leaky integrate-and-fire neuron.
+The computational efficiency of the LIF model has allowed researchers to simulate large numbers of neurons over time scales of seconds or minutes.
+However this computational efficieny comes at the cost of accurate representation of internal neuron dynamics.
+\\
+The LIF equations model a single neuron variable, the membrane potential, in a single differential equation (Eq \ref{eq:lif}).
+The Izhikevich model includes an additional variable that represents a collection of ionic mechanisms and uses two coupled differential equations.
+This two-dimensional model can capture a number of biologically observed dynamical phenomenon not possible in a one-dimensional model while still being computationally efficient.
+\\
+Critical phenomenon observed in the Izhikevich model and not the LIF model include variable firing rates, post-inhibitory rebound spiking and delayed spiking.
+Plots: LIF vs Izzy post-inhibitory rebound spiking, delayed spiking, 
+
 To study traveling waves in small columnar ensembles (SCE) of neurons we created a MATLAB simulation of our model based on \citet{izhikevich2003}.
 We model the firing dynamics of each neuron using the Izhikevich model \citep{izhikevich2003} that consists of a two-dimensional model of two coupled differential equations given by:
 \begin{align}

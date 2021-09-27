@@ -34,7 +34,7 @@ delay.dt = dt;
 %Make 2-D sheet
 [a,b,c,d, S, delays, ecn, pos] = makeColumnParameters(structure, connectivity, delay, 0);
 %Background, corrected for dt
-st = impulseStim2D(pos, 10, t);
+st = impulseStim2D(pos, 10, t, [0 3], [0 3], [0 1]);
 
 kappaScale = [1.0 0.75 0.5 0.25 0.1];
 

@@ -128,7 +128,7 @@ The \textit{McCulloch-Pitts} model includes several features used in many comput
 It sums the values from many input neurons \textbf{x}, applies an \textit{activation function} f, and provides an all-or-nothing response based on a threshold $\Theta$.
 
 Many phenomenological studies use the \textit{leaky integrate-and-fire} (LIF) model\citep{Abbott1999}. which may be stated as in (\citet{Trappenberg2010} Section 3.1.1):
-\begin{align}
+\begin{align}\label{eq:lif}
   \begin{split}
     \tau_m \frac{dv(t)}{dt} &= -(v(t)-E_L) + RI(t) \\
     \displaystyle\lim_{\delta \rightarrow 0} v(t^f + \delta) &= v_{res}\\ 

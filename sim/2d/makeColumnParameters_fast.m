@@ -1,4 +1,4 @@
-function [a,b,c,d, S, delays, excNeurons, pos] = makeColumnParametersPBC_fast(structure, connectivity, delay, doplot)
+function [a,b,c,d, S, delays, excNeurons, pos] = makeColumnParameters_fast(structure, connectivity, delay, doplot)
 
 
 width = structure.width;
@@ -81,7 +81,7 @@ ysz = height;
 zsz = layers; 
 
 %Load (or generate) table of inter-neuron distances
-fname = strcat( 'DistanceTable_',  num2str(width), 'x',num2str(height),'.mat')
+fname = strcat( 'DistanceTableABC_',  num2str(width), 'x',num2str(height),'.mat')
 %if isfile(fname)
 if ~isempty(dir(fname))
     checkIdx = load(fname);
@@ -90,9 +90,6 @@ else
     checkIdx = [];
     for jj=1:length(x)
         dx = abs(x(jj)-x); dy = abs(y(jj)-y); dz = abs(z(jj)-z); 
-        dx = min(dx, abs(xsz-dx));
-        dy = min(dy, abs(ysz-dy));
-        dz = min(dz, abs(zsz-dz));
         dis = sqrt(dx.^2+dy.^2+dz.^2);
         idx = (dis<dmax) & (dis>0);
         idx = find(idx == 1);  
