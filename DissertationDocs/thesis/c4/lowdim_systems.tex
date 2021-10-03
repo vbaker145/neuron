@@ -133,7 +133,7 @@ The waves at the lower connection strength are thinner and sparser.
 We now observe the formation of spiral wave pattern as seen in figure \ref{fig:2DSpiralWaves}.
 \begin{figure}[!htb]
  \caption{ Spiral waves are apparent in the average membrane potential observed in a 2D sheet over time. 
-           The sheet is 200x200x2 with periodic boundary conditions, $K=6$, $\kappa=0.1$.
+           The sheet is 300x300x2 with periodic boundary conditions, $K=6$, $\kappa=0.1$.
            A 5x5 smoothing filter has been applied. }
  \label{fig:2DSpiralWaves}
  \centering
@@ -157,8 +157,11 @@ We term these 'heart' waves.
 \FloatBarrier
 
 We further examine the transition from spreading waves to spiral waves as connection strength decreases.
-Our experimental setup is a 100x100x2 sheet with a step stimulus as described in section \ref{sec:wave_speed_method}.
+We hypothesize that the lower connection strength creates anisotropy that can disrupt a spreading wave propagation, resulting the heart and spiral patterns. 
+We demonstrate this using a 100x100x2 sheet with a step stimulus as described in section \ref{sec:wave_speed_method}.
 The stimulus is applied to the neurons at the center of the sheet at $t=0$ and generates waves that radiate outward.
+The smaller system size is valid as we are creating a single controlled wave at the center of the system.
+Examples of the waves in the system are shown in Figure \ref{fig:2DWaveTransition}a and \ref{fig:2DWaveTransition}b.
 
 We wish to determine whether a given experiment produced a spreading wave or spiral wave.
 To distinguish between the wave types we calculate the center of mass of the spikes that occur in a $5~ms$ window:
@@ -169,11 +172,12 @@ To distinguish between the wave types we calculate the center of mass of the spi
 where $X$ and $Y$ are the X and Y locations of the spikes w.r.t to center of the sheet, and $N_{spikes}$ is the total number of spikes that occur in the $5~ms$ observation.
 We then calculate the center of mass offset as $d_{CoM}=\sqrt{CoM_x^2 + CoM_y^2}$.
 The spreading waves have a low $d_{CoM}$ due to their high symmetry, while the spiral waves have a higher $d_{CoM}$.
+We see in Figure \ref{fig:2DWaveTransition}c that he $d_{CoM}$ clearly shows the transition from spiral waves to spreading waves as $K$ increases.
 \begin{figure}[!htb]
  \caption{Transition between spiral and spreading waves as $K$ increases..
           a) Spike raster plot showing a spiral wave in a sheet with $K=9.5$. The center of mass is displaced almost 22 units from the center at $t=100$ indicating the asymmetry of the wave.
           b) Spike raster plot showing a spreading wave in a sheet with $K=10.5$. The center of mass is displaced only 2.5 units due to the high symmetry of the wave.
-          c) The system undergoes a transition from asymmetric spiral waves to symmetric spreading waves as the connection strength parameter$K$ increases.
+          c) The system undergoes a transition from asymmetric spiral waves to symmetric spreading waves as the connection strength parameter $K$ increases.
           } 
      \subfloat[][]{\includegraphics[width=0.45\textwidth]{fig/CoM_Example_K_9p5} }
      \subfloat[][]{\includegraphics[width=0.45\textwidth]{fig/CoM_Example_K_10p5} }
@@ -182,9 +186,10 @@ The spreading waves have a low $d_{CoM}$ due to their high symmetry, while the s
 \end{figure}
  \FloatBarrier
 
- In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain why individual spike timing is highly irregular 
+The waves in our simulations appear to create spatiotemporal patterns that repeat at some regular interval.
+This is in contrast to \citet{keane2015} traveling waves in 2-D sheets were proposed to explain why individual spike timing is highly irregular 
 but membrane potential fluctuations can be correlated.
-We calculate the coefficient of variation of the inter-spike intervals for the spiral wave experiment.
+To compare our system to \citet{keane2015} we calculate the coefficient of variation of the inter-spike intervals for the spiral wave experiment.
 Our overall coefficient of variation is <> indicating highly variable firing in agreement with experimental results.
 However, the spike count correlation shows a strong dependence on the distance between neurons.
 The traveling waves in our model thus also exhibit strong spike correlations with highly irregular spike times.
@@ -201,6 +206,17 @@ The traveling waves in our model thus also exhibit strong spike correlations wit
 \end{figure}
  \FloatBarrier
  
+This indicates that our 2D sheets exhibit spatiotemporal patterns that are both highly complex and yet repetitive over long time scales.
+We consider a complex but repeating pattern as a dynamical attractor of the system.
+To understand if the same system has multiple attractor states we compare multiple simulations of an identical system under different random stimulus.
+\begin{figure}[!htb]
+ \caption{ Another trial of the identical system from Figure \ref{fig:2DSpiralWaves}, but with a different random draw of the stimulus.
+           The qualitative behavior is similar but the specific spatiotemporal pattern is clearly different.}
+ \label{fig:2DSpiralWaves_SecondTrial}
+ \centering
+   \includegraphics[width=\textwidth]{fig/SpiralWaves2D_K6_kappa0p1_M4_SecondTrial}
+\end{figure}
+\FloatBarrier
 
 The traveling wave mechanism in the locally connected two dimensional sheet is the same as the locally connected one dimensional minicolumn.
 We therefore expect similar traveling wave speeds, with the model parameters playing the same role as in the one dimensional minicolumn.
