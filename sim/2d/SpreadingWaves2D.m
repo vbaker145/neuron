@@ -4,8 +4,8 @@ rng(42); %Seed random for consistent results
 
 addpath('../sce/');
 
-width = 200;
-height = 200;
+width = 300;
+height = 300;
 layers = 2;
 N = width*height*layers;
 
@@ -33,7 +33,7 @@ delay.dt = dt;
 
 
 %Make 2-D sheet
-[a,b,c,d, S, delays, ecn, pos] = makeColumnParametersPBC(structure, connectivity, delay, 0);
+[a,b,c,d, S, delays, ecn, pos] = makeColumnParametersPBC_fast(structure, connectivity, delay, 0);
 
 vinit=-65*ones(N,1)+0*rand(N,1);    % Initial values of v
 uinit=b.*vinit;                 % Initial values of u
