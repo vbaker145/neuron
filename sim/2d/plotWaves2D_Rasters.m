@@ -13,6 +13,10 @@ set(h, 'Position', [100 100 800 550]);
 
 nplots = length(frameTimes);
 ncols = 4;
+if nplots == 1
+    ncols = 1;  %One figure if a single plot
+end
+
 nrows = ceil(nplots/ncols);
 for tt=1:length(frameTimes)
    fwin = find(f(:,1)>frameTimes(tt) & f(:,1)<frameTimes(tt)+dt);

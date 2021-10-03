@@ -124,17 +124,6 @@ In figure \ref{fig:2DWaveRasters_attractor} we see that the waves spawned from t
  \centering
    \includegraphics[width=\textwidth]{fig/2DWaveRasters_Attractor_kappa0p1_seed35}
 \end{figure}
-We suspect that these winner-take-all waves may be spawned by low-threshold spiking inhibitory neurons as seen in our minicolumns (section \ref{sub:wave_initiation}).
-To test this hypothesis we plot calculate the density of inhibitory neurons across the sheet using MATlAB's 'ksdensity' function.
-\begin{figure}[!htb]
- \caption{ Density plot of inhibitory neurons in the sheet. The color scale covers the top 10\% of the density.
-           The area with the highest density of inhibitory neurons includes the location from which the attractor waves are spawned near X=70, Y=75. }
- \label{fig:2DAttractor_InhibDensity}
- \centering
-   \includegraphics[width=\textwidth]{fig/2DAttractor_seed35_InhibitoryDensity}
-\end{figure}
-
-\FloatBarrier
 
 We do not observe spiral waves in our simulations with the model parameters set at $\Sigma$.
 With the higher connectivity observed in the sheet (figure \ref{fig:connection_delay_distrbution_2D}) we see circular waves emanating from a point.
@@ -167,7 +156,33 @@ We term these 'heart' waves.
 \end{figure}
 \FloatBarrier
 
-In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain why individual spike timing is highly irregular 
+We further examine the transition from spreading waves to spiral waves as connection strength decreases.
+Our experimental setup is a 100x100x2 sheet with a step stimulus as described in section \ref{sec:wave_speed_method}.
+The stimulus is applied to the neurons at the center of the sheet at $t=0$ and generates waves that radiate outward.
+
+We wish to determine whether a given experiment produced a spreading wave or spiral wave.
+To distinguish between the wave types we calculate the center of mass of the spikes that occur in a $5~ms$ window:
+\begin{align}
+ CoM_x &= \frac{1}{N_{spikes}}\Sigma_{i=1}^{N_{spikes}} X_i\\
+ CoM_y &= \frac{1}{N_{spikes}}\Sigma_{i=1}^{N_{spikes}} Y_i
+\end{align}
+where $X$ and $Y$ are the X and Y locations of the spikes w.r.t to center of the sheet, and $N_{spikes}$ is the total number of spikes that occur in the $5~ms$ observation.
+We then calculate the center of mass offset as $d_{CoM}=\sqrt{CoM_x^2 + CoM_y^2}$.
+The spreading waves have a low $d_{CoM}$ due to their high symmetry, while the spiral waves have a higher $d_{CoM}$.
+\begin{figure}[!htb]
+ \caption{Transition between spiral and spreading waves as $K$ increases..
+          a) Spike raster plot showing a spiral wave in a sheet with $K=9.5$. The center of mass is displaced almost 22 units from the center at $t=100$ indicating the asymmetry of the wave.
+          b) Spike raster plot showing a spreading wave in a sheet with $K=10.5$. The center of mass is displaced only 2.5 units due to the high symmetry of the wave.
+          c) The system undergoes a transition from asymmetric spiral waves to symmetric spreading waves as the connection strength parameter$K$ increases.
+          } 
+     \subfloat[][]{\includegraphics[width=0.45\textwidth]{fig/CoM_Example_K_9p5} }
+     \subfloat[][]{\includegraphics[width=0.45\textwidth]{fig/CoM_Example_K_10p5} }
+     \subfloat[][]{\includegraphics[width=0.75\textwidth]{fig/2DWaveTypeTransition} }
+ \label{fig:2DWaveTransition}
+\end{figure}
+ \FloatBarrier
+
+ In \citet{keane2015} traveling waves in 2-D sheets were proposed to explain why individual spike timing is highly irregular 
 but membrane potential fluctuations can be correlated.
 We calculate the coefficient of variation of the inter-spike intervals for the spiral wave experiment.
 Our overall coefficient of variation is <> indicating highly variable firing in agreement with experimental results.

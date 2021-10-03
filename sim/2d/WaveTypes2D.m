@@ -61,3 +61,38 @@ plot(Kvals, nanmean(anisScore), 'ko-', 'MarkerFaceColor', 'black')
 xlabel('K'); ylabel('Mean CoM displacement (units)')
 set(gca, 'FontSize', 12)
 
+%Generate sample results for explanaion
+rng(42);
+connectivity.connStrength = 9.5;
+[a,b,c,d, S, delays, ecn, pos] = makeColumnParameters_fast(structure, connectivity, delay, 0);
+vinit=-65*ones(N,1);    % Initial values of v
+uinit=b.*vinit;                 % Initial values of u
+[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
+plotWaves2D_Rasters( firings, pos, dt, 100 );
+ax1 = gca;
+f20 = figure(20);
+set(f20, 'Position', [100 100 600 600]);
+copyobj(ax1, f20 )
+[tout, aspr, anis] = calcAvgSpikePosition( firings, 100, pos, [width/2 height/2]);
+text(10, 10, ['CoM offset:', num2str(anis)], 'FontSize', 12)
+xticks auto; yticks auto;
+axis equal
+axis([0 width 0 height])
+title('K=9.5', 'FontSize', 14);
+set(gca, 'FontSize', 12);
+
+connectivity.connStrength = 10.5;
+[a,b,c,d, S, delays, ecn, pos] = makeColumnParameters_fast(structure, connectivity, delay, 0);
+vinit=-65*ones(N,1);    % Initial values of v
+uinit=b.*vinit;                 % Initial values of u
+[v, vall, u, uall, firings] = izzy_net(vinit,uinit,dt, length(t), a, b, c, d, S, delays, st);
+plotWaves2D_Rasters( firings, pos, dt, 75 );
+h = gcf;
+set(h,'Position', [100 100 600 600]);
+[tout, aspr, anis] = calcAvgSpikePosition( firings, 75, pos, [width/2 height/2]);
+text(10, 10, ['CoM offset:', num2str(anis)], 'FontSize', 12, 'BackgroundColor','White')
+xticks auto; yticks auto;
+axis equal
+axis([0 width 0 height])
+title('K=10.5', 'FontSize', 14);
+set(gca, 'FontSize', 12);
