@@ -4,8 +4,8 @@ rng(42); %Seed random for consistent results
 
 addpath('../sce/');
 
-width = 200;
-height = 200;
+width = 300;
+height = 300;
 layers = 2;
 N = width*height*layers;
 
