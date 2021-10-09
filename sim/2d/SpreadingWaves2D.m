@@ -1,6 +1,6 @@
 clear; close all;
 
-rng(42); %Seed random for consistent results
+rng(35); %Seed random for consistent results
 
 addpath('../sce/');
 
@@ -27,7 +27,7 @@ connectivity.connStrength = 10;
 connectivity.maxLength = 100; 
 
 delay.delayType = 1;
-delay.delayMult = 1;
+delay.delayMult = 0.1;
 delay.delayFrac = 1.0;
 delay.dt = dt;
 
