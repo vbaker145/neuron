@@ -1,4 +1,4 @@
-function [isi, cv, Nij, cc_d] = calcSpikeCountMetrics(f, sim_t, pos)
+function [isi, isiAll, cv, Nij, cc_d] = calcSpikeCountMetrics(f, sim_t, pos)
 
 xp = pos.x(:); yp = pos.y(:); zp = pos.z(:);
 N = length(xp);
@@ -6,11 +6,13 @@ N = length(xp);
 twin = 50;
 t = 0:max(sim_t);
 Nij = zeros(length(t), N);
+isiAll = [];
 
 for jj=1:N
    spikes = find(f(:,2)==jj);
    spikeTimes = sort( f(spikes,1) );
    isi{jj} = diff(spikeTimes);
+   isiAll = [isiAll; diff(spikeTimes)];
    cv(jj) = sqrt(var(isi{jj}))/mean(isi{jj});
    for kk=1:length(spikeTimes)
       st = spikeTimes(kk);
@@ -41,12 +43,20 @@ for bins=1:100
     cc_d(bins) = mean(cct(cct>0)); 
 end
 
-h = figure(20);
+h = figure(10);
 set(h, 'Position', [0 100 400 250]);
 histogram(cv, 'Normalization', 'probability','FaceColor', 'k')
 xlabel('Coefficient of variation')
 ylabel('Probability mass')
 set(gca, 'FontSize', 12);
+
+h = figure(20);
+set(h, 'Position', [400 100 400 250]);
+histogram(isiAll, 'Normalization', 'probability','FaceColor', 'k')
+xlabel('Inter-spike interval (ms)')
+ylabel('Probability mass')
+set(gca, 'FontSize', 12);
+xlim([0 500]);
 
 h = figure(30);
 set(h, 'Position', [600 100 400 250]);
