@@ -1,6 +1,8 @@
 function mv = plotWaves2D_Frames( f, pos, v, sim_dt, frameTimes )
 
 x = pos.x; y = pos.y;
+minX = min(x(:)); maxX = max(x(:));
+minY = min(y(:)); maxY = max(y(:));
 
 tmax = max(f(:,1));
 
@@ -34,7 +36,7 @@ for tt=1:length(frameTimes)
    
    subplot(nrows,ncols,tt);
    %plot(x(fev(:,2)), y(fev(:,2)), 'k.');
-   imagesc(x(:,1), y(:,1), vt); 
+   imagesc([minX maxX],[minY maxY], vt); 
    set(gca, 'YDir', 'Normal'); caxis([-70 -40]);
    axis([min(pos.x(:)) max(pos.x(:)) min(pos.y(:)) max(pos.y(:))])
    

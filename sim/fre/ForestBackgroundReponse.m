@@ -15,8 +15,6 @@ rng(42);
 
 %For plotWaves2D
 addpath('../2d')
- 
-
 addpath('../sce'); %Neural column code
 
 dt = 0.1;
@@ -27,16 +25,16 @@ t = 0:dt:tmax;
 %Connected microcolumn ensemble
 structure.width = 2;
 structure.height = 2;
-structure.nWide = 30;
-structure.nHigh = 30;
-structure.columnSpacing = 2.5+structure.width;
+structure.nWide = 50;
+structure.nHigh = 50;
+structure.columnSpacing = 1.5+structure.width;
 structure.layers = 10;
 structure.displacement = 0;
 colStruct    = makeFiringRateColumnEnsemble(dt, structure.columnSpacing, structure);
 
 
 %Background, corrected for dt
-stimStrength = 2;
+stimStrength = 3;
 st = zeros(colStruct.N, size(t,2));
 st(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
 st(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
