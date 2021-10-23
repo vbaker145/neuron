@@ -52,11 +52,21 @@ set(gca, 'FontSize', 12);
 
 h = figure(20);
 set(h, 'Position', [400 100 400 250]);
-histogram(isiAll, 'Normalization', 'probability','FaceColor', 'k')
+histogram(isiAll, 'Normalization', 'pdf','FaceColor', 'k')
+
 xlabel('Inter-spike interval (ms)')
 ylabel('Probability mass')
 set(gca, 'FontSize', 12);
 xlim([0 500]);
+
+[isiHist, isiEdges] = histcounts(isiAll);
+h = figure(25);
+set(h, 'Position', [400 100 400 250]);
+bar(isiEdges(1:end-1), log(isiHist), 'FaceColor', 'k')
+xlim([-50 1000])
+xlabel('Inter-spike interval (ms)')
+ylabel('Counts, log scale')
+set(gca, 'FontSize', 12);
 
 h = figure(30);
 set(h, 'Position', [600 100 400 250]);
