@@ -211,6 +211,33 @@ The waves span the entire sheet in both the X and Y directions, and the wave arr
 For the forest of minicolumns $I_{i,e}$ has a magnitude of $5$ units and is applied for $10~ms$ to the single minicolumn in the lower left corner of the forest.
 The stimulus evokes waves that travel in the X/Y plane and the wave arrival time is measured at the minicolumn in the lower right corner of the forest.
 
+\section{Spike correlation analysis}\label{sec:spike_correlation_analysis}
+For our quasi two-dimensional systems we characterize the spatio-temporal activity using the inter-spike interval (ISI), the coefficient of variation (CV) of the ISI, 
+and the cross-correlation of the spike counts between neurons.
+The distribution of the ISI reveals temporal patterns in our quasi-2D systems.
+The CV of the ISI indicates the temporal regularity of the spiking activity, where a CV of $0$ indicates perfectly regular repetitaion while a Poisson process
+has a CV of $1$.
+We calculate the cross-correlation between neuron spike counts as a function of the distance between neurons.
+This measure can reveal local correlations in firing activity indicative of traveling waves.
+These measures were used by \citet{keane2015} to show that traveling waves could simultaneously explain both the irregular firing of individual neurons
+and the correlated firing between nearby neurons.
+
+The CV of the ISI is calculated as:
+\begin{align}\label{eq:cv}
+ CV_{i} &= \frac{\sqrt{\textbf{var}(X_{i})}}{\langle X_{i} \rangle}
+\end{align}
+where $X_{ij}$ is the vector of all the inter-spike intervals from a simulation.
+
+The cross-correlation of the spike counts between neurons $i$ and $j$ is goven by:
+\begin{align}\label{eq:cross_correlation}
+ CC_{i,j}(\tau) &= \frac{ \sum_{l=1}^L (N_i(t^l)-\langle N_i(t^l) \rangle) (N_j(t^l+\tau)-\langle N_j(t^l) \rangle) } { \sqrt{\text{var}(N_i(t^l))\text{var}(N_j(t^l))}  }
+\end{align}
+where $L$ is the total number of samples in time time series and the spike counts are summed over $50~ms$ windows stepped at $1~ms$ intervals.
+In our simulations it is common for a neuron to not spike within a $50~ms$ interval.
+We therefore modify this metric and do not normalize by the variance to avoid division by $0$.
+Here we are only interested in the zero-lag cross-correlation at $\tau=0$ as we want to determine if the firing activity of nearby neurons is correlated.
+
+
 \endinput
 %%
 %% End of file `example-1.tex'.
