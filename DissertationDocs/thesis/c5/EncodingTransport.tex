@@ -25,20 +25,29 @@
 
 Individual neurons in the brain are tuned to fire upon specific events such as visual stimuli of a particular type \citep{Hubel1962} .
 However, even neurons that are tuned to a specific stimulus show variability in their firing rate and timing when the same stimulus is repeatedly applied \citep{Georgopoulos1982}\citep{Newsome1989}.
-This indicates that information in the brain is represented by the firing dynamics of populations of many neurons.
-This population coding may take the form of variations in the average firing rate of the neurons in the population (rate coding) or variations in the synchronization between spikes (temporal coding).
+This indicates that individual neurons do not reliably encode sensory information, and therefore information in the brain must be represented by the firing dynamics of populations of many neurons.
+This neuron population coding may take the form of variations in the average firing rate of the neurons in the population (rate coding) or variations in the synchronization between neuron spikes (temporal coding).
 The temporal and rate coding may also have a functional relation, i.e. through Hebbian learning \citep{Basawaraj2019}.
 Various methods of decoding the information in these population dynamics have been studied \citep{Deneve1999}\citep{Xu2019}, 
 and population dynamics are incorporated into modern theories of neural computation \citep{Pitkow2017}\citep{Nadeau2020}.
 
-Here we consider how quasi one-dimensional neuronal structures could encode and transmit population activity via traveling waves.
-Direct connections between cortical areas are quite sparse\citep{Markov2011} as local connectivity is dominant.
-Traveling waves of neuronal activity would provide information transfer across cortical areas with the observed sparse corticocortical connectivity.
-\citet{Heitmann2013} proposed a possible mechanism for decoding traveling waves and provided applications to the motor cortex.
-We perform computational experiments using a quasi one-dimensional model we call a Small Columnar Ensemble (SCE), first reported in , with a network of Izhikevich neurons \citep{izhikevich2003} using the same local connectivity model as \citep{maass2002}.
-We have previously shown that this model supports stimulus-evoked traveling waves across a variety of model parameters.
+Here we consider how information that is represented as population activity in one cortical area could be transferred to another cortical area via traveling waves.
+For example, \citet{Heitmann2013} proposed a possible mechanism for decoding traveling waves and provided applications to the motor cortex.
+Direct connections between spatially separated cortical areas are quite sparse\citep{Markov2011} as intra-cortical connectivity is mostly local in nature.
+Traveling waves of neuronal activity would provide a mechanism for long-range information transfer across cortical areas 
+even if there were very few direct neural connections between those areas.
+
+To test our hypothesis of information coding and transfer we first define a population of input neurons.
+These input neurons represent a neural population that is e.g. tuned to the same orientation of visual stimulus, 
+so that the stimulus or other information is encoded in the firing rate of this population.
+We represent the information as an average firing rate.
+We simulate the population of input neurons as independent Poisson processes with the common firing rate F.
+We then perform simulations of neural system to determine if the information, encoded in the firing rate of the input population,
+can be transferred via traveling waves.
+
+We have previously shown that our minicolumn model supports stimulus-evoked traveling waves across a variety of model parameters.
 We now demonstrate that input from a population of neurons, simulated as Poisson spike trains, can evoke traveling waves in our quasi one-dimensional system.
-The number of waves per second that span the SCE, which we term the wave arrival rate, increases as the average firing rate of the input pool of neurons is increased.
+The number of waves per second that travel through the minicolumn, which we term the wave arrival rate, increases as the average firing rate of the input pool of neurons is increased.
 The plot of wave arrival rate versus input population firing rate resembles the activation functions of either a single neuron or a population of neurons.
 This leads us to consider the SCE to have a nonlinear activation function in terms of input population rate, and to consider the SCE as encoding the input population firing rate into the wave arrival rate.
 
