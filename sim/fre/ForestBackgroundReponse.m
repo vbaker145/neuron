@@ -34,7 +34,7 @@ colStruct    = makeFiringRateColumnEnsemble(dt, structure.columnSpacing, structu
 
 
 %Background, corrected for dt
-stimStrength = 3;
+stimStrength = 4;
 st = zeros(colStruct.N, size(t,2));
 st(colStruct.ecn,1:1/dt:end) = stimStrength*rand(sum(colStruct.ecn),tmax+1);
 st(~colStruct.ecn,1:1/dt:end) = stimStrength*(2/5)*rand(sum(~colStruct.ecn),tmax+1);
@@ -49,5 +49,5 @@ uinit=(colStruct.b).*vinit;                 % Initial values of u
     colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
     colStruct.delays, sti); 
 size(firings)
-figure(201); plot(firings(:,1) ,firings(:,2)./colStruct.Nlayer, 'k.')
+plotForest_Frames( firings, colStruct.pos, vall, dt, 1400:25:1400+25*11 );
         

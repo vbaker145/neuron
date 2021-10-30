@@ -11,9 +11,7 @@ N = width*height*layers;
 
 tmax = 2000;
 dt = 0.2;
-t = 0:dt:tmax;
-
-%Column parameters
+t = 0:dt:tmax; 
 structure.width = width;
 structure.height = height;
 structure.layers = layers;

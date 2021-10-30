@@ -1,4 +1,4 @@
-function mv = plotWaves2D( f, pos, v, sim_dt, ecn, fname )
+function mv = plotForest( f, pos, v, sim_dt, fname )
 
 
 if nargin < 6

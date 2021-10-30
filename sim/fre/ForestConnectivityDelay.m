@@ -1,4 +1,4 @@
-%% Firing rate encoding with a minicolumn ensemble
+                                                                                                                      %% Firing rate encoding with a minicolumn ensemble
 %
 % 1 Create common neurons
 % 
