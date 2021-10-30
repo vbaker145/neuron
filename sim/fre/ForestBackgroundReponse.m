@@ -49,5 +49,5 @@ uinit=(colStruct.b).*vinit;                 % Initial values of u
     colStruct.a, colStruct.b, colStruct.c, colStruct.d, colStruct.S, ...
     colStruct.delays, sti); 
 size(firings)
-plotForest_Frames( firings, colStruct.pos, vall, dt, 1400:25:1400+25*11 );
+plotForest_Frames( firings, colStruct.pos, vall, dt, 1400:25:1400+25*11 ); %Spiral waves
         

@@ -1,7 +1,7 @@
 function mv = plotForest( f, pos, v, sim_dt, fname )
 
 
-if nargin < 6
+if nargin < 5
     fname = 'Forest2D';
 end
 x = pos.x; y = pos.y;
