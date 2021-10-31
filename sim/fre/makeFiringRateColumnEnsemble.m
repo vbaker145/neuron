@@ -22,7 +22,7 @@ connectivity.percentExc = 0.8;
 connectivity.connType = 1;
 connectivity.lambda = 2.5;
 connectivity.C = 0.5;
-connectivity.connStrength = 14;
+connectivity.connStrength = 24;
 connectivity.maxLength = 100;
 
 delay.delayType = 1;

@@ -34,8 +34,8 @@ structure.layers = 40;
 structure.displacement = 0;
 
 colStructBase    = makeFiringRateColumnEnsemble(dt, 7, structure);
-colSep = [colStructBase.connectivity.lambda + colStructBase.structure.width, ...
-          4*colStructBase.connectivity.lambda + colStructBase.structure.width];
+colSep = [colStructBase.connectivity.lambda + colStructBase.structure.width-1, ...
+          4*colStructBase.connectivity.lambda + colStructBase.structure.width-1];
 
 %colSep = structure.width;
 colStructs = [];
