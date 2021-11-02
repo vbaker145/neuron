@@ -43,12 +43,10 @@ for tt=0:dt:tmax
    vt = reshape(vt, size(x));
    vt = mean(vt,3);
    
-   %vt = conv2(vt, smoother, 'same');
+   vt = conv2(vt, smoother, 'same');
    subplot(1,2,2);
    
-   surf(squeeze(x(:,:,1)), squeeze(y(:,:,1)), vt); colorbar;
-   zlim([-70 -40]);
-   campos([0 0 20]);
+   imagesc(x(:,1), y(:,1), vt); colorbar;
    set(gca, 'YDir', 'Normal'); caxis([-70 -40]);
    %hold on; plot(x(ecn) );
    title(['T =' num2str(tt)]);
