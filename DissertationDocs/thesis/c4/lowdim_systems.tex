@@ -217,7 +217,7 @@ This is in agreement with both simulated and observed traveling wave experiments
  \caption{Spike timing characterization of the spiral waves seen in figure \ref{fig:2DSpiralWaves}.
           a) The spike raster from a small number of neurons show regular spike events that correspond to passing waves.
           b) The histogram of all inter-spike intervals shows a peak $200~ms$ corresponding to the wave repetition rate. The peak near 0 is due to neurons firing several times when a wave passes. 
-          c) The distribution of the coefficient of variation (eq. \ref{eq_cv}) confirms the regular spiking behavior as most of the CV values are near 0 (perfectly regular).
+          c) The distribution of the coefficient of variation (eq. \ref{eq:cv}) confirms the regular spiking behavior as most of the CV values are near 0 (perfectly regular).
           d) The average correlation coefficient as a function of distance (\ref{eq:cross_correlation}) shows that the firing times of nearby neurons are highly correlated due to the wave structure.
           } 
      \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/2DSpiralWaves_CorrelationRasterPlot} }
@@ -332,7 +332,7 @@ The spatio-temporal patterns in the simulation continue to evolve and do not set
      \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/ForestSpiralWaves_ISI} }
      \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/ForestSpiralWaves_CVDist} }
      \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/ForestSpiralWaves_CorrelationCoefficient} }
- \label{fig:ForestWave_SpikeTiming}
+ \label{fig:ForestSpiralWave_SpikeTiming}
 \end{figure}
 
 
@@ -353,9 +353,9 @@ We again observe a repeating spatio-temporal pattern with a repetition rate of a
 In a quasi-2D system we observed repeating spatiotemporal patterns that created highly regular firing rates in the individual neurons.
 In our forest of minicolumns we still observe a repetitive large-scale spatiotemporal structure, but the firing activity of the individual neurons shows more variation.
 Rather than firing once or twice when a wave passes, the individual neurons fire several times in an irregular pattern 
-driven by the activity within the local minicolumn (Figure \ref{fig:ForestWave_SpikeTiming}).
+driven by the activity within the local minicolumn (Figure \ref{fig:ForestSpreadingWave_SpikeTiming}).
 Plotting the inter-spike interval histogram on a log scale reveals that the most prevalent ISIs are very short, 
-indicating individual neurons firing multiple times in close succession (Figure \ref{fig:ForestWave_SpikeTiming}b).
+indicating individual neurons firing multiple times in close succession (Figure \ref{fig:ForestSpreadingWave_SpikeTiming}b).
 We still see a peak in the vicinity of $200~ms$ indicating the spatio-temporal repetition rate.
 We also see smaller peaks near multiples of $200~ms$ indicating that some neurons were not triggered by every passing wave.
 \begin{figure}[!htb]
@@ -370,7 +370,7 @@ We also see smaller peaks near multiples of $200~ms$ indicating that some neuron
      \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/ForestSpreadingWaves_ISI} }
      \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/ForestSpreadingWaves_CVDist} }
      \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/ForestSpreadingWaves_CorrelationCoefficient} }
- \label{fig:ForestWave_SpikeTiming}
+ \label{fig:ForestSpreadingWave_SpikeTiming}
 \end{figure}
  \FloatBarrier
  

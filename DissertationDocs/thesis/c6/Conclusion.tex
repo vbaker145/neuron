@@ -23,6 +23,7 @@
 
 \chapter{Conclusion}
 
+\section{Quasi 1-D results}
 Here we have demonstrated that a biologically influenced model of a small quasi one-dimensional columnar ensemble  can support traveling waves. 
 Our model considers a wide variety of neuronal types using local connectivity and distance-dependent time delays.
 Because of the substantial randomness in neuronal types and connections between neurons, we did not observe traveling waves in the purely one-dimensional ($X=1,Y=1$) version of our model, 
@@ -72,26 +73,77 @@ An applied stimulus could then disturb the network from this dynamic equilibrium
 Our results show  that any network with sufficiently strong connectivity and delayed action potential propagation can exhibit traveling wave structure (Figure \ref{fig:delay_waves}).
 Since biological action potentials always travel with some delay, this indicates that traveling waves could be observed in the brain regardless of the inter-neuron connectivity.
 The numerical results presented here could be further refined to predict biological traveling wave speed for different neuron and network parameters.
-This could help distinguish between the different classes of traveling waves presented in \citep{ermentrout2001}.
+This could help distinguish between the different classes of traveling waves presented in \citet{ermentrout2001}.
 
 Traveling waves in one-dimensional networks have not been observed in the brain. 
 Part of the reason might be that such an observation requires precise experiments that probe structures such as minicolumns in the cortex. 
 These are not easy, as other properties of minicolumns are still elusive. 
 However, our work shows that in biological quasi one-dimensional systems  traveling waves are not only possible, but that because of the wide range of values in their allowed parameter space, their existence should be expected.
 
-We have demonstrated traveling waves in quasi two-dimensional sheets.
-We have shown that our model can exhibit circular spreading waves, plane waves and rotating or spiral waves.
-The spiral waves are most prevalent at lower connection strengths.
-Low-threshold-spiking inhibitory neurons can act as pacemakers in our model, spawning waves that can dominate the firing activity in a stable dynamic attractor state.
+\section{Quasi-2D results}
+We have demonstrated traveling waves in quasi two-dimensional sheets with substantial spatial variation in the neurons and synapses.
+Previous two-dimensional simulations using neural field models or leaky integrate-and-fire neurons addressed systems of identical neurons and isotropic connections.
+In our model a purely two-dimensional system did not exhibit traveling waves, although it did exhibit spatial and temporal correlations in the neural activity.
 
-We have demonstrated traveling waves in a forest of minicolumns that represents the laminar and microcolumnar organization of the cortex.
+We have shown that our model can exhibit the circular spreading waves, plane waves and spiral waves that are observed in the cortex.
+The spiral waves are most prevalent at lower connection strengths.
+We have shown that a single spreading wave can fracture into a spiral wave due to the variation in the underlying neural system.
+
+Our quasi-2D sheets exhibit repeating spatio-temporal wave patterns.
+These patterns are fairly stable over time and we consider them as attractor states of the system.
+A given sheet can exhibit multiple attractor states, as applying different random background stimulus to the same sheet results in different wave patterns.
+
+Previous work \citep{keane2015} proposed traveling waves as an explanation for the seeming contradictions between the irregular spiking behavior of individual neurons 
+and the correlation between the firing of nearby neurons.
+We reproduce these results, showing substantial variance in the inter-spike intervals as well as higher correlation between the firing rates of nearby neurons.
+We confirm that the neurons mostly fire when a traveling wave passes, but any individual neuron may not fire at all or fire multiple times when a particular wave passes.
+We also find that for the special case of sparse connectivity our systems can exhibit extremely regular inter-spike intervals if each neuron fires only once when a wave passes.
+
+We have also demonstrated traveling waves in a forest of minicolumns that represents the laminar and minicolumnar organization of the cortex.
 The forest organization creates anisotropy between the vertical connectivity (down the minicolumn) and the lateral connectivity between minicolumns.
 Transverse traveling waves are supported in the forest even when the lateral connectivity is lower than would normally permit wave propagation.
+We observe both spreading and spiral waves structures depending on the connection strength.
 The transverse wave speed is slower than the vertical wave speed within the minicolumns.
 
-We have proposed a mechanism for the encoding and transport of the information contained in population activity via traveling waves of neuronal activation.
+
+\section{Information transport}
+We have proposed a mechanism for the encoding and transport of the information contained in the activity of a population of neurons via traveling waves of neuronal activation.
 We demonstrated that our minicolumn structure can encode the population firing rate into the minicolumn wave rate.
+The minicolumn wave rate depends asymptotically on the firing rate of the input population in a manner that resembles the activation functions of both single neurons and neural populations. 
 Although the single minicolumn encoding was noisy, we demonstrated that a forest of loosely coupled  minicolumns could more reliably encode and transmit the population rate information.
+
+\section{Future work}
+The present work has established fundamental methods and results for exploring traveling waves in simulations of neuronal systems.
+There are a number of areas for further research based on the results shown so far.
+
+The present models do not include time-varying connection strengths or any model of synaptic plasticity.
+A common form of spike-timing-dependent plasticity enhances a synaptic connection between two neurons when the presynaptic neuron fires shortly before the postsynaptic neuron fires.
+Since traveling waves naturally impose a spatial sequence to the neuron firing activity it is reasonable to expect that synaptic plasticity could enhance traveling waves.
+Traveling waves could even be an emergent behavior due to the long-term potentiation of synaptic pathways in a given direction.
+
+We have observed that a given quasi two-dimensional system can settle into different attractor states.
+It is possible that an external stimulus could cause a system in one attractor state to switch to a different attractor state.
+Such stimuli-induced switching between stable states would be an interesting phenomenon with a number of possible functional roles.
+
+The present work does not include any representation of the damage that may occur to neurons and synapses due to trauma, disease or aging.
+Previous work \citep{cruz2000} has shown a loss of minicolumnar structure in the cortex of sufferers of Alzheimer's disease.
+Our methods could be extended to examine how such changes to cortical organization could disrupt the formation and structure of traveling waves
+
+We have shown that a small forest of minicolumns can both encode and transport information.
+Such a structure might also perform a filtering function by e.g. selectively transmitting certain stimulus frequencies.
+The coupling between adjacent minicolumns may also provide a mechanism for spatial filtering if different stimuli are applied to different minicolumns. 
+Such an experiment is suggested by the observed columnar structure of the visual cortex in which neurons in the same column are tuned to the same stimulus.
+
+Our minicolumn structure was inspired by the neuronal structure described in the seminal paper on Liquid State Machines \citep{maass2002}.
+The structures presented here could be used as the 'liquid' or 'reservoir' in that paradigm of machine learning.
+The waves observed in the quasi-two dimensional systems are reminiscent of the ripples in a pool of water from a falling stone, 
+the analogy that inspired the term Liquid State Machine.
+
+Interaction between temporal oscillations at different frequencies, termed cross-frequency coupling \citep{Hyafil2015}, has been observed in mammalian brain.
+One widely studied example is the relationship between theta oscillations ($4-8~Hz$) and gamma oscillations ($>30~Hz$), 
+which have been proposed as a means to represent multiple items in an ordered way \citep{Lisman2013}. 
+The present work has produced traveling waves with repetition rates in the theta range.
+This work could be extended with models that include higher-frequency oscillations to study the mechanisms and computational roles of cross-frequency coupling.
 
 \endinput
 %%
