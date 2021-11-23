@@ -27,7 +27,7 @@
 Computational neuroscience makes use of a number of neuron models.
 By far the most common model used when studying traveling waves and other mesoscopic behavior is the leaky integrate-and-fire neuron.
 The computational efficiency of the LIF model has allowed researchers to simulate large numbers of neurons over time scales of seconds or minutes.
-However this computational efficieny comes at the cost of accurate representation of internal neuron dynamics.
+However this computational efficiency comes at the cost of accurate representation of internal neuron dynamics.
 \\
 The LIF equations model a single neuron variable, the membrane potential, in a single differential equation (Eq \ref{eq:lif}).
 The Izhikevich model includes an additional variable that represents a collection of ionic mechanisms and uses two coupled differential equations.
@@ -123,8 +123,8 @@ After placing, we connect two neurons based on their relative distance according
 \begin{align}\label{eq:connectivity}
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
-where $D(a,b)$ is the Euclidean distance between neuron a and b, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is the peak probability of connection .
-This local ceopnnectivity model has been observed in the mouse visual cortex\citep{Hellwig2000} and auditory cortex\citep{Levy2012}.
+where $D(a,b)$ is the Euclidean distance between neuron a and b, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is the peak probability of connection.
+This local connectivity model has been observed in the mouse visual cortex\citep{Hellwig2000} and auditory cortex\citep{Levy2012}.
 Multiple connections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
 Two neurons may be recurrently connected, however. 
 
