@@ -27,7 +27,7 @@
 Computational neuroscience makes use of a number of neuron models.
 By far the most common model used when studying traveling waves and other mesoscopic behavior is the leaky integrate-and-fire neuron.
 The computational efficiency of the LIF model has allowed researchers to simulate large numbers of neurons over time scales of seconds or minutes.
-However this computational efficieny comes at the cost of accurate representation of internal neuron dynamics.
+However this computational efficiency comes at the cost of accurate representation of internal neuron dynamics.
 \\
 The LIF equations model a single neuron variable, the membrane potential, in a single differential equation (Eq \ref{eq:lif}).
 The Izhikevich model includes an additional variable that represents a collection of ionic mechanisms and uses two coupled differential equations.
@@ -123,8 +123,8 @@ After placing, we connect two neurons based on their relative distance according
 \begin{align}\label{eq:connectivity}
  P_{a,b} &= C e^{-(D(a,b)/\lambda)^2}
 \end{align}
-where $D(a,b)$ is the Euclidean distance between neuron a and b, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is the peak probability of connection .
-This local ceopnnectivity model has been observed in the mouse visual cortex\citep{Hellwig2000} and auditory cortex\citep{Levy2012}.
+where $D(a,b)$ is the Euclidean distance between neuron a and b, $\lambda$ is the characteristic length of the local connectivity neighborhood, and $C$ is the peak probability of connection.
+This local connectivity model has been observed in the mouse visual cortex\citep{Hellwig2000} and auditory cortex\citep{Levy2012}.
 Multiple connections from the same presynaptic neuron to the same postsynaptic neuron, as well as self-connections, are prohibited.
 Two neurons may be recurrently connected, however. 
 
@@ -165,7 +165,7 @@ This clustering removes random background firing activity.
 The waves are identified using a plane sweep algorithm that proceeds along the dimension of simulation time and applies wave labels to clusters such that all clusters with the same label are part of the same wave.
 When a new cluster $C(t,z)$ is encountered, the algorithm associates $C(t,z)$ with any existing wave if the existing wave contains a cluster $C(t_c,z_c)$ within $40~ms$ and $6$ units of the new cluster.
 If there is no such adjacent cluster a new wave is created using $C(t,z)$ as the first cluster.
-An example of the clustering and identification is shown in Figure 2, with further illustration in SI Figure 1.
+An example of the clustering and identification is shown in Figure \ref{fig:wave_analysis}.
 
 \begin{figure}[!htb]
   \centering
@@ -193,7 +193,7 @@ This detector test demonstrates that our detection and analysis method detects a
 Once identified and labeled, we measure wave propagation speeds and wave initiation locations. 
 We also measure the "wave firing fraction" defined as the fraction of spikes that are associated with the labeled traveling wave (total number of spikes found within the waves divided by number of spikes in the simulation). 
 
-For the quasi two-dimensional sheets and forests we also visualize traveling waves with color plots of the membrane potential (see for example \ref{fig:2D_waves}).
+For the quasi two-dimensional sheets and forests we also visualize traveling waves with color plots of the membrane potential (see for example figure \ref{fig:2D_waves}).
 The membrane potential at at X/Y position is averaged across all neurons at that position over a $2~ms$ window.
 A $5x5$ smoothing filter is applied to the resulting image to improve the visibility of the wave fronts. 
 For two dimensional waves we show a sequential series of these plots to illustrate the two dimensional wave behavior.

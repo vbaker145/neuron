@@ -80,7 +80,7 @@
   \addtolength{\tempskipa}{-4em}
   \begin{spacing}{2}
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l p{\tempskipa}}
-      \textbf{Dissertation/Thesis Title:} & \@DUT@title \\
+      \textbf{Title:} & \@DUT@title \\
       \textbf{Author:} & \@DUT@author
     \end{tabular*}
 
@@ -124,6 +124,7 @@
   \endgroup
   \pagebreak
 }
+
 \newcommand\drexellogobw{
   \begin{tikzpicture}[y=0.8pt, x=0.8pt,yscale=-1, inner sep=0pt, outer sep=0pt]
   \begin{scope}[cm={{1.25,0.0,0.0,-1.25,(-332.5,550.73629)}},]

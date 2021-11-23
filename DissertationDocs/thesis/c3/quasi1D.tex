@@ -50,7 +50,7 @@ The traveling waves in fully connected systems are dependent upon the action pot
 
 The results are organized as a series of computational experiments on traveling waves.
 We first determine which parameterizations of our model support traveling waves.
-Stronger and more numerous local connections between neurons are found to facilitate the formation of traveling wave patters.
+Stronger and more numerous local connections between neurons are found to facilitate the formation of traveling wave patterns.
 We then investigate the influence of neuron dynamics and connectivity on the speed of traveling waves.
 Stronger neuronal connections and faster action potential propagation are shown to increase traveling wave speed, but the neuron dynamics enforce an upper limit on the speed. 
 Low-threshold-spiking inhibitory neurons are shown to consistently generate traveling waves through the mechanism of post-inhibitory rebound spiking.
@@ -98,7 +98,7 @@ This requires stronger connections so that the traveling wave can elicit spikes 
 We first explore which parameterizations of our model will support traveling waves.
 We detect the waves as described in Methods, and then use the wave firing fraction metric to determine for which parameter values our model will produce traveling waves.
 We fix the connection normalization constant $C$ in equation \ref{eq:connectivity} to $0.5$ and we fix the stimulus strength $M$ in equation \ref{eq:randomstim} to $5$.
-For this value of C and $\lambda=2.5$ each neuron has an average of $6.90$ input connections, as measured across $100$ randomly-generated SCE (see SI Figure 2 for connectivity distribution).
+For this value of C and $\lambda=2.5$ each neuron has an average of $6.90$ input connections, as measured across $100$ randomly-generated SCE as seen in figure \ref{fig:connection_delay_distrbution}.
 
 The key parameters of our model that we examine are the connection strength $K$, the characteristic connection length $\lambda$, the fraction of excitatory neurons $P_{exc}$ and the delay parameter $\kappa$.
 First we establish that traveling waves are observed at the reference  point $\Sigma = \{K=10,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$.
@@ -142,9 +142,9 @@ This is in contrast to previous work in largely isotropic networks and neural fi
 However, it is consistent with other work that found traveling wave patterns without including propagation delay \citet{Folias2012}\citet{Wyller2007}.
 
 Our model includes several artifacts that may not be important for traveling waves.
-The probabilisitc connection results in a few long connections along the Z direction that cannot exist in the X or Y directions.
+The probabilistic connection results in a few long connections along the Z direction that cannot exist in the X or Y directions.
 We have also placed neurons an a unit cubic lattice with no spatial perturbation.
-By performing the same experiments as in Figure 4, but now pruning long-range connections and moving the neurons off the lattice, 
+By performing the same experiments as in Figure \ref{fig:wave_parameters}, but now pruning long-range connections and moving the neurons off the lattice, 
 results show that these model artifacts do not substantially affect traveling waves.
 \begin{figure}[!htb]
  \centering
@@ -241,7 +241,7 @@ We fix $\Sigma_v = \{K=24,\lambda=2.5,P_{exc}=0.8,\kappa=1.0 \}$ for the remaind
 
 We first examine the impact of K on the wave speed.
 The wave speed increases with K as anticipated (Figure \ref{fig:delay_k}).
-The relationship is logarithmic in shape, in agreement with some previous work including \citet{Golomb1999} (Figure 3 for $\tau_d>0$) and \citet{Golomb1996}(Figure 10, exponential footprint shape).
+The relationship is logarithmic in shape, in agreement with some previous work including \citet{Golomb1999} (their Figure 3 for $\tau_d>0$) and \citet{Golomb1996}(their Figure 10, exponential footprint shape).
 \begin{figure}[!htb]
  \centering
    \includegraphics[width=\textwidth]{fig/WaveSpeed_K}
@@ -253,7 +253,7 @@ The relationship is logarithmic in shape, in agreement with some previous work i
 We examine the influence of the $b$ parameter on wave speed.
 We generate $100$ SCE, then multiply the $b$ parameter of all neurons by a scaling factor from $0.7$ to $1.3$.
 When the scale factor is $\leq 1.0$ the wave speed remains constant, but when the scale factor is $>1.0$ the wave speed increases linearly (Figure \ref{fig:WaveSpeed_B}).
-This indicates that the lower firing thresholds (Figure 6) that result from larger values of the $b$ parameter result in faster traveling waves.
+This indicates that the lower firing thresholds that result from larger values of the $b$ parameter result in faster traveling waves.
 
 \begin{figure}[!htb]
  \centering
@@ -312,7 +312,7 @@ and the measured wave speeds are more than double the speeds measured in the iso
 Our SCE topology (namely, the X and Y dimensions) may influence the wave speed in several ways.
 Increasing X and/or Y increases the total number of neurons, the total number of connections, and the average number of connections per neuron.
 To test these, we construct columns with topology in XxY of $2x2, 2x3, 3x3, 3x4$ and $4x4$.
-We also tested the $1x1$ topology but found that it did not support traveling waves (SI Figure 6).
+We also tested the $1x1$ topology but found that it did not support traveling waves.
 For each topology we measure the pace and speed over $5$ randomly generated SCE (Figure \ref{fig:delay_topology}).
 We see that increasing the X and/or Y dimensions of the SCE increases the speed, and the dependence looks qualitatively similar to increasing the connection strength via $K$ or the number of connections via $\lambda$.
 
@@ -322,11 +322,11 @@ We see that increasing the X and/or Y dimensions of the SCE increases the speed,
    \caption{ The pace (left, error bars $\pm 1 \sigma$) decreases, and the speed (right) increases, as the XxY extents of the SCE grow.}
    \label{fig:delay_topology}
 \end{figure}
+\FloatBarrier
 
 To separate the effect of the increased connectivity from the effect of different topology (larger X or Y increases both the total number of neurons and changes the proportion of surface neurons) we scale the $C$ parameter in equation \ref{eq:connectivity} to maintain the same average number of connections per neuron (\textasciitilde{}7) across the topologies.
 Results show that when separated from the increase in connectivity larger cross sections do not change the wave propagation speed (Figure \ref{fig:delay_topology_avgconn}).
-Therefore the increase in speed with cross-section seen in Figure \ref{fig:delay_topology} is due entirely to the increasing number of connections per neuron.
-Figure 5 in the SI shows additional analysis of SCE with larger cross sections. 
+Therefore the increase in speed with cross-section seen in Figure \ref{fig:delay_topology} is due entirely to the increasing number of connections per neuron. 
 
 \begin{figure}[!htb]
  \centering
@@ -444,7 +444,7 @@ Figure \ref{fig:lts_inhibit} clearly shows that adding the single LTS neuron res
 
 \FloatBarrier
 
-\subsection{Wave patterns in fully connected networks} \label{sub:delay}
+\section{Wave patterns in fully connected networks} \label{sub:delay}
 Our investigation has been concerned with traveling waves of activations that spread through locally connected networks.
 We now examine whether traveling wave patterns can also be observed in fully connected networks.
 We show that this is possible provided we consider the action potential propagation delay proportional to the distance between neurons, as used in all the simulations above.
