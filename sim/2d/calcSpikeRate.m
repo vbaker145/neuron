@@ -21,12 +21,15 @@ for tidx = 1:nTbins
    for kk=1:length(xv)
        spikeCounts(xv(kk),yv(kk),tidx) = spikeCounts(xv(kk),yv(kk),tidx)+1;
    end
-   
-   if ~isempty(posIdx)
-        plot(pos.x(posIdx), pos.y(posIdx), 'k.');
-        xlim([0 xsz]); ylim([0 ysz]);
-        title(num2str(tidx));
+   if length(xv) > 0
+     cspikeCounts(:,:,tidx) = spikeCounts(:,:,tidx)/length(xv);
    end
+   
+%    if ~isempty(posIdx)
+%         plot(pos.x(posIdx), pos.y(posIdx), 'k.');
+%         xlim([0 xsz]); ylim([0 ysz]);
+%         title(num2str(tidx));
+%    end
 end
 
 figure(50); imagesc(spikeCounts(:,:,end)'); colormap('gray'); colorbar; set(gca, 'YDir', 'Normal');
