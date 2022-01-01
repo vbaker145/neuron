@@ -25,6 +25,7 @@ cutSpikes = fa( fa(:,2)==cut,: );
 if isempty( cutSpikes )
     disp('No spikes from CUT');
     wt = []; theta = []; c = [];
+    return;
 end
 
 wt = cutSpikes(1,1);
@@ -37,10 +38,12 @@ for jj=1:length(nidx)
 end
 
 %Plot spike timing delta
-figure(10); 
+figure(15); 
 scatter(spikeVec(:,1), spikeVec(:,2), 30, dt, 'filled');
+xlabel('X offset'); ylabel('Y offset');
 colorbar;
 axis equal; 
+set(gca, 'FontSize', 12);
 
 %Find best fit angle 
 mAngle = angle(spikeVec(:,1) + 1i*spikeVec(:,2));
@@ -54,12 +57,12 @@ end
 [mv midx] = min(errAngle);
 theta = testAngle(midx);
 
-figure(20);
+figure(25);
 plot(errAngle, 'k');
-title(num2str(mv));
+xlabel('Angle (degrees)'); ylabel('Fit error'); set(gca, 'FontSize', 12);
 
 %Now find best speed fit at that angle
-testSpeed = 0.1:0.1:2;
+testSpeed = 0.1:0.05:5;
 for jj=1:length(testSpeed)
     errSpeed(jj) = sum( abs(dt' - (1/testSpeed(jj))*(mr.*cos(mAngle-theta))) )/length(nidx);
 end
