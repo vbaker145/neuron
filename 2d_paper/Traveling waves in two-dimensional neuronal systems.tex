@@ -353,6 +353,30 @@ In our simulations it is common for a neuron to not spike within a $50~ms$ inter
 We therefore modify this metric and do not normalize by the variance to avoid division by $0$.
 Here we are only interested in the zero-lag cross-correlation at $\tau=0$ as we want to determine if the firing activity of nearby neurons is correlated.
 
+\subsection{Wave Analysis}
+
+A basic test of the wae analysis method is shown in figure \ref{fig:WavePropTest}.
+The test data includes a single well defined spreading wave.
+We performed the wave analysis for neurons under test along the diagonal from $x=y=150$ to $x=y=160$.
+For each $x,y$ position we compared the estimated wave direction and speed for the neurons at $z=0$ and $z=1$.
+The wave direction difference (mean $2.8$ degrees, standard deviation $6.1$ degrees) and the wave speed difference (mean $0.065$ units/ms, standard deviation $0.097$ units/ms)
+indicate that the wave property measurement method is consistent.
+Furthermore, the wave direction (around $224$ degrees) and speed (around $0.8$ units/ms) measured across all ten $x,y$ locations was consistent with visual inspection of the wave.
+
+\begin{figure}[!htb]
+ \caption{Example of wave analysis.
+          a) Spike raster plot of the test data, showing a well-defined spreading wave starting at $t=1100~ms$ around $(90,180)$.
+             The test positions are shown with red dots.
+          b) Plot showing the spike time difference from the neuron under test as a function of the spatial offset. The neuron under test is at position $x=160$, $y=160$. $z=0$.
+          c) Error when fitting the plane wave model to the data. The best fit is a wave direction of $226$ degrees, and the best fit wave speed was $0.8$ units/ms.
+          } 
+     \subfloat[][]{\includegraphics[width=\textwidth]{fig/WavePropTest_Rasters} } \\
+     \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/WavePropTest_SpikeDelays} }
+     \subfloat[][]{\includegraphics[width=0.48\textwidth]{fig/WavePropTest_AngleFittingError} }
+ \label{fig:WavePropTest}
+\end{figure}
+\FloatBarrier
+
 
 \section{Results}
 We first create a purely 2-D sheet of neurons with X=300, Y=300 and Z=1.
