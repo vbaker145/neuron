@@ -7,6 +7,8 @@ function [wt, theta, c] = calcWaveProperties(f, pos, cut, r, tut, waveSpeed)
 % r - radius within cut to consider
 % tut - time under test, min/max times to consider
 
+plots = 0;
+
 %Find distance from cell under test
 x = pos.x(:); y = pos.y(:);
 xut = x(cut); yut = y(cut);
@@ -37,13 +39,15 @@ for jj=1:length(nidx)
    spikeVec(jj,:) = [x(spikes(1,2))-xut, y(spikes(1,2))-yut];
 end
 
-%Plot spike timing delta
-figure(15); 
-scatter(spikeVec(:,1), spikeVec(:,2), 30, dt, 'filled');
-xlabel('X offset'); ylabel('Y offset');
-colorbar;
-axis equal; 
-set(gca, 'FontSize', 12);
+if plots > 0
+    %Plot spike timing delta
+    figure(15); 
+    scatter(spikeVec(:,1), spikeVec(:,2), 30, dt, 'filled');
+    xlabel('X offset'); ylabel('Y offset');
+    colorbar;
+    axis equal; 
+    set(gca, 'FontSize', 12);
+end
 
 %Find best fit angle 
 mAngle = angle(spikeVec(:,1) + 1i*spikeVec(:,2));
@@ -57,12 +61,14 @@ end
 [mv midx] = min(errAngle);
 theta = testAngle(midx);
 
-figure(25);
-plot(errAngle, 'k');
-xlabel('Angle (degrees)'); ylabel('Fit error'); set(gca, 'FontSize', 12);
+if plots>0
+    figure(25);
+    plot(errAngle, 'k');
+    xlabel('Angle (degrees)'); ylabel('Fit error'); set(gca, 'FontSize', 12);
+end
 
 %Now find best speed fit at that angle
-testSpeed = 0.1:0.05:5;
+testSpeed = 0.1:0.05:2;
 for jj=1:length(testSpeed)
     errSpeed(jj) = sum( abs(dt' - (1/testSpeed(jj))*(mr.*cos(mAngle-theta))) )/length(nidx);
 end
