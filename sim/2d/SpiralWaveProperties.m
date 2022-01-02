@@ -9,7 +9,7 @@ diffC = [];
 thetas = [];
 
 %Set spatial and temporal windows to examine
-[xGrid, yGrid] = meshgrid(180:5:280, 100:5:200); 
+[xGrid, yGrid] = meshgrid(180:2:280, 100:2:200); 
 xGrid = xGrid(:); yGrid = yGrid(:);
 tBounds = [1100 1350];
 
@@ -80,7 +80,7 @@ for tt=1:length(frameTimes)-1
    
    %Add quivers
    gidx = find(times>frameTimes(tt) & times<frameTimes(tt+1));
-   quiver(xGrid(gidx), yGrid(gidx), speeds(gidx).*cos(thetas(gidx)), speeds(gidx).*sin(thetas(gidx)),'r')
+   quiver(xGrid(gidx), yGrid(gidx), speeds(gidx).*cos(thetas(gidx)), speeds(gidx).*sin(thetas(gidx)),5,'r')
    
    text(min(xGrid)+5, max(yGrid)-5, ['T=' num2str(frameTimes(tt)) ], 'FontSize', 10, 'BackgroundColor', 'White')
    set(gca, 'XTick', []);
