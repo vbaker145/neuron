@@ -32,7 +32,8 @@ for tidx = 1:nTbins
 %    end
 end
 
-figure(50); imagesc(spikeCounts(:,:,end)'); colormap('gray'); colorbar; set(gca, 'YDir', 'Normal');
- 
+figure(50); imagesc((1:nXbins)*gridSz,(1:nYbins)*gridSz, spikeCounts(:,:,end)'); colormap('gray'); colorbar; set(gca, 'YDir', 'Normal');
+xlabel('X'); ylabel('Y'); set(gca,'FontSize',12)
+axis equal
 end
 
