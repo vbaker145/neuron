@@ -17,7 +17,7 @@ dis = sqrt((y-yut).^2 + (x-xut).^2);
 %Find spikes that fall within distance and time limits
 rwin = find(dis<=r);
 ridx =  ismember(f(:,2), rwin);
-tidx = (f(:,1)>tut & f(:,1)<tut+100);
+tidx = (f(:,1)>tut(1) & f(:,1)<tut(2));
 cidx = ridx & tidx;
 
 fa = f(cidx, :);
@@ -68,7 +68,7 @@ if plots>0
 end
 
 %Now find best speed fit at that angle
-testSpeed = 0.1:0.05:2;
+testSpeed = 0.1:0.02:2;
 for jj=1:length(testSpeed)
     errSpeed(jj) = sum( abs(dt' - (1/testSpeed(jj))*(mr.*cos(mAngle-theta))) )/length(nidx);
 end

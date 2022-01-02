@@ -10,7 +10,7 @@ thetas = [];
 plotWaves2D_Rasters(firings, pos, 0:1999, 1100:25:1100+25*3);
 
 
-xGrid = meshgrid(150:10:250); 
+xGrid = meshgrid(150:5:250); 
 yGrid = xGrid';
 xGrid = xGrid(:); yGrid = yGrid(:);
 
@@ -28,7 +28,7 @@ for jj=1:length(xGrid)
 
     if length(ft) > 1
         %Check that the two neurons at X=Y=150 give similar results
-        [wt, theta, c] = calcWaveProperties(firings, pos, idx(1), 10, ft(1)-50, 0.5);
+        [wt, theta, c] = calcWaveProperties(firings, pos, idx(1), 10, [ft(1)-50 ft(1)+50], 0.5);
         
         if ~isempty(wt)   
             times(jj) = wt;
