@@ -401,6 +401,25 @@ We also visualize the wave direction and speed as a vector field as shown in fig
 \end{figure}
 \FloatBarrier
 
+\subsection{Wave pattern correlation}
+Our system exhibits repeating spatio-temporal patterns we term attractor states.
+To identify the attractor states and determine their period of repetition we use a correlation metric
+to compare spatial patterns at different times.
+We first calculate a spike count intensity map by counting all the spikes that occur within a 
+time window $t_1<t<t_2$ and a set of spatial windows that are $5x5$ units in area. 
+This generates the spike count intensity map:
+\begin{align}
+ \chi_{ij} &= \sum_{a=i-2}^{a=i+2} \sum_{b=j-2}^{b=j+2}s_{ab}^t\text{\ , for } t_1<t<t_2 
+\end{align}
+where $i.j$ is the center of one element of the intensity map and $s_{ab}^t$ is a spike at spatial position $a,b$ and time $t$.
+
+To calculate the similarity between two spike count intensity maps $\chi^a$ and $\chi^b$ we use zero-normalized cross-correlation:
+\begin{align}
+ CC^{ab} &= \frac{1}{n}\sum_{x,y} \frac{1}{\sigma_a\sigma_b}\left(\chi_{xy}^a-\mu_a\right)\left(\chi_{xy}^b-\mu_b \right)
+\end{align}
+where $n$ is the total number of cells and $\mu$ and $\sigma$ are the mean and standard deviation of the spike count intensity maps.
+
+
 \section{Results}
 We first create a purely 2-D sheet of neurons with X=300, Y=300 and Z=1.
 Model parameters are fixed at $\Sigma$.
@@ -481,20 +500,34 @@ We now observe the formation of spiral wave pattern as seen in figure \ref{fig:2
 \end{figure}
 \FloatBarrier
 
-\parencite{Huang2010} provide the observation that a plane wave with limited extents can generate a spiral wave pattern.
-The firing activity at the edge of the plane wave will spread in directions that are not parallel to the plane wave propagation.
-We observe similar behavior when the propagation of a circular spreading wave is not isotropic.
-In this case we can see spiral waves shed from both edges of the circular wave as seen in figure \ref{fig:2DHeartWaves}.
-We term these 'heart' waves.
+We examine a portion of the wave simulation using the tools described in methods.
+The vector field evolution over time is shown in figure \ref{fig:2DSpiralWaveAnalysis}a.
+The distribution of measured wave speeds is shown in figure \ref{fig:2DSpiralWaveAnalysis}b.
 \begin{figure}[!htb]
- \caption{ Spiral 'heart' waves are apparent in the average membrane potential observed in a 2D sheet over time. 
-           The sheet is 200x200x2 with periodic boundary conditions, $K=6$, $\kappa=0.1$.
+ \caption{ \textbf{a}) Vector field of a section of the spiral wave simulation. 
+              The section shown is $180\leq x \leq 280$ and $100 \leq y \leq 200$.
+           \textbf{b}) The distribution of measured wave speeds. Mean speed is $0.36$ units/second.
            }
- \label{fig:2DHeartWaves}
+ \label{fig:2DSpiralWaveAnalysis}
  \centering
-   \includegraphics[width=\textwidth]{fig/2DSpiralWaves_HeartWaves}
+   
+   \subfloat[][]{\includegraphics[width=\textwidth]{fig/2DSpiralVectorField} }\\
+   \subfloat[][]{\includegraphics[width=\textwidth]{fig/2DSpiralWaveSpeedDistribution} }
 \end{figure}
 \FloatBarrier
+
+The spiral waves in our simulation appear to settle into a repeating spatio-temporal pattern.
+The cross-correlation of the spike count intensity plots over time compared to the spike count intensity plot at $t=1000~ms$
+is shown in figure \ref{fig:2DSpiralWaveCrossCorrelation}.
+\begin{figure}[!htb]
+ \caption{ The zero-normalized cross-correlation shows regular peaks spaced at $\sim 200~ms$.
+           }
+ \label{fig:2DSpiralWaveCrossCorrelation}
+ \centering
+   \includegraphics[width=\textwidth]{fig/2DSpiral_CrossCorrelation}
+\end{figure}
+\FloatBarrier
+
 
 We further examine the transition from spreading waves to spiral waves as connection strength decreases.
 We hypothesize that the lower connection strength creates anisotropy that can disrupt a spreading wave propagation, resulting the heart and spiral patterns. 
