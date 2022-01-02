@@ -32,6 +32,7 @@
 \addbibresource{thesis.bib}
 %\renewcommand\thesubsection{\alph{subsection}}
 
+\DeclareMathOperator*{\argmax}{argmax}
 
 %\DeclareGraphicsExtensions{.eps,.png}
 
@@ -354,8 +355,19 @@ We therefore modify this metric and do not normalize by the variance to avoid di
 Here we are only interested in the zero-lag cross-correlation at $\tau=0$ as we want to determine if the firing activity of nearby neurons is correlated.
 
 \subsection{Wave Analysis}
+We estimate the wave direction $\Theta$ and the wave speed $c$ using relative spike timing.
+When a plane wave passes neuron $n_i$ at 2-D position $x_i,y_i$ the neuron emits a spike at time $t_i$.
+The wave also elicits spikes at times $t_j$ from nearby neurons $n_j$.
+The spike time delay $\Delta_{ij}=t_j-t_i$ is determined by the speed and direction of the wave.
+For a sufficiently small area of regard the traveling wave can be approximated as a plane wave.
+Under the plane wave assumption the speed and direction of the wave at position $x_i,y_i$ and time $t_i$ can then be estimated from:
+\begin{align}\label{eq:wave_estimate}
+\underset{\Theta,c}{arg\,min}\left\{f(\Theta,c) = \sum_j \left[ \Delta_{i,j}-\frac{\mathbf{d}_{ij}}{c}\cos(\Theta-\Theta_{ij}) \right]  \right\}
+\end{align}
+where $\mathbf{d}_{ij}$ and $\Theta_{ij}$ are the distance and angle between neuron $i$ and neuron $j$.
+We have found it is sufficient to first estimate $\Theta$ using a reasonable guess for $c$, then estimate $c$ once $\Theta$ is determined.
 
-A basic test of the wae analysis method is shown in figure \ref{fig:WavePropTest}.
+A basic test of the wave analysis method is shown in figure \ref{fig:WavePropTest}.
 The test data includes a single well defined spreading wave.
 We performed the wave analysis for neurons under test along the diagonal from $x=y=150$ to $x=y=160$.
 For each $x,y$ position we compared the estimated wave direction and speed for the neurons at $z=0$ and $z=1$.
@@ -365,7 +377,7 @@ Furthermore, the wave direction (around $224$ degrees) and speed (around $0.8$ u
 
 \begin{figure}[!htb]
  \caption{Example of wave analysis.
-          a) Spike raster plot of the test data, showing a well-defined spreading wave starting at $t=1100~ms$ around $(90,180)$.
+          a) Spike raster plot of the test data, showing a well-defined spreading wave starting at $t=1100~ms$ around $(180,180)$.
              The test positions are shown with red dots.
           b) Plot showing the spike time difference from the neuron under test as a function of the spatial offset. The neuron under test is at position $x=160$, $y=160$. $z=0$.
           c) Error when fitting the plane wave model to the data. The best fit is a wave direction of $226$ degrees, and the best fit wave speed was $0.8$ units/ms.
@@ -377,6 +389,17 @@ Furthermore, the wave direction (around $224$ degrees) and speed (around $0.8$ u
 \end{figure}
 \FloatBarrier
 
+We also visualize the wave direction and speed as a vector field as shown in figure \ref{fig:WavePropQuiver}.
+\begin{figure}[!htb]
+ \caption{Wave visualized as a vector field.
+          a) Vector field of all wave measurements.
+          b) Vector fields over time showing wave propagation.
+          } 
+     \subfloat[][]{\includegraphics[width=0.39\textwidth]{fig/WavePropTest_Quiver} }
+     \subfloat[][]{\includegraphics[width=0.59\textwidth]{fig/WavePropTest_QuiverEvolution} }
+ \label{fig:WavePropQuiver}
+\end{figure}
+\FloatBarrier
 
 \section{Results}
 We first create a purely 2-D sheet of neurons with X=300, Y=300 and Z=1.
